@@ -8149,7 +8149,7 @@ through these: each is ticked by the round that gave its capture.
       leg 10 defends before a use (AM-era rule in the same step). Item NR-R4b.
     - **The Chanter** went on from where round 3 had saved it and cast Smite at the
       fungi (NR-R3b): leg 1 ended in 9.4 game minutes.
-- [ ] **NR-R4b - An object use that an attack cut short is followed by the defence.** Depends: NR-R4
+- [x] **NR-R4b - An object use that an attack cut short is followed by the defence.** Depends: NR-R4
   - Work: Java first: what ends a use bar (read under NR-R4: ItemUseObserver). A leg's
     object use that was cut short is followed by the journey's own defence and rest
     before the step comes round again, on every leg, as leg 10 does before its use.
@@ -8157,6 +8157,42 @@ through these: each is ticked by the round that gave its capture.
     before, so the recorded scopes must not change.
   - Proof: The full gate identical. In round 5 the Gladiator, the Assassin and the Bard
     take Q2213's item and end leg 2.
+  - 2026-10-10: done, in a second form: the defence runs before the same object is used
+    again. Round 5's file was played without a capture as the proof; round 5 plays it
+    again for the captures.
+    - **Java.** Read under NR-R4: a use bar is ended by an attack on the player, among
+      the other things ItemUseObserver watches for (17-60).
+    - **The first form, and why it is not committed.** The defence after every use the
+      server cut short. Its proof round passed, and its gate failed on scope c alone
+      (run/nr/NR-R4b/first/guard-p8/verdict.json): 88,967 records against 112,256, first
+      different at record 52,656. The Cleric's recorded leg 4 has one use cut short, a
+      beehive of Q2232 at 1:17:05. There the step goes to another beehive, and the walk
+      to it fights the monster off; a defence at the first beehive changed what
+      followed. The Cleric's scopes are not recorded again (NR-Q2), and they need not
+      be: the walk to another object already defends.
+    - **The second form, generic** (Sc/NaturalIshalgenJourney.cs, the legs' use-object
+      step). The step remembers the object whose use the server cut short. When its
+      walk ends at that same object again, the journey's own defence and rest run first,
+      and the trace says object-use-again-after-cut-short; then it walks to the object
+      and uses it, as leg 10 does before every use. Q2213 has one tree, so the walk
+      ended where the bot stood, with the monster still on it.
+    - **Proof, round 5's file without a capture** (run resume-a2,
+      run/nr/NR-R4b/resume-a2; round file run/nr/NR-R5/round-5.json; -From nr-r4; 100
+      seconds). All nine reached their stage's end with no death.
+      - The Gladiator, the Assassin and the Bard, resumed at the tree, took Q2213's item
+        and ended leg 2 with 76 quests. None of the three was struck at the tree this
+        time: a resumed bot rests and defends before it goes on.
+      - The rule was called on once, by the Chanter in its own leg 2. Its use of the
+        tree was cut short at 19:53.6; before it used the tree again it fought the
+        monster that was on it and killed it, and then it took the item.
+      - The Sorcerer, Ranger, Spirit Master, Gunner and Rider ended leg 3 at level 17
+        with 81 quests.
+    - **Proof.** Gate, set all+mage+warrior+artist+engineer+scout+templar, -Parallel 8,
+      run guard-p8 (run/nr/NR-R4b/guard-p8/verdict.json): verdict pass, all thirteen
+      scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests passes (4,629
+      passed, 16 skipped) and Fast passes (run nrr4b-fast2, 11 passed). The second
+      bundle's own Fast was refused, because its run folder was the first bundle's; Fast
+      was run again by itself on the same build.
 - [ ] **NR-R5 - Round 5: Altgard leg 3 for five, leg 2 for four.** Depends: NR-R4b
   - Work: The eight worlds resumed from nr-r4 with -Capture nr-r5. The Sorcerer, Ranger,
     Spirit Master, Gunner and Rider play leg 3; the Chanter plays leg 2; the Gladiator,
@@ -9231,3 +9267,12 @@ report what was done, what is parked or blocked, and what the operator must deci
   tree's 3 s bar ran, the server cut the use short as Java does, and the step used the
   tree again at once, three times. Written: NR-R4b, the defence after a use cut short,
   and NR-R5, round 5. Seven checks pass. Next: NR-R4b.
+- 2026-10-10 — Loop: NR-R4b done, in its second form. The first, a defence after every
+  use the server cut short, failed the gate on scope c: the Cleric's recorded leg 4 has
+  one such use, at a beehive, and goes to another beehive after it. The second form
+  defends only before the same object is used again, which is Q2213's one tree. Round 5's
+  file, played without a capture (resume-a2, 100 s): all nine reached their stage's end;
+  the Gladiator, the Assassin and the Bard took Q2213's item and ended leg 2, and the
+  Chanter, cut short at the same tree, fought the monster off and took it. Full gate
+  guard-p8 (thirteen scopes identical), seven checks, unit suite (4,629 passed, 16
+  skipped) and Fast (nrr4b-fast2) pass. Next: NR-R5, round 5, with its captures.

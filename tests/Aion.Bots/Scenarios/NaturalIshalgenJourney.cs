@@ -2733,6 +2733,8 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 				int repeats = 0;
 				// AB-08: a decision repeated because the Cleric died on it is a retry, not a stall (OD-12): up to six of them.
 				bool itemApproachRetreated = false;
+				// NR-R4b: the object whose use the server cut short last, until a use of an object ends by itself.
+				int useCutShortObject = 0;
 				int revivesAtPrevious = combat.ReviveCount, deathRetries = 0;
 				// AC-06: the escort's state across protocol runs (a death ends a run; the attempts and ended followers stay).
 				int escortAttempts = 0;
@@ -3290,8 +3292,29 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 								if (NaturalAltgardQuestSteps.State(session.Api.World, use.QuestId)?.Var != use.FromVar) break;
 								item = await ApproachShippedSpawnAsync(use.NpcId, skipBlockedTarget: true, withinRange: TalkRange(use.NpcId));
 							}
+							// NR-R4b: the server cuts a use bar short when the player is attacked (Java ItemUseObserver 17-60). The walk
+							// to another object defends on its way. The walk to the same object ends where the bot stands, and used
+							// again at once the monster that cut the use short cuts every use short, until the leg's count of repeated
+							// decisions ends it: the Gladiator, the Assassin and the Bard at Q2213's Okaru Tree in round 4. So before
+							// the object whose use was just cut short is used again, the journey's own defence and rest run, as leg
+							// 10 has them before every use.
+							if (item == useCutShortObject)
+							{
+								session.TraceDiagnostic("object-use-again-after-cut-short", new Dictionary<string, object?>
+								{
+									["use"] = use.Key, ["object"] = item, ["hp"] = session.Api.World.CurrentHp, ["position"] = session.CurrentPosition,
+								});
+								await RestSafelyAsync(token);
+								if (NaturalAltgardQuestSteps.State(session.Api.World, use.QuestId)?.Var != use.FromVar) break;
+								item = await ApproachShippedSpawnAsync(use.NpcId, skipBlockedTarget: true,
+									withinRange: use.MapId == null ? null : TalkRange(use.NpcId));
+							}
 							// AC-05: the use may open a dialog first (Q2221's safe), answered with the contract's close action.
+							int useStart = session.PacketHistory.Count;
 							bool used = await NaturalAltgardQuestSteps.UseContractObjectAsync(session, use, item, token);
+							useCutShortObject = !used && session.PacketHistory.Skip(useStart).Any(packet => packet.PacketType == typeof(SM_USE_OBJECT) &&
+								packet.Get<int>("targetObjectId") == item && packet.Get<byte>("actionType") == 2 && packet.Get<int>("durationMs") <= 0)
+								? item : 0;
 							if (used && use.MovieId != null)
 							{
 								await session.WaitForPacketAsync(typeof(SM_PLAYER_SPAWN), token, packet => packet.Get<int>("worldId") == leg.Hub.MapId);
