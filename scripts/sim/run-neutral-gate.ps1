@@ -81,6 +81,9 @@ $scopeTable = [ordered]@{
 	# NR-78: the Chanter's scope is Haramel too, where its rules differ most from the Cleric's: it walks to its target,
 	# plays its strike chains at melee and keeps its own buff up.
 	chanter  = @{ line = 'priest-chanter'; replay = [ordered]@{ AltgardLeg1 = $true; Leg = 'l12'; From = 'altgard-coingear-chanter'; LaterCapital = $true } }
+	# NR-118: the Spirit Master's scope is Haramel too, where its rules differ most from the Mage's: it fights with its
+	# spirit out, heals it, and casts its own erosion, earth and choke.
+	spiritmaster = @{ line = 'mage-spirit-master'; replay = [ordered]@{ AltgardLeg1 = $true; Leg = 'l12'; From = 'altgard-coingear-spirit-master'; LaterCapital = $true } }
 }
 # The environment every gate run is pinned to. Null is unset: help items on, the bot monitor at its default port.
 $pinned = [ordered]@{ AION_SIM_SEED = '1'; NA_HELP_ITEMS = $null; AION_BOT_DASHBOARD_PORT = $null; AION_SIM_PROCESS_KEY = $null }
