@@ -11,7 +11,6 @@ public sealed partial class BotWorldModel
 
 	private readonly Dictionary<int, BotKnownObject> objects = [];
 	// NR-R15a: where a packet has put a creature that is no player, kept beside the object and not applied to it.
-	private readonly Dictionary<int, BotPosition> pendingLandings = [];
 	private readonly Dictionary<int, BotInventoryItem> inventory = [];
 	private readonly Dictionary<int, BotSkill> skills = [];
 	private readonly HashSet<int> recipes = [];
@@ -145,7 +144,6 @@ public sealed partial class BotWorldModel
 	private void ForgetWorldObjects()
 	{
 		objects.Clear();
-		pendingLandings.Clear();
 		openPrivateStores.Clear(); privateStoreNames.Clear(); privateStoreListings.Clear();
 		lootStatuses.Clear();
 		Dialog = null;
@@ -186,11 +184,10 @@ public sealed partial class BotWorldModel
 		else if (type == typeof(SM_FORCED_MOVE))
 			ApplyForcedMove(packet);
 		else if (packet.Landings is { } landings)
-			NoteLandings(landings);
+			ApplyLandings(landings);
 		else if (type == typeof(SM_DELETE))
 		{
 			objects.Remove(packet.Get<int>("objectId"));
-			pendingLandings.Remove(packet.Get<int>("objectId"));
 			objectAbnormals.Remove(packet.Get<int>("objectId"));
 			objectEffects.Remove(packet.Get<int>("objectId"));
 			ForgetPrivateStore(packet.Get<int>("objectId"));
@@ -364,7 +361,6 @@ public sealed partial class BotWorldModel
 	{
 		var objectId = packet.Get<int>("objectId");
 		var npcId = packet.Get<int>("npcId");
-		pendingLandings.Remove(objectId);
 		// The same monster described again keeps the patrol path already watched.
 		var patrolPath = objects.TryGetValue(objectId, out var known) && known.TemplateId == npcId ? known.PatrolPath : null;
 		objects[objectId] = new BotKnownObject(objectId, BotKnownObjectKind.Npc,
@@ -387,7 +383,6 @@ public sealed partial class BotWorldModel
 	private void ApplyMove(DecodedBotServerPacket packet)
 	{
 		var objectId = packet.Get<int>("objectId");
-		pendingLandings.Remove(objectId);
 		var position = ReadPosition(packet.Fields);
 		BotPosition? target = packet.Fields.ContainsKey("targetX")
 			? new BotPosition(Get<float>(packet.Fields, "targetX"), Get<float>(packet.Fields, "targetY"),
@@ -406,26 +401,17 @@ public sealed partial class BotWorldModel
 			Position = position;
 	}
 
-	// NR-110g, NR-R15a: a stagger, a stumble, a lift or a pull moved a creature that is no player; the server says where
-	// only in the cast result, and for a weapon's critical in SM_ATTACK (BotServerPacketDecoder.Landings). A player is told
-	// by SM_FORCED_MOVE, and is moved by that. The place is kept, not applied: the object stays where the bot had it, as
-	// every recorded trace has it, until the fight takes the landing (TakeLanding) or the creature moves or is described
-	// again.
-	private void NoteLandings(IReadOnlyList<BotCreatureLanding> landings)
+	// NR-110g: a stagger, a stumble, a lift or a pull moved a creature that is no player; the server says where only in the
+	// cast result, and for a weapon's critical in SM_ATTACK (BotServerPacketDecoder.Landings). The creature stands there
+	// from the blow on, as a client shows it. A player is told by SM_FORCED_MOVE, and is moved by that.
+	private void ApplyLandings(IReadOnlyList<BotCreatureLanding> landings)
 	{
 		foreach (BotCreatureLanding landing in landings)
 			if (objects.TryGetValue(landing.ObjectId, out var known) && known.Kind == BotKnownObjectKind.Npc)
-				pendingLandings[landing.ObjectId] = new BotPosition(landing.X, landing.Y, landing.Z, known.Position.Heading);
-	}
-
-	/// <summary>NR-R15a: put a creature where the last packet that moved it said, when one did since the creature last
-	/// moved by itself. The fight calls this when the server refuses a skill for distance: its refusal shows the bot's own
-	/// place for the creature to be wrong. Null when no such place is kept.</summary>
-	public BotPosition? TakeLanding(int objectId)
-	{
-		if (!pendingLandings.Remove(objectId, out BotPosition landed) || !objects.TryGetValue(objectId, out var known)) return null;
-		objects[objectId] = known with { Position = landed, MoveTarget = null };
-		return landed;
+				objects[landing.ObjectId] = known with
+				{
+					Position = new BotPosition(landing.X, landing.Y, landing.Z, known.Position.Heading), MoveTarget = null,
+				};
 	}
 
 	// A knockback, stumble or pull moved the creature on the server; the client puts it where it landed.
