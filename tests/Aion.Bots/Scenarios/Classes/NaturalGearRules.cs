@@ -42,6 +42,9 @@ public sealed record NaturalGearRules
 	/// <summary>CP-68: what the equipment check puts in the off hand beside a one-hand weapon.</summary>
 	public NaturalOffHand OffHand { get; init; }
 
+	/// <summary>NR-R23a: the class runs its equipment check when a leg starts (<see cref="NaturalClassGearTable"/>).</summary>
+	public bool WearsAtLegStart { get; init; }
+
 	/// <summary>NR-50c: the same rules for a class that holds a shield from now on: shields are its gear, the best one is
 	/// worn and kept. The class needs the shield mastery.</summary>
 	public NaturalGearRules HoldingShield() => !MasteryUnlocks.Contains("SHIELD")

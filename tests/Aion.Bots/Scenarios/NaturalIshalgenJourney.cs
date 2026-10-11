@@ -2747,6 +2747,9 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 				await FallFromLoginPlaceAsync();
 				await TopUpHelpItemsAsync("run-start");
 				await combat.BuffOurselfAsync(NaturalHelpTrigger.AfterRelog, token);
+				// NR-R23a: a second class wears the better gear it owns before the leg begins. The town service was the one place
+				// a leg put gear on, and a roomy cube seldom sends a leg there.
+				if (combat.ClassProfile.Gear.WearsAtLegStart) await EquipUpgradesAsync(token);
 				// The revised roomy cube need not trigger generic inventory maintenance after Q24016.
 				// Wear its already earned staff once before CG's explicit loadout freeze and receipts.
 				if (leg.CoinGear is { } retainedGear)

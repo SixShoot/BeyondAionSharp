@@ -43,9 +43,13 @@ public enum NaturalOffHand
 /// item templates. At a reward they decide between two pieces of one score, and among accessories and hats, which the
 /// score does not rank: the first stat in which two pieces differ decides, the larger value winning. Not given: the
 /// order of the class's weapon stat, <see cref="CasterBonuses"/> or <see cref="PhysicalBonuses"/>.</param>
+/// <param name="WearsAtLegStart">NR-R23a: the class runs its equipment check when an Altgard leg, the coin-gear stage or
+/// Haramel starts. In those legs gear was put on at the town service alone, which a leg takes when the cube is nearly full
+/// (AK-08), and the roomy cube seldom is: the Assassin stood at level 24 in gear of levels 6 to 10 with level-16 pieces
+/// in its cube. Off for the accepted line, whose legs keep their own check points (the operator, 2026-10-06; NR-Q2).</param>
 public sealed record NaturalClassGearTable(PlayerClass Class, IReadOnlyList<string> WeaponGroups, NaturalWeaponStat WeaponStat,
 	IReadOnlyList<string> ArmorTypes, IReadOnlyList<int> ConsumableOrder, IReadOnlyList<int>? Supplies = null,
-	NaturalOffHand OffHand = NaturalOffHand.None, IReadOnlyList<string>? BonusOrder = null)
+	NaturalOffHand OffHand = NaturalOffHand.None, IReadOnlyList<string>? BonusOrder = null, bool WearsAtLegStart = true)
 {
 	/// <summary>NR-32: a class that casts and heals: magic boost, magical accuracy, healing boost, then mana and concentration.</summary>
 	public static readonly IReadOnlyList<string> HealerBonuses = ["BOOST_MAGICAL_SKILL", "MAGICAL_ACCURACY", "HEAL_BOOST", "MAXMP", "CONCENTRATION"];
@@ -85,12 +89,13 @@ public sealed record NaturalClassGearTable(PlayerClass Class, IReadOnlyList<stri
 	// staff with the most magic boost after Ascension (the staff rule, AX-Q1), which is the weapon order here. The Priest
 	// keeps its mace by magic boost.
 	public static NaturalClassGearTable Priest { get; } = new(PlayerClass.PRIEST, ["MACE"], NaturalWeaponStat.Magical,
-		["LEATHER", "ROBE", "CLOTHES"], DefaultConsumableOrder, NaturalIshalgenPotionPolicy.ManaPotionIds, BonusOrder: HealerBonuses);
+		["LEATHER", "ROBE", "CLOTHES"], DefaultConsumableOrder, NaturalIshalgenPotionPolicy.ManaPotionIds, BonusOrder: HealerBonuses,
+		WearsAtLegStart: false);
 	// NR-32: the Cleric's table names no bonus order. The recorded Cleric takes the first of two such pieces (at Q2227 the
 	// Corundum Ring, +28 HP, before the Turquoise Ring, +28 MP), and an order would change that pick and its scopes. Whether
 	// it gets the healer's order is the operator's (NR-Q12).
 	public static NaturalClassGearTable Cleric { get; } = new(PlayerClass.CLERIC, ["STAFF", "MACE"], NaturalWeaponStat.Magical,
-		["CHAIN", "LEATHER", "ROBE", "CLOTHES"], DefaultConsumableOrder, PriestLineSupplies, BonusOrder: []);
+		["CHAIN", "LEATHER", "ROBE", "CLOTHES"], DefaultConsumableOrder, PriestLineSupplies, BonusOrder: [], WearsAtLegStart: false);
 	public static NaturalClassGearTable Chanter { get; } = new(PlayerClass.CHANTER, ["STAFF", "MACE"], NaturalWeaponStat.Magical,
 		["CHAIN", "LEATHER", "ROBE", "CLOTHES"], DefaultConsumableOrder, PriestLineSupplies, BonusOrder: HealerBonuses);
 
@@ -233,6 +238,7 @@ public sealed record NaturalClassGearTable(PlayerClass Class, IReadOnlyList<stri
 				.Concat(Supplies ?? []).ToHashSet(),
 			MasteryUnlocks = unlocks,
 			OffHand = OffHand,
+			WearsAtLegStart = WearsAtLegStart,
 			ConsumableOrder = ConsumableOrder,
 			BonusOrder = Bonuses,
 			ExpectedSkillIds = masteries.Select(mastery => mastery.SkillId).Where(id => !replaced.Contains(id)).Distinct().Order().ToArray(),

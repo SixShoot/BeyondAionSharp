@@ -10745,6 +10745,44 @@ through these: each is ticked by the round that gave its capture.
     Cleric's.
   - Proof: Round 24's file from nr-r23 without a capture: the Assassin puts on its
     level-16 pieces at the start of leg 10. The bundle with the full gate.
+  - 2026-10-11, the code: every class but the accepted line runs its equipment check
+    when a leg starts. The Assassin puts on twelve pieces and wins Q2281. Five class
+    scopes put pieces on at Haramel's start and are recorded again; the item is ticked
+    with that.
+    - **The change.** Sc/Classes/NaturalClassGearTable.cs: WearsAtLegStart, on for
+      every table but the Priest's and the Cleric's. Sc/Classes/NaturalGearRules.cs
+      carries it. Sc/NaturalIshalgenJourney.cs: an Altgard leg, the coin-gear stage and
+      Haramel run the equipment check after the login buffs when the class's rules say
+      so. It is the check the town service runs. No branch on a class.
+    - **Proof, the round** (run change-a1: round 24's file from nr-r23 without a
+      capture). At the start of leg 10 the Assassin puts on twelve pieces: the Altgard
+      Legionary Dagger (16) for the Karmic Dagger (10), which goes to the off hand for
+      the dagger of level 8; the Legionary Jerkin, Boots and Vambrace (16) for pieces
+      of levels 8 and 9; two rings and a sash; and a hood, two earrings and a power
+      shard where it wore nothing. In its 76 game minutes it wins 42 of 42 fights with
+      one attacker, 22 of 28 with two and none of 6 with three. It wins Q2281's last
+      two kills at 15:35 and 15:57 and goes on to Q2282, the warlocks, where its hour
+      then runs out with nothing won: its first there. Four deaths. The Gunner ends
+      the Abyss entry in the same round's play: level 26, 181 quests, 16.2 game
+      minutes.
+    - **The gate** (run guard-p8, run/nr/NR-R23a/guard-p8/verdict.json): fourteen
+      scopes identical, the Priest's and the Cleric's seven among them. Five class
+      scopes differ, each first at a piece put on at Haramel's start, in a slot that
+      was empty; each journey ends as before.
+
+      | Scope | First difference | Put on at the start of Haramel |
+      |---|---|---|
+      | sorcerer | record 58 | Altgard Medal of Honor (necklace, 20), Deyla's Earrings (17), Anturoon Leggings (8) |
+      | chanter | record 58 | Altgard Dark Legionary Aquamarine Necklace (19), Anturoon Chausses (8) |
+      | spiritmaster | record 58 | Altgard Medal of Honor, Deyla's Earrings, Anturoon Leggings |
+      | bard | record 65 | Altgard Medal of Honor, Deyla's Earrings, Anturoon Leggings |
+      | ranger | record 56 | Anturoon Breeches (8) |
+
+      Each of the five came to Haramel with no leg piece on; the Templar and the
+      Gladiator had nothing to put on, and their scopes are identical.
+    - **The bundle** (run/nr/NR-R23a, chain; one tree with the Rider's gate row of
+      NR-138): the unit suite (4,632 passed, 16 skipped), the seven checks, the script
+      tests and Fast (nrr23a-fast) pass.
 - [ ] **NR-R24 - Round 24: the Abyss entry for the Gunner, leg 10 for the Assassin.** Depends: NR-R23a
   - Work: Two worlds resumed from nr-r23 with -Capture nr-r24 (round file
     run/nr/NR-R24/round-24.json; worlds 1, 2, 3, 5, 6 and 8 have no bot: both of world
@@ -12337,3 +12375,12 @@ report what was done, what is parked or blocked, and what the operator must deci
   NR-R23a, the equipment check at a leg's start for every class but the accepted line,
   and NR-R24, round 24. Seven checks pass. Next: NR-138, the Rider's class scope, with
   NR-R23a in one bundle.
+- 2026-10-11 — Loop: NR-R23a, the code. Every class but the accepted line runs its
+  equipment check when a leg starts (gear-table data, off for the Priest and the Cleric).
+  Round 24's file without a capture (change-a1): the Assassin puts on twelve pieces at
+  the start of leg 10, wins Q2281's last two kills and goes on to Q2282; with one
+  attacker it wins 42 of 42 fights. The Gunner ends the Abyss entry in that play. Gate
+  guard-p8: fourteen scopes identical, the Cleric's among them; sorcerer, chanter,
+  spiritmaster, bard and ranger differ first at a piece put on at Haramel's start. Unit
+  suite, seven checks, script tests and Fast nrr23a-fast pass. Next: NR-R23a still, the
+  five scopes recorded again; then NR-138, the Rider's class scope.
