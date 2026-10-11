@@ -8935,7 +8935,7 @@ through these: each is ticked by the round that gave its capture.
       was refused a travel plan 36 times, and did not take the item. Thirteen deaths in
       the leg. Item NR-R12c.
     - **Deaths: 36,** of which 34 are those three's.
-- [ ] **NR-R12a - The Rider at Q2916's suspicious clothing.** Depends: NR-R12
+- [x] **NR-R12a - The Rider at Q2916's suspicious clothing.** Depends: NR-R12
   - Work: Its second attempt first: the Rider resumed from nr-r12-w8 without a
     capture. If it ends leg 9, the item closes with what the first attempt lost. If it
     stops again: Java first for what the errand relies on, then find why the Rider dies
@@ -8943,6 +8943,19 @@ through these: each is ticked by the round that gave its capture.
     profile numbers.
   - Proof: The Rider ends leg 9 in a round without a capture; the full gate identical
     when code changes.
+  - 2026-10-11: done with no change. The Rider's second attempt ends leg 9.
+    - **The second attempt** (run second-a1 at fe8622238, round 13's file from nr-r12 without a
+      capture; run/nr/NR-R12a/second-a1; 1,330 s). The leg was
+      complete at 0:10:53 of the world's clock, the Rider's first minute. It went for
+      the clothing, took it at the first use at 0:34:24, and the leg ended at 0:34:42:
+      level 23, 152 quests, one death on the way.
+    - **What the first attempt lost.** Three tries at the clothing, each coming away
+      without the item, with a death and a long way back between them. Nothing of the
+      server's is in question. A finding and no item: the clothing is one more object
+      whose use a monster can cut short, outside the legs' own use step that NR-R4b
+      mended.
+    - **Proof.** No code changes; the gate is NR-R11's (guard-p8 under run/nr/NR-R11b).
+      Seven pre-commit checks pass. Round 13 plays it again for the capture.
 - [ ] **NR-R12b - The Ranger at Q2281 in the Black Claw village.** Depends: NR-R12a
   - Work: Its second attempt first, as NR-R12a. If it stops again: find why its fights
     there end in deaths and no counted kill, and mend it in the shared code or in the
@@ -10179,3 +10192,7 @@ report what was done, what is parked or blocked, and what the operator must deci
   Claw village (fifteen deaths in the leg) and the Sorcerer at Q24014's item (thirteen).
   Written: NR-R12a, NR-R12b, NR-R12c and NR-R13, round 13. Seven checks pass. Next:
   NR-R12a.
+- 2026-10-11 — Loop: NR-R12a done with no change. The second attempts of the three that
+  stopped in round 12 were played as one round without a capture (second-a1, 1,330 s).
+  The Rider took Q2916's clothing at the first use and ended leg 9 (level 23, 152
+  quests). Seven checks pass. Next: NR-R12b.
