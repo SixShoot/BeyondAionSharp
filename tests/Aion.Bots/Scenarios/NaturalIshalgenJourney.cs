@@ -3886,6 +3886,7 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 					}
 					long started = runtime.NowMillis;
 					int revives = combat.ReviveCount, retreats = combat.CompletedRetreats;
+					int fightPackets = session.PacketHistory.Count;
 					bool killed = await combat.TryKillAsync(enemy.Value, token, session.CurrentPosition,
 						Math.Max(0, session.PacketHistory.Count - 400));
 					session.TraceDiagnostic("destiny-combat-outcome", new Dictionary<string, object?>
@@ -3895,8 +3896,16 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 					});
 					if (NaturalAltgardQuestSteps.State(session.Api.World, destiny.QuestId) is (3, 9))
 					{
-						await session.WaitForPacketAsync(typeof(SM_PLAYER_SPAWN), token, packet => packet.Get<int>("worldId") == destiny.KillTeleport.MapId);
-						await session.WaitForPacketAsync(typeof(SM_PLAYER_INFO), token, packet => packet.Get<int>("objectId") == session.CharacterId);
+						// NR-R19a: the kill's teleport can come while the fight still waits out its last blow's hit time. The spawn is
+						// then in the packets the fight has read, and only what has not come yet is waited for.
+						int spawnAt = session.PacketHistory.Skip(fightPackets).Select((packet, offset) => (packet, offset))
+							.Where(seen => seen.packet.PacketType == typeof(SM_PLAYER_SPAWN) && seen.packet.Get<int>("worldId") == destiny.KillTeleport.MapId)
+							.Select(seen => fightPackets + seen.offset).DefaultIfEmpty(-1).First();
+						if (spawnAt < 0)
+							await session.WaitForPacketAsync(typeof(SM_PLAYER_SPAWN), token, packet => packet.Get<int>("worldId") == destiny.KillTeleport.MapId);
+						if (spawnAt < 0 || !session.PacketHistory.Skip(spawnAt).Any(packet => packet.PacketType == typeof(SM_PLAYER_INFO) &&
+							packet.Get<int>("objectId") == session.CharacterId))
+							await session.WaitForPacketAsync(typeof(SM_PLAYER_INFO), token, packet => packet.Get<int>("objectId") == session.CharacterId);
 						session.AcceptTeleportPosition();
 						await session.SynchronizeAsync(token);
 						EnterLegMap(newEntry: true);

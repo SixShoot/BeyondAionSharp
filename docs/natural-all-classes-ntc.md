@@ -10133,7 +10133,42 @@ through these: each is ticked by the round that gave its capture.
       | Assassin | Q2281 | 0 | Q2280 ended at 0:33:39 and six counts of Q2281; 39 flights at low health, 11 deaths, 20 fights that ended in a blocked approach |
       | Gunner | Q2282 | 2 | no fight with a warlock in the hour; 13 fights left at two attackers. It has two of three from rounds 16 and 17. A third such hour gets an item under NR-Q4 |
     - **Deaths: 13.**
-- [ ] **NR-R20 - Round 20: the Abyss entry for the Gladiator and the Ranger, leg 11 for the Rider, leg 10 for two.** Depends: NR-R19
+- [x] **NR-R19a - A kill's teleport that comes before the fight has ended.** Depends: NR-R19
+  - Work: Round 20's file was played once without a capture before the round (run
+    preview-a1, run/nr/NR-R20/preview-a1). The Rider stopped in leg 11's fight with
+    the Hellion: "No SM_PLAYER_SPAWN packet within 3 minutes". Find why the teleport
+    that ends Q2900's fight was not seen, in the fight every class shares, and mend it.
+  - Proof: The full gate identical, with the bundle. The Rider, resumed from nr-r19-w8
+    without a capture, ends leg 11.
+  - 2026-10-11: done. The fight with the Hellion takes a teleport that has already
+    come as come.
+    - **Java.** Nothing of the server's is relied on beyond what the leg already
+      reads: the kill sets Q2900 to var 9 and the server sends the player out.
+    - **What happened.** After the fight the journey waited for the next
+      SM_PLAYER_SPAWN to the kill teleport's map. The Rider's last blow, its rocket,
+      has a hit time of 1.8 s, and the fight waits that out before it ends. The
+      teleport came inside that wait, so the fight read it, and the wait that
+      followed was for a packet that had been and gone. Another class's last blow
+      lands sooner: the Gladiator's fight ended first and the spawn came after.
+    - **The change, generic** (Sc/NaturalIshalgenJourney.cs, FightDestinyAsync). The
+      journey notes how long the packet history was before the fight. After a kill
+      it looks there for the spawn to the kill teleport's map and for the player's
+      own SM_PLAYER_INFO after it, and waits only for what has not come.
+    - **Proof round** (run change-a1, the change in the working tree, round 20's file
+      from nr-r19 without a capture; run/nr/NR-R19a/change-a1; 231 s, five worlds).
+      The Rider kills the Hellion at 0:20:12, is out at 0:20:14 and goes on to Skuld
+      at once. It ends leg 11: level 25, 164 quests, 12.3 game minutes, no death,
+      receipt verified.
+    - **Also seen in that round, of round 20.** The Gladiator (181 quests) and the
+      Ranger (179) end the Abyss entry. The Gunner kills its third warlock and ends
+      leg 10 with 162 quests. The Assassin's hour runs out in leg 10.
+    - **Proof.** Gate, set
+      all+mage+warrior+artist+engineer+scout+templar+sorcerer+chanter+spiritmaster+bard,
+      -Parallel 8, run guard-p8 (run/nr/NR-R19a/guard-p8/verdict.json): verdict pass,
+      all seventeen scopes identical. Seven pre-commit checks pass,
+      Aion.GameServer.Tests passes (4,632 passed, 16 skipped) and Fast passes (run
+      nrr19a-fast, 11 passed).
+- [ ] **NR-R20 - Round 20: the Abyss entry for the Gladiator and the Ranger, leg 11 for the Rider, leg 10 for two.** Depends: NR-R19a
   - Work: Five worlds resumed from nr-r19 with -Capture nr-r20 (round file
     run/nr/NR-R20/round-20.json; worlds 1, 2 and 6 have no bot). The Gladiator and the
     Ranger play the Abyss entry (stage ax); the Rider plays leg 11; the Assassin and
@@ -11572,3 +11607,11 @@ report what was done, what is parked or blocked, and what the operator must deci
   leg 10 with 162. The Assassin ended Q2280 and began Q2281 before its hour ran out; the
   Gunner's hour at Q2282 won nothing, the second in a row. Written: NR-R20, round 20.
   Seven checks pass. Next: NR-R20, round 20, with its captures.
+- 2026-10-11 — Loop: NR-R19a written and done. Round 20's file was played once without a
+  capture first (preview-a1). The Rider stopped in leg 11: the teleport that ends the
+  fight with the Hellion came while the fight still waited out its last blow's hit time,
+  and the journey then waited for a spawn that had been and gone. It now takes a spawn
+  already read as come. Proof round (change-a1, 231 s): the Rider ends leg 11 with 164
+  quests. Full gate guard-p8 (seventeen scopes identical), seven checks, unit suite
+  (4,632 passed, 16 skipped) and Fast (nrr19a-fast) pass. Next: NR-R20, round 20, with
+  its captures.
