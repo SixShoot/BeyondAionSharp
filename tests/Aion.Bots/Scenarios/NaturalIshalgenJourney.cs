@@ -6786,6 +6786,19 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 					});
 					return;
 				}
+				// NR-R11c: on any map, a bot that stands on its bind point itself has nowhere to Return to. A leg played again from
+				// its end starts there (the Spirit Master's leg 9 ends with a Return), and Return still cools down from that first
+				// time: the bot sat the 19 minutes out and cast into the cooldown's last second, which the login list gives in whole
+				// seconds only.
+				if (session.Api.World.ObeliskBindPoint is { } here && here.MapId == session.Api.World.MapId &&
+					Distance(session.CurrentPosition, here.Position) <= 1)
+				{
+					session.TraceDiagnostic("natural-return-skipped-on-bind-point", new Dictionary<string, object?>
+					{
+						["position"] = session.CurrentPosition, ["bindPosition"] = here.Position,
+					});
+					return;
+				}
 				session.BeginStep("ni07-natural-return", "cast-learned-return-after-checked-route-blocked");
 				// NA-27 (LIVE): a monster can kill the bot on the very walk whose failure asked for Return, and Java refuses
 				// a dead player's cast (CM_CASTSPELL: STR_SKILL_CANT_CAST, DEAD). A bind revive lands at the same bind

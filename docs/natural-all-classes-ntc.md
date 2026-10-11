@@ -8850,12 +8850,40 @@ through these: each is ticked by the round that gave its capture.
       identical. On that tree the seven pre-commit checks pass, Aion.GameServer.Tests
       passes (4,632 passed, 16 skipped: the three new port tests) and Fast passes (run
       nrr11b-fast, 11 passed). The three items are committed one after another from it.
-- [ ] **NR-R11c - A leg played again from its end casts a Return it does not need.** Depends: NR-R11b
+- [x] **NR-R11c - A leg played again from its end casts a Return it does not need.** Depends: NR-R11b
   - Work: Find why the Spirit Master, standing at leg 9's end, casts Return, and why
     the server refuses the cast after the bot has waited the cooldown out. Mend it in
     the shared code.
   - Proof: The full gate identical, with the bundle. The Spirit Master, resumed from
     nr-r11-w6 without a capture, ends leg 9 from its end.
+  - 2026-10-11: done. A bot that stands on its bind point does not cast Return.
+    - **Why it cast.** Leg 9 ends with the clothing of a later capital quest and then
+      "Return when farther from the hub's ground than the hub's radius". Its bind point
+      is farther than that, so the leg's first play ends with a Return to it. Played
+      again from there, the leg is complete at once, the clothing is carried already,
+      and the same line asks for Return again, from the bind point to the bind point.
+    - **Why the server refused.** Return cools down for 20 minutes. At login the server
+      lists it with 1,168 s left, in whole seconds as Java writes the list; the bot
+      waited 1,168 s and cast 1 ms later, inside the last second, and the server
+      answered STR_SKILL_NOT_READY, rightly. A cooldown read from a cast's result is
+      exact; one read from the login list can be up to a second short. Left as it is,
+      and written down: every recorded scope begins with that list.
+    - **The change, generic** (Sc/NaturalIshalgenJourney.cs,
+      UseLearnedReturnToBindAsync). On any map, a bot within 1 m of its own bind point
+      does not cast Return: it would land where it stands. The trace says
+      natural-return-skipped-on-bind-point. The Ishalgen rule beside it (CP-07, 30 m)
+      stays as it is.
+    - **Proof round** (run change-a2, round 12's file from nr-r11 without a capture;
+      run/nr/NR-R11b/change-a2; 981 s). The Spirit Master's leg 9 was complete at once,
+      the Return was skipped on the bind point, and the leg ended in 0.2 game minutes at
+      level 22 with 152 quests. In change-a1, without the change, it had waited 19.5
+      minutes and stopped at the refused cast.
+    - **Proof.** Gate, set all+mage+warrior+artist+engineer+scout+templar, -Parallel 8,
+      run guard-p8 (run/nr/NR-R11b/guard-p8/verdict.json), on the tree that holds the
+      changes of NR-R11a, NR-R11b and NR-R11c together: verdict pass, all thirteen scopes
+      identical. On that tree the seven pre-commit checks pass, Aion.GameServer.Tests
+      passes (4,632 passed, 16 skipped: the three new port tests) and Fast passes (run
+      nrr11b-fast, 11 passed). The three items are committed one after another from it.
 - [ ] **NR-R12 - Round 12: leg 10 for two, leg 9 for four, and the legs of the Chanter, the Assassin and the Gunner.** Depends: NR-R11c
   - Work: The eight worlds resumed from nr-r11 with -Capture nr-r12 (round file
     run/nr/NR-R12/round-12.json). The Sorcerer and the Ranger play leg 10; the
@@ -10067,3 +10095,10 @@ report what was done, what is parked or blocked, and what the operator must deci
   new wait was not called on. The same gate and bundle as NR-R11a. The first proof round
   showed the Spirit Master stopping when its leg 9 is played again from its end. Written:
   NR-R11c. Next: NR-R11c.
+- 2026-10-11 — Loop: NR-R11c done. Leg 9 ends with a Return to a bind point that lies
+  outside its hub's radius, so a leg played again from its end asked for Return from the
+  bind point to the bind point, with Return still cooling down; the login list gives the
+  cooldown in whole seconds, and the cast came inside its last second. A bot within 1 m
+  of its bind point no longer casts Return. Proof round change-a2: the Spirit Master's
+  leg 9 ended from its end in 0.2 game minutes. The same gate and bundle as NR-R11a. Next:
+  NR-R12, round 12, with its captures.
