@@ -89,6 +89,21 @@ try {
 	Set-Pointer @{ stage = 'bridge' }
 	$fromBridge = & $script -Action Restore -Name munin-mage-mock -Docker $fake -SnapshotRoot $snapshots | ConvertFrom-Json
 	Assert-True ($fromBridge.environment.PSObject.Properties.Name -notcontains 'NA_ASCENSION') "A round character at the bridge's end gained later capital scope."
+	# NR-67b: a leg captured alone from a round character stays on its seat; a capture of another character does not take it.
+	$alone = Join-Path $snapshots 'leg-from-round-mock'
+	New-Item -ItemType Directory -Path $alone | Out-Null
+	Copy-Item -LiteralPath (Join-Path $munin 'dump.sql.gz') -Destination $alone
+	function Set-Alone([int]$Character) {
+		[ordered]@{ schemaVersion = 1; name = 'leg-from-round-mock'; from = 'munin-mage-mock'; characterId = $Character; elapsedMillis = 1000; dumpSha256 = $hash } |
+			ConvertTo-Json | Set-Content -LiteralPath (Join-Path $alone 'snapshot.json')
+	}
+	Set-Pointer @{}
+	Set-Alone 7001
+	$fromAlone = & $script -Action Restore -Name leg-from-round-mock -Docker $fake -SnapshotRoot $snapshots | ConvertFrom-Json
+	Assert-True ($fromAlone.environment.NI08_RESUME_ACCOUNT -eq '111' -and $fromAlone.environment.NI08_RESUME_NAME -eq 'Asimmage') 'A leg captured from a round character lost its seat.'
+	Set-Alone 7002
+	$fromOther = & $script -Action Restore -Name leg-from-round-mock -Docker $fake -SnapshotRoot $snapshots | ConvertFrom-Json
+	Assert-True ($fromOther.environment.PSObject.Properties.Name -notcontains 'NI08_RESUME_ACCOUNT') "A capture took the seat of another round character."
 	Set-Pointer @{ characterId = 7999 }
 	Assert-Throws { & $script -Action Restore -Name munin-mage-mock -Docker $fake -SnapshotRoot $snapshots } '*does not hold*' 'A character its round snapshot does not hold was restored.'
 	Set-Pointer @{ account = 112 }

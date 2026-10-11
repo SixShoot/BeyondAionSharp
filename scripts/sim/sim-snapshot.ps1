@@ -342,9 +342,22 @@ function Restore-Snapshot([string]$SnapshotName = $Name) {
 		$environment.RC_CAPITAL = '1'
 	}
 	if ($classLine) { $environment.CP_CLASS = $classLine }
+	# NR-67b: a leg captured alone from a round character stays on that character's seat. Its record names the capture it
+	# was played from (from), and the seat is read there, through every such capture down to the round's.
+	$seat = $roundCharacter
+	$origin = if ($roundCharacter) { $null } else { $metadata }
+	for ($hop = 0; -not $seat -and $hop -lt 16 -and $origin -and $origin.PSObject.Properties.Name -contains 'from' -and $origin.from; $hop++) {
+		$originFile = Join-Path (Join-Path $SnapshotRoot ([string]$origin.from)) 'snapshot.json'
+		if (-not (Test-Path -LiteralPath $originFile)) { break }
+		$origin = Get-Content -Raw -LiteralPath $originFile | ConvertFrom-Json
+		if ($origin.PSObject.Properties.Name -contains 'source' -and $origin.source -eq 'natural-round-character' -and
+			$origin.characterId -eq $metadata.characterId) { $seat = $origin }
+	}
+	if ($seat) {
+		$environment.NI08_RESUME_ACCOUNT = "$($seat.account)"
+		$environment.NI08_RESUME_NAME = [string]$seat.characterName
+	}
 	if ($roundCharacter) {
-		$environment.NI08_RESUME_ACCOUNT = "$($roundCharacter.account)"
-		$environment.NI08_RESUME_NAME = [string]$roundCharacter.characterName
 		# NR-67a: a round character that ended an Altgard stage stands on the revised route, as a later-capital snapshot
 		# of one character does, so a leg can be captured alone from it. At the Abyss entry's end it resumes as that
 		# leg's snapshot does (AX-13).

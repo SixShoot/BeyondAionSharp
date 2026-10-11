@@ -4832,7 +4832,35 @@ The template:
       -Parallel 8, run guard-p8 (run/nr/NR-R17a/guard-p8/verdict.json): verdict pass, all
       thirteen scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests
       passes (4,632 passed, 16 skipped) and Fast passes (run nrr17a-fast, 11 passed).
-- [ ] **NR-67 - Sorcerer: the endpoint.** Depends: NR-67a; ticked by its round
+- [x] **NR-67b - The seat of a leg captured alone from a round character.** Depends: NR-67a
+  - Work: NR-67's capture was made and its Verify failed: "NI-08 retained character
+    133266 is missing; refusing to create a replacement". A round character lives on
+    its seat's account (111, Asimsorcerer); the capture's record does not name the
+    seat, so the resume looked on the accepted line's account. A snapshot is not
+    edited and not captured again. Read the seat where it is written: in the round
+    capture the leg was played from.
+  - Proof: The script tests pass, with the bundle and the full gate. Verify of
+    ntc-ready-sorcerer-s1 resumes its character at the endpoint.
+  - 2026-10-11: done. A leg captured alone from a round character restores on that
+    character's seat.
+    - **The change** (scripts/sim/sim-snapshot.ps1, Restore-Snapshot). A snapshot's
+      record names the capture it was played from (from). The restore follows that
+      name, through every such capture, to a round character with the same character
+      id and takes its account and name for the resume. A capture whose chain holds no
+      round character, or another character's, restores as before.
+    - **The script test** (scripts/sim/test-sim-snapshot.ps1) has two assertions for
+      it: the seat is taken from the round character, and not from another one's.
+    - **Verify** (run nr67-verify-a2, the change in the working tree;
+      run/nr/NR-67/verify-a2.log): "Verified snapshot ntc-ready-sorcerer-s1: character
+      133266 resumed at its endpoint." The failed first run is kept
+      (run/nr/NR-67/verify-a1.log, run/snapshots/_verify/nr67-verify-a1).
+    - **Proof.** One bundle for NR-67b and NR-R17b, on the tree with both changes. The
+      script tests pass (test-sim-snapshot.ps1, test_compare_traces.py,
+      test-code-coverage.ps1). Gate, set all+mage+warrior+artist+engineer+scout+templar,
+      -Parallel 8, run guard-p8 (run/nr/NR-R17b/guard-p8/verdict.json): verdict pass, all
+      thirteen scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests
+      passes (4,632 passed, 16 skipped) and Fast passes (run nrr17b-fast, 11 passed).
+- [ ] **NR-67 - Sorcerer: the endpoint.** Depends: NR-67b; ticked by its round
   - Work: Captured and verified as ntc-ready-sorcerer-s1: alive at Morheim Ice Fortress,
     level 25 or higher, Q2945, Q2946, Q2947 and Q2042 complete.
   - Proof: The capture verifies.
@@ -11042,3 +11070,10 @@ report what was done, what is parked or blocked, and what the operator must deci
   twelve metres above the ground, at the place the server last saved for it, and finding
   no way: NR-R17b is written, before round 18. Next: NR-67, the Sorcerer's finish
   capture.
+- 2026-10-11 — Loop: NR-67b written and done. ntc-ready-sorcerer-s1 was captured and its
+  Verify failed: the record of a leg captured alone does not name the seat its round
+  character lives on. The restore now reads the seat from the round capture the leg was
+  played from, and the Verify passes (nr67-verify-a2). One bundle with NR-R17b: script
+  tests, full gate guard-p8 of NR-R17b (thirteen scopes identical), seven checks, unit
+  suite (4,632 passed, 16 skipped) and Fast (nrr17b-fast) pass. Next: NR-R17b, whose
+  proof is in the same bundle, then NR-67's record.
