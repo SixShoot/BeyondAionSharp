@@ -93,6 +93,9 @@ $scopeTable = [ordered]@{
 	# NR-108: the Ranger's scope is Haramel too, where its rules differ most from the Scout's: it fights from range
 	# with the bow, snares and stuns its target and plays its arrow chains.
 	ranger   = @{ line = 'scout-ranger'; replay = [ordered]@{ AltgardLeg1 = $true; Leg = 'l12'; From = 'altgard-coingear-ranger'; LaterCapital = $true } }
+	# NR-138: the Rider's scope is Haramel too, where its rules differ most from the Engineer's: it lays the pistol
+	# down for a cipher-blade and fights from the mech that blade calls.
+	rider    = @{ line = 'engineer-rider'; replay = [ordered]@{ AltgardLeg1 = $true; Leg = 'l12'; From = 'altgard-coingear-rider'; LaterCapital = $true } }
 }
 # The environment every gate run is pinned to. Null is unset: help items on, the bot monitor at its default port.
 $pinned = [ordered]@{ AION_SIM_SEED = '1'; NA_HELP_ITEMS = $null; AION_BOT_DASHBOARD_PORT = $null; AION_SIM_PROCESS_KEY = $null }
