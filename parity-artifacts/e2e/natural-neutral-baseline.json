@@ -908,6 +908,53 @@
         "binds": 1,
         "soulHeals": 0
       }
+    },
+    {
+      "scope": "gunner",
+      "line": "engineer-gunner",
+      "replay": {
+        "AltgardLeg1": true,
+        "Leg": "l12",
+        "From": "altgard-coingear-gunner",
+        "LaterCapital": true
+      },
+      "snapshot": "altgard-coingear-gunner",
+      "commit": "1759f3060b5e880fc4cc6369a78b296bb44d561f",
+      "environment": {
+        "AION_SIM_SEED": "1",
+        "NA_HELP_ITEMS": null,
+        "AION_BOT_DASHBOARD_PORT": null,
+        "AION_SIM_PROCESS_KEY": null
+      },
+      "ignore": [],
+      "records": 44357,
+      "sha256": "a5073013ff2915f3642bc01ab4c4ce6cba59e2625ea76f54b343d3f5f38ca1d3",
+      "counts": {
+        "records": 44358,
+        "deaths": 0,
+        "reviveSteps": 0,
+        "retreats": 8,
+        "retreatRoutes": 14,
+        "restSitsTraced": 0,
+        "restInterrupts": 0,
+        "betweenFightHeals": 0,
+        "powderRestCasts": 8,
+        "vendorBuys": 0,
+        "pullPlans": 305,
+        "patrolWaits": 171,
+        "emergencyDecisions": 0,
+        "atTargetPulls": 4,
+        "lifePotions": 3,
+        "restLifePotions": 2,
+        "restSitsForHealth": 1,
+        "manaPotions": 0,
+        "shieldScrolls": 0,
+        "speedScrolls": 0,
+        "runningScrolls": 0,
+        "helpItemsSupplied": 0,
+        "binds": 1,
+        "soulHeals": 0
+      }
     }
   ]
 }

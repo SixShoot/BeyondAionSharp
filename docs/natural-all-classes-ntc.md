@@ -7822,10 +7822,32 @@ The template:
       run/snapshots/_verify/nr127-verify-a1): "Verified snapshot ntc-ready-gunner-s1:
       character 133266 resumed at its endpoint." It is the tenth class at the plan's
       finish.
-- [ ] **NR-128 - Gunner: the class scope.** Depends: NR-127
+- [x] **NR-128 - Gunner: the class scope.** Depends: NR-127
   - Work: One scope of the Gunner's play, chosen where its rules differ most from the
     Engineer's, recorded by a bot alone, twice, and added to the gate's sets.
   - Proof: The two recordings are identical.
+  - 2026-10-11: done. Scope gunner is recorded and stands in the baseline file.
+    - **The scope.** Haramel, leg l12 from altgard-coingear-gunner with the later
+      capital, as every second class's is. It is where the Gunner plays least like the
+      Engineer it was: it holds a pistol in each hand, plays its chains of shots,
+      reloads, and takes its mana back with Crosstrigger. The capture it starts from is
+      a round character, replayed alone (NR-67a, NR-67b); the gate and its scopes stay
+      one bot in its own world (rule (w)).
+    - **The row** (scripts/sim/run-neutral-gate.ps1, committed first as 1759f3060). One
+      bundle on the tree with the row (run/nr/NR-128, chain): the script tests, the
+      seven checks, the unit suite (4,632 passed, 16 skipped), Fast nr128-fast, and the
+      full gate on twenty scopes, all identical.
+    - **The recording** at 1759f3060 on a clean tree (run record-a1,
+      run/nr/NR-128/record-a1/verdict.json): two passes, identical after normalization:
+      44,357 records, sha256 a5073013ff2915f3. No death, 8 retreats, 305 pull plans, 171
+      holds of the patrol rule, 0 help items supplied. The traces are kept under
+      run/cp/baseline/1759f3060... and in the second copy beside the repository.
+    - **Proof.** The full gate with the new row passes (run guard-p8,
+      run/nr/NR-128/guard-p8/verdict.json): twenty-one scopes identical. Seven
+      pre-commit checks and the three script tests pass on the tree with the new row.
+    - **The full gate from here** is set
+      all+mage+warrior+artist+engineer+scout+templar+sorcerer+chanter+spiritmaster+bard+gladiator+ranger+rider+gunner:
+      twenty-one scopes.
 - [x] **NR-130 - Rider: survey and profile data.** Depends: the close of phase C
   - 2026-10-10: done. The Rider has a class line, a gear table and a profile the
     validator accepts. Nothing has been played. Every skill of its own needs its mech,
@@ -12498,3 +12520,8 @@ report what was done, what is parked or blocked, and what the operator must deci
   nr127-verify-a1): the tenth class at the plan's finish. The Assassin, in the gear
   NR-R23a put on, wins Q2281 and goes on to Q2282, where its first hour wins nothing.
   Written: NR-R25, round 25. Seven checks pass. Next: NR-128, the Gunner's class scope.
+- 2026-10-11 — Loop: NR-128 done. Scope gunner is Haramel from altgard-coingear-gunner,
+  a round character replayed alone. Its row was committed as 1759f3060. Recorded at
+  1759f3060: two passes identical, 44,357 records, sha256 a5073013ff2915f3. The full
+  gate is now twenty-one scopes, and all are identical (guard-p8 of NR-128). Seven
+  checks and the script tests pass. Next: NR-R25, round 25, the Assassin alone.
