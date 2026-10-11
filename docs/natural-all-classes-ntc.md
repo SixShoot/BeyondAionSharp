@@ -8884,7 +8884,7 @@ through these: each is ticked by the round that gave its capture.
       identical. On that tree the seven pre-commit checks pass, Aion.GameServer.Tests
       passes (4,632 passed, 16 skipped: the three new port tests) and Fast passes (run
       nrr11b-fast, 11 passed). The three items are committed one after another from it.
-- [ ] **NR-R12 - Round 12: leg 10 for two, leg 9 for four, and the legs of the Chanter, the Assassin and the Gunner.** Depends: NR-R11c
+- [x] **NR-R12 - Round 12: leg 10 for two, leg 9 for four, and the legs of the Chanter, the Assassin and the Gunner.** Depends: NR-R11c
   - Work: The eight worlds resumed from nr-r11 with -Capture nr-r12 (round file
     run/nr/NR-R12/round-12.json). The Sorcerer and the Ranger play leg 10; the
     Gladiator, Bard and Rider play leg 9, and the Spirit Master's leg 9 is played again
@@ -8892,6 +8892,75 @@ through these: each is ticked by the round that gave its capture.
     Gunner goes on in leg 8 from where it stopped. Captures as
     altgard-rc-<leg>-<class>. One outcome line for each class; a stop gets a lettered
     item, in round 12's own letters.
+  - Proof: round.json with nine outcome records; for each class that reached its
+    stage's end the completion receipt says verified and its capture is written.
+  - 2026-10-11: played. Six reached their stage's end and are captured, the Spirit
+    Master's leg 9 among them with no server problem recorded (NR-R11a, NR-R11c). Three
+    stopped after an hour without progress: the Rider after leg 9's quests (NR-R12a),
+    and the Ranger and the Sorcerer in leg 10 (NR-R12b, NR-R12c).
+    - **The round** (run r12-a1 at 8667562a9, -From nr-r11, -Capture nr-r12;
+      run/nr/NR-R12/r12-a1; round file run/nr/NR-R12/round-12.json). Eight worlds side by
+      side, 946 seconds of wall time.
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 1 | mage-sorcerer | Sorcerer | l10 | stopped | 24 | 159 | 404.8 | 438, 290 kills | 13 | none |
+      | 2 | priest-chanter | Chanter | l8 | reached | 22 | 142 | 31.0 | 36, 35 kills | 0 | altgard-rc-l8-chanter |
+      | 3 | warrior-gladiator | Gladiator | l9 | reached | 23 | 152 | 62.2 | 152, 45 kills | 1 | altgard-rc-l9-gladiator |
+      | 4 | scout-assassin | Assassin | l7 | reached | 22 | 135 | 67.2 | 58, 57 kills | 0 | altgard-rc-l7-assassin |
+      | 5 | scout-ranger | Ranger | l10 | stopped | 23 | 152 | 245.1 | 333, 214 kills | 15 | none |
+      | 6 | mage-spirit-master | Spirit Master | l9 | reached | 22 | 152 | 0.2 | 0, 0 kills | 0 | altgard-rc-l9-spirit-master |
+      | 7 | engineer-gunner | Gunner | l8 | reached | 22 | 142 | 11.9 | 6, 3 kills | 0 | altgard-rc-l8-gunner |
+      | 8 | artist-bard | Bard | l9 | reached | 22 | 152 | 63.6 | 48, 42 kills | 1 | altgard-rc-l9-bard |
+      | 8 | engineer-rider | Rider | l9 | stopped | 23 | 152 | 118.9 | 119, 97 kills | 6 | none |
+
+      Each receipt of a class that reached its stage's end says verified. The captures
+      are records that point into the round snapshots nr-r12-w1 to nr-r12-w8, which hold
+      the three that stopped as they stood.
+    - **The Rider, after leg 9's quests.** The leg's last decision, "the endpoint is
+      reached", is at 0:53:55. What is left is the later capital's errand that leg 9
+      carries, Q2916's suspicious clothing (700211). In the 75 minutes that followed
+      the Rider tried the clothing three times and came away without it each time,
+      fought 89 times and died six times, to a mau shaman three times, a brutal Black
+      Claw tracer twice and a swift tayga (level 18, the first two of rank expert). The
+      hour without progress ended it. The
+      Gladiator, with the same ranges, and the Bard did the same errand in this round
+      and ended the leg. Item NR-R12a.
+    - **The Ranger, leg 10, Q2281.** From 3:05:47 it worked Q2281 in the Black Claw
+      village: 83 fights and eight deaths in the hour, all to brutal Black Claw of rank
+      expert, and no kill counted. Fifteen deaths in the leg. Item NR-R12b.
+    - **The Sorcerer, leg 10, Q24014's item.** It came further, through Q2281 with
+      eight deaths and Q24014's kills, and at 5:44:58 went for the item 182215360. For
+      an hour it cleared the guards about the place, twenty times, fought 24 times and
+      was refused a travel plan 36 times, and did not take the item. Thirteen deaths in
+      the leg. Item NR-R12c.
+    - **Deaths: 36,** of which 34 are those three's.
+- [ ] **NR-R12a - The Rider at Q2916's suspicious clothing.** Depends: NR-R12
+  - Work: Its second attempt first: the Rider resumed from nr-r12-w8 without a
+    capture. If it ends leg 9, the item closes with what the first attempt lost. If it
+    stops again: Java first for what the errand relies on, then find why the Rider dies
+    where the Gladiator does not, and mend it in the shared code or in the Rider's
+    profile numbers.
+  - Proof: The Rider ends leg 9 in a round without a capture; the full gate identical
+    when code changes.
+- [ ] **NR-R12b - The Ranger at Q2281 in the Black Claw village.** Depends: NR-R12a
+  - Work: Its second attempt first, as NR-R12a. If it stops again: find why its fights
+    there end in deaths and no counted kill, and mend it in the shared code or in the
+    Ranger's profile numbers.
+  - Proof: The Ranger ends leg 10 in a round without a capture; the full gate identical
+    when code changes.
+- [ ] **NR-R12c - The Sorcerer at Q24014's item.** Depends: NR-R12b
+  - Work: Its second attempt first, as NR-R12a. If it stops again: find why an hour of
+    clearing does not bring it to the item, and mend it in the shared code.
+  - Proof: The Sorcerer ends leg 10 in a round without a capture; the full gate
+    identical when code changes.
+- [ ] **NR-R13 - Round 13: leg 10 for five, leg 9 for three, and the Assassin's leg 8.** Depends: NR-R12c
+  - Work: The eight worlds resumed from nr-r12 with -Capture nr-r13 (round file
+    run/nr/NR-R13/round-13.json). The Spirit Master, the Gladiator and the Bard play
+    leg 10; the Sorcerer and the Ranger go on in leg 10 and the Rider in leg 9, each
+    from where it stopped; the Gunner and the Chanter play leg 9 and the Assassin leg
+    8. Captures as altgard-rc-<leg>-<class>. One outcome line for each class; a stop
+    gets a lettered item, in round 13's own letters.
   - Proof: round.json with nine outcome records; for each class that reached its
     stage's end the completion receipt says verified and its capture is written.
 
@@ -10102,3 +10171,11 @@ report what was done, what is parked or blocked, and what the operator must deci
   of its bind point no longer casts Return. Proof round change-a2: the Spirit Master's
   leg 9 ended from its end in 0.2 game minutes. The same gate and bundle as NR-R11a. Next:
   NR-R12, round 12, with its captures.
+- 2026-10-11 — Loop: NR-R12 played. Round 12 (r12-a1 at 8667562a9, -From nr-r11, 946 s):
+  six reached their stage's end and are captured in nr-r12-w1 to w8: the Spirit Master,
+  the Gladiator and the Bard leg 9 (152 quests), the Chanter and the Gunner leg 8 (142)
+  and the Assassin leg 7 (135). Three stopped after an hour without progress: the Rider
+  at Q2916's clothing after leg 9's quests (six deaths), the Ranger at Q2281 in the Black
+  Claw village (fifteen deaths in the leg) and the Sorcerer at Q24014's item (thirteen).
+  Written: NR-R12a, NR-R12b, NR-R12c and NR-R13, round 13. Seven checks pass. Next:
+  NR-R12a.
