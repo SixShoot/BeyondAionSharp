@@ -4756,10 +4756,14 @@ The template:
     level 14, 55 quests complete, 154 fights with 150 kills, no death. Its
     bridge-completion.json says verified. Captured as altgard-sorcerer-s1, a record that points at
     character 133266 in the round snapshot nr-r1-w1.
-- [ ] **NR-63 - Sorcerer: Altgard legs l1 to l5.** Depends: NR-62; ticked by its round
+- [x] **NR-63 - Sorcerer: Altgard legs l1 to l5.** Depends: NR-62; ticked by its round
   - Work: The Cleric's legs in order, each end captured under the Cleric's snapshot name
     with -sorcerer (NR-41). In leg 1 it shoots the fungus in flight.
   - Proof: Each capture verifies.
+  - 2026-10-10: done in rounds 3 to 7 (NR-R3 to NR-R7, world 1). Each leg ended with a
+    receipt that says verified, and the Sorcerer stands at leg 5's end at level 20 with
+    109 quests. Captured as altgard-rc-l1-sorcerer to altgard-rc-l5-sorcerer, records
+    that point at character 133266 in the round snapshots nr-r3-w1 to nr-r7-w1.
 - [ ] **NR-64 - Sorcerer: Altgard legs l6 to l11.** Depends: NR-63; ticked by its round
   - Work: As NR-63. Leg 11 is the destiny quest: its stone is 140000004 (NR-39).
   - Proof: Each capture verifies.
@@ -5965,10 +5969,14 @@ The template:
     level 14, 55 quests complete, 165 fights with 152 kills, no death. Its
     bridge-completion.json says verified. Captured as altgard-ranger-s1, a record that points at
     character 133266 in the round snapshot nr-r1-w5.
-- [ ] **NR-103 - Ranger: Altgard legs l1 to l5.** Depends: NR-102; ticked by its round
+- [x] **NR-103 - Ranger: Altgard legs l1 to l5.** Depends: NR-102; ticked by its round
   - Work: The Cleric's legs in order, each end captured under the Cleric's snapshot name
     with -ranger (NR-41). In leg 1 it shoots the fungus in flight.
   - Proof: Each capture verifies.
+  - 2026-10-10: done in rounds 3 to 7 (NR-R3 to NR-R7, world 5). Each leg ended with a
+    receipt that says verified, and the Ranger stands at leg 5's end at level 21 with
+    109 quests. Captured as altgard-rc-l1-ranger to altgard-rc-l5-ranger, records
+    that point at character 133266 in the round snapshots nr-r3-w5 to nr-r7-w5.
 - [ ] **NR-104 - Ranger: Altgard legs l6 to l11.** Depends: NR-103; ticked by its round
   - Work: As NR-103. Leg 11 is the destiny quest: its stone is 140000002 (NR-39).
   - Proof: Each capture verifies.
@@ -6785,10 +6793,14 @@ The template:
     level 14, 55 quests complete, 156 fights with 145 kills, no death. Its
     bridge-completion.json says verified. Captured as altgard-spirit-master-s1, a record that points at
     character 133266 in the round snapshot nr-r1-w6.
-- [ ] **NR-113 - Spirit Master: Altgard legs l1 to l5.** Depends: NR-112; ticked by its round
+- [x] **NR-113 - Spirit Master: Altgard legs l1 to l5.** Depends: NR-112; ticked by its round
   - Work: The Cleric's legs in order, each end captured under the Cleric's snapshot name
     with -spirit-master (NR-41). In leg 1 it casts Erosion at the fungus in flight.
   - Proof: Each capture verifies.
+  - 2026-10-10: done in rounds 3 to 7 (NR-R3 to NR-R7, world 6). Each leg ended with a
+    receipt that says verified, and the Spirit Master stands at leg 5's end at level 21 with
+    109 quests. Captured as altgard-rc-l1-spirit-master to altgard-rc-l5-spirit-master, records
+    that point at character 133266 in the round snapshots nr-r3-w6 to nr-r7-w6.
 - [ ] **NR-114 - Spirit Master: Altgard legs l6 to l11.** Depends: NR-113; ticked by its round
   - Work: As NR-113. Leg 11 is the destiny quest: its stone is the Sorcerer's, 140000004
     (NR-39).
@@ -7253,10 +7265,14 @@ The template:
     level 14, 55 quests complete, 182 fights with 157 kills, no death. Its
     bridge-completion.json says verified. Captured as altgard-gunner-s1, a record that points at
     character 133266 in the round snapshot nr-r1-w7.
-- [ ] **NR-123 - Gunner: Altgard legs l1 to l5.** Depends: NR-122; ticked by its round
+- [x] **NR-123 - Gunner: Altgard legs l1 to l5.** Depends: NR-122; ticked by its round
   - Work: The Cleric's legs in order, each end captured under the Cleric's snapshot name
     with -gunner (NR-41). In leg 1 it shoots the fungus in flight.
   - Proof: Each capture verifies.
+  - 2026-10-10: done in rounds 3 to 7 (NR-R3 to NR-R7, world 7). Each leg ended with a
+    receipt that says verified, and the Gunner stands at leg 5's end at level 20 with
+    109 quests. Captured as altgard-rc-l1-gunner to altgard-rc-l5-gunner, records
+    that point at character 133266 in the round snapshots nr-r3-w7 to nr-r7-w7.
 - [ ] **NR-124 - Gunner: Altgard legs l6 to l11.** Depends: NR-123; ticked by its round
   - Work: As NR-123. Leg 11 is the destiny quest: its stone is 140000002 (NR-39).
   - Proof: Each capture verifies.
@@ -7603,10 +7619,14 @@ The template:
     Altgard bind: a Rider of level 13, 55 quests complete, no death. Its
     bridge-completion.json says verified. Captured as altgard-rider-s1, a record that
     points at character 133702 in the round snapshot nr-r2-w8.
-- [ ] **NR-133 - Rider: Altgard legs l1 to l5.** Depends: NR-132; ticked by its round
+- [x] **NR-133 - Rider: Altgard legs l1 to l5.** Depends: NR-132; ticked by its round
   - Work: The Cleric's legs in order, each end captured under the Cleric's snapshot name
     with -rider (NR-41). In leg 1 it kills the fungus in flight.
   - Proof: Each capture verifies.
+  - 2026-10-10: done in rounds 3 to 7 (NR-R3 to NR-R7, world 8). Each leg ended with a
+    receipt that says verified, and the Rider stands at leg 5's end at level 21 with
+    109 quests. Captured as altgard-rc-l1-rider to altgard-rc-l5-rider, records
+    that point at character 133702 in the round snapshots nr-r3-w8 to nr-r7-w8.
 - [ ] **NR-134 - Rider: Altgard legs l6 to l11.** Depends: NR-133; ticked by its round
   - Work: As NR-133. Leg 11 is the destiny quest: its stone is 140000002 (NR-39).
   - Proof: Each capture verifies.
@@ -8263,13 +8283,82 @@ through these: each is ticked by the round that gave its capture.
       mosbear (Q2224), a Black Claw warrior and a tusked mosbear cub, and the Ranger's
       at a tusked mosbear cub. A finding, not an item: deaths are outcomes, and every
       class ended the leg.
-- [ ] **NR-R7 - Round 7: Altgard leg 5 for five, leg 4 for four.** Depends: NR-R6
+- [x] **NR-R7 - Round 7: Altgard leg 5 for five, leg 4 for four.** Depends: NR-R6
   - Work: The eight worlds resumed from nr-r6 with -Capture nr-r7 (round file
     run/nr/NR-R7/round-7.json). The Sorcerer, Ranger, Spirit Master, Gunner and Rider
     play leg 5; the Chanter, Gladiator, Assassin and Bard play leg 4. Captures as
     altgard-rc-l5-<class> and altgard-rc-l4-<class>. One outcome line for each class; a
     stop gets a lettered item. A class whose leg 5 is captured has its legs l1 to l5:
     its item (NR-63, NR-103, NR-113, NR-123, NR-133) is ticked with the round.
+  - Proof: round.json with nine outcome records; for each class that reached its
+    stage's end the completion receipt says verified and its capture is written.
+  - 2026-10-10: played. Eight reached their stage's end and are captured: leg 5 for the
+    Sorcerer, Ranger, Spirit Master, Gunner and Rider, leg 4 for the Chanter, Gladiator
+    and Bard. The Assassin stopped in leg 4 at Comrade Sumarhon; its stop is NR-R7a.
+    NR-63, NR-103, NR-113, NR-123 and NR-133 are ticked: those five have legs l1 to l5.
+    - **The round** (run r7-a1 at d6dd384f7, -From nr-r6, -Capture nr-r7;
+      run/nr/NR-R7/r7-a1; round file run/nr/NR-R7/round-7.json). Eight worlds side by
+      side, 483 seconds of wall time.
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 1 | mage-sorcerer | Sorcerer | l5 | reached | 20 | 109 | 158.8 | 173, 142 kills | 0 | altgard-rc-l5-sorcerer |
+      | 2 | priest-chanter | Chanter | l4 | reached | 20 | 95 | 245.6 | 622, 239 kills | 6 | altgard-rc-l4-chanter |
+      | 3 | warrior-gladiator | Gladiator | l4 | reached | 19 | 95 | 202.4 | 212, 183 kills | 2 | altgard-rc-l4-gladiator |
+      | 4 | scout-assassin | Assassin | l4 | stopped | 19 | 94 | 224.8 | 276, 197 kills | 8 | none |
+      | 5 | scout-ranger | Ranger | l5 | reached | 21 | 109 | 149.9 | 199, 147 kills | 1 | altgard-rc-l5-ranger |
+      | 6 | mage-spirit-master | Spirit Master | l5 | reached | 21 | 109 | 166.1 | 204, 163 kills | 0 | altgard-rc-l5-spirit-master |
+      | 7 | engineer-gunner | Gunner | l5 | reached | 20 | 109 | 164.7 | 178, 139 kills | 0 | altgard-rc-l5-gunner |
+      | 8 | artist-bard | Bard | l4 | reached | 19 | 95 | 175.6 | 244, 187 kills | 2 | altgard-rc-l4-bard |
+      | 8 | engineer-rider | Rider | l5 | reached | 21 | 109 | 146.9 | 262, 174 kills | 0 | altgard-rc-l5-rider |
+
+      Each receipt of a class that reached its stage's end says verified. The captures
+      are records that point into the round snapshots nr-r7-w1 to nr-r7-w8, which hold
+      the Assassin as it stood.
+    - **The stop, the Assassin's.** "Natural journey made no quest, quest-item or level
+      progress for 01:00:00." Leg 4, Q24112, taken at 2:44:44: "kill 210510 toward var
+      1", Comrade Sumarhon, who stands in the grave robbers' camp with a sentry and a
+      fencer beside him. The kill step clears the adds that would join before it pulls
+      its target (PullAndKillAsync). Here each add brings Sumarhon and the other add
+      with it: "3 monsters would come; the Assassin leaves from 3", four waits, and the
+      add is pulled anyway. Three came. Twice (2:59:10 and 3:28:08) the Assassin killed
+      the add in 14 s and died to the two that were left, with 1,404 HP at the start;
+      twice more it died on its way back through the camp, a way of up to 28 game
+      minutes. In the hour it never struck Sumarhon. One kill of him is all the quest asks (Java
+      _24112NoLaissezFaireForLepharists.onKillEvent 85-102).
+    - **The others at the same place.** Every class meets the same three. The Cleric's
+      recorded leg 4 plays it the same way: three deaths and 62 game minutes from the
+      quest to its report. The Chanter, the Gladiator and the Bard died there three
+      times, once and twice in this round and got their kill, as the five did in round
+      6.
+    - **Deaths, leg 4:** the Chanter 6, the Gladiator 2, the Bard 2, the Assassin 8;
+      ten of the eighteen are at Q24112's robbers and four are the Assassin's at the
+      Black Claw of Q24013. Leg 5: one, the Ranger's.
+    - **Finding, the Chanter at Q2224's swamp mosbears: 268 fights with no kill**, 383
+      of its 622 in all. It began a fight with one of two swamp mosbears, cast once and
+      left it within a second, and was refused the walk to a third (112 times "approach
+      blocked"), over and over, until the quest's items were found elsewhere. The leg
+      ended. Not an item yet: it cost game time and no stop. If another class shows it,
+      it gets one.
+- [ ] **NR-R7a - The Assassin at Comrade Sumarhon.** Depends: NR-R7
+  - Work: Java first: Q24112's kill event (read under NR-R7) and what brings a robber
+    to another's help. The generic change: an add whose pull brings the kill step's own
+    target is not cleared first; the target is pulled, so a fight that cannot be won at
+    least reaches the monster the quest asks for. The Cleric's recorded leg 4 pulls the
+    same adds at the same place, so the change is expected to differ on scope c: try it
+    against the full gate. When a Priest or Cleric scope differs nothing is committed
+    (NR-Q2): the change is kept as a patch, the question is written under Blocked, and
+    the Assassin takes its second attempt at the leg in round 8 as the code stands.
+  - Proof: With the change, the Assassin resumed from nr-r7-w4 without a capture, and
+    its outcome at Sumarhon; the full gate's verdict.
+- [ ] **NR-R8 - Round 8: Altgard leg 6 for five, leg 5 for three, and the Assassin's leg 4.** Depends: NR-R7a
+  - Work: The eight worlds resumed from nr-r7 with -Capture nr-r8 (round file
+    run/nr/NR-R8/round-8.json). The Sorcerer, Ranger, Spirit Master, Gunner and Rider
+    play leg 6; the Chanter, Gladiator and Bard play leg 5; the Assassin goes on in leg
+    4 from where it stopped. Captures as altgard-rc-l6-<class>, altgard-rc-l5-<class>
+    and altgard-rc-l4-assassin. One outcome line for each class; a stop gets a lettered
+    item. A class whose leg 5 is captured has its legs l1 to l5: its item (NR-73, NR-83,
+    NR-143) is ticked with the round.
   - Proof: round.json with nine outcome records; for each class that reached its
     stage's end the completion receipt says verified and its capture is written.
 
@@ -9360,3 +9449,12 @@ report what was done, what is parked or blocked, and what the operator must deci
   Chanter, Gladiator, Assassin and Bard ended leg 3 (level 17, 81 quests) with none.
   Written: NR-R7, round 7. Seven checks pass. Next: NR-R7, round 7: leg 5 for five and
   leg 4 for four.
+- 2026-10-10 — Loop: NR-R7 played. Round 7 (r7-a1 at d6dd384f7, -From nr-r6, 483 s): eight
+  reached their stage's end and are captured in nr-r7-w1 to w8. The Sorcerer, Ranger,
+  Spirit Master, Gunner and Rider ended Altgard leg 5 (level 20 or 21, 109 quests), so
+  NR-63, NR-103, NR-113, NR-123 and NR-133 are ticked. The Chanter, Gladiator and Bard
+  ended leg 4 (95 quests). The Assassin stopped in leg 4 after an hour at Q24112's Comrade
+  Sumarhon: the kill step pulls his adds first, each add brings him and the other, and
+  the Assassin died to the three twice without striking him. Finding: the Chanter's 268
+  fights with no kill at Q2224's swamp mosbears. Written: NR-R7a, the Assassin at
+  Sumarhon, and NR-R8, round 8. Seven checks pass. Next: NR-R7a.
