@@ -64,3 +64,12 @@ public interface INaturalJourneySession
 }
 
 public sealed class NaturalDialogTooFarException() : InvalidOperationException("NPC dialogue was refused: too far to talk.");
+
+/// <summary>NR-R11b: the NPC opened no dialog and is trading blows with <paramref name="opponent"/>. A fighting NPC takes no
+/// dialog request and answers nothing (Java AbstractAI.canHandleEvent 75-83: DIALOG_START only in IDLE or WALKING).</summary>
+public sealed class NaturalDialogNpcFightingException(int npc, int opponent)
+	: InvalidOperationException($"NPC {npc} opened no dialogue: it is fighting {opponent}.")
+{
+	public int Npc { get; } = npc;
+	public int Opponent { get; } = opponent;
+}

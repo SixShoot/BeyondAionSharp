@@ -4447,6 +4447,7 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 							npc = await ApproachShippedSpawnAsync(step.NpcId);
 						}
 					}
+					int fightsWaitedOut = 0;
 					for (int attempt = 1; ; attempt++)
 					{
 						try
@@ -4456,6 +4457,21 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 							return;
 						}
 						catch (NaturalDialogTooFarException) when (attempt < 3 && !step.Flight) { await ReapproachForDialogAsync(npc); }
+						catch (NaturalDialogNpcFightingException fighting) when (fightsWaitedOut < 12)
+						{
+							// NR-R11b: the NPC is fighting a monster and takes no dialog request. Let the fight end, as a player stands by
+							// while a guard finishes his monster: defend when the monster turns on the bot, let the clock run, ask again.
+							fightsWaitedOut++;
+							attempt--;
+							session.TraceDiagnostic("talk-npc-fighting", new Dictionary<string, object?>
+							{
+								["step"] = step.Key, ["npc"] = fighting.Npc, ["opponent"] = fighting.Opponent, ["wait"] = fightsWaitedOut,
+								["position"] = session.CurrentPosition,
+							});
+							if (!await DefendAgainstEngagedAsync($"talk-{step.Key}") || session.Api.World.IsDead) return;
+							await session.AdvanceAsync(TimeSpan.FromSeconds(5), token);
+							await session.SynchronizeAsync(token);
+						}
 					}
 				}
 

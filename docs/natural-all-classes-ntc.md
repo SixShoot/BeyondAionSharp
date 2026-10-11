@@ -8811,7 +8811,7 @@ through these: each is ticked by the round that gave its capture.
       identical. On that tree the seven pre-commit checks pass, Aion.GameServer.Tests
       passes (4,632 passed, 16 skipped: the three new port tests) and Fast passes (run
       nrr11b-fast, 11 passed). The three items are committed one after another from it.
-- [ ] **NR-R11b - A talk to an NPC who is fighting.** Depends: NR-R11a
+- [x] **NR-R11b - A talk to an NPC who is fighting.** Depends: NR-R11a
   - Work: Java first: what a guard in a fight does with a dialog request
     (CM_SHOW_DIALOG, the AI's DIALOG_START). Then the bot, in the shared talk step: it
     does not wait for a dialog window without the clock running, and when the NPC it
@@ -8819,7 +8819,44 @@ through these: each is ticked by the round that gave its capture.
     monster or lets the guard finish, and asks again.
   - Proof: The full gate identical, with the bundle. The Gunner, resumed from nr-r11-w7
     without a capture, talks to Neifenmer and ends leg 8.
-- [ ] **NR-R12 - Round 12: leg 10 for two, leg 9 for four, and the legs of the Chanter, the Assassin and the Gunner.** Depends: NR-R11b
+  - 2026-10-11: done. The talk no longer waits with the clock stopped, and the leg lets
+    a fighting NPC finish. The new wait was not called on in the proof round.
+    - **Java.** CM_SHOW_DIALOG hands the request to NpcController.onDialogRequest
+      (250-262), which gives the AI a DIALOG_START event; AbstractAI.canHandleEvent
+      (75-83) takes that event only in the states IDLE and WALKING. An NPC that is
+      fighting takes none and answers nothing. The server is right.
+    - **The change, generic.** The shared talk step (Sc/NaturalAltgardQuestSteps.cs,
+      TalkAsync) waits for the dialog window only for what is already on its way; when
+      none comes and the NPC was just seen trading blows (NaturalDialogProtocol.OpponentOf,
+      from the last swings in view), it says so with NaturalDialogNpcFightingException.
+      The legs' talk (Sc/NaturalIshalgenJourney.cs) catches it: it defends when the
+      monster turns on the bot, lets five seconds pass and asks again, up to twelve
+      times; the trace says talk-npc-fighting. When no window comes and the NPC is not
+      fighting, the old wait stands.
+    - **Proof round** (runs change-a1 and change-a2, round 12's file from nr-r11
+      without a capture; run/nr/NR-R11b). In both the Gunner walked back to Neifenmer,
+      who was not fighting this time, talked to him at 0:08:22 at the first asking and
+      ended leg 8 at level 22 with 142 quests. So the round shows the talk unharmed,
+      and the Gunner past its stop; it does not show the new wait at work. Should a
+      talk meet a fighting NPC again, the trace will say so.
+    - **Also seen there: a leg played again from its end.** In change-a1 the Spirit
+      Master, put back at leg 9's end, stopped after 19.5 game minutes: "expected
+      SM_CASTSPELL, observed SM_SYSTEM_MESSAGE". Item NR-R11c. And of round 12: the
+      Sorcerer and the Ranger stop in leg 10 and the Rider in leg 9, each after an hour
+      without progress; round 12 will record them.
+    - **Proof.** Gate, set all+mage+warrior+artist+engineer+scout+templar, -Parallel 8,
+      run guard-p8 (run/nr/NR-R11b/guard-p8/verdict.json), on the tree that holds the
+      changes of NR-R11a, NR-R11b and NR-R11c together: verdict pass, all thirteen scopes
+      identical. On that tree the seven pre-commit checks pass, Aion.GameServer.Tests
+      passes (4,632 passed, 16 skipped: the three new port tests) and Fast passes (run
+      nrr11b-fast, 11 passed). The three items are committed one after another from it.
+- [ ] **NR-R11c - A leg played again from its end casts a Return it does not need.** Depends: NR-R11b
+  - Work: Find why the Spirit Master, standing at leg 9's end, casts Return, and why
+    the server refuses the cast after the bot has waited the cooldown out. Mend it in
+    the shared code.
+  - Proof: The full gate identical, with the bundle. The Spirit Master, resumed from
+    nr-r11-w6 without a capture, ends leg 9 from its end.
+- [ ] **NR-R12 - Round 12: leg 10 for two, leg 9 for four, and the legs of the Chanter, the Assassin and the Gunner.** Depends: NR-R11c
   - Work: The eight worlds resumed from nr-r11 with -Capture nr-r12 (round file
     run/nr/NR-R12/round-12.json). The Sorcerer and the Ranger play leg 10; the
     Gladiator, Bard and Rider play leg 9, and the Spirit Master's leg 9 is played again
@@ -10022,3 +10059,11 @@ report what was done, what is parked or blocked, and what the operator must deci
   the map, with a port test of three. Gate guard-p8 on the tree with NR-R11a, NR-R11b and
   NR-R11c together (thirteen scopes identical), seven checks, unit suite (4,632 passed, 16
   skipped) and Fast (nrr11b-fast) pass. Next: NR-R11b.
+- 2026-10-11 — Loop: NR-R11b done. A fighting NPC takes no dialog request and answers
+  nothing (Java AbstractAI.canHandleEvent 75-83), so the server is right. The shared talk
+  step no longer waits for a window with the clock stopped; when none comes and the NPC is
+  trading blows, the leg lets the fight end and asks again. In the proof rounds (change-a1,
+  change-a2) Neifenmer was not fighting: the Gunner talked to him and ended leg 8, and the
+  new wait was not called on. The same gate and bundle as NR-R11a. The first proof round
+  showed the Spirit Master stopping when its leg 9 is played again from its end. Written:
+  NR-R11c. Next: NR-R11c.

@@ -20,7 +20,16 @@ public static class NaturalAltgardQuestSteps
 		(byte Status, int Var)? before = State(world, step.QuestId);
 		Expect(step, before);
 		await NaturalDialogProtocol.OpenAsync(session, npc, token);
-		await session.WaitForPacketAsync(typeof(SM_DIALOG_WINDOW), token, packet => packet.Get<int>("targetObjectId") == npc);
+		// NR-R11b: an NPC that is fighting opens no dialog and says nothing (Java NpcController.onDialogRequest 250-262 hands the
+		// request to the AI, and AbstractAI.canHandleEvent 75-83 takes DIALOG_START only in IDLE or WALKING). Neifenmer, a guard, was
+		// fighting a watch mage, and the wait for his window sat out three minutes with the clock stopped. When no window comes
+		// and the NPC is trading blows, say so; the caller lets the fight end and asks again.
+		if (await session.WaitForPacketWithinAsync(typeof(SM_DIALOG_WINDOW), TimeSpan.FromSeconds(5), token,
+			packet => packet.Get<int>("targetObjectId") == npc) == null)
+		{
+			if (NaturalDialogProtocol.OpponentOf(session, npc) is int opponent) throw new NaturalDialogNpcFightingException(npc, opponent);
+			await session.WaitForPacketAsync(typeof(SM_DIALOG_WINDOW), token, packet => packet.Get<int>("targetObjectId") == npc);
+		}
 		// A walking NPC (Tulberg) walks on until the talk stops it. Java NpcController.onDialogSelect drops a choice made from out of
 		// talk range without a word, so a walker that stopped beyond reach left the talk waiting for a page that never came (run-fast,
 		// AG-00: 6.6 m away). Wait for it to stop, as a player watches it turn round, and step closer when it is out of reach.
