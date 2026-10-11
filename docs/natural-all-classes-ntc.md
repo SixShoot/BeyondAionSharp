@@ -7783,11 +7783,16 @@ The template:
       (run/nr/NR-R21a, chain4): the unit suite (4,632 passed, 16 skipped), the seven
       checks, the script tests and Fast (nrr21a4-fast) pass. Gate guard4-p8: eighteen
       scopes identical; scope gladiator differs for NR-R21a, which records it again.
-- [ ] **NR-125 - Gunner: coin gear and Haramel.** Depends: NR-124; ticked by its round
+- [x] **NR-125 - Gunner: coin gear and Haramel.** Depends: NR-124; ticked by its round
   - Work: The coin-gear leg (leather, by its manifest, NR-38a) and Haramel with chest
     700830 (NR-40), captured as altgard-coingear-gunner and
     altgard-rc-complete-s1-gunner.
   - Proof: Each capture verifies.
+  - 2026-10-11: done in rounds 22 and 23 (NR-R22, NR-R23, world 7). The coin-gear stage
+    ended at level 25 with 165 quests and Haramel at level 26 with 176 quests, in 86.3
+    game minutes without a death, each with a receipt that says verified. Captured as
+    altgard-coingear-gunner and altgard-rc-complete-s1-gunner, records that point at
+    character 133266 in the round snapshots nr-r22-w7 and nr-r23-w7.
 - [ ] **NR-126 - Gunner: the Abyss entry.** Depends: NR-125; ticked by its round
   - Work: Q24020, then Q2945, Q2946, Q2947 and Q2042 with the coin tiers it can wear
     (NR-38b, NR-Q14, NR-Q16), captured as morheim-abyss-entry-s1-gunner.
@@ -8152,14 +8157,36 @@ The template:
     game minutes without a death, each with a receipt that says verified. Captured as
     altgard-coingear-rider and altgard-rc-complete-s1-rider, records that point at
     character 133702 in the round snapshots nr-r21-w8 and nr-r22-w8.
-- [ ] **NR-136 - Rider: the Abyss entry.** Depends: NR-135; ticked by its round
+- [x] **NR-136 - Rider: the Abyss entry.** Depends: NR-135; ticked by its round
   - Work: Q24020, then Q2945, Q2946, Q2947 and Q2042 with the coin tiers it can wear
     (NR-38b, NR-Q14, NR-Q16), captured as morheim-abyss-entry-s1-rider.
   - Proof: The capture verifies.
-- [ ] **NR-137 - Rider: the endpoint.** Depends: NR-136; ticked by its round
+  - 2026-10-11: done in round 23 (NR-R23, world 8). The Abyss entry ended in 16.2 game
+    minutes without a death, with a receipt that says verified: a Rider of level 26,
+    alive at Morheim Ice Fortress, Q24020, Q2945, Q2946, Q2947 and Q2042 complete, 181
+    quests in all. Captured as morheim-abyss-entry-s1-rider, a record that points at
+    character 133702 in the round snapshot nr-r23-w8.
+- [x] **NR-137 - Rider: the endpoint.** Depends: NR-136; ticked by its round
   - Work: Captured and verified as ntc-ready-rider-s1: alive at Morheim Ice Fortress,
     level 25 or higher, Q2945, Q2946, Q2947 and Q2042 complete.
   - Proof: The capture verifies.
+  - 2026-10-11: done in round 23. ntc-ready-rider-s1 is captured and verified, and it
+    comes straight out of the round's world.
+    - **Captured** by the round, at e69a9fd7d: the round file names two captures for
+      the Rider's Abyss entry (NR-R21b, its first use with two names), and
+      ntc-ready-rider-s1 is a record that points at character 133702 in the round
+      snapshot nr-r23-w8, as morheim-abyss-entry-s1-rider is. No leg was played again
+      alone for it (the operator's answers to NR-Q9).
+    - **The endpoint, from the receipt.** Character 133702, created by packets: a Rider
+      of level 26, alive at Morheim Ice Fortress and bound there; Q24020, Q2945, Q2946,
+      Q2947 and Q2042 complete, 181 quests in all; the arena and the ring course each
+      at the first try. It wears the level-26 coin cipher-blade 102100610 and four
+      level-26 coin pieces.
+    - **Proof.** sim-snapshot.ps1 -Action Verify -Name ntc-ready-rider-s1, run
+      nr137-verify-a1 (run/nr/NR-R23/verify-rider-a1.log; evidence under
+      run/snapshots/_verify/nr137-verify-a1): "Verified snapshot ntc-ready-rider-s1:
+      character 133702 resumed at its endpoint." It is the ninth class at the plan's
+      finish.
 - [ ] **NR-138 - Rider: the class scope.** Depends: NR-137
   - Work: One scope of the Rider's play, chosen where its rules differ most from the
     Engineer's, recorded by a bot alone, twice, and added to the gate's sets.
@@ -10645,7 +10672,7 @@ through these: each is ticked by the round that gave its capture.
       |---|---|---|---|
       | Assassin | Q2281 | 2 | the quest stands as it stood, at 3 of 3, 5 of 5 and 3 of 5. Four fights with a scratcher of its third group, no kill; 67 fights and 41 kills in the hour; 10 flights at low health, 1 death. A third hour with nothing won gets it an item |
     - **Deaths: 1,** the Assassin's.
-- [ ] **NR-R23 - Round 23: Haramel for the Gunner, the Abyss entry for the Rider, leg 10 for the Assassin.** Depends: NR-R22
+- [x] **NR-R23 - Round 23: Haramel for the Gunner, the Abyss entry for the Rider, leg 10 for the Assassin.** Depends: NR-R22
   - Work: Three worlds resumed from nr-r22 with -Capture nr-r23 (round file
     run/nr/NR-R23/round-23.json; worlds 1, 2, 3, 5 and 6 have no bot). The Gunner
     plays Haramel (stage l12); the Rider plays the Abyss entry and names two captures,
@@ -10657,6 +10684,77 @@ through these: each is ticked by the round that gave its capture.
     Assassin's third hour at Q2281 wins nothing it gets an item, which reads its fights
     first (Blocked, the later look).
   - Proof: round.json with three outcome records; for each class that reached its
+    stage's end the completion receipt says verified and its capture is written.
+  - 2026-10-11: played. Two reached their stage's end and are captured: the Gunner ends
+    Haramel (NR-125 ticked), and the Rider ends the Abyss entry and is at the plan's
+    finish, captured from the round's world and verified (NR-136, NR-137 ticked). The
+    Assassin's third hour at Q2281 won nothing; it gets its item, NR-R23a. No stop of
+    this round is a defect of the round's own.
+    - **The round** (run r23-a1 at e69a9fd7d, -From nr-r22, -Capture nr-r23;
+      run/nr/NR-R23/r23-a1; round file run/nr/NR-R23/round-23.json). Three worlds side by
+      side, worlds 4, 7 and 8, 211 seconds of wall time. Its file was played once
+      without a capture first (run preview-a1), with the same outcomes.
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 4 | scout-assassin | Assassin | l10 | stopped | 24 | 152 | 60.0 | 46, 36 kills | 3 | none |
+      | 7 | engineer-gunner | Gunner | l12 | reached | 26 | 176 | 86.3 | 132, 128 kills | 0 | altgard-rc-complete-s1-gunner |
+      | 8 | engineer-rider | Rider | ax | reached | 26 | 181 | 16.2 | 10, 10 kills | 0 | morheim-abyss-entry-s1-rider, ntc-ready-rider-s1 |
+
+      Each receipt of a class that reached its stage's end says verified. The captures
+      are records that point into the round snapshots nr-r23-w4, nr-r23-w7 and
+      nr-r23-w8; the first holds the Assassin as it stood.
+    - **Leg 10, the attempts so far.**
+
+      | Class | Where its hour ran out | Attempts with nothing won | Note |
+      |---|---|---|---|
+      | Assassin | Q2281 | 3 | the quest stands as it stood. One fight with a scratcher of its third group, no kill; 46 fights and 36 kills in the hour; 8 flights at low health, 3 deaths. Item NR-R23a |
+    - **Deaths: 3,** all the Assassin's.
+    - **Finding, why the Assassin dies: it does not wear what it owns.** At level 24
+      it holds the Karmic Dagger of level 10 and a dagger of level 8 and wears leather
+      of levels 8 and 9, nine pieces of levels 6 to 10 in all (its login observation
+      of this round). In its cube lie the Altgard Legionary Dagger, Jerkin, Vambrace
+      and Boots and a Guardian's Ring, all of level 16, with two hats, a sash and
+      earrings it has no piece for. The monsters it fights are of levels 17 to 19.
+      - **The cause.** In the Altgard legs gear is put on at one place alone, the town
+        service, which a leg takes when the cube is nearly full (AK-08). The cube is
+        roomy since the capital's expansions, so that is seldom. The equipment check
+        put nothing on the Assassin in any round after round 1.
+      - **Every class played so.** The first round after the bridge in which the check
+        put anything on, and where: the Sorcerer in round 12 (11 pieces), the Ranger
+        in round 17 (12), the Gunner in round 20 (13) and the Rider in round 20 (12),
+        each at a town service; the Assassin never. From there on the coin gear and the
+        Abyss entry's own check after every hand-in (AX-04) dressed them, so each
+        finish capture wears what it should. Until there each fought the legs in what
+        it wore at Ascension.
+      - **The operator's rules.** 2026-10-06: the check belongs after every quest
+        hand-in; and the accepted line's earlier legs keep their own check points
+        ("Don't change earlier runs"). NR-Q2 keeps the Cleric's scopes identical.
+        2026-10-11, of the Assassin: "this is not normal for this class type to have
+        so many deaths."
+- [ ] **NR-R23a - A second class wears what it owns when a leg starts.** Depends: NR-R23
+  - Work: Found by round 23 (the finding above). Every class but the accepted line runs
+    the equipment check at the start of each Altgard leg, the coin-gear stage and
+    Haramel: it wears the better gear it owns, as the town service does. The rule is
+    data of the class's gear table; the Priest's and the Cleric's tables keep their own
+    check points (the operator, 2026-10-06; NR-Q2), so their seven scopes stay identical.
+    No branch on a class. A class scope that changes is recorded again twice, its first
+    difference explained by a piece put on at the leg's start. The check after every
+    hand-in in the legs, which the operator's rule of 2026-10-06 asks for, is written
+    under Blocked: it changes every class scope and wants the operator's word on the
+    Cleric's.
+  - Proof: Round 24's file from nr-r23 without a capture: the Assassin puts on its
+    level-16 pieces at the start of leg 10. The bundle with the full gate.
+- [ ] **NR-R24 - Round 24: the Abyss entry for the Gunner, leg 10 for the Assassin.** Depends: NR-R23a
+  - Work: Two worlds resumed from nr-r23 with -Capture nr-r24 (round file
+    run/nr/NR-R24/round-24.json; worlds 1, 2, 3, 5, 6 and 8 have no bot: both of world
+    8's classes are at the finish). The Gunner plays the Abyss entry and names two
+    captures, morheim-abyss-entry-s1-gunner and ntc-ready-gunner-s1; the Assassin goes
+    on in leg 10 in the gear it owns. The file is played once without a capture first
+    (NR-R23a's proof round is that play); a stop that is a defect is mended before the
+    captured round, in round 23's letters. One outcome line for each class, and the
+    table of leg 10's attempts carried on.
+  - Proof: round.json with two outcome records; for each class that reached its
     stage's end the completion receipt says verified and its capture is written.
 
 ### E. Close
@@ -10727,6 +10825,17 @@ Nothing is blocked at the start.
   of them the Cleric's, and one replay does not end with each (the Chanter's, the
   Artist's). To decide: whether the rule is mended and every scope it changes recorded
   again, in an item of its own that first makes those two journeys end.
+- **Recorded by NR-R23, blocking nothing: in the Altgard legs gear is put on at the town
+  service alone.** A leg takes the town service when the cube is nearly full, and since
+  the capital's expansions it seldom is. So every second class fought legs 1 to 10 in
+  what it wore at Ascension (NR-R23's finding has the rounds), and the Assassin, which
+  never came to a town service, stands at level 24 in gear of levels 6 to 10. NR-R23a
+  gives every class but the accepted line the check at a leg's start. Not done: the
+  check after every quest hand-in in the legs, which the operator asked for on
+  2026-10-06 for the leg worked then and later ones. It would change every class scope,
+  and for the accepted line the Cleric's scopes too, against "Don't change earlier
+  runs" and NR-Q2. To decide: whether the legs check after every hand-in for the second
+  classes, and whether the Cleric's own legs do.
 - **For a later look with the operator, blocking nothing (2026-10-11).**
   - **The Ranger's Q2282 and Q2283** stay left out (NR-R15c). The operator: "leave it
     for later evaluation where we can look into it. Not a blocker at this time."
@@ -10737,6 +10846,8 @@ Nothing is blocked at the start.
     is not normal for this class type to have so many deaths." Nothing is changed for
     it now. The Assassin goes on by the plan's rules, and what it leaves out, or where
     it is parked, is written here for that look.
+    - 2026-10-11, round 23: the cause is found. It wears gear of levels 6 to 10 at
+      level 24 and owns better (NR-R23's finding; item NR-R23a).
 
 ## Loop prompt
 
@@ -12216,3 +12327,13 @@ report what was done, what is parked or blocked, and what the operator must deci
   Haramel with 176 (NR-135); both are captured in nr-r22. The Assassin's second hour at
   Q2281 won nothing. Written: NR-R23, round 23. Seven checks pass. Next: NR-R23, round
   23, first without a capture.
+- 2026-10-11 — Loop: NR-R23 played. Round 23 (r23-a1 at e69a9fd7d, -From nr-r22, 211 s,
+  three worlds): the Gunner ends Haramel with 176 quests (NR-125). The Rider ends the
+  Abyss entry with 181 quests, no death (NR-136), and ntc-ready-rider-s1 is captured
+  from the round's world and verified (NR-137, run nr137-verify-a1): the ninth class at
+  the plan's finish. The Assassin's third hour at Q2281 won nothing. Found: it wears
+  gear of levels 6 to 10 at level 24 and owns level-16 pieces; in the legs gear is put
+  on at the town service alone, and every class fought legs 1 to 10 so. Written:
+  NR-R23a, the equipment check at a leg's start for every class but the accepted line,
+  and NR-R24, round 24. Seven checks pass. Next: NR-138, the Rider's class scope, with
+  NR-R23a in one bundle.
