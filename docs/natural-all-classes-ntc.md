@@ -8187,10 +8187,33 @@ The template:
       run/snapshots/_verify/nr137-verify-a1): "Verified snapshot ntc-ready-rider-s1:
       character 133702 resumed at its endpoint." It is the ninth class at the plan's
       finish.
-- [ ] **NR-138 - Rider: the class scope.** Depends: NR-137
+- [x] **NR-138 - Rider: the class scope.** Depends: NR-137
   - Work: One scope of the Rider's play, chosen where its rules differ most from the
     Engineer's, recorded by a bot alone, twice, and added to the gate's sets.
   - Proof: The two recordings are identical.
+  - 2026-10-11: done. Scope rider is recorded and stands in the baseline file.
+    - **The scope.** Haramel, leg l12 from altgard-coingear-rider with the later
+      capital, as every second class's is. It is where the Rider plays least like the
+      Engineer it was: it lays the pistol down for a cipher-blade and fights from the
+      mech that blade calls. The capture it starts from is a round character, replayed
+      alone (NR-67a, NR-67b); the gate and its scopes stay one bot in its own world
+      (rule (w)).
+    - **The row** (scripts/sim/run-neutral-gate.ps1, committed first as 602ffcb73). One
+      bundle on one tree with NR-R23a's change (run/nr/NR-R23a, chain): the script
+      tests, the seven checks, the unit suite (4,632 passed, 16 skipped), Fast
+      nrr23a-fast, and the full gate on nineteen scopes, where fourteen were identical
+      and five class scopes differed for NR-R23a.
+    - **The recording** at 4cf8cc49c on a clean tree (run record-a1,
+      run/nr/NR-138/record-a1/verdict.json): two passes, identical after normalization:
+      37,457 records, sha256 ee3a4fb4c1d5206a. No death, 3 retreats, 254 pull plans, 138
+      holds of the patrol rule, 0 help items supplied. The traces are kept under
+      run/cp/baseline/4cf8cc49c... and in the second copy beside the repository.
+    - **Proof.** The full gate with the new row passes (run guard-p8,
+      run/nr/NR-138/guard-p8/verdict.json): twenty scopes identical. Seven pre-commit
+      checks and the three script tests pass on the tree with the new row.
+    - **The full gate from here** is set
+      all+mage+warrior+artist+engineer+scout+templar+sorcerer+chanter+spiritmaster+bard+gladiator+ranger+rider:
+      twenty scopes.
 - [x] **NR-140 - Bard: survey and profile data.** Depends: the close of phase C
   - 2026-10-10: done. The Bard has a class line, a gear table and a profile the
     validator accepts. Nothing has been played. Everything it casts fits the table as
@@ -12404,3 +12427,8 @@ report what was done, what is parked or blocked, and what the operator must deci
   sorcerer 35,435, chanter 53,727, spiritmaster 50,141, bard 37,953, ranger 33,952 records. Gate
   guard2-p8: nineteen scopes identical. Seven checks pass. Next: NR-138, the Rider's
   class scope.
+- 2026-10-11 — Loop: NR-138 done. Scope rider is Haramel from altgard-coingear-rider, a
+  round character replayed alone. Its row was committed as 602ffcb73. Recorded at
+  4cf8cc49c: two passes identical, 37,457 records, sha256 ee3a4fb4c1d5206a. The full
+  gate is now twenty scopes, and all are identical (guard-p8 of NR-138). Seven checks
+  and the script tests pass. Next: NR-R24, round 24, with its captures.
