@@ -209,6 +209,22 @@ by a lettered item. Answers already given are quoted.
   Default: the scopes stay as they are. NR-110g waits under Blocked with its change kept
   as a patch, and the Spirit Master goes round it by NR-110h. To decide: whether scope b
   may be recorded again for this fix, with the Mage's scope by rule (j).
+- **NR-Q18. May the Cleric's leg 4 be recorded again for the kill step at a pack that
+  cannot be taken apart?** Asked by NR-R7a. Comrade Sumarhon (Q24112) stands with a
+  sentry and a fencer, and whichever is struck, three come. The kill step clears "the
+  adds that would join" first, so it strikes an add, and it goes on hunting Sumarhon after
+  the quest has counted his death. Every class dies there, the Cleric three times in its
+  recorded leg 4 (62 game minutes from the quest to its report); the Assassin stopped
+  there after an hour without striking him (NR-R7). Two generic changes would mend it.
+  One: a hunt ends when the quest has counted its kill, as the leg already does when the
+  target cannot be found. Two: a pull made as the last resort against a pack that holds
+  the step's target strikes the target, and the walk into that pack is accepted for the
+  target as it is for an add. Both change scope c at Sumarhon. A wider form of the second
+  was tried and is not kept (NR-R7a: four scopes differ and the Cleric's Haramel does not
+  end). Default: the scopes stay as they are and nothing is changed. A class that stops
+  there takes its second attempt, and is parked by rule (r) if it stops again. To decide:
+  whether scope c may be recorded again for the two changes; with a yes they are written
+  and proven in an item of their own.
 
 ## Standing rules
 
@@ -8340,7 +8356,7 @@ through these: each is ticked by the round that gave its capture.
       blocked"), over and over, until the quest's items were found elsewhere. The leg
       ended. Not an item yet: it cost game time and no stop. If another class shows it,
       it gets one.
-- [ ] **NR-R7a - The Assassin at Comrade Sumarhon.** Depends: NR-R7
+- [x] **NR-R7a - The Assassin at Comrade Sumarhon.** Depends: NR-R7
   - Work: Java first: Q24112's kill event (read under NR-R7) and what brings a robber
     to another's help. The generic change: an add whose pull brings the kill step's own
     target is not cleared first; the target is pulled, so a fight that cannot be won at
@@ -8351,6 +8367,50 @@ through these: each is ticked by the round that gave its capture.
     the Assassin takes its second attempt at the leg in round 8 as the code stands.
   - Proof: With the change, the Assassin resumed from nr-r7-w4 without a capture, and
     its outcome at Sumarhon; the full gate's verdict.
+  - 2026-10-10: done, and nothing is committed. The change was tried and is not kept: it
+    did not give the Assassin its kill, and the gate fails with it on four scopes, one of
+    them a Cleric journey that no longer ends. What the place needs is written as
+    question NR-Q18. The Assassin takes its second attempt in round 8 as the code stands.
+    - **Java.** One kill of Comrade Sumarhon moves Q24112 from var 0 to 1
+      (_24112NoLaissezFaireForLepharists.onKillEvent 85-102). A monster helps another
+      of a tribe it supports when it is within its own aggro range and 2 m of the one
+      asking or of the attacker and sees it (AggroEventHandler.onCreatureNeedsSupport
+      27-36, isInSupportRange 51-55). The sentry, the fencer and Sumarhon stand inside
+      that range of one another, so whichever is struck, three come.
+    - **The change tried** (Sc/NaturalIshalgenJourney.cs, PullAndKillAsync; kept as
+      run/nr/NR-R7a/nrr7a-first-form.patch): when the add chosen to be cleared first
+      has the step's target among its helpers, the step goes to its target.
+    - **The proof round** (run change-a1, the change in the working tree, round 8's
+      file from nr-r7 without a capture; run/nr/NR-R7a/change-a1; 953 s). The Assassin
+      ended leg 4 at level 20 with 95 quests and three deaths. The change did not do
+      that:
+      - The kill came at 0:22:49, before the rule ran. Fighting its way through the
+        camp, the Assassin pulled a sentry, the three came, and of its attackers the
+        defence chose Sumarhon: dead in 11 s, the quest at var 1, and the Assassin dead
+        9 s later.
+      - The kill step then went on hunting Sumarhon, as it does in every class's play.
+        The rule ran twice (0:37:30, 0:39:50). Both times the walk into the pack was
+        refused for the target, though it is accepted for an add, so nothing was fought;
+        the second refusal left the monster, and with none to find the leg counted the
+        hunt by the quest's var (altgard-l4-hunt-counted-on-the-way, 0:45:51).
+      - So with the change the Assassin does not strike Sumarhon either. Had the quest
+        still stood at var 0, it would have stalled there.
+      - The rule also ran twice each for the Gladiator and the Bard in leg 5. Three
+        bots stopped in this round with no use of the rule in their traces: the Chanter
+        in leg 5 at Q2292's carrier, the Gunner in leg 6 after an hour at a talk step,
+        and the Rider in leg 6 with no route to object 700147. Round 8 will show them.
+    - **The gate with the change** (run guard-p8, run/nr/NR-R7a/guard-p8/verdict.json):
+      fail. Nine scopes identical. l1 differs first at record 17,080 (29,758 records
+      against 29,797), c at record 5,733 (104,704 against 112,256), templar at record
+      5,442 (38,872 against 36,504), each at the rule's first use there: Q24110's
+      kill, Q2224's swamp mosbears and a collect step of Q28501. hm does not end: the
+      rule ran five times in Haramel's route guards and the journey failed at "Haramel
+      source 700832 is exhausted in this copy". The rule is far wider than the place it
+      was written for.
+    - **What the place needs** is two things the Cleric's recorded leg 4 does not do,
+      so neither can be committed outside phase B (NR-Q2). The Cleric pulls an add that
+      brings Sumarhon anyway at 2:28:12 and 2:48:51, and hunts him from 2:11:39, when
+      the quest counted his death, until 2:49:45. Question NR-Q18.
 - [ ] **NR-R8 - Round 8: Altgard leg 6 for five, leg 5 for three, and the Assassin's leg 4.** Depends: NR-R7a
   - Work: The eight worlds resumed from nr-r7 with -Capture nr-r8 (round file
     run/nr/NR-R8/round-8.json). The Sorcerer, Ranger, Spirit Master, Gunner and Rider
@@ -8397,6 +8457,14 @@ Nothing is blocked at the start.
   spirit holds a staggered monster in place, plays without its two staggers by NR-110h.
   To decide: NR-Q17. With a yes, NR-110g applies the patch, reads SM_ATTACK for a swing's
   critical too, records b and mage again and gives the Spirit Master its staggers back.
+- **Recorded by NR-R7a, blocking nothing yet: the kill step at a pack that cannot be
+  taken apart (NR-Q18).** At Q24112's Comrade Sumarhon the kill step strikes an add that
+  brings him anyway, and hunts him on after the quest counted his death. The Cleric's
+  recorded leg 4 does both, so neither may change (NR-Q2). No change is written: the one
+  tried under NR-R7a was too wide and is kept only as evidence
+  (run/nr/NR-R7a/nrr7a-first-form.patch). No class is parked: eight have passed the place
+  with deaths, and the Assassin, which stopped there in round 7, takes its second attempt
+  in round 8. To decide: NR-Q18.
 
 ## Loop prompt
 
@@ -9458,3 +9526,12 @@ report what was done, what is parked or blocked, and what the operator must deci
   the Assassin died to the three twice without striking him. Finding: the Chanter's 268
   fights with no kill at Q2224's swamp mosbears. Written: NR-R7a, the Assassin at
   Sumarhon, and NR-R8, round 8. Seven checks pass. Next: NR-R7a.
+- 2026-10-10 — Loop: NR-R7a done; nothing is committed. The change tried, the target
+  before an add that brings it, did not give the Assassin its kill: in the proof round
+  (change-a1, 953 s) the kill came from the defence before the rule ran, and the rule's
+  two uses ended in a refused walk. The full gate with it fails (guard-p8): l1, c and
+  templar differ and the Cleric's Haramel does not end. It is kept as evidence only. What
+  the place needs changes the Cleric's leg 4: question NR-Q18, written under Blocked and
+  blocking nothing yet. The Assassin takes its second attempt in round 8. The proof round
+  also showed three stops round 8 will meet: the Chanter in leg 5, the Gunner and the
+  Rider in leg 6. Seven checks pass. Next: NR-R8, round 8.
