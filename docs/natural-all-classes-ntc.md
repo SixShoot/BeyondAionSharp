@@ -6227,10 +6227,27 @@ The template:
     Q2946, Q2947 and Q2042 complete, 179 quests in all. Q2282 and Q2283 are not among them (NR-R15c). Captured as
     morheim-abyss-entry-s1-ranger, a record that points at character 133266 in the
     round snapshot nr-r20-w5.
-- [ ] **NR-107 - Ranger: the endpoint.** Depends: NR-106; ticked by its round
+- [x] **NR-107 - Ranger: the endpoint.** Depends: NR-106; ticked by its round
   - Work: Captured and verified as ntc-ready-ranger-s1: alive at Morheim Ice Fortress,
     level 25 or higher, Q2945, Q2946, Q2947 and Q2042 complete.
   - Proof: The capture verifies.
+  - 2026-10-11: done. ntc-ready-ranger-s1 is captured and verified.
+    - **Captured** at a1c824f3f: sim-snapshot.ps1 -Action Capture -AltgardLeg1 -Leg ax
+      -From altgard-rc-complete-s1-ranger -Name ntc-ready-ranger-s1 (run nr107-ax-a1,
+      log run/nr/NR-107/capture-a1.log), as the Sorcerer's was (NR-67). The leg was
+      played once more, alone, as round 20 played it: 15 min 32 s, no death, the arena
+      and the ring course each at the first try, 103,121,022 ms of game time since
+      creation. Dump sha256 21985e0ba54f772d.
+    - **The endpoint, from the receipt.** Character 133266, created by packets: a Ranger
+      of level 26, alive at Morheim Ice Fortress and bound there; Q24020, Q2945, Q2946,
+      Q2947 and Q2042 complete, 179 quests in all. Q2282 and Q2283, which the Ranger
+      leaves out (NR-R15c), are not among them. It wears the level-26 coin bow 101700835
+      and four level-26 coin pieces.
+    - **Proof.** sim-snapshot.ps1 -Action Verify -Name ntc-ready-ranger-s1, run
+      nr107-verify-a1 (run/nr/NR-107/verify-a1.log; evidence under
+      run/snapshots/_verify/nr107-verify-a1): "Verified snapshot ntc-ready-ranger-s1:
+      character 133266 resumed at its endpoint." Seven pre-commit checks pass
+      (run/nr/NR-87/checks.log, on the tree of the finish captures of this chain).
 - [ ] **NR-108 - Ranger: the class scope.** Depends: NR-107
   - Work: One scope of the Ranger's play, chosen where its rules differ most from the
     Scout's, recorded by a bot alone, twice, and added to the gate's sets.
@@ -11708,3 +11725,8 @@ report what was done, what is parked or blocked, and what the operator must deci
   Q2945, Q2946, Q2947 and Q2042 complete, 181 quests. It is the seventh class at the
   plan's finish. Seven checks pass. Next: NR-107, the Ranger's finish capture, made in
   the same chain.
+- 2026-10-11 — Loop: NR-107 done. ntc-ready-ranger-s1 is captured at a1c824f3f (run
+  nr107-ax-a1: the Abyss entry played once more alone, 15 min 32 s, no death) and
+  verified (run nr107-verify-a1): a Ranger of level 26, alive at Morheim Ice Fortress,
+  Q2945, Q2946, Q2947 and Q2042 complete, 179 quests. It is the eighth class at the
+  plan's finish. Seven checks pass. Next: NR-88, the Gladiator's class scope.
