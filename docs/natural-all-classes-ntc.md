@@ -9289,7 +9289,7 @@ through these: each is ticked by the round that gave its capture.
       run guard-p8 (run/nr/NR-R15a/guard-p8/verdict.json): verdict pass, all thirteen
       scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests passes (4,632
       passed, 16 skipped) and Fast passes (run nrr15a-fast, 11 passed).
-- [ ] **NR-R15b - Fights that end in a blocked approach, over and over.** Depends: NR-R15a
+- [x] **NR-R15b - Fights that end in a blocked approach, over and over.** Depends: NR-R15a
   - Work: Find why a class that walks up to its target begins fight after fight that
     ends at once because the walk is refused, in the Rider's hour at Q2281 and, in
     round 14, in the Ranger's at Q2282. Mend it in the shared code: a monster that is
@@ -9297,6 +9297,23 @@ through these: each is ticked by the round that gave its capture.
     taken up again at once.
   - Proof: The full gate identical, with the bundle. The Rider, resumed from nr-r15-w8
     without a capture, spends its hour at Q2281 on fights that are fought.
+  - 2026-10-11: closed with no change. The Rider's third attempt at Q2281 ends the quest,
+    and the hour of blocked approaches is written down as a finding.
+    - **The third attempt** is in NR-R15a's proof round (run change-a1, from nr-r15; the
+      Rider's play has none of NR-R15a's landings in it). Q2281 was done at 1:37 of the
+      world's clock and the leg went on to Q2282, where the hour ran out. 20 of its
+      fights ended in a blocked approach, against 110 in round 15's hour.
+    - **Why the hour of round 15 went as it did.** In the village every way to a
+      monster crosses the circle of another that is not of its pack. A class that walks
+      up finds no checked way, the walk-in rule has no pack to accept, the fight ends
+      before a blow, and the defence or the fight-through takes up the next monster, or
+      the same. From another place, a few metres on, the same monsters can be walked
+      to.
+    - **Finding, not mended.** A fight that ends in a blocked approach is taken up
+      again at once. It cost the Rider an hour once and the Chanter 112 such fights in
+      round 7. Not an item on this evidence: the next attempt went through. A class
+      that loses a second hour to it gets one.
+    - **Proof.** No code changes; the gate is NR-R15a's. Seven pre-commit checks pass.
 - [ ] **NR-R15c - The Ranger and Q2282.** Depends: NR-R15b
   - Work: Three attempts with nothing won (NR-R12b's rule). Its fourth attempt first,
     with NR-R15a and NR-R15b in. If it wins nothing again: NR-Q4, a quest a class
@@ -10592,3 +10609,8 @@ report what was done, what is parked or blocked, and what the operator must deci
   clothing and ended leg 9; the Gladiator took one and ended leg 10. Full gate guard-p8
   (thirteen scopes identical), seven checks, unit suite (4,632 passed, 16 skipped) and
   Fast (nrr15a-fast) pass. Next: NR-R15b.
+- 2026-10-11 — Loop: NR-R15b closed with no change. The Rider's third attempt at Q2281,
+  in NR-R15a's proof round, ends the quest with 20 fights that end in a blocked approach
+  where round 15's hour had 110. The dense village leaves a class that walks up no
+  checked way to a monster from some places; written down as a finding. Seven checks
+  pass. Next: NR-R15c.
