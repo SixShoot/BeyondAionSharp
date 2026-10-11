@@ -1550,6 +1550,16 @@ public sealed partial class NaturalIshalgenJourney
 						["clientTargetDistance"] = session.Api.World.Objects.TryGetValue(target,
 							out BotKnownObject? observed) ? Distance(session.CurrentPosition, observed.Position) : null,
 					});
+					// NR-R15a: a blow of the bot's own, a stagger, a stumble, a lift or a weapon's critical, put the monster somewhere
+					// else on the server, and a caster does not walk back. The packet of that blow said where (NR-110g); the server's
+					// refusal shows the bot's place for the monster to be wrong, so the place the packet gave is taken now. The
+					// close-in below then walks to where the monster is.
+					if (observed != null && session.Api.World.TakeLanding(target) is { } landed)
+						session.TraceDiagnostic("combat-target-landing-taken", new Dictionary<string, object?>
+						{
+							["targetObjectId"] = target, ["skillId"] = skill.Id, ["believed"] = observed.Position, ["landed"] = landed,
+							["position"] = session.CurrentPosition,
+						});
 					if (rejection > 3) return false; // Reacquire another observed guard, not an infinite stale pull.
 					// The server measured more than the skill's range although the client's last-known
 					// position says otherwise: a walker moved on without a fresh SM_MOVE. Close in along

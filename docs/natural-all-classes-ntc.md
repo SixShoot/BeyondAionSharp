@@ -9241,7 +9241,7 @@ through these: each is ticked by the round that gave its capture.
       | Gunner | Q2281 | 1 | Q2277 and Q2280 in this round |
       | Rider | Q2281 | 2 | NR-R15b |
     - **Deaths: 30.**
-- [ ] **NR-R15a - A monster a blow has put away, and the server's refusal for distance.** Depends: NR-R15
+- [x] **NR-R15a - A monster a blow has put away, and the server's refusal for distance.** Depends: NR-R15
   - Work: Java first: where the server puts the target of a stagger, a stumble, a lift
     and a pull, and what it tells a client: the cast result for a skill (read under
     NR-110g) and SM_ATTACK for a weapon's critical. NR-110g's change moves the monster
@@ -9253,6 +9253,42 @@ through these: each is ticked by the round that gave its capture.
   - Proof: The full gate identical, with the bundle. The Assassin, resumed from
     nr-r15-w4 without a capture, kills the mau shaman or is not held by it, and its
     hour is spent on the clothing.
+  - 2026-10-11: done. The bot keeps the place a blow gives a monster and takes it when
+    the server refuses a skill for distance. The recorded scopes are as they were.
+    - **Java.** A stagger, a stumble, a lift and a pull move their target on the server
+      and send SM_FORCED_MOVE for a player only (read under NR-110g). For any other
+      creature the place is in the cast result's entry of the effect, and for a
+      weapon's critical in SM_ATTACK: after the two HP bytes an H of 1025 or 1026 marks
+      a critical's effect on a target that is no player, then an H of 0 and three F,
+      the target's place after it (SM_ATTACK.writeImpl; the port writes the same,
+      ServerPackets/SM_ATTACK.cs 73-98).
+    - **The change, generic.**
+      - **The decoder** (Bots/Protocol/BotServerPacketDecoder.cs) is NR-110g's for the
+        cast result, kept as a patch since then, and reads SM_ATTACK's place as well.
+        The place is no field of the packet, so a trace writes every packet as before.
+      - **The world** (Bots/World/BotWorldModel.cs) does not move the monster, which is
+        what changed scope b under NR-110g. It keeps the place beside the object and
+        drops it when the monster moves by itself, is described again or is gone.
+      - **The fight** (Sc/NaturalIshalgenJourney.Combat.cs). When the server refuses a
+        skill for distance, a place so kept for the target is taken: the object is put
+        there, the trace says combat-target-landing-taken, and the close-in that
+        follows a refusal walks to where the monster is.
+    - **Proof round** (run change-a1, the change in the working tree, round 16's file
+      from nr-r15 without a capture; run/nr/NR-R15a/change-a1; 534 s). The Assassin
+      took a landing six times, three of them for a mau shaman put 3.6 m, 2.1 m and 1.4
+      m from where it had it; its skills were refused for distance seven times in the
+      leg, against 299 in round 15's hour. It took Q2916's clothing at the first use at
+      0:15:07 and ended leg 9 at level 23 with 152 quests in 20.7 game minutes. The
+      Gladiator took one landing, High Spellshifter Abija 4.1 m off, and ended leg 10
+      with no death. No other class took one.
+    - **NR-110g and NR-Q17.** This does what NR-110g was for in the case that stops a
+      class, and leaves scope b alone. What is still NR-110g's and still waits on
+      NR-Q17: the bot's picture of a monster between the blow and its next refusal or
+      move, and the Spirit Master's two staggers (NR-110h).
+    - **Proof.** Gate, set all+mage+warrior+artist+engineer+scout+templar, -Parallel 8,
+      run guard-p8 (run/nr/NR-R15a/guard-p8/verdict.json): verdict pass, all thirteen
+      scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests passes (4,632
+      passed, 16 skipped) and Fast passes (run nrr15a-fast, 11 passed).
 - [ ] **NR-R15b - Fights that end in a blocked approach, over and over.** Depends: NR-R15a
   - Work: Find why a class that walks up to its target begins fight after fight that
     ends at once because the walk is refused, in the Rider's hour at Q2281 and, in
@@ -9316,6 +9352,10 @@ Nothing is blocked at the start.
   spirit holds a staggered monster in place, plays without its two staggers by NR-110h.
   To decide: NR-Q17. With a yes, NR-110g applies the patch, reads SM_ATTACK for a swing's
   critical too, records b and mage again and gives the Spirit Master its staggers back.
+  - 2026-10-11, NR-R15a: the decoder is in, for the cast result and for SM_ATTACK, and
+    the fight takes the place it gives when the server refuses a skill for distance. The
+    world still does not move a monster at the blow itself, so scope b is as it was and
+    the question stands for that part alone.
 - **Recorded by NR-R7a, blocking nothing yet: the kill step at a pack that cannot be
   taken apart (NR-Q18).** At Q24112's Comrade Sumarhon the kill step strikes an add that
   brings him anyway, and hunts him on after the quest counted his death. The Cleric's
@@ -10544,3 +10584,11 @@ report what was done, what is parked or blocked, and what the operator must deci
   once in a blocked approach: NR-R15b. The Ranger's third hour at Q2282 won nothing:
   NR-R15c. The Gladiator (Q2282) and the Gunner (Q2281) each went two quests on. Written:
   NR-R15a, NR-R15b, NR-R15c and NR-R16, round 16. Seven checks pass. Next: NR-R15a.
+- 2026-10-11 — Loop: NR-R15a done. The bot reads where a blow puts a monster, from the
+  cast result (NR-110g's decoder) and from SM_ATTACK for a weapon's critical, keeps the
+  place beside the object, and takes it when the server refuses a skill for distance.
+  The world does not move the monster at the blow, so the recorded scopes are as they
+  were. Proof round (change-a1, 534 s): the Assassin took six landings, got Q2916's
+  clothing and ended leg 9; the Gladiator took one and ended leg 10. Full gate guard-p8
+  (thirteen scopes identical), seven checks, unit suite (4,632 passed, 16 skipped) and
+  Fast (nrr15a-fast) pass. Next: NR-R15b.

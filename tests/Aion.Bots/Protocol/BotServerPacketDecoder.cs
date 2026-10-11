@@ -1,3 +1,4 @@
+using System.Buffers.Binary;
 using System.Collections.Frozen;
 using Aion.GameServer.Network.Aion.ServerPackets;
 
@@ -149,7 +150,7 @@ public sealed partial class BotServerPacketDecoder
 	public DecodedBotServerPacket DecodeOrRaw(DecodedGamePacket packet)
 	{
 		if (Decoders.TryGetValue(packet.PacketType, out var decoder))
-			return new DecodedBotServerPacket(packet.PacketType, decoder(packet.Body));
+			return new DecodedBotServerPacket(packet.PacketType, decoder(packet.Body)) { Landings = Landings(packet.PacketType, packet.Body) };
 		return new DecodedBotServerPacket(
 			packet.PacketType,
 			new Dictionary<string, object?>(StringComparer.Ordinal)
@@ -162,7 +163,90 @@ public sealed partial class BotServerPacketDecoder
 	{
 		if (!Decoders.TryGetValue(packetType, out var decoder))
 			throw new NotSupportedException($"The bot does not decode {packetType.Name}.");
-		return new DecodedBotServerPacket(packetType, decoder(body));
+		return new DecodedBotServerPacket(packetType, decoder(body)) { Landings = Landings(packetType, body) };
+	}
+
+	/// <summary>
+	/// NR-110g: where a packet puts creatures. Java moves the target of a stagger, a stumble, a lift and a pull on the
+	/// server (StaggerEffect.startEffect 41, StumbleEffect 42, OpenAerialEffect 62, PulledEffect 65) and sends
+	/// SM_FORCED_MOVE for a player only. For any other creature the place is in SM_CASTSPELL_RESULT alone, in the entry
+	/// of the effect (writeImpl 140-165). Null when the packet puts none anywhere.
+	/// </summary>
+	private static IReadOnlyList<BotCreatureLanding>? Landings(Type packetType, ReadOnlySpan<byte> body) =>
+		packetType == typeof(SM_CASTSPELL_RESULT) ? DecodeCastSpellLandings(body)
+		: packetType == typeof(SM_ATTACK) ? DecodeAttackLanding(body) : null;
+
+	// NR-R15a: a weapon's critical that staggers or stumbles its target. Java SM_ATTACK.writeImpl: D the attacker, C, H, C, C,
+	// D the target, C and C the two HP; then H 1025 or 1026 for a critical's effect on a target that is no player (1 or 2 on a
+	// player, who is told by SM_FORCED_MOVE), H 0, and for such an effect three F, the target's place after it.
+	private static IReadOnlyList<BotCreatureLanding>? DecodeAttackLanding(ReadOnlySpan<byte> body)
+	{
+		if (body.Length < 31 || BinaryPrimitives.ReadUInt16LittleEndian(body[15..]) is not (1025 or 1026)) return null;
+		return [new(BinaryPrimitives.ReadInt32LittleEndian(body[9..]), BinaryPrimitives.ReadSingleLittleEndian(body[19..]),
+			BinaryPrimitives.ReadSingleLittleEndian(body[23..]), BinaryPrimitives.ReadSingleLittleEndian(body[27..]))];
+	}
+
+	// Java SM_CASTSPELL_RESULT.writeImpl after the chain flag: C 2, D, D, C for a skill of an item used in a fight, or
+	// C method, C dash and, for a dash, C heading and three F; then H the number of effect entries, and the entries.
+	private static IReadOnlyList<BotCreatureLanding>? DecodeCastSpellLandings(ReadOnlySpan<byte> body)
+	{
+		if (body.Length < 5) return null;
+		int at = 5 + (body[4] is 0 or 3 or 4 ? 4 : body[4] == 2 ? 44 : 12) + 11;
+		if (body.Length < at + 2) return null;
+		if (body[at] == 2) at += 10;
+		else at += 2 + (body[at + 1] is 1 or 2 or 3 or 4 or 6 ? 13 : 0);
+		if (body.Length < at + 2) return null;
+		int entries = BinaryPrimitives.ReadUInt16LittleEndian(body[at..]);
+		var landings = new List<BotCreatureLanding>();
+		return entries > 0 && TryReadCastEffects(body[(at + 2)..], entries, landings) && landings.Count > 0 ? landings : null;
+	}
+
+	/// <summary>
+	/// One entry and those after it: D the creature, C the result, C its HP, C the caster's HP, C the spell status, C, H, C
+	/// the runes; then by the status the place (1 stumble, 2 stagger, 4 lift, 8 the fall after a lift) or a heading (16);
+	/// then C the number of results, each C, D, C, C a shield and, by the shield, three or seven D. A pull and a step back
+	/// put their place where a status would, with a status that names none, and nothing in the packet says so: both
+	/// readings are tried, and the one that uses the packet up to its last byte holds.
+	/// </summary>
+	private static bool TryReadCastEffects(ReadOnlySpan<byte> rest, int left, List<BotCreatureLanding> landings)
+	{
+		if (left == 0) return rest.IsEmpty;
+		if (rest.Length < 12) return false;
+		int objectId = BinaryPrimitives.ReadInt32LittleEndian(rest);
+		byte status = rest[7];
+		ReadOnlySpan<byte> after = rest[12..];
+		if (status is 1 or 2 or 4 or 8) return Placed(after);
+		if (status == 16) return after.Length >= 1 && Results(after[1..]);
+		return Results(after) || Placed(after);
+
+		bool Placed(ReadOnlySpan<byte> place)
+		{
+			if (place.Length < 12) return false;
+			int mark = landings.Count;
+			landings.Add(new(objectId, BinaryPrimitives.ReadSingleLittleEndian(place), BinaryPrimitives.ReadSingleLittleEndian(place[4..]),
+				BinaryPrimitives.ReadSingleLittleEndian(place[8..])));
+			if (Results(place[12..])) return true;
+			landings.RemoveRange(mark, landings.Count - mark);
+			return false;
+		}
+
+		bool Results(ReadOnlySpan<byte> results)
+		{
+			if (results.IsEmpty) return false;
+			int count = results[0];
+			results = results[1..];
+			for (int index = 0; index < count; index++)
+			{
+				if (results.Length < 7) return false;
+				int length = 7 + (results[6] is 0 or 2 ? 0 : results[6] is 8 or 10 ? 12 : 28);
+				if (results.Length < length) return false;
+				results = results[length..];
+			}
+			int mark = landings.Count;
+			if (TryReadCastEffects(results, left - 1, landings)) return true;
+			landings.RemoveRange(mark, landings.Count - mark);
+			return false;
+		}
 	}
 
 	private static IReadOnlyDictionary<string, object?> DecodeUnwrapItem(ReadOnlySpan<byte> body)
@@ -1214,8 +1298,15 @@ public sealed partial class BotServerPacketDecoder
 public sealed record BotDecomposableChoice(byte Index, int ItemId, int MinCount, byte Reserved,
 	byte StatBonus, byte EnchantBonus, byte Flags);
 
+/// <summary>NR-110g: a creature and the place a packet puts it at.</summary>
+public sealed record BotCreatureLanding(int ObjectId, float X, float Y, float Z);
+
 public sealed record DecodedBotServerPacket(Type PacketType, IReadOnlyDictionary<string, object?> Fields)
 {
+	/// <summary>NR-110g: where the packet puts creatures; null for none. It is no field: a trace writes the fields, and
+	/// every recorded trace holds this packet as it was decoded before.</summary>
+	public IReadOnlyList<BotCreatureLanding>? Landings { get; init; }
+
 	/// <summary>AK-04: when the transport received the packet (the virtual clock in SIM, wall time live), so state that runs on
 	/// from a packet (the game clock) is not dated by when the bot got round to applying it.</summary>
 	public DateTimeOffset? ReceivedAt { get; init; }
