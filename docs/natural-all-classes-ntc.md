@@ -8081,10 +8081,26 @@ The template:
     Q2946, Q2947 and Q2042 complete, 181 quests in all. Captured as
     morheim-abyss-entry-s1-bard, a record that points at character 133266 in the
     round snapshot nr-r18-w8.
-- [ ] **NR-147 - Bard: the endpoint.** Depends: NR-146; ticked by its round
+- [x] **NR-147 - Bard: the endpoint.** Depends: NR-146; ticked by its round
   - Work: Captured and verified as ntc-ready-bard-s1: alive at Morheim Ice Fortress,
     level 25 or higher, Q2945, Q2946, Q2947 and Q2042 complete.
   - Proof: The capture verifies.
+  - 2026-10-11: done. ntc-ready-bard-s1 is captured and verified.
+    - **Captured** at 319ff9c0e: sim-snapshot.ps1 -Action Capture -AltgardLeg1 -Leg ax
+      -From altgard-rc-complete-s1-bard -Name ntc-ready-bard-s1 (run nr147-ax-a1, log
+      run/nr/NR-147/capture-a1.log), as the Sorcerer's was (NR-67). The leg was played
+      once more, alone, as round 18 played it: 16 min 35 s, no death, the arena and the
+      ring course each at the first try, 137,607,001 ms of game time since creation.
+      Dump sha256 00ddb5aa4f24081b.
+    - **The endpoint, from the receipt.** Character 133266, created by packets: a Bard
+      of level 26, alive at Morheim Ice Fortress and bound there; Q24020, Q2945, Q2946,
+      Q2947 and Q2042 complete, 181 quests in all. It wears the level-26 coin harp
+      102000729 and four level-26 coin pieces.
+    - **Proof.** sim-snapshot.ps1 -Action Verify -Name ntc-ready-bard-s1, run
+      nr147-verify-a1 (run/nr/NR-147/verify-a1.log; evidence under
+      run/snapshots/_verify/nr147-verify-a1): "Verified snapshot ntc-ready-bard-s1:
+      character 133266 resumed at its endpoint." Seven pre-commit checks pass
+      (run/nr/NR-77/checks.log, on the tree of the three finish captures of this chain).
 - [ ] **NR-148 - Bard: the class scope.** Depends: NR-147
   - Work: One scope of the Bard's play, chosen where its rules differ most from the
     Artist's, recorded by a bot alone, twice, and added to the gate's sets.
@@ -11311,3 +11327,8 @@ report what was done, what is parked or blocked, and what the operator must deci
   Fortress, Q2945, Q2946, Q2947 and Q2042 complete, 181 quests. It is the fifth class at
   the plan's finish. Seven checks pass. Next: NR-147, the Bard's finish capture, made in
   the same chain.
+- 2026-10-11 — Loop: NR-147 done. ntc-ready-bard-s1 is captured at 319ff9c0e (run
+  nr147-ax-a1: the Abyss entry played once more alone, 16 min 35 s, no death) and
+  verified (run nr147-verify-a1): a Bard of level 26, alive at Morheim Ice Fortress,
+  Q2945, Q2946, Q2947 and Q2042 complete, 181 quests. It is the sixth class at the
+  plan's finish. Seven checks pass. Next: NR-78, the Chanter's class scope.
