@@ -8996,11 +8996,21 @@ through these: each is ticked by the round that gave its capture.
       three attempts at one quest of the leg with no kill counted and no item taken
       gets an item of its own for that, with the lines.
     - **Proof.** No code changes; the gate is NR-R11's. Seven pre-commit checks pass.
-- [ ] **NR-R12c - The Sorcerer at Q24014's item.** Depends: NR-R12b
+- [x] **NR-R12c - The Sorcerer at Q24014's item.** Depends: NR-R12b
   - Work: Its second attempt first, as NR-R12a. If it stops again: find why an hour of
     clearing does not bring it to the item, and mend it in the shared code.
   - Proof: The Sorcerer ends leg 10 in a round without a capture; the full gate
     identical when code changes.
+  - 2026-10-11: done with no change. The Sorcerer's second attempt ends leg 10.
+    - **The second attempt** (run second-a1 at fe8622238, round 13's file from nr-r12 without a
+      capture; run/nr/NR-R12a/second-a1; 1,330 s). It began at
+      the item, had it by 0:10:44, when the leg turned to Jolk, and ended leg 10 in 43.4
+      game minutes at level 24 with 162 quests and one death.
+    - **What the first attempt lost.** An hour of clearing the guards about the item,
+      twenty times, with a travel plan refused 36 times. A finding and no item; the
+      Spirit Master stops at the same place in its first attempt (NR-R12b's round).
+    - **Proof.** No code changes; the gate is NR-R11's. Seven pre-commit checks pass.
+      Round 13 plays it again for the capture.
 - [ ] **NR-R13 - Round 13: leg 10 for five, leg 9 for three, and the Assassin's leg 8.** Depends: NR-R12c
   - Work: The eight worlds resumed from nr-r12 with -Capture nr-r13 (round file
     run/nr/NR-R13/round-13.json). The Spirit Master, the Gladiator and the Bard play
@@ -10237,3 +10247,6 @@ report what was done, what is parked or blocked, and what the operator must deci
   costs a ten-minute way back. No number is changed on that. A class goes on from the
   round snapshot, a quest an attempt; three attempts at one quest with nothing won, and
   it gets an item under NR-Q4. Seven checks pass. Next: NR-R12c.
+- 2026-10-11 — Loop: NR-R12c done with no change. In its second attempt (second-a1) the
+  Sorcerer took Q24014's item within eleven minutes and ended leg 10 (level 24, 162
+  quests). Seven checks pass. Next: NR-R13, round 13, with its captures.
