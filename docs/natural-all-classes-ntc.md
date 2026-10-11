@@ -7793,14 +7793,35 @@ The template:
     game minutes without a death, each with a receipt that says verified. Captured as
     altgard-coingear-gunner and altgard-rc-complete-s1-gunner, records that point at
     character 133266 in the round snapshots nr-r22-w7 and nr-r23-w7.
-- [ ] **NR-126 - Gunner: the Abyss entry.** Depends: NR-125; ticked by its round
+- [x] **NR-126 - Gunner: the Abyss entry.** Depends: NR-125; ticked by its round
   - Work: Q24020, then Q2945, Q2946, Q2947 and Q2042 with the coin tiers it can wear
     (NR-38b, NR-Q14, NR-Q16), captured as morheim-abyss-entry-s1-gunner.
   - Proof: The capture verifies.
-- [ ] **NR-127 - Gunner: the endpoint.** Depends: NR-126; ticked by its round
+  - 2026-10-11: done in round 24 (NR-R24, world 7). The Abyss entry ended in 16.2 game
+    minutes without a death, with a receipt that says verified: a Gunner of level 26,
+    alive at Morheim Ice Fortress, Q24020, Q2945, Q2946, Q2947 and Q2042 complete, 181
+    quests in all. Captured as morheim-abyss-entry-s1-gunner, a record that points at
+    character 133266 in the round snapshot nr-r24-w7.
+- [x] **NR-127 - Gunner: the endpoint.** Depends: NR-126; ticked by its round
   - Work: Captured and verified as ntc-ready-gunner-s1: alive at Morheim Ice Fortress,
     level 25 or higher, Q2945, Q2946, Q2947 and Q2042 complete.
   - Proof: The capture verifies.
+  - 2026-10-11: done in round 24. ntc-ready-gunner-s1 is captured and verified, and it
+    comes straight out of the round's world.
+    - **Captured** by the round, at 8a617eacc: the round file names two captures for the
+      Gunner's Abyss entry (NR-R21b), and ntc-ready-gunner-s1 is a record that points
+      at character 133266 in the round snapshot nr-r24-w7, as
+      morheim-abyss-entry-s1-gunner is. No leg was played again alone for it.
+    - **The endpoint, from the receipt.** Character 133266, created by packets: a Gunner
+      of level 26, alive at Morheim Ice Fortress and bound there; Q24020, Q2945, Q2946,
+      Q2947 and Q2042 complete, 181 quests in all; the arena and the ring course each
+      at the first try. It holds the level-26 coin pistol 101800692 and wears four level-26
+      coin pieces.
+    - **Proof.** sim-snapshot.ps1 -Action Verify -Name ntc-ready-gunner-s1, run
+      nr127-verify-a1 (run/nr/NR-R24/verify-gunner-a1.log; evidence under
+      run/snapshots/_verify/nr127-verify-a1): "Verified snapshot ntc-ready-gunner-s1:
+      character 133266 resumed at its endpoint." It is the tenth class at the plan's
+      finish.
 - [ ] **NR-128 - Gunner: the class scope.** Depends: NR-127
   - Work: One scope of the Gunner's play, chosen where its rules differ most from the
     Engineer's, recorded by a bot alone, twice, and added to the gate's sets.
@@ -10821,7 +10842,7 @@ through these: each is ticked by the round that gave its capture.
       | ranger | 33,789 | 33,952 | b80b09e557adc672 | 7 where it had 6 | 0 |
     - **The gate after** (run guard2-p8, run/nr/NR-R23a/guard2-p8/verdict.json):
       nineteen scopes identical. Seven checks pass on the recorded tree.
-- [ ] **NR-R24 - Round 24: the Abyss entry for the Gunner, leg 10 for the Assassin.** Depends: NR-R23a
+- [x] **NR-R24 - Round 24: the Abyss entry for the Gunner, leg 10 for the Assassin.** Depends: NR-R23a
   - Work: Two worlds resumed from nr-r23 with -Capture nr-r24 (round file
     run/nr/NR-R24/round-24.json; worlds 1, 2, 3, 5, 6 and 8 have no bot: both of world
     8's classes are at the finish). The Gunner plays the Abyss entry and names two
@@ -10832,6 +10853,45 @@ through these: each is ticked by the round that gave its capture.
     table of leg 10's attempts carried on.
   - Proof: round.json with two outcome records; for each class that reached its
     stage's end the completion receipt says verified and its capture is written.
+  - 2026-10-11: played. The Gunner ends the Abyss entry and is at the plan's finish,
+    captured from the round's world and verified (NR-126, NR-127 ticked). The Assassin
+    wins Q2281 in the gear it owns and goes on to Q2282, where its hour runs out. No
+    stop of this round is a defect.
+    - **The round** (run r24-a1 at 8a617eacc, -From nr-r23, -Capture nr-r24;
+      run/nr/NR-R24/r24-a1; round file run/nr/NR-R24/round-24.json). Two worlds side by
+      side, worlds 4 and 7, 155 seconds of wall time. Its file was played once without a
+      capture first, as NR-R23a's proof (run change-a1), with the same outcomes.
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 4 | scout-assassin | Assassin | l10 | stopped | 24 | 152 | 76.0 | 88, 64 kills | 4 | none |
+      | 7 | engineer-gunner | Gunner | ax | reached | 26 | 181 | 16.2 | 10, 10 kills | 0 | morheim-abyss-entry-s1-gunner, ntc-ready-gunner-s1 |
+
+      The Gunner's receipt says verified. The captures are records that point into the
+      round snapshots nr-r24-w4 and nr-r24-w7; the first holds the Assassin as it
+      stood.
+    - **The Assassin.** At the start of leg 10 it puts on twelve pieces (NR-R23a). It
+      wins 42 of 42 fights with one attacker, 22 of 28 with two and none of 6 with
+      three: 64 kills in 88 fights. Q2281's last two kills fall at 15:35 and 15:57.
+      Then Q2282, "[Group] Killing Kumbaron's Followers": three Black Claw warlocks
+      (210538). In the hour that follows it sets out for them four times, once after
+      each death. It comes to one once, at 1:12:40, and the walk up to it is refused;
+      it strikes none. Four deaths.
+    - **Leg 10, the attempts so far.**
+
+      | Class | Where its hour ran out | Attempts with nothing won | Note |
+      |---|---|---|---|
+      | Assassin | Q2282 | 1 | Q2281 is won, at its fourth hour and the first in its own gear. At Q2282 it strikes no warlock in the hour: one walk up to one, refused; four deaths on the way to them |
+    - **Deaths: 4,** all the Assassin's.
+- [ ] **NR-R25 - Round 25: leg 10 for the Assassin.** Depends: NR-R24
+  - Work: One world resumed from nr-r24 with -Capture nr-r25 (round file
+    run/nr/NR-R25/round-25.json; world 4 alone has a bot: every other class is at the
+    finish). The Assassin goes on in leg 10 from Q2282. The file is played once without
+    a capture first; a stop that is a defect is mended before the captured round, in
+    round 24's letters. One outcome line, and the table of leg 10's attempts carried
+    on. Three attempts at one quest with nothing won get the Assassin an item (NR-Q4).
+  - Proof: round.json with one outcome record; if the Assassin reached its stage's
+    end the completion receipt says verified and its capture is written.
 
 ### E. Close
 
@@ -12432,3 +12492,9 @@ report what was done, what is parked or blocked, and what the operator must deci
   4cf8cc49c: two passes identical, 37,457 records, sha256 ee3a4fb4c1d5206a. The full
   gate is now twenty scopes, and all are identical (guard-p8 of NR-138). Seven checks
   and the script tests pass. Next: NR-R24, round 24, with its captures.
+- 2026-10-11 — Loop: NR-R24 played. Round 24 (r24-a1 at 8a617eacc, -From nr-r23, 155 s, two
+  worlds): the Gunner ends the Abyss entry with 181 quests, no death (NR-126), and
+  ntc-ready-gunner-s1 is captured from the round's world and verified (NR-127, run
+  nr127-verify-a1): the tenth class at the plan's finish. The Assassin, in the gear
+  NR-R23a put on, wins Q2281 and goes on to Q2282, where its first hour wins nothing.
+  Written: NR-R25, round 25. Seven checks pass. Next: NR-128, the Gunner's class scope.
