@@ -10732,7 +10732,7 @@ through these: each is ticked by the round that gave its capture.
         ("Don't change earlier runs"). NR-Q2 keeps the Cleric's scopes identical.
         2026-10-11, of the Assassin: "this is not normal for this class type to have
         so many deaths."
-- [ ] **NR-R23a - A second class wears what it owns when a leg starts.** Depends: NR-R23
+- [x] **NR-R23a - A second class wears what it owns when a leg starts.** Depends: NR-R23
   - Work: Found by round 23 (the finding above). Every class but the accepted line runs
     the equipment check at the start of each Altgard leg, the coin-gear stage and
     Haramel: it wears the better gear it owns, as the town service does. The rule is
@@ -10783,6 +10783,21 @@ through these: each is ticked by the round that gave its capture.
     - **The bundle** (run/nr/NR-R23a, chain; one tree with the Rider's gate row of
       NR-138): the unit suite (4,632 passed, 16 skipped), the seven checks, the script
       tests and Fast (nrr23a-fast) pass.
+  - 2026-10-11: done. The five class scopes are recorded again.
+    - **Recorded again** at 03af24c4f on a clean tree (run record-a1,
+      run/nr/NR-R23a/record-a1/verdict.json): each of the five repeats in its two
+      passes, and each journey ends as before. The rows keep their line, replay,
+      environment and ignore list.
+
+      | Scope | Records before | Records now | sha256 | Retreats | Deaths |
+      |---|---|---|---|---|---|
+      | sorcerer | 35,591 | 35,435 | 28dd635ab9cb7022 | 13 where it had 7 | 1 |
+      | chanter | 67,343 | 53,727 | 19659c378ddc9fd8 | 10 where it had 9 | 0 |
+      | spiritmaster | 57,507 | 50,141 | b908643dee560086 | 0 where it had 7 | 0 |
+      | bard | 41,392 | 37,953 | 4a01971827e2e6bf | 12 where it had 8 | 0 |
+      | ranger | 33,789 | 33,952 | b80b09e557adc672 | 7 where it had 6 | 0 |
+    - **The gate after** (run guard2-p8, run/nr/NR-R23a/guard2-p8/verdict.json):
+      nineteen scopes identical. Seven checks pass on the recorded tree.
 - [ ] **NR-R24 - Round 24: the Abyss entry for the Gunner, leg 10 for the Assassin.** Depends: NR-R23a
   - Work: Two worlds resumed from nr-r23 with -Capture nr-r24 (round file
     run/nr/NR-R24/round-24.json; worlds 1, 2, 3, 5, 6 and 8 have no bot: both of world
@@ -12384,3 +12399,8 @@ report what was done, what is parked or blocked, and what the operator must deci
   spiritmaster, bard and ranger differ first at a piece put on at Haramel's start. Unit
   suite, seven checks, script tests and Fast nrr23a-fast pass. Next: NR-R23a still, the
   five scopes recorded again; then NR-138, the Rider's class scope.
+- 2026-10-11 — Loop: NR-R23a done. Scopes sorcerer, chanter, spiritmaster, bard and
+  ranger are recorded again at 03af24c4f (record-a1, two passes identical each):
+  sorcerer 35,435, chanter 53,727, spiritmaster 50,141, bard 37,953, ranger 33,952 records. Gate
+  guard2-p8: nineteen scopes identical. Seven checks pass. Next: NR-138, the Rider's
+  class scope.
