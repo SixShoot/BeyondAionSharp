@@ -10508,7 +10508,7 @@ through these: each is ticked by the round that gave its capture.
       |---|---|---|---|
       | Assassin | Q2281 | 1 | the quest stands at 3 of 3, 5 of 5 and 3 of 5: two scratchers of its third group are wanting. Three fights with one of them, no kill; 11 flights at low health, 4 deaths |
     - **Deaths: 4,** all the Assassin's.
-- [ ] **NR-R21a - The Rider's pull spot in Haramel that no route leaves.** Depends: NR-R21
+- [x] **NR-R21a - The Rider's pull spot in Haramel that no route leaves.** Depends: NR-R21
   - Work: Found by round 22's file played without a capture (run preview-a1,
     run/nr/NR-R22/preview-a1, at ac5820a4d). The Rider stops in Haramel at 1:09:49 with
     172 quests: "No checked Haramel ground route" from 242.943, 234.108, 89.649 to
@@ -10565,6 +10565,13 @@ through these: each is ticked by the round that gave its capture.
     - **The bundle** (run/nr/NR-R21a, chain4; one tree for NR-120c, NR-R21a and
       NR-R21b): the unit suite (4,632 passed, 16 skipped), the seven checks, the script
       tests and Fast (nrr21a4-fast) pass.
+  - 2026-10-11: done. Scope gladiator is recorded again.
+    - **Recorded again** at 383b29b43 on a clean tree (run record-a1,
+      run/nr/NR-R21a/record-a1/verdict.json): two passes identical, 34,229 records
+      where it had 35,420, sha256 cf79597266bb69dd. Haramel ends as before, without a death; 5 retreats where it had 8; 221 pull plans where it had 275; 118 waits for a patrol where it had 170.
+      The row keeps its line, replay, environment and ignore list.
+    - **The gate after** (run guard5-p8, run/nr/NR-R21a/guard5-p8/verdict.json):
+      nineteen scopes identical. Seven checks pass on the recorded tree.
 - [x] **NR-R21b - A round's Abyss entry gives the finish capture.** Depends: NR-R21
   - Work: The operator's answers to NR-Q9 (2026-10-09, 2026-10-11): a class's captures,
     ntc-ready-<class>-s1 among them, come straight out of the round's world. A round
@@ -12154,3 +12161,7 @@ report what was done, what is parked or blocked, and what the operator must deci
   capture. Script tests pass; the changed expressions were run by themselves on every
   shape of the field; the bundle is NR-R21a's. Next: NR-R21a still, scope gladiator
   recorded again.
+- 2026-10-11 — Loop: NR-R21a done. Scope gladiator is recorded again at 383b29b43 (record-a1,
+  two passes identical): 34,229 records where it had 35,420, sha256 cf79597266bb69dd,
+  without a death. Gate guard5-p8: nineteen scopes identical. Seven checks pass.
+  Next: NR-R22, round 22, with its captures.
