@@ -5289,10 +5289,31 @@ The template:
       run/snapshots/_verify/nr77-verify-a1): "Verified snapshot ntc-ready-chanter-s1:
       character 133266 resumed at its endpoint." Seven pre-commit checks pass
       (run/nr/NR-77/checks.log, on the tree of the three finish captures of this chain).
-- [ ] **NR-78 - Chanter: the class scope.** Depends: NR-77
+- [x] **NR-78 - Chanter: the class scope.** Depends: NR-77
   - Work: One scope of the Chanter's play, chosen where its rules differ most from the
     Cleric's, recorded by a bot alone, twice, and added to the gate's sets.
   - Proof: The two recordings are identical.
+  - 2026-10-11: done. Scope chanter is recorded and stands in the baseline file.
+    - **The scope.** Haramel, leg l12 from altgard-coingear-chanter with the later
+      capital, as the Templar's and the Sorcerer's are. It is where the Chanter plays
+      least like the Cleric: it walks to its target and plays its strike chains at
+      melee, keeps its own buff up, and takes or leaves a pack by the patrol rule. The
+      capture it starts from is a round character, replayed alone (NR-67a, NR-67b).
+    - **The row** (scripts/sim/run-neutral-gate.ps1, committed first as 6e67d37b8). One
+      bundle stands for the rows of NR-78, NR-118 and NR-148, on the tree with the
+      three: the script tests, the full gate on fourteen scopes (run guard-p8 of NR-78),
+      the seven checks, the unit suite (4,632 passed, 16 skipped) and Fast nr78-fast.
+    - **The recording** at 689768fa6 on a clean tree (run record-a1,
+      run/nr/NR-78/record-a1/verdict.json): two passes, identical after normalization:
+      67,343 records, sha256 5175ad9ed7af592b. No death, 9 retreats, 367 pull plans, 222
+      holds of the patrol rule, one help item supplied. The traces are kept under
+      run/cp/baseline/689768fa6... and in the second copy beside the repository.
+    - **Proof.** A comparison of the scope with its new row passes (run guard-chanter,
+      run/nr/NR-78/guard-chanter/verdict.json). Seven pre-commit checks and the three
+      script tests pass on the tree with the new row (run/nr/NR-78/checks2.log,
+      run/nr/NR-78/script-tests2.log).
+    - **The full gate from here** is set
+      all+mage+warrior+artist+engineer+scout+templar+sorcerer+chanter: fifteen scopes.
 - [x] **NR-80 - Gladiator: survey and profile data.** Depends: the close of phase C
   - 2026-10-10: done. The Gladiator has a class line, a gear table and a profile the
     validator accepts. Nothing has been played. One thing its skills need that the shared
@@ -11332,3 +11353,9 @@ report what was done, what is parked or blocked, and what the operator must deci
   verified (run nr147-verify-a1): a Bard of level 26, alive at Morheim Ice Fortress,
   Q2945, Q2946, Q2947 and Q2042 complete, 181 quests. It is the sixth class at the
   plan's finish. Seven checks pass. Next: NR-78, the Chanter's class scope.
+- 2026-10-11 — Loop: NR-78 done. Scope chanter is Haramel from altgard-coingear-chanter,
+  a round character replayed alone. Its row was committed as 6e67d37b8; one bundle
+  stands for the three rows of this batch (fourteen scopes identical, nr78-fast).
+  Recorded at 689768fa6: two passes identical, 67,343 records, sha256 5175ad9ed7af592b,
+  and guard-chanter passes. The full gate is now fifteen scopes. Seven checks and the
+  script tests pass. Next: NR-118, the Spirit Master's class scope.

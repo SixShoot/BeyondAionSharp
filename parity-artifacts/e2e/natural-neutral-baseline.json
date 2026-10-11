@@ -624,6 +624,53 @@
         "binds": 1,
         "soulHeals": 0
       }
+    },
+    {
+      "scope": "chanter",
+      "line": "priest-chanter",
+      "replay": {
+        "AltgardLeg1": true,
+        "Leg": "l12",
+        "From": "altgard-coingear-chanter",
+        "LaterCapital": true
+      },
+      "snapshot": "altgard-coingear-chanter",
+      "commit": "689768fa685bb3a0308a0ef47b50ccc4166fc1f5",
+      "environment": {
+        "AION_SIM_SEED": "1",
+        "NA_HELP_ITEMS": null,
+        "AION_BOT_DASHBOARD_PORT": null,
+        "AION_SIM_PROCESS_KEY": null
+      },
+      "ignore": [],
+      "records": 67343,
+      "sha256": "5175ad9ed7af592bd4f5ce1948d399881166b917ccc6602ccded5ff364be2b12",
+      "counts": {
+        "records": 67344,
+        "deaths": 0,
+        "reviveSteps": 0,
+        "retreats": 9,
+        "retreatRoutes": 16,
+        "restSitsTraced": 0,
+        "restInterrupts": 0,
+        "betweenFightHeals": 0,
+        "powderRestCasts": 1,
+        "vendorBuys": 0,
+        "pullPlans": 367,
+        "patrolWaits": 222,
+        "emergencyDecisions": 0,
+        "atTargetPulls": 6,
+        "lifePotions": 6,
+        "restLifePotions": 0,
+        "restSitsForHealth": 0,
+        "manaPotions": 0,
+        "shieldScrolls": 0,
+        "speedScrolls": 22,
+        "runningScrolls": 0,
+        "helpItemsSupplied": 1,
+        "binds": 1,
+        "soulHeals": 0
+      }
     }
   ]
 }
