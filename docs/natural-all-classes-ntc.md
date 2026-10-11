@@ -5471,11 +5471,16 @@ The template:
     level 13, 55 quests complete, 152 fights with 140 kills, no death. Its
     bridge-completion.json says verified. Captured as altgard-gladiator-s1, a record that points at
     character 133266 in the round snapshot nr-r1-w3.
-- [ ] **NR-83 - Gladiator: Altgard legs l1 to l5.** Depends: NR-82; ticked by its round
+- [x] **NR-83 - Gladiator: Altgard legs l1 to l5.** Depends: NR-82; ticked by its round
   - Work: The Cleric's legs in order, each end captured under the Cleric's snapshot name
     with -gladiator (NR-41). In leg 1 it has nothing that reaches from range yet and
     swings its weapon at the fungus in flight, as the Templar did.
   - Proof: Each capture verifies.
+  - 2026-10-10: done in rounds 3 and 5 to 8 (NR-R3, NR-R5 to NR-R8, world 3). Each leg
+    ended with a receipt that says verified, and the Gladiator stands at leg 5's end at
+    level 20 with 109 quests. Captured as altgard-rc-l1-gladiator to
+    altgard-rc-l5-gladiator, records that point at character 133266 in the round
+    snapshots nr-r3-w3 and nr-r5-w3 to nr-r8-w3.
 - [ ] **NR-84 - Gladiator: Altgard legs l6 to l11.** Depends: NR-83; ticked by its round
   - Work: As NR-83. Leg 11 is the destiny quest: its stone is the Templar's, 140000003
     (NR-39).
@@ -7849,10 +7854,15 @@ The template:
     level 14, 55 quests complete, 161 fights with 144 kills, no death. Its
     bridge-completion.json says verified. Captured as altgard-bard-s1, a record that points at
     character 133266 in the round snapshot nr-r1-w8.
-- [ ] **NR-143 - Bard: Altgard legs l1 to l5.** Depends: NR-142; ticked by its round
+- [x] **NR-143 - Bard: Altgard legs l1 to l5.** Depends: NR-142; ticked by its round
   - Work: The Cleric's legs in order, each end captured under the Cleric's snapshot name
     with -bard (NR-41). In leg 1 it shoots the fungus in flight.
   - Proof: Each capture verifies.
+  - 2026-10-10: done in rounds 3 and 5 to 8 (NR-R3, NR-R5 to NR-R8, world 8). Each leg
+    ended with a receipt that says verified, and the Bard stands at leg 5's end at level
+    20 with 109 quests. Captured as altgard-rc-l1-bard to altgard-rc-l5-bard, records
+    that point at character 133266 in the round snapshots nr-r3-w8 and nr-r5-w8 to
+    nr-r8-w8.
 - [ ] **NR-144 - Bard: Altgard legs l6 to l11.** Depends: NR-143; ticked by its round
   - Work: As NR-143. Leg 11 is the destiny quest: its stone is 140000001 (NR-39).
   - Proof: Each capture verifies.
@@ -8411,7 +8421,7 @@ through these: each is ticked by the round that gave its capture.
       so neither can be committed outside phase B (NR-Q2). The Cleric pulls an add that
       brings Sumarhon anyway at 2:28:12 and 2:48:51, and hunts him from 2:11:39, when
       the quest counted his death, until 2:49:45. Question NR-Q18.
-- [ ] **NR-R8 - Round 8: Altgard leg 6 for five, leg 5 for three, and the Assassin's leg 4.** Depends: NR-R7a
+- [x] **NR-R8 - Round 8: Altgard leg 6 for five, leg 5 for three, and the Assassin's leg 4.** Depends: NR-R7a
   - Work: The eight worlds resumed from nr-r7 with -Capture nr-r8 (round file
     run/nr/NR-R8/round-8.json). The Sorcerer, Ranger, Spirit Master, Gunner and Rider
     play leg 6; the Chanter, Gladiator and Bard play leg 5; the Assassin goes on in leg
@@ -8419,6 +8429,78 @@ through these: each is ticked by the round that gave its capture.
     and altgard-rc-l4-assassin. One outcome line for each class; a stop gets a lettered
     item. A class whose leg 5 is captured has its legs l1 to l5: its item (NR-73, NR-83,
     NR-143) is ticked with the round.
+  - Proof: round.json with nine outcome records; for each class that reached its
+    stage's end the completion receipt says verified and its capture is written.
+  - 2026-10-10: played. Five reached their stage's end and are captured: leg 6 for the
+    Sorcerer, Ranger and Spirit Master, leg 5 for the Gladiator and the Bard, whose
+    items NR-83 and NR-143 are ticked. Four stopped: the Chanter in leg 5 (NR-R8a), the
+    Gunner and the Rider in leg 6 (NR-R8b, NR-R8c), and the Assassin a second time in
+    leg 4, now with its kill counted.
+    - **The round** (run r8-a1 at 5904e3206, -From nr-r7, -Capture nr-r8;
+      run/nr/NR-R8/r8-a1; round file run/nr/NR-R8/round-8.json). Eight worlds side by
+      side, 955 seconds of wall time.
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 1 | mage-sorcerer | Sorcerer | l6 | reached | 21 | 119 | 65.2 | 97, 77 kills | 0 | altgard-rc-l6-sorcerer |
+      | 2 | priest-chanter | Chanter | l5 | stopped | 20 | 98 | 123.0 | 126, 103 kills | 2 | none |
+      | 3 | warrior-gladiator | Gladiator | l5 | reached | 20 | 109 | 147.4 | 187, 166 kills | 0 | altgard-rc-l5-gladiator |
+      | 4 | scout-assassin | Assassin | l4 | stopped | 20 | 94 | 82.8 | 127, 86 kills | 8 | none |
+      | 5 | scout-ranger | Ranger | l6 | reached | 21 | 119 | 110.8 | 113, 90 kills | 1 | altgard-rc-l6-ranger |
+      | 6 | mage-spirit-master | Spirit Master | l6 | reached | 21 | 119 | 74.9 | 110, 84 kills | 0 | altgard-rc-l6-spirit-master |
+      | 7 | engineer-gunner | Gunner | l6 | stopped | 21 | 116 | 139.0 | 122, 102 kills | 1 | none |
+      | 8 | artist-bard | Bard | l5 | reached | 20 | 109 | 146.3 | 194, 139 kills | 3 | altgard-rc-l5-bard |
+      | 8 | engineer-rider | Rider | l6 | stopped | 21 | 109 | 24.7 | 43, 40 kills | 0 | none |
+
+      Each receipt of a class that reached its stage's end says verified. The captures
+      are records that point into the round snapshots nr-r8-w1 to nr-r8-w8, which hold
+      the four that stopped as they stood.
+    - **The Assassin, leg 4, its second stop at Comrade Sumarhon.** As in NR-R7a's
+      proof round, the defence killed Sumarhon at 0:22:49 and the quest counted it (var
+      1). The kill step hunted him on, as NR-Q18 describes; five more deaths, and the
+      hour without progress ran out at 1:22:49. The character is saved with Q24112 at
+      var 1, so a leg that starts from there reads the quest and goes to its report:
+      round 9 takes it on with no change. It is not parked. Were it to stop there a
+      third time, it is parked by rule (r) under NR-Q18.
+    - **The Chanter, leg 5, Q2292's Mumu Ang** (210623, the carrier of 122000040):
+      "Altgard leg l5 made no progress on carrier-hunt". It reached the one Mumu Ang at
+      1:29, found no pull spot in six waits, and two fights with it did not happen; the
+      kill step left that monster for another (1:31:43), and there is no other. Four
+      times the hunt then missed its carrier, and the leg's count of repeated decisions
+      ended it. Item NR-R8a.
+    - **The Gunner, leg 6, the road to Germir** (203645, Q2247's giver): no progress
+      for an hour from 1:18:59. Three walks of the road ended more than 300 m short, 38
+      fights on the way, 144 times no travel plan. Item NR-R8b.
+    - **The Rider, leg 6, Q2246's insignia box** (700147): "No client-observed NPC
+      700147 ... No collision-checked route". A Blackened Angolem (210487) blocks the
+      way; the pull found it "moved" 17.6 m off 39 times from one place, and the Rider
+      never walked. Item NR-R8c.
+- [ ] **NR-R8a - The Chanter at Q2292's Mumu Ang.** Depends: NR-R8
+  - Work: Java first for what the step relies on. Find why the Chanter's two fights
+    with the Mumu Ang did not happen, and why a hunt whose only carrier it has left
+    goes on looking for one. Mend it in the shared code, no branch on a class.
+  - Proof: The full gate identical. The Chanter, resumed from nr-r8-w2 without a
+    capture, takes Q2292's ring from the Mumu Ang and ends leg 5.
+- [ ] **NR-R8b - The Gunner on the road to Germir.** Depends: NR-R8a
+  - Work: Java first for what the step relies on. Find why the Gunner does not arrive
+    at Germir in an hour where the Sorcerer, the Ranger and the Spirit Master did, and
+    mend it in the shared code or in the Gunner's profile numbers.
+  - Proof: The full gate identical. The Gunner, resumed from nr-r8-w7 without a
+    capture, takes Q2247 and ends leg 6.
+- [ ] **NR-R8c - The Rider at Q2246's insignia box.** Depends: NR-R8b
+  - Work: Java first for what the step relies on. Find why the pull of the blocker
+    answers "moved" from a place the Rider does not leave, and mend it in the shared
+    code: a class whose skills reach 5 m must be able to clear a blocker.
+  - Proof: The full gate identical. The Rider, resumed from nr-r8-w8 without a
+    capture, opens the insignia box and ends leg 6.
+- [ ] **NR-R9 - Round 9: leg 7 for three, leg 6 for four, and the Chanter's and the Assassin's legs.** Depends: NR-R8c
+  - Work: The eight worlds resumed from nr-r8 with -Capture nr-r9 (round file
+    run/nr/NR-R9/round-9.json). The Sorcerer, Ranger and Spirit Master play leg 7; the
+    Gladiator and the Bard play leg 6; the Gunner and the Rider go on in leg 6, the
+    Chanter in leg 5 and the Assassin in leg 4, each from where it stopped. Captures as
+    altgard-rc-<leg>-<class>. One outcome line for each class; a stop gets a lettered
+    item. A class whose leg 5 is captured has its legs l1 to l5: its item (NR-73, NR-93)
+    is ticked with the round that captures it.
   - Proof: round.json with nine outcome records; for each class that reached its
     stage's end the completion receipt says verified and its capture is written.
 
@@ -8465,6 +8547,9 @@ Nothing is blocked at the start.
   (run/nr/NR-R7a/nrr7a-first-form.patch). No class is parked: eight have passed the place
   with deaths, and the Assassin, which stopped there in round 7, takes its second attempt
   in round 8. To decide: NR-Q18.
+  - 2026-10-10, round 8: the Assassin stopped there again, an hour after the quest had
+    counted its kill. It is saved with Q24112 at var 1, and a leg that starts there goes
+    to the report, so round 9 takes it on and it is not parked.
 
 ## Loop prompt
 
@@ -9535,3 +9620,13 @@ report what was done, what is parked or blocked, and what the operator must deci
   blocking nothing yet. The Assassin takes its second attempt in round 8. The proof round
   also showed three stops round 8 will meet: the Chanter in leg 5, the Gunner and the
   Rider in leg 6. Seven checks pass. Next: NR-R8, round 8.
+- 2026-10-10 — Loop: NR-R8 played. Round 8 (r8-a1 at 5904e3206, -From nr-r7, 955 s): five
+  reached their stage's end and are captured in nr-r8-w1 to w8. The Sorcerer, Ranger and
+  Spirit Master ended Altgard leg 6 (level 21, 119 quests); the Gladiator and the Bard
+  ended leg 5 (level 20, 109 quests), so NR-83 and NR-143 are ticked. Four stopped. The
+  Assassin, in leg 4, an hour after the quest counted its kill of Sumarhon (NR-Q18); it
+  is saved at var 1 and round 9 takes it on. The Chanter in leg 5: it left Q2292's one
+  Mumu Ang after two fights that did not happen. The Gunner in leg 6: an hour on the road
+  to Germir. The Rider in leg 6: a blocker before Q2246's insignia box that the pull
+  found "moved" 39 times. Written: NR-R8a, NR-R8b, NR-R8c and NR-R9, round 9. Seven
+  checks pass. Next: NR-R8a.
