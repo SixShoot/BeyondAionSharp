@@ -345,6 +345,15 @@ function Restore-Snapshot([string]$SnapshotName = $Name) {
 	if ($roundCharacter) {
 		$environment.NI08_RESUME_ACCOUNT = "$($roundCharacter.account)"
 		$environment.NI08_RESUME_NAME = [string]$roundCharacter.characterName
+		# NR-67a: a round character that ended an Altgard stage stands on the revised route, as a later-capital snapshot
+		# of one character does, so a leg can be captured alone from it. At the Abyss entry's end it resumes as that
+		# leg's snapshot does (AX-13).
+		$stage = if ($roundCharacter.PSObject.Properties.Name -contains 'stage') { [string]$roundCharacter.stage } else { '' }
+		if ($stage -cmatch '^(l(?:[1-9]|1[0-2])|cg|ax)$') {
+			$environment.NA_ASCENSION = '1'
+			$environment.RC_CAPITAL = '1'
+		}
+		if ($stage -ceq 'ax') { $environment.AF_ALTGARD = 'ax' }
 	}
 	[pscustomobject]@{
 		snapshot = $SnapshotName

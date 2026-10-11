@@ -78,6 +78,17 @@ try {
 	Assert-True ($fromRound.environment.NI08_RESUME_ACCOUNT -eq '111' -and $fromRound.environment.NI08_RESUME_NAME -eq 'Asimmage') 'A round character restore lost its seat account or name.'
 	Assert-True ($fromRound.environment.CP_CLASS -eq 'mage' -and $fromRound.environment.AION_SIM_NI08_ELAPSED_MS -eq '25000') 'A round character restore lost its line or its world clock.'
 	Assert-True ((Get-Content -LiteralPath $log)[-2] -like "cp *round-mock-w1*dump.sql.gz aion-mysql:/tmp/$($fromRound.database).sql.gz") 'A round character restore did not import its world dump.'
+	# NR-67a: a round character that ended an Altgard stage stands on the revised route; one before it does not.
+	Assert-True (@('NA_ASCENSION', 'RC_CAPITAL', 'AF_ALTGARD' | Where-Object { $fromRound.environment.PSObject.Properties.Name -contains $_ }).Count -eq 0) 'A round character before the Altgard stages gained later capital scope.'
+	Set-Pointer @{ stage = 'l12' }
+	$fromStage = & $script -Action Restore -Name munin-mage-mock -Docker $fake -SnapshotRoot $snapshots | ConvertFrom-Json
+	Assert-True ($fromStage.environment.NA_ASCENSION -eq '1' -and $fromStage.environment.RC_CAPITAL -eq '1' -and $fromStage.environment.PSObject.Properties.Name -notcontains 'AF_ALTGARD') 'A round character at an Altgard stage did not restore on the revised route.'
+	Set-Pointer @{ stage = 'ax' }
+	$fromFinish = & $script -Action Restore -Name munin-mage-mock -Docker $fake -SnapshotRoot $snapshots | ConvertFrom-Json
+	Assert-True ($fromFinish.environment.NA_ASCENSION -eq '1' -and $fromFinish.environment.RC_CAPITAL -eq '1' -and $fromFinish.environment.AF_ALTGARD -eq 'ax') "A round character at the Abyss entry's end did not restore as that leg's snapshot does."
+	Set-Pointer @{ stage = 'bridge' }
+	$fromBridge = & $script -Action Restore -Name munin-mage-mock -Docker $fake -SnapshotRoot $snapshots | ConvertFrom-Json
+	Assert-True ($fromBridge.environment.PSObject.Properties.Name -notcontains 'NA_ASCENSION') "A round character at the bridge's end gained later capital scope."
 	Set-Pointer @{ characterId = 7999 }
 	Assert-Throws { & $script -Action Restore -Name munin-mage-mock -Docker $fake -SnapshotRoot $snapshots } '*does not hold*' 'A character its round snapshot does not hold was restored.'
 	Set-Pointer @{ account = 112 }

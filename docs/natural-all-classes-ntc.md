@@ -4808,7 +4808,31 @@ The template:
     alive at Morheim Ice Fortress, Q24020, Q2945, Q2946, Q2947 and Q2042 complete, 181
     quests in all. Captured as morheim-abyss-entry-s1-sorcerer, a record that points at
     character 133266 in the round snapshot nr-r17-w1.
-- [ ] **NR-67 - Sorcerer: the endpoint.** Depends: NR-66; ticked by its round
+- [x] **NR-67a - A leg captured alone from a round character.** Depends: NR-66
+  - Work: A round gives a bot one capture, and the Abyss entry's is
+    morheim-abyss-entry-s1-<class>. The finish capture is taken as the Templar's was
+    (NR-57): the Abyss-entry leg played once more, alone, from the Haramel capture.
+    sim-snapshot.ps1 restores a round character (NR-47) with its seat and its world's
+    clock, but without the settings of the route it stands on, which a snapshot of one
+    character carries in its own record. Give a round character those settings.
+  - Proof: The script tests pass, with the bundle and the full gate. NR-67 is its use.
+  - 2026-10-11: done. A round character that ended an Altgard stage restores on the
+    revised route, as a later-capital snapshot of one character does.
+    - **The change** (scripts/sim/sim-snapshot.ps1, Restore-Snapshot). A round
+      character whose record names an Altgard stage (l1 to l12, cg, ax) is restored
+      with NA_ASCENSION=1 and RC_CAPITAL=1. One at the Abyss entry's end also gets
+      AF_ALTGARD=ax, as that leg's own snapshot does (AX-13), so Verify resumes it at
+      its endpoint. A round character at Munin or at the bridge's end restores as
+      before.
+    - **The script test** (scripts/sim/test-sim-snapshot.ps1) has four assertions
+      for it beside NR-47's: no stage, l12, ax and the bridge.
+    - **Proof.** One bundle for NR-67a and NR-R17a, on the tree with both changes. The
+      script tests pass (test-sim-snapshot.ps1, test_compare_traces.py,
+      test-code-coverage.ps1). Gate, set all+mage+warrior+artist+engineer+scout+templar,
+      -Parallel 8, run guard-p8 (run/nr/NR-R17a/guard-p8/verdict.json): verdict pass, all
+      thirteen scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests
+      passes (4,632 passed, 16 skipped) and Fast passes (run nrr17a-fast, 11 passed).
+- [ ] **NR-67 - Sorcerer: the endpoint.** Depends: NR-67a; ticked by its round
   - Work: Captured and verified as ntc-ready-sorcerer-s1: alive at Morheim Ice Fortress,
     level 25 or higher, Q2945, Q2946, Q2947 and Q2042 complete.
   - Proof: The capture verifies.
@@ -10975,3 +10999,9 @@ report what was done, what is parked or blocked, and what the operator must deci
   Rider ran out their hour in leg 10; the Gunner and the Rider have two warlocks of
   Q2282's three. Written: NR-R17a and NR-R18, round 18. Seven checks pass. Next: NR-67,
   the Sorcerer's finish capture.
+- 2026-10-11 — Loop: NR-67a written and done. The finish capture is taken as the
+  Templar's was, the Abyss-entry leg played once more alone, and sim-snapshot.ps1 now
+  restores a round character that ended an Altgard stage with the settings of the
+  revised route. One bundle with NR-R17a: script tests, full gate guard-p8 of NR-R17a
+  (thirteen scopes identical), seven checks, unit suite (4,632 passed, 16 skipped) and
+  Fast (nrr17a-fast) pass. Next: NR-R17a, whose proof is in the same bundle, then NR-67.
