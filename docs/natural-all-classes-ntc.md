@@ -4860,10 +4860,27 @@ The template:
       -Parallel 8, run guard-p8 (run/nr/NR-R17b/guard-p8/verdict.json): verdict pass, all
       thirteen scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests
       passes (4,632 passed, 16 skipped) and Fast passes (run nrr17b-fast, 11 passed).
-- [ ] **NR-67 - Sorcerer: the endpoint.** Depends: NR-67b; ticked by its round
+- [x] **NR-67 - Sorcerer: the endpoint.** Depends: NR-67b; ticked by its round
   - Work: Captured and verified as ntc-ready-sorcerer-s1: alive at Morheim Ice Fortress,
     level 25 or higher, Q2945, Q2946, Q2947 and Q2042 complete.
   - Proof: The capture verifies.
+  - 2026-10-11: done. ntc-ready-sorcerer-s1 is captured and verified.
+    - **Captured** at ee27f233f: sim-snapshot.ps1 -Action Capture -AltgardLeg1 -Leg ax
+      -From altgard-rc-complete-s1-sorcerer -Name ntc-ready-sorcerer-s1 (run nr67-ax-a1,
+      log run/nr/NR-67/capture-a1.log; NR-67a lets a leg be captured alone from a round
+      character). The leg was played once more, alone, as round 17 played it: 16 min
+      30 s, no death, the arena and the ring course each at the first try, 84,350,001
+      ms of game time since creation. Dump sha256 0382bce968853aee.
+    - **The endpoint, from the receipt.** Character 133266, created by packets: a
+      Sorcerer of level 26, alive at Morheim Ice Fortress and bound there; Q24020,
+      Q2945, Q2946, Q2947 and Q2042 complete, 181 quests in all. It wears the level-26
+      coin spellbook 100600868 and four level-26 coin pieces.
+    - **Proof.** sim-snapshot.ps1 -Action Verify -Name ntc-ready-sorcerer-s1. The first
+      run (nr67-verify-a1) failed for the seat, which NR-67b mended without touching
+      the snapshot. The second, run nr67-verify-a2 (run/nr/NR-67/verify-a2.log;
+      evidence under run/snapshots/_verify/nr67-verify-a2): "Verified snapshot
+      ntc-ready-sorcerer-s1: character 133266 resumed at its endpoint." Seven
+      pre-commit checks pass (run/nr/NR-67/checks.log).
 - [ ] **NR-68 - Sorcerer: the class scope.** Depends: NR-67
   - Work: One scope of the Sorcerer's play, chosen where its rules differ most from the
     Mage's, recorded by a bot alone, twice, and added to the gate's sets.
@@ -11120,3 +11137,9 @@ report what was done, what is parked or blocked, and what the operator must deci
   on to 161 quests. It then stops at Q24016's first talk: Java gives the Rider a path of
   its own there, and round 18 will record it. The bundle is NR-67b's. Next: NR-67's
   record.
+- 2026-10-11 — Loop: NR-67 done. ntc-ready-sorcerer-s1 is captured at ee27f233f (run
+  nr67-ax-a1: the Abyss entry played once more alone, 16 min 30 s, no death) and verified
+  (run nr67-verify-a2): a Sorcerer of level 26, alive at Morheim Ice Fortress, Q2945,
+  Q2946, Q2947 and Q2042 complete, 181 quests. It is the third class at the plan's
+  finish, after the Cleric and the Templar. Seven checks pass. Next: NR-68, the
+  Sorcerer's class scope.
