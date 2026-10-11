@@ -10044,13 +10044,42 @@ through these: each is ticked by the round that gave its capture.
       all seventeen scopes identical. Seven pre-commit checks pass,
       Aion.GameServer.Tests passes (4,632 passed, 16 skipped) and Fast passes (run
       nrr18a-fast, 11 passed).
-- [ ] **NR-R18b - A missed lift in Haramel, and no way back to its waiting place.** Depends: NR-R18a
+- [x] **NR-R18b - A missed lift in Haramel, and no way back to its waiting place.** Depends: NR-R18a
   - Work: The Gladiator missed a lift's window in Haramel (haramel-missed-elevator-window)
     and stood 4 m from the waiting place with no checked ground route to it. Find
     where it stood and why the walk back has no route, in the Haramel travel that every
     class shares, and mend it there. Nothing of the server's is expected to change.
   - Proof: The full gate identical, with the bundle. The Gladiator, resumed from
     nr-r18-w3 without a capture, ends Haramel or stops for another reason.
+  - 2026-10-11: done. A bot that comes to the upper landing too late for the lift
+    waits for the next one, and one that misses a lift steps back off its place.
+    - **Java.** Nothing of the server's is relied on: the lift is the client's own
+      animation (parity-artifacts/e2e/natural-haramel-elevator.json), and CM_MOVE takes
+      the client's places.
+    - **What happened.** The lift's cycle is 20 s. It stands at the top from 8.667 s
+      to 11.333 s. The ride down waited for the lift only when the bot came before it
+      or after it had gone. The Gladiator came to the landing inside those 2.7
+      seconds with too little of them left, walked aboard, and stood on the lift's
+      place 11.733 s into the cycle, after the lift had gone. The retry then asked
+      the navmesh for a walk back to the landing, 4 m away, from a place that is not
+      on the navmesh.
+    - **The change, generic** (Sc/NaturalHaramelTravel.cs, RideOfficeElevatorDownAsync).
+      - The walk aboard is planned before the lift is chosen. A bot that comes with
+        less of the lift's stop left than that walk takes waits for the next lift.
+      - A bot that still finds the lift gone steps back to the landing the way a
+        rider leaves the lift at the top, and tries again.
+    - **Proof round** (run change-a1, the change in the working tree, round 19's file
+      from nr-r18 without a capture; run/nr/NR-R18b/change-a1; 316 s, five worlds).
+      The Gladiator comes to the landing as before, waits for the lift of 1:26:40,
+      rides down at 1:26:49 and misses none. It ends Haramel at 1:43:17 with its
+      eleven quests: level 25, 176 quests, 103.3 game minutes, no death, receipt
+      verified. The other four play as in NR-R18a's proof round.
+    - **Proof.** Gate, set
+      all+mage+warrior+artist+engineer+scout+templar+sorcerer+chanter+spiritmaster+bard,
+      -Parallel 8, run guard-p8 (run/nr/NR-R18b/guard-p8/verdict.json): verdict pass,
+      all seventeen scopes identical; the Cleric's Haramel scope, hm, rides this lift
+      down once. Seven pre-commit checks pass, Aion.GameServer.Tests passes (4,632
+      passed, 16 skipped) and Fast passes (run nrr18b-fast, 11 passed).
 - [ ] **NR-R19 - Round 19: Haramel for the Gladiator and the Ranger, leg 10 for three.** Depends: NR-R18b
   - Work: Five worlds resumed from nr-r18 with -Capture nr-r19 (round file
     run/nr/NR-R19/round-19.json; worlds 1, 2 and 6 have no bot). The Gladiator and the
@@ -11476,3 +11505,11 @@ report what was done, what is parked or blocked, and what the operator must deci
   Fast (nrr18a-fast) pass. The round showed the Gladiator missing a lift in Haramel and
   finding no way back to its waiting place: NR-R18b is written, before round 19. Next:
   NR-R18b.
+- 2026-10-11 — Loop: NR-R18b done. Haramel's lift stands at the top for 2.7 seconds of
+  its 20. The Gladiator came to the landing with too little of that left, stood on the
+  lift's place after the lift had gone, and had no navmesh walk back. A bot now waits
+  for the next lift when its walk aboard would end too late, and steps back the way a
+  rider leaves when it misses one. Proof round (change-a1, 316 s): the Gladiator rides
+  the next lift and ends Haramel with 176 quests. Full gate guard-p8 (seventeen scopes
+  identical), seven checks, unit suite (4,632 passed, 16 skipped) and Fast (nrr18b-fast)
+  pass. Next: NR-R19, round 19, with its captures.

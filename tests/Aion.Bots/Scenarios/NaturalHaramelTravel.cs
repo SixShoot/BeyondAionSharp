@@ -100,10 +100,6 @@ public sealed class NaturalHaramelTravel(INaturalJourneySession session, Natural
 		{
 			await walk(landing, 1);
 			if (session.Api.World.IsDead || session.Api.World.MapId != elevator.MapId) return;
-			long cycle = runtime.NowMillis - runtime.NowMillis % elevator.PeriodMillis;
-			if (runtime.NowMillis - cycle >= elevator.DescentStarts) cycle += elevator.PeriodMillis;
-			long wait = cycle + elevator.AscentEnds - runtime.NowMillis;
-			if (wait > 0) await session.AdvanceAsync(TimeSpan.FromMilliseconds(wait), token);
 			IReadOnlyList<BotPosition> connector = elevator.Disembark(geo, exit);
 			bool hop = connector.Count == 0;
 			if (hop) connector = elevator.JumpDisembark(geo, exit);
@@ -116,13 +112,23 @@ public sealed class NaturalHaramelTravel(INaturalJourneySession session, Natural
 				previous = point;
 			}
 			var mover = new BotMover(session.Api.World, session.Api.Timing);
-			await session.ExecuteMovementAsync(hop ? mover.CreateJumpPlan(boarding, landing, session.Api.World.MovementSpeed!.Value)
-				: mover.CreateGroundPlan(boarding, landing, session.Api.World.MovementSpeed!.Value), token);
+			float speed = session.Api.World.MovementSpeed!.Value;
+			BotMovementPlan aboard = hop ? mover.CreateJumpPlan(boarding, landing, speed) : mover.CreateGroundPlan(boarding, landing, speed);
+			long cycle = runtime.NowMillis - runtime.NowMillis % elevator.PeriodMillis;
+			// NR-R18b: the lift stands at the top from AscentEnds to DescentStarts. A bot that comes to the landing with less of
+			// that left than its walk aboard takes waits for the next lift.
+			if (runtime.NowMillis - cycle >= elevator.DescentStarts - (long)Math.Ceiling(aboard.Duration.TotalMilliseconds)) cycle += elevator.PeriodMillis;
+			long wait = cycle + elevator.AscentEnds - runtime.NowMillis;
+			if (wait > 0) await session.AdvanceAsync(TimeSpan.FromMilliseconds(wait), token);
+			await session.ExecuteMovementAsync(aboard, token);
 			await session.SynchronizeAsync(token);
 			if (session.Api.World.IsDead || session.Api.World.MapId != elevator.MapId) return;
 			if (runtime.NowMillis - cycle >= elevator.DescentStarts)
 			{
 				session.TraceDiagnostic("haramel-missed-elevator-window", new Dictionary<string, object?> { ["attempt"] = attempt, ["cycle"] = cycle, ["floor"] = "upper" });
+				// NR-R18b: the lift's place is off the navmesh. Step back to the landing the way a rider leaves the lift.
+				await session.ExecuteMovementAsync(hop ? mover.CreateJumpPlan(connector, elevator.Top, speed) : mover.CreateGroundPlan(connector, elevator.Top, speed), token);
+				await session.SynchronizeAsync(token);
 				continue;
 			}
 			session.TraceDiagnostic("haramel-office-elevator-down", new Dictionary<string, object?> { ["cycle"] = cycle, ["from"] = elevator.Top, ["to"] = elevator.Bottom });
