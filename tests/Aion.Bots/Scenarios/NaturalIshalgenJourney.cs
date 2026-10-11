@@ -3426,11 +3426,14 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 						case "return-to-endpoint":
 						{
 							// AM-Q1: Leg 2 ends at Manir's Campsite, beside the NPC who takes its last hand-in.
+							// NR-R16b: a leg with no hand-in where it ends (leg 11 has no template quest) ends at its obelisk.
 							await EnsureOnGroundAsync();
 							float[] end = leg.Endpoint.Anchor ?? leg.Hub.Anchor;
-							int endNpc = altgardPlans.Values.SelectMany(plan => plan.EndNpcs)
-								.First(npc => npc.Positions.Any(at => MathF.Sqrt(MathF.Pow(at.X - end[0], 2) + MathF.Pow(at.Y - end[1], 2)) <= leg.Endpoint.Radius)).Id;
-							await ApproachShippedSpawnAsync(endNpc);
+							QuestRunNpc? endNpc = altgardPlans.Values.SelectMany(plan => plan.EndNpcs)
+								.FirstOrDefault(npc => npc.Positions.Any(at => MathF.Sqrt(MathF.Pow(at.X - end[0], 2) + MathF.Pow(at.Y - end[1], 2)) <= leg.Endpoint.Radius));
+							if (endNpc != null) await ApproachShippedSpawnAsync(endNpc.Id);
+							else await ApproachShippedSpawnAsync(leg.Endpoint.BindNpcId
+								?? throw new InvalidDataException($"{leg.Leg} ends at no hand-in NPC and at no obelisk."), withinRange: 5);
 							break;
 						}
 						case "cube-expansion":

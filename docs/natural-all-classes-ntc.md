@@ -9498,12 +9498,29 @@ through these: each is ticked by the round that gave its capture.
       run guard-p8 (run/nr/NR-R16a/guard-p8/verdict.json): verdict pass, all thirteen
       scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests passes (4,632
       passed, 16 skipped) and Fast passes (run nrr16a-fast, 11 passed).
-- [ ] **NR-R16b - The walk to the end of a leg that has no hand-in there.** Depends: NR-R16a
+- [x] **NR-R16b - The walk to the end of a leg that has no hand-in there.** Depends: NR-R16a
   - Work: The walk to where a leg ends takes a hand-in NPC of the leg's template quests
     as its mark (leg 2's and leg 3's). A leg without one ends at its obelisk: walk to
     the endpoint's bind NPC then. Nothing of the server's is relied on.
   - Proof: The full gate identical, with the bundle. The Ranger, resumed from nr-r16-w5
     without a capture, ends leg 11.
+  - 2026-10-11: done. Where no hand-in NPC of the leg's template quests stands at its
+    end, the walk goes to the leg's obelisk.
+    - **Java.** Nothing of the server's is relied on.
+    - **The change, generic** (Sc/NaturalIshalgenJourney.cs, return-to-endpoint). The
+      walk takes a hand-in NPC within the endpoint's radius as before, which is leg 2's
+      and leg 3's mark. With none, it walks to within 5 m of the endpoint's bind NPC.
+      A leg that ends at neither is refused with a message that says so.
+    - **Proof round** (run change-a1 of NR-R16c, the tree with NR-R16b's and NR-R16c's
+      changes, round 17's file from nr-r16 without a capture;
+      run/nr/NR-R16c/change-a1; 352 s). The Ranger comes back from Pandaemonium by the
+      teleporter, plans the walk at 0:12:07 and ends leg 11 at 0:12:20: level 25, 162
+      quests, 12.5 game minutes, no death, receipt verified.
+    - **Proof.** One gate for NR-R16b and NR-R16c, on the tree with both changes: set
+      all+mage+warrior+artist+engineer+scout+templar, -Parallel 8, run guard-p8
+      (run/nr/NR-R16c/guard-p8/verdict.json): verdict pass, all thirteen scopes
+      identical. Seven pre-commit checks pass, Aion.GameServer.Tests passes (4,632
+      passed, 16 skipped) and Fast passes (run nrr16c-fast, 11 passed).
 - [ ] **NR-R16c - A looted item that does not stack.** Depends: NR-R16b
   - Work: Java first: how ItemService.addItem puts a looted item away, and which
     packet says so. Mend the loot sweep's wait: a change of a stack the character has
@@ -10827,3 +10844,9 @@ report what was done, what is parked or blocked, and what the operator must deci
   skipped) and Fast (nrr16a-fast) pass. The same round showed two defects that a captured
   round would keep a class at: the Ranger's walk to leg 11's end and the Chanter's wait
   at a loot in Haramel. Written: NR-R16b and NR-R16c, before round 17. Next: NR-R16b.
+- 2026-10-11 — Loop: NR-R16b done. The walk to where a leg ends goes to the leg's obelisk
+  when no hand-in NPC of its template quests stands there. Proof round (change-a1 of
+  NR-R16c, with NR-R16c's change as well, 352 s): the Ranger ends leg 11 with 162 quests.
+  One gate for the two items, guard-p8 of NR-R16c (thirteen scopes identical), seven
+  checks, unit suite (4,632 passed, 16 skipped) and Fast (nrr16c-fast) pass. Next:
+  NR-R16c.
