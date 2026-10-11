@@ -8775,7 +8775,7 @@ through these: each is ticked by the round that gave its capture.
       never ended. Item NR-R11b.
     - **Deaths: ten.** Four are the Gladiator's and four the Gunner's in leg 8, one the
       Sorcerer's and one the Ranger's in leg 9.
-- [ ] **NR-R11a - The port's getSuccessEffects().clear() throws.** Depends: NR-R11
+- [x] **NR-R11a - The port's getSuccessEffects().clear() throws.** Depends: NR-R11
   - Work: Java first (rule (t)): Effect.getSuccessEffects (Effect.java 854-856) and its
     one caller that changes it (EffectTemplate.java 315-316). Give the port's
     Effect.GetSuccessEffects() Java's meaning, a view whose Clear() empties the map, so
@@ -8783,6 +8783,34 @@ through these: each is ticked by the round that gave its capture.
     port tests are; this is the server, not bot work.
   - Proof: The port test. The full gate identical, with the bundle. Round 12 captures
     the Spirit Master at leg 9's end with no server problem recorded.
+  - 2026-10-11: done. The port's view of an effect's success map is Java's now.
+    - **Java.** Effect.getSuccessEffects() returns successEffects.values() (Effect.java
+      854-856), the map's live view: what is cleared or removed through it is cleared
+      or removed in the map. Its one caller that changes it is EffectTemplate.calculate
+      (EffectTemplate.java 315-316): when an effect after the first is dodged or
+      resisted, and the first is not a damage effect, the whole skill's successes are
+      emptied.
+    - **The port** returned ConcurrentDictionary.Values, a read-only copy, so that
+      Clear() threw NotSupportedException and the skill's use ended in an error log. A
+      semantic gap between Java and C#, not a choice of the port's.
+    - **The change** (src/Aion.GameServer/SkillEngine/Model/Effect.cs).
+      GetSuccessEffects() returns a small view over the map: Count, Contains and the
+      enumeration read the map; Clear() and Remove() change it; Add() is refused, as
+      Java's values() refuses it. EffectTemplate.Calculate stays Java's line.
+    - **The port test** (tests/Aion.GameServer.Tests/EffectSuccessEffectsViewPortTests.cs,
+      three tests): Clear() on the view empties the map; the view follows a later
+      AddSuccessEffect; Remove() takes one entry out. Server code, so a port test like
+      the skill engine's others; the rule against new tests is for bot work.
+    - **In a round.** The proof round of NR-R11b and NR-R11c (run change-a2) plays the
+      Spirit Master's leg 9 again from its end with no server problem recorded. It
+      orders no skill of the spirit there, so the round does not reach the line; the
+      port test does. Round 12 captures it.
+    - **Proof.** Gate, set all+mage+warrior+artist+engineer+scout+templar, -Parallel 8,
+      run guard-p8 (run/nr/NR-R11b/guard-p8/verdict.json), on the tree that holds the
+      changes of NR-R11a, NR-R11b and NR-R11c together: verdict pass, all thirteen scopes
+      identical. On that tree the seven pre-commit checks pass, Aion.GameServer.Tests
+      passes (4,632 passed, 16 skipped: the three new port tests) and Fast passes (run
+      nrr11b-fast, 11 passed). The three items are committed one after another from it.
 - [ ] **NR-R11b - A talk to an NPC who is fighting.** Depends: NR-R11a
   - Work: Java first: what a guard in a fight does with a dialog request
     (CM_SHOW_DIALOG, the AI's DIALOG_START). Then the bot, in the shared talk step: it
@@ -9988,3 +10016,9 @@ report what was done, what is parked or blocked, and what the operator must deci
   Java clears the map. The Gunner stopped in leg 8, asking a guard who was fighting for a
   dialog. Written: NR-R11a, NR-R11b and NR-R12, round 12. Seven checks pass. Next:
   NR-R11a.
+- 2026-10-11 — Loop: NR-R11a done. Java's Effect.getSuccessEffects() is the success map's
+  live values() view and EffectTemplate.calculate empties the map through it; the port
+  returned a read-only copy and threw. Effect.GetSuccessEffects() now returns a view over
+  the map, with a port test of three. Gate guard-p8 on the tree with NR-R11a, NR-R11b and
+  NR-R11c together (thirteen scopes identical), seven checks, unit suite (4,632 passed, 16
+  skipped) and Fast (nrr11b-fast) pass. Next: NR-R11b.

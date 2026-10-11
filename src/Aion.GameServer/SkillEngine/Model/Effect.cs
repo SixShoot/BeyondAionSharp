@@ -965,7 +965,48 @@ public class Effect : IStatOwner
 
     public ICollection<EffectTemplate> GetSuccessEffects()
     {
-        return successEffects.Values;
+        return new SuccessEffectsView(successEffects);
+    }
+
+    /// <summary>
+    /// Java's Map.values(): a view of the success map, not a copy. EffectTemplate.calculate empties the map through it when a later effect
+    /// is dodged or resisted (EffectTemplate.java 315-316). ConcurrentDictionary.Values is a read-only snapshot, and Clear on it throws.
+    /// </summary>
+    private sealed class SuccessEffectsView : ICollection<EffectTemplate>
+    {
+        private readonly ConcurrentDictionary<int, EffectTemplate> map;
+
+        public SuccessEffectsView(ConcurrentDictionary<int, EffectTemplate> map)
+        {
+            this.map = map;
+        }
+
+        public int Count => map.Count;
+
+        public bool IsReadOnly => false;
+
+        // Java's values() view takes no add.
+        public void Add(EffectTemplate item) => throw new NotSupportedException();
+
+        public void Clear() => map.Clear();
+
+        public bool Contains(EffectTemplate item) => map.Values.Contains(item);
+
+        public void CopyTo(EffectTemplate[] array, int arrayIndex) => map.Values.CopyTo(array, arrayIndex);
+
+        public bool Remove(EffectTemplate item)
+        {
+            foreach (KeyValuePair<int, EffectTemplate> entry in map)
+            {
+                if (Equals(entry.Value, item))
+                    return map.TryRemove(entry.Key, out _);
+            }
+            return false;
+        }
+
+        public IEnumerator<EffectTemplate> GetEnumerator() => map.Values.GetEnumerator();
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
     }
 
     public void AddAllEffectToSucess()
