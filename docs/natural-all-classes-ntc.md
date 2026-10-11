@@ -8956,12 +8956,46 @@ through these: each is ticked by the round that gave its capture.
       mended.
     - **Proof.** No code changes; the gate is NR-R11's (guard-p8 under run/nr/NR-R11b).
       Seven pre-commit checks pass. Round 13 plays it again for the capture.
-- [ ] **NR-R12b - The Ranger at Q2281 in the Black Claw village.** Depends: NR-R12a
+- [x] **NR-R12b - The Ranger at Q2281 in the Black Claw village.** Depends: NR-R12a
   - Work: Its second attempt first, as NR-R12a. If it stops again: find why its fights
     there end in deaths and no counted kill, and mend it in the shared code or in the
     Ranger's profile numbers.
   - Proof: The Ranger ends leg 10 in a round without a capture; the full gate identical
     when code changes.
+  - 2026-10-11: closed with no change and the leg not ended. The Ranger's second attempt
+    finished Q2281 and stopped at the next hunt, Q2282. The place is slow for it, not
+    closed; it goes on from the round snapshot, a quest an attempt.
+    - **The second attempt** (run second-a1 at fe8622238, round 13's file from nr-r12 without a
+      capture; run/nr/NR-R12a/second-a1; 1,330 s). Q2281 was
+      worked from 0:00 and done at 1:40:35, with six deaths. Q2282 then had its hour:
+      73 fights, 17 without a kill, five deaths, and no kill counted. The stop is at
+      2:40:33.
+    - **Why its fights there end without a kill.**
+      - **The hunts are group quests.** Q2280, Q2281 and Q2282 are "[Group]" quests in
+        the quest data, Java's and the port's alike, against brutal Black Claw of rank
+        expert, level 16 to 18. The route has them because the Cleric does them alone,
+        and the Templar did (leg 10 in 230 game minutes with no death). The five
+        other classes that have played it so far all die there.
+      - **It leaves at two attackers,** as its table says, and in the village two come
+        nearly every time: twelve retreats at two in the hour.
+      - **A death costs the way back.** The bind is the fortress: a flight to the
+        pillar and some 500 m of road, about ten minutes, six times in the hour.
+      - **It reached Kumbaron's followers once,** two minutes before the hour ended,
+        and left that fight at two attackers.
+    - **What is not changed, and why.** Nothing of the server's is in question. The
+      Ranger's number, two attackers, is its survey's (NR-100) and the Sorcerer, the
+      Spirit Master, the Bard and the Gunner have the same; the Sorcerer and the Spirit
+      Master got their kills there all the same, with deaths. One class's number is not
+      changed on one hour's evidence.
+    - **The same round shows the others in leg 10 for the first time:** the Gladiator
+      stops at Q2280 (15 deaths), the Bard at Q2280 (3) and the Spirit Master at
+      Q24014's item (12), where the Sorcerer stopped first.
+    - **The rule from here.** An attempt ends after an hour without progress and the
+      round snapshot keeps what it won, so a class goes on a quest at a time. By NR-Q4,
+      a quest a class cannot finish is left out for that class: a class that has had
+      three attempts at one quest of the leg with no kill counted and no item taken
+      gets an item of its own for that, with the lines.
+    - **Proof.** No code changes; the gate is NR-R11's. Seven pre-commit checks pass.
 - [ ] **NR-R12c - The Sorcerer at Q24014's item.** Depends: NR-R12b
   - Work: Its second attempt first, as NR-R12a. If it stops again: find why an hour of
     clearing does not bring it to the item, and mend it in the shared code.
@@ -10196,3 +10230,10 @@ report what was done, what is parked or blocked, and what the operator must deci
   stopped in round 12 were played as one round without a capture (second-a1, 1,330 s).
   The Rider took Q2916's clothing at the first use and ended leg 9 (level 23, 152
   quests). Seven checks pass. Next: NR-R12b.
+- 2026-10-11 — Loop: NR-R12b closed with no change and the Ranger's leg 10 not ended. In
+  its second attempt (second-a1) it finished Q2281 at 1:40 and stopped at Q2282 after an
+  hour with no kill counted. Leg 10's hunts are "[Group]" quests against expert Black
+  Claw; the Ranger leaves at two attackers, twelve times in that hour, and each death
+  costs a ten-minute way back. No number is changed on that. A class goes on from the
+  round snapshot, a quest an attempt; three attempts at one quest with nothing won, and
+  it gets an item under NR-Q4. Seven checks pass. Next: NR-R12c.
