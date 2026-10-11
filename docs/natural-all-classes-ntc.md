@@ -4799,10 +4799,15 @@ The template:
     game minutes without a death, each with a receipt that says verified. Captured as
     altgard-coingear-sorcerer and altgard-rc-complete-s1-sorcerer, records that point at
     character 133266 in the round snapshots nr-r15-w1 and nr-r16-w1.
-- [ ] **NR-66 - Sorcerer: the Abyss entry.** Depends: NR-65; ticked by its round
+- [x] **NR-66 - Sorcerer: the Abyss entry.** Depends: NR-65; ticked by its round
   - Work: Q24020, then Q2945, Q2946, Q2947 and Q2042 with the coin tiers it can wear
     (NR-38b, NR-Q14, NR-Q16), captured as morheim-abyss-entry-s1-sorcerer.
   - Proof: The capture verifies.
+  - 2026-10-11: done in round 17 (NR-R17, world 1). The Abyss entry ended in 16.5 game
+    minutes without a death, with a receipt that says verified: a Sorcerer of level 26,
+    alive at Morheim Ice Fortress, Q24020, Q2945, Q2946, Q2947 and Q2042 complete, 181
+    quests in all. Captured as morheim-abyss-entry-s1-sorcerer, a record that points at
+    character 133266 in the round snapshot nr-r17-w1.
 - [ ] **NR-67 - Sorcerer: the endpoint.** Depends: NR-66; ticked by its round
   - Work: Captured and verified as ntc-ready-sorcerer-s1: alive at Morheim Ice Fortress,
     level 25 or higher, Q2945, Q2946, Q2947 and Q2042 complete.
@@ -5151,11 +5156,16 @@ The template:
     the Chanter stands at leg 11's end at level 24 with 164 quests. Captured as
     altgard-rc-l6-chanter to altgard-rc-l11-chanter, records that point at character 133266
     in the round snapshots of those rounds.
-- [ ] **NR-75 - Chanter: coin gear and Haramel.** Depends: NR-74; ticked by its round
+- [x] **NR-75 - Chanter: coin gear and Haramel.** Depends: NR-74; ticked by its round
   - Work: The coin-gear leg (chain, by its manifest, NR-38a) and Haramel with chest
     700832 (NR-40), captured as altgard-coingear-chanter and
     altgard-rc-complete-s1-chanter.
   - Proof: Each capture verifies.
+  - 2026-10-11: done in rounds 16 and 17 (NR-R16, NR-R17, world 2). The coin-gear stage
+    ended with 165 quests and Haramel at level 25 with 176 quests, in 135.9 game minutes
+    without a death, each with a receipt that says verified. Captured as
+    altgard-coingear-chanter and altgard-rc-complete-s1-chanter, records that point at
+    character 133266 in the round snapshots nr-r16-w2 and nr-r17-w2.
 - [ ] **NR-76 - Chanter: the Abyss entry.** Depends: NR-75; ticked by its round
   - Work: Q24020, then Q2945, Q2946, Q2947 and Q2042 with the coin tiers it can wear
     (NR-38b, NR-Q14, NR-Q16), captured as morheim-abyss-entry-s1-chanter.
@@ -5501,10 +5511,14 @@ The template:
     level 20 with 109 quests. Captured as altgard-rc-l1-gladiator to
     altgard-rc-l5-gladiator, records that point at character 133266 in the round
     snapshots nr-r3-w3 and nr-r5-w3 to nr-r8-w3.
-- [ ] **NR-84 - Gladiator: Altgard legs l6 to l11.** Depends: NR-83; ticked by its round
+- [x] **NR-84 - Gladiator: Altgard legs l6 to l11.** Depends: NR-83; ticked by its round
   - Work: As NR-83. Leg 11 is the destiny quest: its stone is the Templar's, 140000003
     (NR-39).
   - Proof: Each capture verifies.
+  - 2026-10-11: done in rounds 9 to 12, 16 and 17 (NR-R9 to NR-R12, NR-R16, NR-R17, world 3). Each leg ended with a receipt that says verified, and
+    the Gladiator stands at leg 11's end at level 25 with 164 quests. Captured as
+    altgard-rc-l6-gladiator to altgard-rc-l11-gladiator, records that point at character 133266
+    in the round snapshots of those rounds.
 - [ ] **NR-85 - Gladiator: coin gear and Haramel.** Depends: NR-84; ticked by its round
   - Work: The coin-gear leg (plate, by its manifest, NR-38a) and Haramel with chest
     700829 (NR-40), captured as altgard-coingear-gladiator and
@@ -6023,9 +6037,13 @@ The template:
     receipt that says verified, and the Ranger stands at leg 5's end at level 21 with
     109 quests. Captured as altgard-rc-l1-ranger to altgard-rc-l5-ranger, records
     that point at character 133266 in the round snapshots nr-r3-w5 to nr-r7-w5.
-- [ ] **NR-104 - Ranger: Altgard legs l6 to l11.** Depends: NR-103; ticked by its round
+- [x] **NR-104 - Ranger: Altgard legs l6 to l11.** Depends: NR-103; ticked by its round
   - Work: As NR-103. Leg 11 is the destiny quest: its stone is 140000002 (NR-39).
   - Proof: Each capture verifies.
+  - 2026-10-11: done in rounds 8 to 11, 16 and 17 (NR-R8 to NR-R11, NR-R16, NR-R17, world 5). Each leg ended with a receipt that says verified, and
+    the Ranger stands at leg 11's end at level 25 with 162 quests. Leg 10 is without Q2282 and Q2283, which the Ranger leaves out (NR-R15c). Captured as
+    altgard-rc-l6-ranger to altgard-rc-l11-ranger, records that point at character 133266
+    in the round snapshots of those rounds.
 - [ ] **NR-105 - Ranger: coin gear and Haramel.** Depends: NR-104; ticked by its round
   - Work: The coin-gear leg (leather, by its manifest, NR-38a) and Haramel with chest
     700830 (NR-40), captured as altgard-coingear-ranger and
@@ -6857,11 +6875,16 @@ The template:
     Spirit Master stands at leg 11's end at level 25 with 164 quests. Captured as
     altgard-rc-l6-spirit-master to altgard-rc-l11-spirit-master, records that point at
     character 133266 in the round snapshots of those rounds.
-- [ ] **NR-115 - Spirit Master: coin gear and Haramel.** Depends: NR-114; ticked by its round
+- [x] **NR-115 - Spirit Master: coin gear and Haramel.** Depends: NR-114; ticked by its round
   - Work: The coin-gear leg (cloth, by its manifest, NR-38a) and Haramel with chest
     700831 (NR-40), captured as altgard-coingear-spirit-master and
     altgard-rc-complete-s1-spirit-master.
   - Proof: Each capture verifies.
+  - 2026-10-11: done in rounds 16 and 17 (NR-R16, NR-R17, world 6). The coin-gear stage
+    ended with 165 quests and Haramel at level 25 with 176 quests, in 112.0 game minutes
+    without a death, each with a receipt that says verified. Captured as
+    altgard-coingear-spirit-master and altgard-rc-complete-s1-spirit-master, records that point at
+    character 133266 in the round snapshots nr-r16-w6 and nr-r17-w6.
 - [ ] **NR-116 - Spirit Master: the Abyss entry.** Depends: NR-115; ticked by its round
   - Work: Q24020, then Q2945, Q2946, Q2947 and Q2042 with the coin tiers it can wear
     (NR-38b, NR-Q14, NR-Q16), captured as morheim-abyss-entry-s1-spirit-master.
@@ -7901,10 +7924,15 @@ The template:
     the Bard stands at leg 11's end at level 24 with 164 quests. Captured as
     altgard-rc-l6-bard to altgard-rc-l11-bard, records that point at character 133266
     in the round snapshots of those rounds.
-- [ ] **NR-145 - Bard: coin gear and Haramel.** Depends: NR-144; ticked by its round
+- [x] **NR-145 - Bard: coin gear and Haramel.** Depends: NR-144; ticked by its round
   - Work: The coin-gear leg (robe, by its manifest, NR-38a) and Haramel with chest
     700831 (NR-40), captured as altgard-coingear-bard and altgard-rc-complete-s1-bard.
   - Proof: Each capture verifies.
+  - 2026-10-11: done in rounds 16 and 17 (NR-R16, NR-R17, world 8). The coin-gear stage
+    ended with 165 quests and Haramel at level 25 with 176 quests, in 97.5 game minutes
+    without a death, each with a receipt that says verified. Captured as
+    altgard-coingear-bard and altgard-rc-complete-s1-bard, records that point at
+    character 133266 in the round snapshots nr-r16-w8 and nr-r17-w8.
 - [ ] **NR-146 - Bard: the Abyss entry.** Depends: NR-145; ticked by its round
   - Work: Q24020, then Q2945, Q2946, Q2947 and Q2042 with the coin tiers it can wear
     (NR-38b, NR-Q14, NR-Q16), captured as morheim-abyss-entry-s1-bard.
@@ -9554,7 +9582,7 @@ through these: each is ticked by the round that gave its capture.
       (run/nr/NR-R16c/guard-p8/verdict.json): verdict pass, all thirteen scopes
       identical. Seven pre-commit checks pass, Aion.GameServer.Tests passes (4,632
       passed, 16 skipped) and Fast passes (run nrr16c-fast, 11 passed).
-- [ ] **NR-R17 - Round 17: the Abyss entry for the Sorcerer, Haramel for three, leg 11 for two, leg 10 for three.** Depends: NR-R16c
+- [x] **NR-R17 - Round 17: the Abyss entry for the Sorcerer, Haramel for three, leg 11 for two, leg 10 for three.** Depends: NR-R16c
   - Work: The eight worlds resumed from nr-r16 with -Capture nr-r17 (round file
     run/nr/NR-R17/round-17.json). The Sorcerer plays the Abyss entry (stage ax); the
     Chanter, the Spirit Master and the Bard play Haramel (stage l12); the Gladiator and
@@ -9564,6 +9592,63 @@ through these: each is ticked by the round that gave its capture.
     outside leg 10's hunts gets a lettered item, in round 17's own letters; so does a
     class with three attempts at one quest and nothing won.
   - Proof: round.json with nine outcome records; for each class that reached its
+    stage's end the completion receipt says verified and its capture is written.
+  - 2026-10-11: played. Six reached their stage's end and are captured, and six class
+    items are ticked: the Sorcerer the Abyss entry (NR-66); the Chanter, the Spirit
+    Master and the Bard Haramel (NR-75, NR-115, NR-145); the Gladiator and the Ranger
+    leg 11 (NR-84, NR-104). The Assassin, the Gunner and the Rider ran out their hour
+    in leg 10. No stop of this round is a defect: NR-R16b and NR-R16c mended the two
+    that NR-R16a's round had shown.
+    - **The round** (run r17-a1 at 292ee7209, -From nr-r16, -Capture nr-r17;
+      run/nr/NR-R17/r17-a1; round file run/nr/NR-R17/round-17.json). Eight worlds side by
+      side, 356 seconds of wall time. It plays as NR-R16c's round without a capture did.
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 1 | mage-sorcerer | Sorcerer | ax | reached | 26 | 181 | 16.5 | 10, 10 kills | 0 | morheim-abyss-entry-s1-sorcerer |
+      | 2 | priest-chanter | Chanter | l12 | reached | 25 | 176 | 135.9 | 169, 161 kills | 0 | altgard-rc-complete-s1-chanter |
+      | 3 | warrior-gladiator | Gladiator | l11 | reached | 25 | 164 | 12.2 | 15, 9 kills | 0 | altgard-rc-l11-gladiator |
+      | 4 | scout-assassin | Assassin | l10 | stopped | 23 | 152 | 64.8 | 65, 39 kills | 4 | none |
+      | 5 | scout-ranger | Ranger | l11 | reached | 25 | 162 | 12.5 | 9, 9 kills | 0 | altgard-rc-l11-ranger |
+      | 6 | mage-spirit-master | Spirit Master | l12 | reached | 25 | 176 | 112.0 | 132, 123 kills | 0 | altgard-rc-complete-s1-spirit-master |
+      | 7 | engineer-gunner | Gunner | l10 | stopped | 24 | 152 | 115.1 | 123, 83 kills | 4 | none |
+      | 8 | artist-bard | Bard | l12 | reached | 25 | 176 | 97.5 | 138, 133 kills | 0 | altgard-rc-complete-s1-bard |
+      | 8 | engineer-rider | Rider | l10 | stopped | 24 | 152 | 93.1 | 76, 65 kills | 4 | none |
+
+      Each receipt of a class that reached its stage's end says verified. The captures
+      are records that point into the round snapshots nr-r17-w1 to nr-r17-w8, which hold
+      the three that stopped as they stood.
+    - **The Sorcerer is the first class of a round at the Abyss entry's end:** level 26,
+      alive at Morheim Ice Fortress, 181 quests. Its finish capture, ntc-ready-sorcerer-s1,
+      is NR-67. It has no stage left to play, so its world has no bot from round 18 on:
+      NR-R17a.
+    - **Leg 10, the attempts so far.**
+
+      | Class | Where its hour ran out | Attempts with nothing won | Note |
+      |---|---|---|---|
+      | Sorcerer, Chanter, Spirit Master, Bard, Gladiator, Ranger | none: ended before | - | |
+      | Assassin | Q2273, the leg's first quest | 1 | it never came to a mumu: 17 fights with Brutal Black Claw Warriors on the way, 13 flights at low health, 4 deaths |
+      | Gunner | Q2282 | 0 | a second warlock of three at 0:55:06; one in each round |
+      | Rider | Q2282 | 1 | two warlocks of three in this round, at 0:27:48 and 0:43:05 |
+    - **Deaths: 12,** four each for the three in leg 10.
+- [ ] **NR-R17a - A world with nothing left to play.** Depends: NR-R17
+  - Work: A class that has ended the Abyss entry has no stage left, and a round file
+    may not name a world without a bot. Let run-round.ps1 leave such a world alone: not
+    restored, not played, not captured, and not asked for in the snapshot a round
+    resumes from. The world keeps its place in the file, so the others keep their
+    numbers and their snapshots.
+  - Proof: The script tests pass. Round 18's file, whose world 1 has no bot, plays its
+    seven worlds without a capture.
+- [ ] **NR-R18 - Round 18: the Abyss entry for three, the coin gear for two, leg 10 for three.** Depends: NR-R17a
+  - Work: Seven worlds resumed from nr-r17 with -Capture nr-r18 (round file
+    run/nr/NR-R18/round-18.json; world 1 has no bot). The Chanter, the Spirit Master
+    and the Bard play the Abyss entry (stage ax); the Gladiator and the Ranger play the
+    coin-gear stage; the Assassin, the Gunner and the Rider go on in leg 10, each from
+    where it stopped. Captures as the class items name them. One outcome line for each
+    class, and the table of leg 10's attempts carried on. A stop outside leg 10's hunts
+    gets a lettered item, in round 18's own letters; so does a class with three
+    attempts at one quest and nothing won.
+  - Proof: round.json with eight outcome records; for each class that reached its
     stage's end the completion receipt says verified and its capture is written.
 
 ### E. Close
@@ -10882,3 +10967,11 @@ report what was done, what is parked or blocked, and what the operator must deci
   has room. Proof round (change-a1, 352 s): the Chanter ends Haramel with 176 quests.
   The gate and the bundle are NR-R16b's, on the tree with both changes. Next: NR-R17,
   round 17, with its captures.
+- 2026-10-11 — Loop: NR-R17 played. Round 17 (r17-a1 at 292ee7209, -From nr-r16, 356 s):
+  six reached their stage's end and are captured in nr-r17-w1 to w8, and six class items
+  are ticked: the Sorcerer the Abyss entry (level 26, 181 quests; NR-66); the Chanter,
+  the Spirit Master and the Bard Haramel (176; NR-75, NR-115, NR-145); the Gladiator
+  (164) and the Ranger (162) leg 11 (NR-84, NR-104). The Assassin, the Gunner and the
+  Rider ran out their hour in leg 10; the Gunner and the Rider have two warlocks of
+  Q2282's three. Written: NR-R17a and NR-R18, round 18. Seven checks pass. Next: NR-67,
+  the Sorcerer's finish capture.
