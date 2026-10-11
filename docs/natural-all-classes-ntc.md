@@ -8142,11 +8142,16 @@ The template:
     Rider's own path through Q24016 (NR-R18a), and the Rider stands at leg 11's end at
     level 25 with 164 quests. Captured as altgard-rc-l6-rider to altgard-rc-l11-rider,
     records that point at character 133702 in the round snapshots of those rounds.
-- [ ] **NR-135 - Rider: coin gear and Haramel.** Depends: NR-134; ticked by its round
+- [x] **NR-135 - Rider: coin gear and Haramel.** Depends: NR-134; ticked by its round
   - Work: The coin-gear leg (chain, by its manifest, NR-38a) and Haramel with chest
     700832 (NR-40), captured as altgard-coingear-rider and
     altgard-rc-complete-s1-rider.
   - Proof: Each capture verifies.
+  - 2026-10-11: done in rounds 21 and 22 (NR-R21, NR-R22, world 8). The coin-gear stage
+    ended at level 25 with 165 quests and Haramel at level 25 with 176 quests, in 132.1
+    game minutes without a death, each with a receipt that says verified. Captured as
+    altgard-coingear-rider and altgard-rc-complete-s1-rider, records that point at
+    character 133702 in the round snapshots nr-r21-w8 and nr-r22-w8.
 - [ ] **NR-136 - Rider: the Abyss entry.** Depends: NR-135; ticked by its round
   - Work: Q24020, then Q2945, Q2946, Q2947 and Q2042 with the coin tiers it can wear
     (NR-38b, NR-Q14, NR-Q16), captured as morheim-abyss-entry-s1-rider.
@@ -10601,7 +10606,7 @@ through these: each is ticked by the round that gave its capture.
       round on this code. The first round in which a class ends the Abyss entry names
       two, morheim-abyss-entry-s1-<class> and ntc-ready-<class>-s1, and Verify of the
       second is that class's proof (NR-97, NR-127, NR-137).
-- [ ] **NR-R22 - Round 22: the coin gear for the Gunner, Haramel for the Rider, leg 10 for the Assassin.** Depends: NR-R21a
+- [x] **NR-R22 - Round 22: the coin gear for the Gunner, Haramel for the Rider, leg 10 for the Assassin.** Depends: NR-R21a
   - Work: Three worlds resumed from nr-r21 with -Capture nr-r22 (round file
     run/nr/NR-R22/round-22.json; worlds 1, 2, 3, 5 and 6 have no bot). The Gunner
     plays the coin-gear stage; the Rider plays Haramel (stage l12); the Assassin goes
@@ -10610,6 +10615,47 @@ through these: each is ticked by the round that gave its capture.
     letters. Captures as the class items name them. One outcome line for each class,
     and the table of leg 10's attempts carried on. A class with three attempts at one
     quest and nothing won gets an item.
+  - Proof: round.json with three outcome records; for each class that reached its
+    stage's end the completion receipt says verified and its capture is written.
+  - 2026-10-11: played. Two reached their stage's end and are captured: the Gunner ends
+    the coin-gear stage, and the Rider ends Haramel (NR-135 ticked). The Assassin's
+    second hour at Q2281 won nothing. No stop of this round is a defect.
+    - **The round** (run r22-a1 at fb2d4c4c7, -From nr-r21, -Capture nr-r22;
+      run/nr/NR-R22/r22-a1; round file run/nr/NR-R22/round-22.json). Three worlds side by
+      side, worlds 4, 7 and 8, 230 seconds of wall time. Its file was played without a
+      capture first, five times: once at ac5820a4d, where the Rider stopped in Haramel
+      (run preview-a1; mended by NR-R21a), and four times under NR-R21a, the last on
+      this tree of code with the same outcomes (run change-a4).
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 4 | scout-assassin | Assassin | l10 | stopped | 24 | 152 | 60.0 | 67, 41 kills | 1 | none |
+      | 7 | engineer-gunner | Gunner | cg | reached | 25 | 165 | 15.0 | 24, 24 kills | 0 | altgard-coingear-gunner |
+      | 8 | engineer-rider | Rider | l12 | reached | 25 | 176 | 132.1 | 187, 164 kills | 0 | altgard-rc-complete-s1-rider |
+
+      Each receipt of a class that reached its stage's end says verified. The captures
+      are records that point into the round snapshots nr-r22-w4, nr-r22-w7 and
+      nr-r22-w8; the first holds the Assassin as it stood.
+    - **The Rider in Haramel.** It passes the place of NR-R21a: its pull plans refuse
+      the spot under the office plank ("No checked route to firing spot") and take
+      another. 132.1 game minutes, 187 fights, 164 kills, no death.
+    - **Leg 10, the attempts so far.**
+
+      | Class | Where its hour ran out | Attempts with nothing won | Note |
+      |---|---|---|---|
+      | Assassin | Q2281 | 2 | the quest stands as it stood, at 3 of 3, 5 of 5 and 3 of 5. Four fights with a scratcher of its third group, no kill; 67 fights and 41 kills in the hour; 10 flights at low health, 1 death. A third hour with nothing won gets it an item |
+    - **Deaths: 1,** the Assassin's.
+- [ ] **NR-R23 - Round 23: Haramel for the Gunner, the Abyss entry for the Rider, leg 10 for the Assassin.** Depends: NR-R22
+  - Work: Three worlds resumed from nr-r22 with -Capture nr-r23 (round file
+    run/nr/NR-R23/round-23.json; worlds 1, 2, 3, 5 and 6 have no bot). The Gunner
+    plays Haramel (stage l12); the Rider plays the Abyss entry and names two captures,
+    morheim-abyss-entry-s1-rider and ntc-ready-rider-s1 (NR-R21b's first use with two
+    names); the Assassin goes on in leg 10 from where it stopped. The file is played
+    once without a capture first; a stop that is a defect is mended before the
+    captured round, in round 22's letters. Captures as the class items name them. One
+    outcome line for each class, and the table of leg 10's attempts carried on. If the
+    Assassin's third hour at Q2281 wins nothing it gets an item, which reads its fights
+    first (Blocked, the later look).
   - Proof: round.json with three outcome records; for each class that reached its
     stage's end the completion receipt says verified and its capture is written.
 
@@ -12165,3 +12211,8 @@ report what was done, what is parked or blocked, and what the operator must deci
   two passes identical): 34,229 records where it had 35,420, sha256 cf79597266bb69dd,
   without a death. Gate guard5-p8: nineteen scopes identical. Seven checks pass.
   Next: NR-R22, round 22, with its captures.
+- 2026-10-11 — Loop: NR-R22 played. Round 22 (r22-a1 at fb2d4c4c7, -From nr-r21, 230 s,
+  three worlds): the Gunner ends the coin-gear stage with 165 quests and the Rider
+  Haramel with 176 (NR-135); both are captured in nr-r22. The Assassin's second hour at
+  Q2281 won nothing. Written: NR-R23, round 23. Seven checks pass. Next: NR-R23, round
+  23, first without a capture.
