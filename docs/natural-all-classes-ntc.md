@@ -9011,13 +9011,60 @@ through these: each is ticked by the round that gave its capture.
       Spirit Master stops at the same place in its first attempt (NR-R12b's round).
     - **Proof.** No code changes; the gate is NR-R11's. Seven pre-commit checks pass.
       Round 13 plays it again for the capture.
-- [ ] **NR-R13 - Round 13: leg 10 for five, leg 9 for three, and the Assassin's leg 8.** Depends: NR-R12c
+- [x] **NR-R13 - Round 13: leg 10 for five, leg 9 for three, and the Assassin's leg 8.** Depends: NR-R12c
   - Work: The eight worlds resumed from nr-r12 with -Capture nr-r13 (round file
     run/nr/NR-R13/round-13.json). The Spirit Master, the Gladiator and the Bard play
     leg 10; the Sorcerer and the Ranger go on in leg 10 and the Rider in leg 9, each
     from where it stopped; the Gunner and the Chanter play leg 9 and the Assassin leg
     8. Captures as altgard-rc-<leg>-<class>. One outcome line for each class; a stop
     gets a lettered item, in round 13's own letters.
+  - Proof: round.json with nine outcome records; for each class that reached its
+    stage's end the completion receipt says verified and its capture is written.
+  - 2026-10-11: played. Five reached their stage's end and are captured: the Sorcerer
+    leg 10, the Chanter, the Gunner and the Rider leg 9 and the Assassin leg 8. Four
+    stopped in leg 10 after an hour without progress, each a quest further than it
+    began or at its first attempt at that quest; by NR-R12b's rule they go on from the
+    round snapshot and get no item yet.
+    - **The round** (run r13-a1 at c7bd52f32, -From nr-r12, -Capture nr-r13;
+      run/nr/NR-R13/r13-a1; round file run/nr/NR-R13/round-13.json). Eight worlds side by
+      side, 1,291 seconds of wall time. It plays as NR-R12a's round without a capture
+      did.
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 1 | mage-sorcerer | Sorcerer | l10 | reached | 24 | 162 | 43.4 | 47, 41 kills | 1 | altgard-rc-l10-sorcerer |
+      | 2 | priest-chanter | Chanter | l9 | reached | 23 | 152 | 56.6 | 41, 39 kills | 0 | altgard-rc-l9-chanter |
+      | 3 | warrior-gladiator | Gladiator | l10 | stopped | 23 | 152 | 280.5 | 396, 197 kills | 15 | none |
+      | 4 | scout-assassin | Assassin | l8 | reached | 22 | 142 | 23.4 | 31, 25 kills | 0 | altgard-rc-l8-assassin |
+      | 5 | scout-ranger | Ranger | l10 | stopped | 23 | 152 | 160.6 | 210, 138 kills | 11 | none |
+      | 6 | mage-spirit-master | Spirit Master | l10 | stopped | 24 | 159 | 570.9 | 566, 332 kills | 12 | none |
+      | 7 | engineer-gunner | Gunner | l9 | reached | 23 | 152 | 69.9 | 74, 58 kills | 2 | altgard-rc-l9-gunner |
+      | 8 | artist-bard | Bard | l10 | stopped | 23 | 152 | 198.9 | 196, 137 kills | 3 | none |
+      | 8 | engineer-rider | Rider | l9 | reached | 23 | 152 | 24.7 | 31, 27 kills | 1 | altgard-rc-l9-rider |
+
+      Each receipt of a class that reached its stage's end says verified. The captures
+      are records that point into the round snapshots nr-r13-w1 to nr-r13-w8, which hold
+      the four that stopped as they stood.
+    - **Leg 10, the attempts so far.** An attempt is an hour without progress at one
+      quest; three with nothing won, and the class gets an item (NR-R12b, NR-Q4).
+
+      | Class | Where its hour ran out | Attempts there | Won in the leg so far |
+      |---|---|---|---|
+      | Sorcerer | none: the leg is ended | - | Q24014's item at its second attempt |
+      | Ranger | Q2282, Kumbaron's followers | 1 | Q2273, Q2277, Q2280; Q2281 at its second attempt |
+      | Spirit Master | Q24014's item | 1 | every hunt of the village |
+      | Gladiator | Q2280, the shamans | 1 | Q2273, Q2277 |
+      | Bard | Q2280, the shamans | 1 | Q2273, Q2277 |
+    - **Deaths: 45,** of which 41 are those four's in leg 10.
+- [ ] **NR-R14 - Round 14: leg 11 for the Sorcerer, leg 10 for seven, leg 9 for the Assassin.** Depends: NR-R13
+  - Work: The eight worlds resumed from nr-r13 with -Capture nr-r14 (round file
+    run/nr/NR-R14/round-14.json). The Sorcerer plays leg 11; the Chanter, the Gunner
+    and the Rider play leg 10; the Ranger, the Spirit Master, the Gladiator and the Bard
+    go on in leg 10 from where they stopped; the Assassin plays leg 9. Captures as
+    altgard-rc-<leg>-<class>. One outcome line for each class, and the table of leg
+    10's attempts carried on. A stop outside leg 10's hunts gets a lettered item, in
+    round 14's own letters; so does a class with three attempts at one quest and
+    nothing won.
   - Proof: round.json with nine outcome records; for each class that reached its
     stage's end the completion receipt says verified and its capture is written.
 
@@ -10250,3 +10297,10 @@ report what was done, what is parked or blocked, and what the operator must deci
 - 2026-10-11 — Loop: NR-R12c done with no change. In its second attempt (second-a1) the
   Sorcerer took Q24014's item within eleven minutes and ended leg 10 (level 24, 162
   quests). Seven checks pass. Next: NR-R13, round 13, with its captures.
+- 2026-10-11 — Loop: NR-R13 played. Round 13 (r13-a1 at c7bd52f32, -From nr-r12, 1,291 s):
+  five reached their stage's end and are captured in nr-r13-w1 to w8: the Sorcerer leg 10
+  (level 24, 162 quests), the Chanter, the Gunner and the Rider leg 9 (152) and the
+  Assassin leg 8 (142). Four stopped in leg 10 after an hour without progress: the Ranger
+  at Q2282, the Gladiator and the Bard at Q2280 and the Spirit Master at Q24014's item,
+  each at its first attempt there. They go on from the round snapshot. Written: NR-R14,
+  round 14. Seven checks pass. Next: NR-R14, round 14.
