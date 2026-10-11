@@ -9447,7 +9447,7 @@ through these: each is ticked by the round that gave its capture.
       | Gunner | not an hour: a refused cast, in Q2282 | - | Q2281 at its second attempt; one warlock of three. NR-R16a |
       | Rider | Q2282 | 1 | Q2281 at its third attempt |
     - **Deaths: 21.**
-- [ ] **NR-R16a - A notice that a cooldown is over, read again by the next fight.** Depends: NR-R16
+- [x] **NR-R16a - A notice that a cooldown is over, read again by the next fight.** Depends: NR-R16
   - Work: Java first: how skills share a cooldown, what Reload's reset sends, and what
     the server answers a cast inside a cooldown. Mend the fight's reading in the shared
     code: a notice ends a cooldown only when it came after the cast that took it. Look
@@ -9455,7 +9455,63 @@ through these: each is ticked by the round that gave its capture.
     same defect.
   - Proof: The full gate identical, with the bundle. The Gunner, resumed from nr-r16-w7
     without a capture, is not stopped by a refused cast.
-- [ ] **NR-R17 - Round 17: the Abyss entry for the Sorcerer, Haramel for three, leg 11 for two, leg 10 for three.** Depends: NR-R16a
+  - 2026-10-11: done. A notice that a cooldown is over ends it only when it came after
+    the cast that took it. The recorded scopes are as they were.
+    - **Java.**
+      - Skill.setCooldowns 323-330 keeps one deadline for each cooldown id, and
+        Creature.isSkillDisabled 376-391 asks by that id: the skills of one id share
+        the cooldown. Gunshot, Trunk Shot and Crosstrigger are of id 1802.
+      - Player.isSkillDisabled 1524-1535 answers a cast inside it with
+        STR_SKILL_NOT_READY.
+      - SkillCooltimeResetEffect.applyEffect 30-48 (Reload) shortens each running
+        cooldown of its range and sends one SM_SKILL_COOLDOWN for them.
+    - **The change, generic** (Sc/NaturalIshalgenJourney.Combat.cs). The fight notes
+      how long the packet history was when it took a cooldown from its own cast. A
+      notice in the history ends that cooldown only when it stands after that point.
+      A fight that begins on the packets from before it, as a defence does, reads an
+      old notice again and now leaves a cooldown taken since alone.
+    - **The seven refusals of Gunshot at 0:23:16 in round 16 are the same defect.**
+      Reload's notice came at 0:22:54.328, Crosstrigger took the cooldown for 24
+      seconds at 0:22:55.056, the next fight began at 0:22:56.022 and ended it again,
+      and Gunshot was refused until the 24 seconds were over. In that round the
+      Gunner's fights ended a cooldown 94 times on 83 notices.
+    - **Proof round** (run change-a1, the change in the working tree, round 17's file
+      from nr-r16 without a capture; run/nr/NR-R16a/change-a1; 484 s). The server
+      refused the Gunner no cast: 42 notices, 42 cooldowns ended. It killed a second
+      warlock of Q2282 at 0:55:06, and its hour ran out there at 115.1 game minutes
+      with 4 deaths.
+    - **Also seen in that round, of round 17.** The Sorcerer ends the Abyss entry at
+      level 26 with 181 quests, the Gladiator leg 11, and the Spirit Master and the
+      Bard Haramel with 176. The Assassin's and the Rider's hours run out in leg 10.
+      Two stop on defects of the bot's, each at a place a captured round would keep
+      it at, so they are mended before round 17 is played:
+      - **The Ranger, at leg 11's end.** Its Return was cooling down from leg 10's
+        trip for the robe (NR-R15c), so it came back from Pandaemonium by the
+        teleporter, 94 m from where the leg ends. The walk there looks for a hand-in
+        NPC among the leg's template quests, and leg 11 has none: "Sequence contains
+        no matching element". Item NR-R16b.
+      - **The Chanter, in Haramel.** The loot sweep took a Rusty Key while the
+        Chanter held one, and the key does not stack. The server sent it as a new
+        item and the sweep waited for a change of the one it had: "No
+        SM_INVENTORY_UPDATE_ITEM packet within 3 minutes". Item NR-R16c.
+    - **Proof.** Gate, set all+mage+warrior+artist+engineer+scout+templar, -Parallel 8,
+      run guard-p8 (run/nr/NR-R16a/guard-p8/verdict.json): verdict pass, all thirteen
+      scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests passes (4,632
+      passed, 16 skipped) and Fast passes (run nrr16a-fast, 11 passed).
+- [ ] **NR-R16b - The walk to the end of a leg that has no hand-in there.** Depends: NR-R16a
+  - Work: The walk to where a leg ends takes a hand-in NPC of the leg's template quests
+    as its mark (leg 2's and leg 3's). A leg without one ends at its obelisk: walk to
+    the endpoint's bind NPC then. Nothing of the server's is relied on.
+  - Proof: The full gate identical, with the bundle. The Ranger, resumed from nr-r16-w5
+    without a capture, ends leg 11.
+- [ ] **NR-R16c - A looted item that does not stack.** Depends: NR-R16b
+  - Work: Java first: how ItemService.addItem puts a looted item away, and which
+    packet says so. Mend the loot sweep's wait: a change of a stack the character has
+    room in, else a new item.
+  - Proof: The full gate identical, with the bundle. The Chanter, resumed from
+    nr-r16-w2 without a capture, is not stopped at a loot and ends Haramel or stops
+    for another reason.
+- [ ] **NR-R17 - Round 17: the Abyss entry for the Sorcerer, Haramel for three, leg 11 for two, leg 10 for three.** Depends: NR-R16c
   - Work: The eight worlds resumed from nr-r16 with -Capture nr-r17 (round file
     run/nr/NR-R17/round-17.json). The Sorcerer plays the Abyss entry (stage ax); the
     Chanter, the Spirit Master and the Bard play Haramel (stage l12); the Gladiator and
@@ -10763,3 +10819,11 @@ report what was done, what is parked or blocked, and what the operator must deci
   nine times: a defence read Reload's notice again and ended a cooldown taken since:
   NR-R16a. The Rider's hour ran out at Q2282, its first attempt there. Written: NR-R16a
   and NR-R17, round 17. Seven checks pass. Next: NR-R16a.
+- 2026-10-11 — Loop: NR-R16a done. A fight that begins on the packets from before it read
+  Reload's notice again and ended a cooldown taken since; a notice now ends a cooldown
+  only when it came after the cast that took it. Proof round (change-a1, 484 s): the
+  server refused the Gunner no cast, and it killed a second warlock of Q2282. Full gate
+  guard-p8 (thirteen scopes identical), seven checks, unit suite (4,632 passed, 16
+  skipped) and Fast (nrr16a-fast) pass. The same round showed two defects that a captured
+  round would keep a class at: the Ranger's walk to leg 11's end and the Chanter's wait
+  at a loot in Haramel. Written: NR-R16b and NR-R16c, before round 17. Next: NR-R16b.

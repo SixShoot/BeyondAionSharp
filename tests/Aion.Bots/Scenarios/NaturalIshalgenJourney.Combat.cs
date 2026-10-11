@@ -31,6 +31,13 @@ public sealed partial class NaturalIshalgenJourney
 		private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<BotWorldModel,
 			Dictionary<int, DateTimeOffset>> CooldownsByWorld = new();
 		private readonly Dictionary<int, DateTimeOffset> cooldowns = CooldownsByWorld.GetValue(session.Api.World, _ => new());
+		// NR-R16a: how long the packet history was when the fight took each cooldown from its own cast. A notice that a
+		// cooldown is over ends it only when it came after that cast: a fight that begins on the packets from before it
+		// reads them again, and an old notice must not end a cooldown taken since (Java Skill.setCooldowns keeps one
+		// deadline for each cooldown id, and the skills of that id share it).
+		private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<BotWorldModel,
+			Dictionary<int, int>> CooldownCastsByWorld = new();
+		private readonly Dictionary<int, int> cooldownCasts = CooldownCastsByWorld.GetValue(session.Api.World, _ => new());
 		// CP-39: the chain the last chain skill opened, kept the server's way (Java ChainSkills), from the chain flag of
 		// its SM_CASTSPELL_RESULT.
 		private NaturalChainState tableChain = NaturalChainState.None;
@@ -303,12 +310,14 @@ public sealed partial class NaturalIshalgenJourney
 				// NR-120b: the fight keeps a cooldown from the result of its own cast. When the server says a cooldown is
 				// over that the fight still holds (Java SkillCooltimeResetEffect sends SM_SKILL_COOLDOWN with nothing left
 				// for every skill of the cooldown), it is over.
-				int[] ended = recentPackets.Where(packet => packet.PacketType == typeof(SM_SKILL_COOLDOWN))
-					.SelectMany(packet => packet.Get<List<IReadOnlyDictionary<string, object?>>>("cooldowns"))
-					.Where(entry => (int)entry["remainingSeconds"]! == 0)
-					.Select(entry => runtime.Data.SkillDataDh.GetSkillTemplate((ushort)entry["skillId"]!)?.GetCooldownId() ?? 0)
-					.Where(id => cooldowns.TryGetValue(id, out DateTimeOffset held) && held > runtime.Epoch.AddMilliseconds(runtime.NowMillis))
-					.Distinct().Order().ToArray();
+				int[] ended = recentPackets.Select((packet, offset) => (packet, index: observedPacketCount + offset))
+					.Where(seen => seen.packet.PacketType == typeof(SM_SKILL_COOLDOWN))
+					.SelectMany(seen => seen.packet.Get<List<IReadOnlyDictionary<string, object?>>>("cooldowns")
+						.Where(entry => (int)entry["remainingSeconds"]! == 0)
+						.Select(entry => (id: runtime.Data.SkillDataDh.GetSkillTemplate((ushort)entry["skillId"]!)?.GetCooldownId() ?? 0, seen.index)))
+					.Where(over => cooldowns.TryGetValue(over.id, out DateTimeOffset held) && held > runtime.Epoch.AddMilliseconds(runtime.NowMillis) &&
+						cooldownCasts.GetValueOrDefault(over.id) <= over.index)
+					.Select(over => over.id).Distinct().Order().ToArray();
 				if (ended.Length > 0)
 				{
 					foreach (int id in ended) cooldowns.Remove(id);
@@ -1687,7 +1696,10 @@ public sealed partial class NaturalIshalgenJourney
 				lastCastCompleted = true;
 				int deciseconds = result.Get<int>("cooldown");
 				if (deciseconds > 0)
+				{
 					cooldowns[skill.CooldownId] = runtime.Epoch.AddMilliseconds(runtime.NowMillis + deciseconds * 100L);
+					cooldownCasts[skill.CooldownId] = session.PacketHistory.Count;
+				}
 				// NA-18: flag 32 is a successful chain step (Java SM_CASTSPELL_RESULT); anything else resets it.
 				tableChain = tableChain.CastCompleted(skill, target, target == session.CharacterId, (result.Get<byte>("flags") & 32) != 0,
 					runtime.Epoch.AddMilliseconds(runtime.NowMillis));
