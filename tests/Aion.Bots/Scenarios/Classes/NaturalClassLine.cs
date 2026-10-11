@@ -14,6 +14,12 @@ namespace Aion.Bots.Scenarios.Classes;
 public sealed record NaturalClassLine(string Id, PlayerClass Starter, PlayerClass? Second, int SimAccountId, string CharacterName,
 	int? CeremonyItemId = null)
 {
+	/// <summary>NR-R15c (NR-Q4): the quests this line leaves out, each with the quests that ask for it. A leg is taken up
+	/// without them (<see cref="NaturalAltgardContract.Without"/>): they are not worked, not asked for where the leg
+	/// ends, and not expected in the journal a later leg takes up. Why a line leaves one out is in
+	/// docs/natural-all-classes-ntc.md, with the Java lines.</summary>
+	public int[] LeftOutQuestIds { get; init; } = [];
+
 	/// <summary>The journey test reads the line id from this variable; unset means <see cref="Default"/>.</summary>
 	public const string EnvironmentVariable = "CP_CLASS";
 
@@ -57,9 +63,10 @@ public sealed record NaturalClassLine(string Id, PlayerClass Starter, PlayerClas
 	public static NaturalClassLine ScoutAssassin { get; } = new("scout-assassin", PlayerClass.SCOUT, PlayerClass.ASSASSIN, 41, "Asimassassin",
 		CeremonyItemId: 100200605);
 
-	/// <summary>NR-100: the Scout who becomes a Ranger and takes the bow at the ceremony (NR-Q5).</summary>
+	/// <summary>NR-100: the Scout who becomes a Ranger and takes the bow at the ceremony (NR-Q5). NR-R15c: it leaves out
+	/// Q2282, "[Group] Killing Kumbaron's Followers", whose warlocks stand two together, and Q2283, which asks for it.</summary>
 	public static NaturalClassLine ScoutRanger { get; } = new("scout-ranger", PlayerClass.SCOUT, PlayerClass.RANGER, 41, "Asimranger",
-		CeremonyItemId: 101700515);
+		CeremonyItemId: 101700515) { LeftOutQuestIds = [2282, 2283] };
 
 	/// <summary>NR-110: the Mage who becomes a Spirit Master and takes the spellbook at the ceremony (NR-Q5).</summary>
 	public static NaturalClassLine MageSpiritMaster { get; } = new("mage-spirit-master", PlayerClass.MAGE, PlayerClass.SPIRIT_MASTER, 41, "Asimspirit",

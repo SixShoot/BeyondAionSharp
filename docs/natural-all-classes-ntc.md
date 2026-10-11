@@ -9314,7 +9314,7 @@ through these: each is ticked by the round that gave its capture.
       round 7. Not an item on this evidence: the next attempt went through. A class
       that loses a second hour to it gets one.
     - **Proof.** No code changes; the gate is NR-R15a's. Seven pre-commit checks pass.
-- [ ] **NR-R15c - The Ranger and Q2282.** Depends: NR-R15b
+- [x] **NR-R15c - The Ranger and Q2282.** Depends: NR-R15b
   - Work: Three attempts with nothing won (NR-R12b's rule). Its fourth attempt first,
     with NR-R15a and NR-R15b in. If it wins nothing again: NR-Q4, a quest a class
     cannot finish is left out for that class. Write the class line's way of leaving a
@@ -9322,6 +9322,58 @@ through these: each is ticked by the round that gave its capture.
     for the Ranger with the lines.
   - Proof: The Ranger ends leg 10 in a round without a capture; the full gate identical
     when code changes.
+  - 2026-10-11: done. The Ranger leaves out Q2282 and Q2283 (NR-Q4), the first quests a
+    class leaves out, and ends leg 10 without them.
+    - **The fourth attempt** is in NR-R15a's proof round (run change-a1, from nr-r15;
+      NR-R15b changed nothing). It won nothing. Of its hour's 70 fights two were with a
+      Black Claw warlock and neither killed one; the Ranger died twice.
+    - **Why it cannot.** The warlocks do not stand alone. The one the Ranger reached
+      has its home at 2300.89, 2191.86 and a Brutal Black Claw Scratcher has his 8.5 m
+      from it, so a shot at either brings both. The Ranger's rule is to leave a fight
+      at two attackers (its profile's SwarmAttackers). Each of the hour's 70 pull
+      decisions said "the Ranger leaves from 2", and 13 times a fight was left at two
+      attackers. The Sorcerer has the same rule and got its three kills in round 12,
+      each in under eleven seconds.
+    - **Java** (the lines NR-Q4 asks for; the port's data is the same).
+      - quest_data.xml 11111-11119: Q2282, "[Group] Killing Kumbaron's Followers",
+        three kills of 210538 or 210539. A group quest by its name.
+      - quest_data.xml 11120-11128: Q2283, "Report to Pandaemonium", starts only with
+        Q2282 finished, so it goes out with it.
+      - quest_script_data/altgard.xml 227 and 158: a monster_hunt and a report_to
+        template, with no handler of their own.
+      - spawns/Npcs/220030000_Altgard.xml 739-745: 210538's six places, five minutes
+        to come again.
+      - AggroEventHandler.onCreatureNeedsSupport 27-36 and isInSupportRange 51-55:
+        what brings the neighbour.
+    - **The change, generic.**
+      - **The class line** (Classes/NaturalClassLine.cs) has LeftOutQuestIds, empty
+        for every line but the Ranger's, which names 2282 and 2283. No code asks which
+        class plays.
+      - **The leg** (Sc/NaturalAltgardContract.cs, Without). A leg is taken up
+        without a line's left-out quests: they leave its quests, its order, its steps
+        and what its end asks for, and the journal a later leg expects from the legs
+        before it. A quest that stays may not ask for one that goes; the contract
+        refuses that. The journey takes every leg up so, in a round's stage and in the
+        continuous journey. A line that leaves nothing out gets the contract itself.
+      - **Deyla's robe** (Sc/NaturalIshalgenJourney.cs). Leg 10's one trip to
+        Pandaemonium was Q2283's hand-in, and Q2916's robe is handed in on it. With
+        the leg's quests done and the robe not handed in, the leg now makes the trip
+        for the robe and Returns. For a line that hands Q2283 in the robe is done by
+        then, and nothing changes.
+    - **What stays in the journal.** The Ranger took Q2282 before; it stays there
+      started, and no leg looks at it. The two quests it never does are worth 102,150
+      XP, 6,440 Kinah and Q2282's reward item.
+    - **Proof round** (run change-a1, the change in the working tree, round 16's file
+      from nr-r15 without a capture; run/nr/NR-R15c/change-a1; 514 s). The Ranger
+      ends leg 10: level 24, 160 quests, 49.1 game minutes, 3 deaths, receipt
+      verified. It hands in the four quests whose work it had done, which waited
+      behind Q2282's hunt, does Q24014, Q24015 and Q24016, goes to Pandaemonium for
+      the robe at 0:46:22, hands it in at 0:47:58 and Returns. The other eight play
+      as in NR-R15a's proof round.
+    - **Proof.** Gate, set all+mage+warrior+artist+engineer+scout+templar, -Parallel 8,
+      run guard-p8 (run/nr/NR-R15c/guard-p8/verdict.json): verdict pass, all thirteen
+      scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests passes (4,632
+      passed, 16 skipped) and Fast passes (run nrr15c-fast, 11 passed).
 - [ ] **NR-R16 - Round 16: Haramel for the Sorcerer, the coin gear for three, leg 10 for four, and the Assassin's leg 9.** Depends: NR-R15c
   - Work: The eight worlds resumed from nr-r15 with -Capture nr-r16 (round file
     run/nr/NR-R16/round-16.json). The Sorcerer plays Haramel (stage l12); the Chanter,
@@ -10614,3 +10666,11 @@ report what was done, what is parked or blocked, and what the operator must deci
   where round 15's hour had 110. The dense village leaves a class that walks up no
   checked way to a monster from some places; written down as a finding. Seven checks
   pass. Next: NR-R15c.
+- 2026-10-11 — Loop: NR-R15c done. The Ranger's fourth hour at Q2282 won nothing: the
+  warlocks stand two together and it leaves a fight at two. By NR-Q4 it leaves out Q2282
+  and Q2283, which asks for it. The class line names the quests it leaves out, a leg is
+  taken up without them, and leg 10 goes to Pandaemonium for Deyla's robe when no quest
+  takes it there. Proof round (change-a1, 514 s): the Ranger ends leg 10 with 160 quests
+  in 49.1 game minutes. Full gate guard-p8 (thirteen scopes identical), seven checks,
+  unit suite (4,632 passed, 16 skipped) and Fast (nrr15c-fast) pass. Next: NR-R16, round
+  16, with its captures.

@@ -489,7 +489,8 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 					});
 				return own;
 			}
-			NaturalAltgardContract? altgardLeg = altgardLegId is { } legId ? NaturalAltgardContract.LoadLeg(legId) : null;
+			// NR-R15c: a leg is taken up without the quests the class line leaves out (NR-Q4).
+			NaturalAltgardContract? altgardLeg = altgardLegId is { } legId ? NaturalAltgardContract.LoadLeg(legId).Without(ClassLine.LeftOutQuestIds) : null;
 			// NR-41: a leg's incoming journal is a receipt of the accepted run. A character of another class is given the leg
 			// as its own first, and then the journal is bound to what it has completed, so every count the leg checks is a
 			// minimum met. The contract's class keeps the order it had: bound only on the revised route.
@@ -1832,7 +1833,7 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 					Require.Equal(characterId, session.CharacterId);
 					altgardLegId = id;
 					session.IdentityAltgardLegId = id;
-					NaturalAltgardContract shipped = NaturalAltgardContract.LoadLeg(id);
+					NaturalAltgardContract shipped = NaturalAltgardContract.LoadLeg(id).Without(ClassLine.LeftOutQuestIds);
 					altgardLeg = NaturalAltgardContinuation.BindIncoming(WithObservedClassRewards(shipped), session.Api.World.CompletedQuestIds,
 						session.Api.World.Inventory.Values.Select(i => new NaturalJourneyItem(i.ObjectId, i.ItemId, i.Count, i.EquipmentSlot)).ToArray(),
 						NaturalAltgardContinuation.EquippedItemIds(session.Api.World), OfContractClass(shipped));
@@ -2857,6 +2858,12 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 					if (session.Api.World.Level != helpCheckedAtLevel) await TopUpHelpItemsAsync("level-up");
 					NaturalAltgardDecision next = NaturalAltgardDecisionEngine.Decide(leg,
 						NaturalAltgardObservation.Observe(session.Api.World, session.CurrentPosition, session.Api.Timing.Now, FreeCubeSlots(), coinGearProgress, haramelProgress, HaramelNow()), objectives, sequence, only);
+					// NR-R15c: leg 10's trip to Pandaemonium is Q2283's hand-in, and Deyla's robe is handed in on it. A line that
+					// leaves Q2283 out has no quest to take it there: it makes the trip for the robe, once its quests are done.
+					if (laterCapital != null && altgardLegId == "l10" && only == null && next.Outcome == "complete" &&
+						!session.Api.World.CompletedQuestIds.Contains(2916))
+						next = new(sequence, "travel-to-map", null, 2916, "planned",
+							"Q2916: no quest of this leg is handed in at Pandaemonium; take the robe to Deyla.", next.Checks, capitalContract.MapId);
 					session.TraceDiagnostic($"altgard-{altgardLegId}-decision", new Dictionary<string, object?>
 					{
 						["sequence"] = sequence, ["action"] = next.Action, ["step"] = next.StepKey, ["quest"] = next.QuestId,

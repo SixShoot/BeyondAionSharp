@@ -116,6 +116,28 @@ public sealed record NaturalAltgardContract(
 	}
 
 	/// <summary>
+	/// NR-R15c (NR-Q4): the same leg without the quests a class line leaves out. They leave its quests, its order, its
+	/// steps and what its end asks for, and the journal it expects to take up from the legs before it. A quest that stays
+	/// may not ask for one that goes. What a scripted quest has in the leg's other lists stays: each is looked up by a
+	/// quest of the order. With none of them in the leg the contract itself is returned.
+	/// </summary>
+	public NaturalAltgardContract Without(IReadOnlyCollection<int> questIds)
+	{
+		if (!Quests.Any(quest => questIds.Contains(quest.Id)) && !Start.CompletedQuestIds.Any(questIds.Contains)) return this;
+		NaturalAltgardQuest[] kept = [.. Quests.Where(quest => !questIds.Contains(quest.Id))];
+		if (kept.FirstOrDefault(quest => quest.PrerequisiteList.Any(questIds.Contains)) is { } orphan)
+			throw new InvalidDataException($"{Leg} cannot leave out a quest that Q{orphan.Id} asks for and keep Q{orphan.Id}.");
+		return this with
+		{
+			Quests = kept,
+			Order = [.. Order.Where(id => !questIds.Contains(id))],
+			Steps = [.. Steps.Where(step => !questIds.Contains(step.QuestId))],
+			Start = Start with { CompletedQuestIds = [.. Start.CompletedQuestIds.Where(id => !questIds.Contains(id))] },
+			Endpoint = Endpoint with { CompletedQuestIds = [.. Endpoint.CompletedQuestIds.Where(id => !questIds.Contains(id))] },
+		};
+	}
+
+	/// <summary>
 	/// NR-33: the same leg with other protected items in its coin-gear, Haramel and Abyss-entry scopes. Those lists are
 	/// the contract class's (<see cref="NaturalAltgardStart.Class"/>); <paramref name="own"/> gives another class's list
 	/// for each (<see cref="ProtectedFor"/>).
