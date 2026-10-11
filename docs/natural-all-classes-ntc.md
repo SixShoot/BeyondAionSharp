@@ -7052,10 +7052,32 @@ The template:
       ntc-ready-spirit-master-s1: character 133266 resumed at its endpoint." Seven
       pre-commit checks pass (run/nr/NR-77/checks.log, on the tree of the three finish
       captures of this chain).
-- [ ] **NR-118 - Spirit Master: the class scope.** Depends: NR-117
+- [x] **NR-118 - Spirit Master: the class scope.** Depends: NR-117
   - Work: One scope of the Spirit Master's play, chosen where its rules differ most from
     the Mage's, recorded by a bot alone, twice, and added to the gate's sets.
   - Proof: The two recordings are identical.
+  - 2026-10-11: done. Scope spiritmaster is recorded and stands in the baseline file.
+    - **The scope.** Haramel, leg l12 from altgard-coingear-spirit-master with the later
+      capital, as the Templar's and the Sorcerer's are. It is where the Spirit Master
+      plays least like the Mage it was: its spirit is out and is healed, and its own
+      spells are erosion, earth and choke. The capture it starts from is a round
+      character, replayed alone (NR-67a, NR-67b).
+    - **The row** (scripts/sim/run-neutral-gate.ps1, committed first as c3630640a). One
+      bundle stands for the rows of NR-78, NR-118 and NR-148, on the tree with the
+      three: the script tests, the full gate on fourteen scopes (run guard-p8 of NR-78),
+      the seven checks, the unit suite (4,632 passed, 16 skipped) and Fast nr78-fast.
+    - **The recording** at 957017b1b on a clean tree (run record-a1,
+      run/nr/NR-118/record-a1/verdict.json): two passes, identical after normalization:
+      58,980 records, sha256 da826332d9426677. No death, 10 retreats, 282 pull plans,
+      173 holds of the patrol rule, 0 help items supplied. The traces are kept under
+      run/cp/baseline/957017b1b... and in the second copy beside the repository.
+    - **Proof.** A comparison of the scope with its new row passes (run
+      guard-spiritmaster, run/nr/NR-118/guard-spiritmaster/verdict.json). Seven
+      pre-commit checks and the three script tests pass on the tree with the new row
+      (run/nr/NR-118/checks2.log, run/nr/NR-118/script-tests2.log).
+    - **The full gate from here** is set
+      all+mage+warrior+artist+engineer+scout+templar+sorcerer+chanter+spiritmaster:
+      sixteen scopes.
 - [x] **NR-120 - Gunner: survey and profile data.** Depends: the close of phase C, NR-03
   - 2026-10-10: done. The Gunner has a class line, a gear table and a profile the
     validator accepts. Nothing has been played. Two of its skills ask for a form the
@@ -11359,3 +11381,10 @@ report what was done, what is parked or blocked, and what the operator must deci
   Recorded at 689768fa6: two passes identical, 67,343 records, sha256 5175ad9ed7af592b,
   and guard-chanter passes. The full gate is now fifteen scopes. Seven checks and the
   script tests pass. Next: NR-118, the Spirit Master's class scope.
+- 2026-10-11 — Loop: NR-118 done. Scope spiritmaster is Haramel from
+  altgard-coingear-spirit-master, a round character replayed alone. Its row was
+  committed as c3630640a; one bundle stands for the three rows of this batch (fourteen
+  scopes identical, nr78-fast). Recorded at 957017b1b: two passes identical, 58,980
+  records, sha256 da826332d9426677, and guard-spiritmaster passes. The full gate is now
+  sixteen scopes. Seven checks and the script tests pass. Next: NR-148, the Bard's class
+  scope.
