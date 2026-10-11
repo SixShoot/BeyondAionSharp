@@ -5138,10 +5138,14 @@ The template:
     level 21 with 109 quests. Captured as altgard-rc-l1-chanter to altgard-rc-l5-chanter,
     records that point at character 133266 in the round snapshots nr-r4-w2 to nr-r7-w2
     and nr-r9-w2.
-- [ ] **NR-74 - Chanter: Altgard legs l6 to l11.** Depends: NR-73; ticked by its round
+- [x] **NR-74 - Chanter: Altgard legs l6 to l11.** Depends: NR-73; ticked by its round
   - Work: As NR-73. Leg 11 is the destiny quest: its stone is the Cleric's, 140000001
     (NR-39).
   - Proof: Each capture verifies.
+  - 2026-10-11: done in rounds 10 to 15 (NR-R10 to NR-R15, world 2). Each leg ended with a receipt that says verified, and
+    the Chanter stands at leg 11's end at level 24 with 164 quests. Captured as
+    altgard-rc-l6-chanter to altgard-rc-l11-chanter, records that point at character 133266
+    in the round snapshots of those rounds.
 - [ ] **NR-75 - Chanter: coin gear and Haramel.** Depends: NR-74; ticked by its round
   - Work: The coin-gear leg (chain, by its manifest, NR-38a) and Haramel with chest
     700832 (NR-40), captured as altgard-coingear-chanter and
@@ -6838,10 +6842,16 @@ The template:
     receipt that says verified, and the Spirit Master stands at leg 5's end at level 21 with
     109 quests. Captured as altgard-rc-l1-spirit-master to altgard-rc-l5-spirit-master, records
     that point at character 133266 in the round snapshots nr-r3-w6 to nr-r7-w6.
-- [ ] **NR-114 - Spirit Master: Altgard legs l6 to l11.** Depends: NR-113; ticked by its round
+- [x] **NR-114 - Spirit Master: Altgard legs l6 to l11.** Depends: NR-113; ticked by its round
   - Work: As NR-113. Leg 11 is the destiny quest: its stone is the Sorcerer's, 140000004
     (NR-39).
   - Proof: Each capture verifies.
+  - 2026-10-11: done in rounds 8 to 10, 12, 14 and 15 (NR-R8 to NR-R10, NR-R12, NR-R14,
+    NR-R15, world 6). Each leg ended with a receipt that says verified, leg 9 with its
+    capture a round after its end (NR-R11a) and leg 10 at its second attempt, and the
+    Spirit Master stands at leg 11's end at level 25 with 164 quests. Captured as
+    altgard-rc-l6-spirit-master to altgard-rc-l11-spirit-master, records that point at
+    character 133266 in the round snapshots of those rounds.
 - [ ] **NR-115 - Spirit Master: coin gear and Haramel.** Depends: NR-114; ticked by its round
   - Work: The coin-gear leg (cloth, by its manifest, NR-38a) and Haramel with chest
     700831 (NR-40), captured as altgard-coingear-spirit-master and
@@ -7879,9 +7889,13 @@ The template:
     20 with 109 quests. Captured as altgard-rc-l1-bard to altgard-rc-l5-bard, records
     that point at character 133266 in the round snapshots nr-r3-w8 and nr-r5-w8 to
     nr-r8-w8.
-- [ ] **NR-144 - Bard: Altgard legs l6 to l11.** Depends: NR-143; ticked by its round
+- [x] **NR-144 - Bard: Altgard legs l6 to l11.** Depends: NR-143; ticked by its round
   - Work: As NR-143. Leg 11 is the destiny quest: its stone is 140000001 (NR-39).
   - Proof: Each capture verifies.
+  - 2026-10-11: done in rounds 9 to 12, 14 and 15 (NR-R9 to NR-R12, NR-R14, NR-R15, world 8). Each leg ended with a receipt that says verified, and
+    the Bard stands at leg 11's end at level 24 with 164 quests. Captured as
+    altgard-rc-l6-bard to altgard-rc-l11-bard, records that point at character 133266
+    in the round snapshots of those rounds.
 - [ ] **NR-145 - Bard: coin gear and Haramel.** Depends: NR-144; ticked by its round
   - Work: The coin-gear leg (robe, by its manifest, NR-38a) and Haramel with chest
     700831 (NR-40), captured as altgard-coingear-bard and altgard-rc-complete-s1-bard.
@@ -9167,7 +9181,7 @@ through these: each is ticked by the round that gave its capture.
       run guard-p8 (run/nr/NR-R14b/guard-p8/verdict.json): verdict pass, all thirteen
       scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests passes (4,632
       passed, 16 skipped) and Fast passes (run nrr14b-fast, 11 passed).
-- [ ] **NR-R15 - Round 15: the coin gear for the Sorcerer, leg 11 for three, leg 10 for four, and the Assassin's leg 9.** Depends: NR-R14b
+- [x] **NR-R15 - Round 15: the coin gear for the Sorcerer, leg 11 for three, leg 10 for four, and the Assassin's leg 9.** Depends: NR-R14b
   - Work: The eight worlds resumed from nr-r14 with -Capture nr-r15 (round file
     run/nr/NR-R15/round-15.json). The Sorcerer plays the coin-gear stage; the Chanter,
     the Spirit Master and the Bard play leg 11; the Ranger, the Gladiator, the Rider
@@ -9177,6 +9191,93 @@ through these: each is ticked by the round that gave its capture.
     10's attempts carried on. A stop outside leg 10's hunts gets a lettered item, in
     round 15's own letters; so does a class with three attempts at one quest and
     nothing won.
+  - Proof: round.json with nine outcome records; for each class that reached its
+    stage's end the completion receipt says verified and its capture is written.
+  - 2026-10-11: played. Four reached their stage's end and are captured: the Sorcerer
+    the coin-gear stage, and the Chanter, the Spirit Master and the Bard leg 11, so
+    NR-74, NR-114 and NR-144 are ticked. Five stopped after an hour without progress.
+    Two of those hours went to defects of the bot's: NR-R15a and NR-R15b.
+    - **The round** (run r15-a1 at f401f440d, -From nr-r14, -Capture nr-r15;
+      run/nr/NR-R15/r15-a1; round file run/nr/NR-R15/round-15.json). Eight worlds side by
+      side, 463 seconds of wall time. It plays as NR-R14b's round without a capture did.
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 1 | mage-sorcerer | Sorcerer | cg | reached | 24 | 165 | 18.7 | 28, 27 kills | 0 | altgard-coingear-sorcerer |
+      | 2 | priest-chanter | Chanter | l11 | reached | 24 | 164 | 10.6 | 10, 9 kills | 0 | altgard-rc-l11-chanter |
+      | 3 | warrior-gladiator | Gladiator | l10 | stopped | 24 | 152 | 133.7 | 218, 99 kills | 6 | none |
+      | 4 | scout-assassin | Assassin | l9 | stopped | 23 | 152 | 60.3 | 149, 56 kills | 6 | none |
+      | 5 | scout-ranger | Ranger | l10 | stopped | 24 | 152 | 60.0 | 75, 60 kills | 4 | none |
+      | 6 | mage-spirit-master | Spirit Master | l11 | reached | 25 | 164 | 12.2 | 9, 9 kills | 0 | altgard-rc-l11-spirit-master |
+      | 7 | engineer-gunner | Gunner | l10 | stopped | 23 | 152 | 163.9 | 208, 149 kills | 8 | none |
+      | 8 | artist-bard | Bard | l11 | reached | 24 | 164 | 11.4 | 9, 9 kills | 0 | altgard-rc-l11-bard |
+      | 8 | engineer-rider | Rider | l10 | stopped | 23 | 152 | 60.0 | 186, 45 kills | 6 | none |
+
+      Each receipt of a class that reached its stage's end says verified. The captures
+      are records that point into the round snapshots nr-r15-w1 to nr-r15-w8, which hold
+      the five that stopped as they stood.
+    - **The Assassin, at Q2916's clothing: a caster it reckons at 2 m.** Its second
+      hour after leg 9's quests, and it did not come to use the clothing. 84 of its
+      fights were with mau shamans and ended without a kill, 76 of them with one. The
+      first went as a fight does until 0:10:17; from then the server refused its
+      skills for distance, 299 times in the hour, each time with the bot's own
+      reckoning of the distance at about 2 m, and the shaman did not move again until
+      0:12:14. Four refusals end a fight and the defence takes the shaman up again. A
+      blow had put it where the bot does not read: NR-110g's defect, which cost the
+      Gladiator four minutes in round 14 and costs a class that fights at arm's length
+      its hour here. Item NR-R15a.
+    - **The Rider, Q2281: fights that end before they begin.** Its second hour at
+      Q2281: 186 fights, and 110 of them ended at once with a blocked approach. In the
+      village every way to a monster crosses the circle of another that is not of its
+      pack; the walk finds no checked way, the fight ends, and the defence or the
+      fight-through begins the next. Item NR-R15b.
+    - **Leg 10, the attempts so far.**
+
+      | Class | Where its hour ran out | Attempts there | Note |
+      |---|---|---|---|
+      | Sorcerer, Chanter, Spirit Master, Bard | none: ended | - | |
+      | Ranger | Q2282, Kumbaron's followers | 3 | not one of them fought in this hour. Item NR-R15c |
+      | Gladiator | Q2282 | 1 | Q2280 at its third attempt, then Q2281 |
+      | Gunner | Q2281 | 1 | Q2277 and Q2280 in this round |
+      | Rider | Q2281 | 2 | NR-R15b |
+    - **Deaths: 30.**
+- [ ] **NR-R15a - A monster a blow has put away, and the server's refusal for distance.** Depends: NR-R15
+  - Work: Java first: where the server puts the target of a stagger, a stumble, a lift
+    and a pull, and what it tells a client: the cast result for a skill (read under
+    NR-110g) and SM_ATTACK for a weapon's critical. NR-110g's change moves the monster
+    in the bot's world at every such packet and changes the Cleric's scope b (NR-Q17).
+    Write the form that leaves the recorded scopes as they are: the bot keeps the place
+    a packet gave and takes it only when the server has refused a skill for distance at
+    a distance the bot reckons as within reach, which shows its own place for the
+    monster to be wrong.
+  - Proof: The full gate identical, with the bundle. The Assassin, resumed from
+    nr-r15-w4 without a capture, kills the mau shaman or is not held by it, and its
+    hour is spent on the clothing.
+- [ ] **NR-R15b - Fights that end in a blocked approach, over and over.** Depends: NR-R15a
+  - Work: Find why a class that walks up to its target begins fight after fight that
+    ends at once because the walk is refused, in the Rider's hour at Q2281 and, in
+    round 14, in the Ranger's at Q2282. Mend it in the shared code: a monster that is
+    on the bot is fought where the bot stands, and one that cannot be walked to is not
+    taken up again at once.
+  - Proof: The full gate identical, with the bundle. The Rider, resumed from nr-r15-w8
+    without a capture, spends its hour at Q2281 on fights that are fought.
+- [ ] **NR-R15c - The Ranger and Q2282.** Depends: NR-R15b
+  - Work: Three attempts with nothing won (NR-R12b's rule). Its fourth attempt first,
+    with NR-R15a and NR-R15b in. If it wins nothing again: NR-Q4, a quest a class
+    cannot finish is left out for that class. Write the class line's way of leaving a
+    quest out, with the quests that need it (Q2283 asks for Q2282), and leave Q2282 out
+    for the Ranger with the lines.
+  - Proof: The Ranger ends leg 10 in a round without a capture; the full gate identical
+    when code changes.
+- [ ] **NR-R16 - Round 16: Haramel for the Sorcerer, the coin gear for three, leg 10 for four, and the Assassin's leg 9.** Depends: NR-R15c
+  - Work: The eight worlds resumed from nr-r15 with -Capture nr-r16 (round file
+    run/nr/NR-R16/round-16.json). The Sorcerer plays Haramel (stage l12); the Chanter,
+    the Spirit Master and the Bard play the coin-gear stage; the Ranger, the Gladiator,
+    the Gunner and the Rider go on in leg 10 and the Assassin in leg 9, each from where
+    it stopped. Captures as the class items name them. One outcome line for each class,
+    and the table of leg 10's attempts carried on. A stop outside leg 10's hunts gets a
+    lettered item, in round 16's own letters; so does a class with three attempts at
+    one quest and nothing won.
   - Proof: round.json with nine outcome records; for each class that reached its
     stage's end the completion receipt says verified and its capture is written.
 
@@ -10434,3 +10535,12 @@ report what was done, what is parked or blocked, and what the operator must deci
   Fast (nrr14b-fast) pass. The same round showed the Assassin's hour going to a caster it
   reckons at 2 m (NR-110g's defect) and the Rider's to blocked approaches. Next: NR-R15,
   round 15, with its captures.
+- 2026-10-11 — Loop: NR-R15 played. Round 15 (r15-a1 at f401f440d, -From nr-r14, 463 s):
+  four reached their stage's end and are captured in nr-r15-w1 to w8: the Sorcerer the
+  coin-gear stage (165 quests), and the Chanter, the Spirit Master and the Bard leg 11
+  (164), so NR-74, NR-114 and NR-144 are ticked. Five stopped after an hour without
+  progress. The Assassin's went to a caster it reckons at 2 m while the server refuses
+  its skills for distance, 299 times: NR-R15a. The Rider's held 110 fights that ended at
+  once in a blocked approach: NR-R15b. The Ranger's third hour at Q2282 won nothing:
+  NR-R15c. The Gladiator (Q2282) and the Gunner (Q2281) each went two quests on. Written:
+  NR-R15a, NR-R15b, NR-R15c and NR-R16, round 16. Seven checks pass. Next: NR-R15a.
