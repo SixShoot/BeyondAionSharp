@@ -75,6 +75,9 @@ $scopeTable = [ordered]@{
 	# NR-58: the Templar's scope is Haramel, where its rules differ most from the Warrior's: it pulls with Taunt, walks
 	# into the packs its patrol rule decides to take, and holds its shield.
 	templar  = @{ line = 'warrior-templar'; replay = [ordered]@{ AltgardLeg1 = $true; Leg = 'l12'; From = 'altgard-coingear-templar'; LaterCapital = $true } }
+	# NR-68: the Sorcerer's scope is Haramel too, where its rules differ most from the Mage's: it pulls from range, plays
+	# its chains, holds a target before it retreats, and waits on the patrol rule. It replays a round character.
+	sorcerer = @{ line = 'mage-sorcerer'; replay = [ordered]@{ AltgardLeg1 = $true; Leg = 'l12'; From = 'altgard-coingear-sorcerer'; LaterCapital = $true } }
 }
 # The environment every gate run is pinned to. Null is unset: help items on, the bot monitor at its default port.
 $pinned = [ordered]@{ AION_SIM_SEED = '1'; NA_HELP_ITEMS = $null; AION_BOT_DASHBOARD_PORT = $null; AION_SIM_PROCESS_KEY = $null }
