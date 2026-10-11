@@ -8520,12 +8520,35 @@ through these: each is ticked by the round that gave its capture.
       run guard-p8 (run/nr/NR-R8a/guard-p8/verdict.json): verdict pass, all thirteen
       scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests passes (4,629
       passed, 16 skipped) and Fast passes (run nrr8a-fast, 11 passed).
-- [ ] **NR-R8b - The Gunner on the road to Germir.** Depends: NR-R8a
+- [x] **NR-R8b - The Gunner on the road to Germir.** Depends: NR-R8a
   - Work: Java first for what the step relies on. Find why the Gunner does not arrive
     at Germir in an hour where the Sorcerer, the Ranger and the Spirit Master did, and
     mend it in the shared code or in the Gunner's profile numbers.
   - Proof: The full gate identical. The Gunner, resumed from nr-r8-w7 without a
     capture, takes Q2247 and ends leg 6.
+  - 2026-10-10: done with no change. The Gunner's second attempt ends leg 6, and the
+    hour it lost is written down as a finding.
+    - **The hour** (round 8's trace, from 1:18:59). The Gunner walked the leg's road to
+      Germir three times in the first five minutes. Each time two monsters came at it on
+      the road, it left as its table says (it leaves at two attackers), the retreat took
+      it some 100 m off the road, and the road's next stretch was refused as stale; each
+      walk ended more than 300 m short. After that it had no road. For 55 minutes it
+      moved about between y 1,050 and 1,400, 200 to 500 m south of Germir, clearing
+      monsters, while a travel plan to him was refused for hazards 140 times. 38 fights
+      in the hour, no death.
+    - **Java.** Nothing of the server's is in question: the monsters on the road attack
+      and help one another as they should.
+    - **The second attempt** is in NR-R8a's proof round (run change-a1, from nr-r8,
+      at the tree that is HEAD now: the Chanter's profile is its only change). The leg
+      starts where the Gunner stood, plans its road afresh and takes Q2247 from Germir
+      at 0:04:44; leg 6 ends at level 21 with 119 quests, 63.5 game minutes and one death.
+      Round 9 plays it again for the capture.
+    - **Finding, not mended:** a walker thrown off a leg's road by retreats can spend
+      its hour between hazards without a way back to the road. The stop is the right
+      outcome and a second attempt goes round it; a class that loses a second attempt to
+      it gets an item.
+    - **Proof.** No code changes, so the gate is NR-R8a's (guard-p8, thirteen scopes
+      identical at this tree). Seven pre-commit checks pass.
 - [ ] **NR-R8c - The Rider at Q2246's insignia box.** Depends: NR-R8b
   - Work: Java first for what the step relies on. Find why the pull of the blocker
     answers "moved" from a place the Rider does not leave, and mend it in the shared
@@ -9678,3 +9701,9 @@ report what was done, what is parked or blocked, and what the operator must deci
   the Gunner ending leg 6 on its second attempt, and the Gladiator stopping at the
   insignia box as the Rider does. Full gate guard-p8 (thirteen scopes identical), seven
   checks, unit suite (4,629 passed, 16 skipped) and Fast (nrr8a-fast) pass. Next: NR-R8b.
+- 2026-10-10 — Loop: NR-R8b done with no change. In round 8 the Gunner was thrown off the
+  road to Germir three times by retreats from two attackers and then spent 55 minutes
+  between hazards with no travel plan (140 refusals). Its second attempt, in NR-R8a's
+  proof round at the tree that is HEAD now, takes Q2247 and ends leg 6 (level 21, 119
+  quests, one death). The lost hour is a finding. Seven checks pass. Next: NR-R8c, the
+  insignia box, for the Rider and the Gladiator.
