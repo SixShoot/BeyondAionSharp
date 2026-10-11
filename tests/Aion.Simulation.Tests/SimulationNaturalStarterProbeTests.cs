@@ -1501,8 +1501,10 @@ public sealed partial class SimulationFastScenarioTests
 	/// and before each the director prepares one thing: the spirit's HP cut to 30%; the same again, while Spirit Wrath
 	/// Position cools down; 2,000 DP. Every other act is the journey's. The spirit casts a skill of its own only when
 	/// the bot has answered the server's SM_SUMMON_USESKILL, so each cast of the spirit shows an order carried out.
-	/// NR-110i: in the second fight the spirit's swing kills the mosbear in the turn in which the bot casts, and the
-	/// server refuses that cast on a dead target. Every fight ends as a kill, and the step after a kill runs each time.
+	/// NR-110i: when the spirit's swing kills the mosbear in the turn in which the bot casts, the server refuses that
+	/// cast on a dead target. Every fight ends as a kill, and the step after a kill runs each time. NR-110g: with Stone
+	/// Shock in the table the second fight ends by the bot's own Erosion, so that case is checked when it arises; the
+	/// Spirit Master's recorded scope holds it.
 	/// </summary>
 	private async Task SpiritMasterOrdersRowAsync(StarterProbe probe, string id, CancellationToken token)
 	{
@@ -1580,12 +1582,14 @@ public sealed partial class SimulationFastScenarioTests
 		Assert.Equal(spiritId, healed.Fields.GetProperty("targetId").GetInt32());
 		StarterTraceRecord paid = second.Records.First(record => record is { Direction: "<", Packet: "SmAttackStatus" } &&
 			record.Fields.GetProperty("objectId").GetInt32() == self && record.Fields.GetProperty("typeId").GetInt32() == 4);
-		// NR-110i: the spirit's swing killed the mosbear in the turn of the bot's last cast, which the server refused.
-		StarterTraceRecord fell = Assert.Single(second.Records, record => record is { Direction: "action", Packet: "combat-target-fell-before-cast" });
-		Assert.True(fell.Fields.GetProperty("experience").GetInt64() > 0, "The kill's experience had not reached the bot.");
+		// NR-110i: when the spirit's swing killed the mosbear in the turn of the bot's last cast, the server refused that cast
+		// and the kill's experience was in hand. NR-110g: the fight need not end that way.
+		StarterTraceRecord[] fell = second.Records.Where(record => record is { Direction: "action", Packet: "combat-target-fell-before-cast" }).ToArray();
+		Assert.True(fell.Length <= 1, $"{fell.Length} casts were refused on a mosbear that had fallen.");
+		Assert.All(fell, record => Assert.True(record.Fields.GetProperty("experience").GetInt64() > 0, "The kill's experience had not reached the bot."));
 		string secondLine = $"{Outcome(second)}; {Told(second)}; the heal cost the bot {Math.Abs(paid.Fields.GetProperty("writtenValue").GetInt32())} HP; " +
-			$"the last cast, {fell.Fields.GetProperty("skillId").GetInt32()}, was refused on the mosbear the spirit had just killed, with " +
-			$"{fell.Fields.GetProperty("experience").GetInt64()} experience in hand; " +
+			(fell.Length == 0 ? "the last blow was the bot's own; " : $"the last cast, {fell[0].Fields.GetProperty("skillId").GetInt32()}, was refused on the " +
+				$"mosbear the spirit had just killed, with {fell[0].Fields.GetProperty("experience").GetInt64()} experience in hand; ") +
 			$"the spirit's HP {hpBefore} to {spirit.GetLifeStats().GetCurrentHp()} of {spirit.GetLifeStats().GetMaxHp()}";
 
 		// The third fight: with 2,000 DP the spirit is armed.
