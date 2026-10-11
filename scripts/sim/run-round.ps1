@@ -27,6 +27,9 @@
 # -From <name>     Each world is restored from the round snapshot <name>-w<n>. A bot whose line has a character there
 #                  resumes it, on its account and under its name; a bot whose line has none creates one.
 #
+# NR-R17a: a world whose characters have all ended the plan keeps its place in the file with no bot ("bots": []), so the
+# worlds after it keep their numbers and their snapshots. It is not restored, played or captured.
+#
 # Evidence: <ReplayRoot>/<Item>/<Run>/w<n>/<line>/ for each bot (trace, the journey's receipts, outcome.json), and
 # <ReplayRoot>/<Item>/<Run>/round.json with one outcome record for each bot. A bot that stops is an outcome, not a
 # failure of the round: the exit code is 0 when every world played to its end.
@@ -84,11 +87,13 @@ function Get-Field($Object, [string]$Name) {
 $roundFile = Get-Content -Raw -LiteralPath $Round | ConvertFrom-Json
 $worlds = @(Get-Field $roundFile 'worlds')
 if (-not $worlds.Count) { throw 'The round file names no world.' }
-foreach ($entry in $worlds) { if (-not @(Get-Field $entry 'bots').Count) { throw 'A world of the round names no bot.' } }
+$played = @(1..$worlds.Count | Where-Object { @(Get-Field $worlds[$_ - 1] 'bots').Count })
+if (-not $played.Count) { throw 'The round file names no bot.' }
 
 if ($World -gt 0) {
 	# ---- One world of the round, in this process. ----
 	if ($World -gt $worlds.Count) { throw "The round has no world $World." }
+	if ($World -notin $played) { throw "World $World of the round has no bot." }
 	$bots = @($worlds[$World - 1].bots)
 	$worldEvidence = Join-Path $evidence "w$World"
 	New-Item -ItemType Directory -Force -Path $worldEvidence | Out-Null
@@ -220,7 +225,7 @@ if ($Capture) {
 	# A capture is of committed code, as every capture is.
 	$changes = @(& $Git -C $repoRoot status --porcelain -- src tests game-server parity-artifacts scripts/sim)
 	if ($changes.Count) { throw 'A captured round requires committed runtime and script code; commit those changes first.' }
-	for ($n = 1; $n -le $worlds.Count; $n++) {
+	foreach ($n in $played) {
 		$taken = @("$Capture-w$n") + @($worlds[$n - 1].bots | ForEach-Object { Get-Field $_ 'capture' } | Where-Object { $_ })
 		foreach ($name in $taken) {
 			if ($name -notmatch '^[a-z0-9][a-z0-9-]*$') { throw "Not a snapshot name: $name" }
@@ -229,7 +234,7 @@ if ($Capture) {
 	}
 }
 if ($From) {
-	for ($n = 1; $n -le $worlds.Count; $n++) {
+	foreach ($n in $played) {
 		if (-not (Test-Path -LiteralPath (Join-Path (Join-Path $SnapshotRoot "$From-w$n") 'snapshot.json'))) {
 			throw "The round resumes from $From, which has no world $n."
 		}
@@ -250,7 +255,7 @@ $shared = @('-NoProfile', '-File', $PSCommandPath, '-Round', (Resolve-Path -Lite
 if ($Capture) { $shared += @('-Capture', $Capture) }
 if ($From) { $shared += @('-From', $From) }
 $started = Get-Date
-$finished = @(1..$worlds.Count | ForEach-Object -ThrottleLimit $Parallel -Parallel {
+$finished = @($played | ForEach-Object -ThrottleLimit $Parallel -Parallel {
 	$output = & $using:PowerShell @($using:shared) -World $_ 2>&1
 	[pscustomobject]@{ world = $_; code = $LASTEXITCODE; last = ($output | Select-Object -Last 1 | Out-String).Trim() }
 } | Sort-Object world)
@@ -274,12 +279,12 @@ foreach ($done in $finished) {
 }
 [ordered]@{
 	schemaVersion = 1; item = $Item; run = $Run; seed = $Seed; commit = $sha; capture = $Capture; from = $From
-	worlds = $worlds.Count; wallSeconds = [int]((Get-Date) - $started).TotalSeconds; failedWorlds = $failed; bots = $records
+	worlds = $played.Count; wallSeconds = [int]((Get-Date) - $started).TotalSeconds; failedWorlds = $failed; bots = $records
 } | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath (Join-Path $evidence 'round.json') -Encoding utf8
 if ($failed.Count) {
 	Write-Host "Round ${Run}: a world did not play to its end."
 	foreach ($line in $failed) { Write-Host "  $line" }
 	exit 1
 }
-Write-Host "Round $Run played: $($records.Count) bots in $($worlds.Count) worlds. Evidence: $evidence"
+Write-Host "Round $Run played: $($records.Count) bots in $($played.Count) worlds. Evidence: $evidence"
 exit 0

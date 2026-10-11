@@ -9655,7 +9655,7 @@ through these: each is ticked by the round that gave its capture.
       | Gunner | Q2282 | 0 | a second warlock of three at 0:55:06; one in each round |
       | Rider | Q2282 | 1 | two warlocks of three in this round, at 0:27:48 and 0:43:05 |
     - **Deaths: 12,** four each for the three in leg 10.
-- [ ] **NR-R17a - A world with nothing left to play.** Depends: NR-R17
+- [x] **NR-R17a - A world with nothing left to play.** Depends: NR-R17
   - Work: A class that has ended the Abyss entry has no stage left, and a round file
     may not name a world without a bot. Let run-round.ps1 leave such a world alone: not
     restored, not played, not captured, and not asked for in the snapshot a round
@@ -9663,7 +9663,38 @@ through these: each is ticked by the round that gave its capture.
     numbers and their snapshots.
   - Proof: The script tests pass. Round 18's file, whose world 1 has no bot, plays its
     seven worlds without a capture.
-- [ ] **NR-R18 - Round 18: the Abyss entry for three, the coin gear for two, leg 10 for three.** Depends: NR-R17a
+  - 2026-10-11: done. A world with no bot keeps its place in the round file and is
+    left alone.
+    - **The change** (scripts/sim/run-round.ps1). A world with "bots": [] is not
+      asked for a capture name or for a snapshot to resume from, and is not played.
+      The other worlds keep their numbers. round.json's worlds is the number played.
+      A file with no bot at all is refused.
+    - **Proof round** (run change-a1, the change in the working tree, round 18's file
+      from nr-r17 without a capture; run/nr/NR-R17a/change-a1; 561 s). Seven worlds
+      and eight bots, worlds 2 to 8.
+    - **Also seen in that round, of round 18.** The Chanter, the Spirit Master and
+      the Bard end the Abyss entry at level 26 with 181 quests. The Gladiator (165
+      quests) and the Ranger (163) end the coin-gear stage. The Assassin's and the
+      Gunner's hours run out in leg 10. The Rider does not begin: "No
+      collision-checked route to the current destination" at its first step. It logs
+      in at 2653.16, 1654.1, 336.883, twelve metres above the Heart platform and nine
+      metres from where its pillar flights take off. A bot that stops is not logged
+      out, so the dump holds the place the server last saved for it, and that was in
+      the air. Item NR-R17b, before round 18.
+    - **Proof.** One bundle for NR-67a and NR-R17a, on the tree with both changes. The
+      script tests pass (test-sim-snapshot.ps1, test_compare_traces.py,
+      test-code-coverage.ps1). Gate, set all+mage+warrior+artist+engineer+scout+templar,
+      -Parallel 8, run guard-p8 (run/nr/NR-R17a/guard-p8/verdict.json): verdict pass, all
+      thirteen scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests
+      passes (4,632 passed, 16 skipped) and Fast passes (run nrr17a-fast, 11 passed).
+- [ ] **NR-R17b - A character that logs in above the ground.** Depends: NR-R17a
+  - Work: Java first: when the server saves a player's place, where it puts a player
+    who logs in, and what a fall costs. A client that finds itself in the air falls to
+    the ground below. Give the bot that at login, in the shared code, with what Java
+    asks of a fall.
+  - Proof: The full gate identical, with the bundle. The Rider, resumed from nr-r17-w8
+    without a capture, begins its hour.
+- [ ] **NR-R18 - Round 18: the Abyss entry for three, the coin gear for two, leg 10 for three.** Depends: NR-R17b
   - Work: Seven worlds resumed from nr-r17 with -Capture nr-r18 (round file
     run/nr/NR-R18/round-18.json; world 1 has no bot). The Chanter, the Spirit Master
     and the Bard play the Abyss entry (stage ax); the Gladiator and the Ranger play the
@@ -11005,3 +11036,9 @@ report what was done, what is parked or blocked, and what the operator must deci
   revised route. One bundle with NR-R17a: script tests, full gate guard-p8 of NR-R17a
   (thirteen scopes identical), seven checks, unit suite (4,632 passed, 16 skipped) and
   Fast (nrr17a-fast) pass. Next: NR-R17a, whose proof is in the same bundle, then NR-67.
+- 2026-10-11 — Loop: NR-R17a done. run-round.ps1 leaves a world with no bot alone and the
+  others keep their numbers. Proof round (change-a1, 561 s): round 18's file plays seven
+  worlds and eight bots. The bundle is NR-67a's. The round showed the Rider logging in
+  twelve metres above the ground, at the place the server last saved for it, and finding
+  no way: NR-R17b is written, before round 18. Next: NR-67, the Sorcerer's finish
+  capture.
