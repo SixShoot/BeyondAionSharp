@@ -85,6 +85,9 @@ by a lettered item. Answers already given are quoted.
   gear tiers. What must differ is read from the class line: the class's own reward picks,
   trainer, dispatch quest, gear types and kit. A quest a class cannot take or finish is
   recorded with the Java lines and left out for that class, not replaced.
+  - 2026-10-11, on the Ranger's Q2282 and Q2283 (NR-R15c): "leave it for later
+    evaluation where we can look into it. Not a blocker at this time." The two stay left
+    out for the Ranger.
 - **NR-Q5. Weapons.** Answer (2026-10-08), the table in the class-profile plan: staff for
   Cleric and Chanter; a one-hand weapon and a shield for the Templar; the best two-hand
   weapon for the Gladiator; spellbook for Sorcerer and Spirit Master; bow for the Ranger;
@@ -121,6 +124,11 @@ by a lettered item. Answers already given are quoted.
     do another multi-bot in 1 world run."
   - Asked whether a capture must still be one bot in its own world: "I would rather accept
     captures straight out of a shared world."
+  - 2026-10-11, told that the eight finish captures so far were the Abyss entry played
+    once more alone (NR-67a): "Do what is needed, but again, run the bots in parallel on
+    the same world, started 10 minutes apart." So the finish captures still to come are
+    taken from the round's world, as rule (w) says (NR-R21b), and no leg is played again
+    alone for a capture. The eight that exist stay as they are.
 
   So: several bots, each playing alone, in one world and one run; no party play. The loop
   works in rounds by rule (w), from the tick of NR-44 on, and a class's captures, its
@@ -133,6 +141,13 @@ by a lettered item. Answers already given are quoted.
   Default: a round spreads its bots over as many worlds as memory takes, eight on this
   machine, so eleven classes play one or two to a world. One world for all is used when
   the point is to see bots beside each other. The operator's later Answer outranks this.
+  Answer (2026-10-11): "run the bots in parallel on the same world, started 10 minutes
+  apart." So a round's bots play in one world, ten game minutes apart. For the three
+  classes still in play it changes nothing that can be changed: they stand in three
+  dumps, worlds 4, 7 and 8, since round 1, and characters of two dumps cannot be put
+  into one world (Survey C1, 8). Each goes on in its own world; the Rider shares world 8
+  with the Bard and starts ten minutes in. A play that starts from creation after this
+  date puts its bots into one world.
 - **NR-Q12. Accessories and hats at a reward.** Asked by NR-32. The gear score ranks
   weapons and armor. It does not rank a ring, an earring, a necklace, a belt or a hat of
   the HEAD group, which every class may wear; among those the choice went to the first in
@@ -209,6 +224,8 @@ by a lettered item. Answers already given are quoted.
   Default: the scopes stay as they are. NR-110g waits under Blocked with its change kept
   as a patch, and the Spirit Master goes round it by NR-110h. To decide: whether scope b
   may be recorded again for this fix, with the Mage's scope by rule (j).
+  Answer (2026-10-11): "Do what is needed." Scope b and the Mage's scope, and any other
+  scope the fix changes, are recorded again for it. NR-110g is taken off Blocked.
 - **NR-Q18. May the Cleric's leg 4 be recorded again for the kill step at a pack that
   cannot be taken apart?** Asked by NR-R7a. Comrade Sumarhon (Q24112) stands with a
   sentry and a fencer, and whichever is struck, three come. The kill step clears "the
@@ -225,6 +242,8 @@ by a lettered item. Answers already given are quoted.
   there takes its second attempt, and is parked by rule (r) if it stops again. To decide:
   whether scope c may be recorded again for the two changes; with a yes they are written
   and proven in an item of their own.
+  Answer (2026-10-11): "Do what is needed." Scope c, and any other scope the two changes
+  touch, may be recorded again for them. Item NR-R7b, taken when the classes are done.
 
 ## Standing rules
 
@@ -6833,6 +6852,13 @@ The template:
       mage differs first at record 18,915 of 23,555: after Frozen Shock the next
       decision sees the target at 4.1 m where the recorded one saw 2.4 m. The unit suite
       (4,629 passed, 16 skipped), the seven checks and Fast (nr110g-fast) pass.
+  - 2026-10-11: taken off Blocked. The operator's answer to NR-Q17: "Do what is needed."
+    A scope of the Priest or the Cleric that this fix changes is recorded again twice,
+    as a class scope is, and the item does not stop for it. Since the patch was written
+    the decoder has gone in (NR-R15a: the cast result and SM_ATTACK). What is left: the
+    world puts a monster at the place the blow gives; every scope that changes is
+    recorded again; the Spirit Master gets its two staggers back (NR-110h) and its
+    scope is recorded again.
 - [x] **NR-110h - The Spirit Master without its staggers, until NR-110g.** Depends: NR-110d
   - Work: The way round NR-110g (rule (t)). A stagger puts the monster 2 m from the
     spirit that holds it, at a place the bot does not see, and the server's audit then
@@ -8819,6 +8845,19 @@ through these: each is ticked by the round that gave its capture.
       so neither can be committed outside phase B (NR-Q2). The Cleric pulls an add that
       brings Sumarhon anyway at 2:28:12 and 2:48:51, and hunts him from 2:11:39, when
       the quest counted his death, until 2:49:45. Question NR-Q18.
+- [ ] **NR-R7b - The kill step at a pack that cannot be taken apart.** Depends: NR-98, NR-128 and NR-138, each ticked or its class parked
+  - Work: NR-Q18, answered 2026-10-11: "Do what is needed." Taken when the classes are
+    done, so that the rounds still to play keep the code they were tried on. Java first
+    for what Q24112 counts and when. The two generic changes NR-Q18 names: a hunt ends
+    when the quest has counted its kill, as the leg already does when the target cannot
+    be found; a pull made as the last resort against a pack that holds the step's target
+    strikes the target, and the walk into that pack is accepted for the target as it is
+    for an add. Not the wider form NR-R7a tried. Scope c changes at Comrade Sumarhon
+    and is recorded again twice; so is any other scope that changes, its first
+    difference explained by one of the two changes.
+  - Proof: Scope c played again: the Cleric reports Q24112 without hunting Sumarhon on
+    after the quest has counted him. The bundle, and the full gate with every scope
+    identical or recorded again twice.
 - [x] **NR-R8 - Round 8: Altgard leg 6 for five, leg 5 for three, and the Assassin's leg 4.** Depends: NR-R7a
   - Work: The eight worlds resumed from nr-r7 with -Capture nr-r8 (round file
     run/nr/NR-R8/round-8.json). The Sorcerer, Ranger, Spirit Master, Gunner and Rider
@@ -10349,7 +10388,30 @@ through these: each is ticked by the round that gave its capture.
       |---|---|---|---|
       | Assassin | Q2281 | 1 | the quest stands at 3 of 3, 5 of 5 and 3 of 5: two scratchers of its third group are wanting. Three fights with one of them, no kill; 11 flights at low health, 4 deaths |
     - **Deaths: 4,** all the Assassin's.
-- [ ] **NR-R22 - Round 22: the coin gear for the Gunner, Haramel for the Rider, leg 10 for the Assassin.** Depends: NR-R21
+- [ ] **NR-R21a - The Rider's pull spot in Haramel that no route leaves.** Depends: NR-R21
+  - Work: Found by round 22's file played without a capture (run preview-a1,
+    run/nr/NR-R22/preview-a1, at ac5820a4d). The Rider stops in Haramel at 1:09:49 with
+    172 quests: "No checked Haramel ground route" from 242.943, 234.108, 89.649 to
+    object 700953, range 5. Its pull plan for a guard on the route (216909) chose a
+    firing spot at 242.943, 234.108 at height 87.8. The walk there ended at the same
+    place 1.85 m higher. From there two walks toward the guard found no route, the
+    fight ended without a kill, and no route left for the next object. Read why the
+    walk ends above the spot the plan chose, and mend it in the shared code: a pull is
+    made from ground a route leaves. No branch on a class.
+  - Proof: Round 22's file from nr-r21 without a capture: the Rider passes the place.
+    The bundle with the full gate.
+- [ ] **NR-R21b - A round's Abyss entry gives the finish capture.** Depends: NR-R21
+  - Work: The operator's answers to NR-Q9 (2026-10-09, 2026-10-11): a class's captures,
+    ntc-ready-<class>-s1 among them, come straight out of the round's world. A round
+    gives a bot one capture today, and the Abyss entry's is
+    morheim-abyss-entry-s1-<class>; the eight finish captures so far were the leg
+    played once more alone (NR-67a). A character that ends stage ax in a round gets a
+    second record, ntc-ready-<class>-s1, which points at the same character in the same
+    round snapshot. NR-97, NR-127 and NR-137 are then ticked by their round, and their
+    proof is Verify of that record. The eight that exist are not touched.
+  - Proof: The script tests, with the bundle and the full gate. Its first use is the
+    first of the three classes to end the Abyss entry.
+- [ ] **NR-R22 - Round 22: the coin gear for the Gunner, Haramel for the Rider, leg 10 for the Assassin.** Depends: NR-R21a
   - Work: Three worlds resumed from nr-r21 with -Capture nr-r22 (round file
     run/nr/NR-R22/round-22.json; worlds 1, 2, 3, 5 and 6 have no bot). The Gunner
     plays the coin-gear stage; the Rider plays Haramel (stage l12); the Assassin goes
@@ -10400,6 +10462,8 @@ Nothing is blocked at the start.
     the fight takes the place it gives when the server refuses a skill for distance. The
     world still does not move a monster at the blow itself, so scope b is as it was and
     the question stands for that part alone.
+  - 2026-10-11: answered, NR-Q17: "Do what is needed." Not blocked any more; NR-110g is
+    the next item.
 - **Recorded by NR-R7a, blocking nothing yet: the kill step at a pack that cannot be
   taken apart (NR-Q18).** At Q24112's Comrade Sumarhon the kill step strikes an add that
   brings him anyway, and hunts him on after the quest counted his death. The Cleric's
@@ -10414,6 +10478,18 @@ Nothing is blocked at the start.
   - 2026-10-10, round 9: the Assassin reported Q24112 and ended leg 4. All nine classes
     are past the place now; the question stands for the Cleric's own play and for the
     classes of a later plan.
+  - 2026-10-11: answered, NR-Q18: "Do what is needed." Item NR-R7b, taken when the
+    classes are done.
+- **For a later look with the operator, blocking nothing (2026-10-11).**
+  - **The Ranger's Q2282 and Q2283** stay left out (NR-R15c). The operator: "leave it
+    for later evaluation where we can look into it. Not a blocker at this time."
+  - **The Assassin dies too often.** Four deaths and eleven flights at low health in its
+    hour of round 21; seven deaths in the 100 game minutes of round 22's file played
+    without a capture, five of them after Q2281's last kill. The operator: "I'm not sure
+    why the character is having issues surviving, we can look into that later, but this
+    is not normal for this class type to have so many deaths." Nothing is changed for
+    it now. The Assassin goes on by the plan's rules, and what it leaves out, or where
+    it is parked, is written here for that look.
 
 ## Loop prompt
 
@@ -11833,3 +11909,15 @@ report what was done, what is parked or blocked, and what the operator must deci
   coin-gear stage with 165; both are captured in nr-r21. The Assassin's hour at Q2281 won
   nothing: two kills of the quest's third group are wanting. Written: NR-R22, round 22.
   Seven checks pass. Next: NR-R22, round 22, with its captures.
+- 2026-10-11 — Operator: answers, and what round 22's file showed. NR-Q17 and NR-Q18,
+  "Do what is needed": NR-110g is off Blocked, and NR-R7b is written for the kill step at
+  Sumarhon, to be taken when the classes are done. Finish captures and NR-Q11: "run the
+  bots in parallel on the same world, started 10 minutes apart"; the three still to come
+  are taken from the round's world (NR-R21b written), and the three classes stay in
+  their three worlds, which cannot be joined. The Ranger's leave-out and the Assassin's
+  deaths are for a later look and block nothing. Round 22's file played without a
+  capture (run preview-a1 at ac5820a4d): the Gunner ends the coin-gear stage with 165
+  quests; the Assassin wins Q2281's last two kills, then dies five times in an hour
+  with nothing won; the Rider stops in Haramel at 172 quests on a pull spot no route
+  leaves (NR-R21a written, and round 22 now depends on it). Seven checks pass.
+  Next: NR-110g.
