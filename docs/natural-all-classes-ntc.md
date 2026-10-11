@@ -8475,12 +8475,51 @@ through these: each is ticked by the round that gave its capture.
       700147 ... No collision-checked route". A Blackened Angolem (210487) blocks the
       way; the pull found it "moved" 17.6 m off 39 times from one place, and the Rider
       never walked. Item NR-R8c.
-- [ ] **NR-R8a - The Chanter at Q2292's Mumu Ang.** Depends: NR-R8
+- [x] **NR-R8a - The Chanter at Q2292's Mumu Ang.** Depends: NR-R8
   - Work: Java first for what the step relies on. Find why the Chanter's two fights
     with the Mumu Ang did not happen, and why a hunt whose only carrier it has left
     goes on looking for one. Mend it in the shared code, no branch on a class.
   - Proof: The full gate identical. The Chanter, resumed from nr-r8-w2 without a
     capture, takes Q2292's ring from the Mumu Ang and ends leg 5.
+  - 2026-10-10: done. The Chanter walks up to the monster it fights, as the Templar does.
+    - **Why the two fights did not happen** (round 8's trace, 1:31:25 to 1:31:43). The
+      Mumu Ang shoots: struck from 13 m it stays where it is and casts at the Chanter.
+      It stands 7.7 m from a Black Claw sharpeye, inside that one's circle. The first
+      fight was refused three times for an obstacle (STR_SKILL_OBSTACLE) and ended. In
+      the second the Chanter's three spells from range landed; then nothing was ready,
+      and it had to walk into melee. The Priest line walks to the nearest monster of its
+      target's kind by a route checked against every other circle, so the walk was
+      refused, and the fight ended as a blocked approach with the monster still
+      shooting. The same monster twice is left for another, and there is no other.
+    - **Java.** Nothing of the server's is relied on beyond what the walk-in rule already
+      reads: who comes to a monster's help (AggroEventHandler.onCreatureNeedsSupport
+      27-36, read under NR-R7a).
+    - **The change** (Sc/Classes/NaturalChanterProfile.cs). The Chanter's movement is the
+      Priest line's with WalksToItsTarget set: the form NR-53c gave the Templar for "a
+      class that pulls from range and fights at melee". Its walk up goes to its own
+      target, and when that walk is refused because the target stands in a neighbour's
+      circle, the walk-in rule (CP-56a) plans it once more with that neighbour accepted,
+      below the swarm limit. No shared code changes, and the Priest's and the Cleric's
+      movement stays.
+    - **The hunt that goes on looking** is left as it is: a carrier hunt whose one
+      carrier cannot be fought ends by the leg's count of repeated decisions, which is
+      the stop it should be.
+    - **Proof round** (run change-a1, the change in the working tree, round 9's file
+      from nr-r8 without a capture; run/nr/NR-R8a/change-a1; 234 s). The Chanter took
+      the ring from the Mumu Ang at 0:02:03 and ended leg 5 at level 21 with 109 quests
+      and one death. At the Mumu Ang the new walk was not called on this time: the
+      sharpeye had a pull spot of its own, was killed first, and the way was free. It
+      was called on twice later in the leg, for a monster in its neighbour's circle on
+      the way to Q2241's report; both walks were accepted with the one neighbour and
+      both fights ended in a kill.
+    - **Also seen in that round, of round 9:** the Assassin, from var 1, reported
+      Q24112 and ended leg 4 in 3.6 game minutes. The Gunner ended leg 6 on its second
+      attempt with no change. The Gladiator stopped in leg 6 where the Rider did, at
+      Q2246's insignia box, so NR-R8c is for both.
+    - **Proof.** Gate, set all+mage+warrior+artist+engineer+scout+templar, -Parallel 8,
+      run guard-p8 (run/nr/NR-R8a/guard-p8/verdict.json): verdict pass, all thirteen
+      scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests passes (4,629
+      passed, 16 skipped) and Fast passes (run nrr8a-fast, 11 passed).
 - [ ] **NR-R8b - The Gunner on the road to Germir.** Depends: NR-R8a
   - Work: Java first for what the step relies on. Find why the Gunner does not arrive
     at Germir in an hour where the Sorcerer, the Ranger and the Spirit Master did, and
@@ -9630,3 +9669,12 @@ report what was done, what is parked or blocked, and what the operator must deci
   to Germir. The Rider in leg 6: a blocker before Q2246's insignia box that the pull
   found "moved" 39 times. Written: NR-R8a, NR-R8b, NR-R8c and NR-R9, round 9. Seven
   checks pass. Next: NR-R8a.
+- 2026-10-10 — Loop: NR-R8a done. The Mumu Ang shoots and does not come; the Chanter,
+  with nothing left to cast from range, was refused its walk into melee because the
+  monster stands in a neighbour's circle. The Chanter's movement now walks to its own
+  target, the Templar's form (NR-53c), so the walk-in rule accepts that neighbour. Proof
+  round (change-a1, 234 s): the Chanter took Q2292's ring and ended leg 5; the new walk
+  ran twice, both fights won. The same round showed the Assassin ending leg 4 from var 1,
+  the Gunner ending leg 6 on its second attempt, and the Gladiator stopping at the
+  insignia box as the Rider does. Full gate guard-p8 (thirteen scopes identical), seven
+  checks, unit suite (4,629 passed, 16 skipped) and Fast (nrr8a-fast) pass. Next: NR-R8b.

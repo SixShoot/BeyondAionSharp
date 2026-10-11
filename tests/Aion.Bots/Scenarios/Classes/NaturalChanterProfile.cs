@@ -109,12 +109,16 @@ public static class NaturalChanterProfile
 		var excluded = NaturalSkillCatalog.CommonExcluded.Concat(Excluded).ToDictionary(entry => entry.Key, entry => entry.Value);
 		NaturalPriestSkill[] skills = NaturalSkillCatalog.Build(data, PlayerClass.CHANTER, Roles, excluded);
 		NaturalProfileValidator.Require(data, PlayerClass.CHANTER, TopLevel, skills, excluded, Rules.Lines(skills), ChanterGear, KeptMantras);
+		// NR-R8a: the Chanter opens from range and fights at melee, as the Templar does (NR-53c). When its target does not
+		// come to it, a monster that shoots such as Q2292's Mumu Ang, it walks up to that monster itself, and the walk-in
+		// rule (CP-56a) accepts the neighbour whose circle the target stands in. The Priest's and the Cleric's walk stays.
+		NaturalFightMovement movement = NaturalPriestProfile.PriestLineMovement with { WalksToItsTarget = true };
 		return new NaturalClassProfile
 		{
 			Class = PlayerClass.CHANTER,
 			Skills = skills,
 			Excluded = excluded,
-			Combat = new NaturalRotationCombatPolicy(Rules, skills, NaturalPriestProfile.PriestLineMovement),
+			Combat = new NaturalRotationCombatPolicy(Rules, skills, movement),
 			// NR-34: as the Cleric, both kinds.
 			HelpItems = NaturalHelpItemRules.ForKinds(caster: true, reagent: true),
 			// The Priest's blessing in its Chanter rank, and the two buffs of 30 min.
@@ -129,7 +133,7 @@ public static class NaturalChanterProfile
 			Rest = NaturalPriestProfile.RestWith(skills),
 			Ranges = NaturalPriestProfile.PriestLineRanges,
 			Readiness = NaturalPriestProfile.PriestLineReadiness,
-			Movement = NaturalPriestProfile.PriestLineMovement,
+			Movement = movement,
 			Campaign = NaturalPriestProfile.PriestLineCampaign,
 			Gear = ChanterGear,
 			Restock = NaturalPriestProfile.PriestLineRestock,
