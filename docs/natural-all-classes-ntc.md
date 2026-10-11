@@ -6859,6 +6859,57 @@ The template:
     world puts a monster at the place the blow gives; every scope that changes is
     recorded again; the Spirit Master gets its two staggers back (NR-110h) and its
     scope is recorded again.
+  - 2026-10-11, the world's part: done, and six scopes are recorded again. The item
+    stays open for the Spirit Master's staggers and its row.
+    - **The change** (382308064: Bots/World/BotWorldModel.cs,
+      Sc/NaturalIshalgenJourney.Combat.cs). The world puts a creature that is no player
+      at the place a cast result or an SM_ATTACK gives, at the blow, as a client shows
+      it. The place NR-R15a kept aside, and the fight's use of it when the server
+      refused a skill for distance, are gone: nothing is left for them to do.
+    - **The gate before the recording** (run guard2-p8,
+      run/nr/NR-110g/guard2-p8/verdict.json): thirteen scopes identical and six that
+      differ, each first at a blow of the bot's own that moved its target. In each the
+      decision before the blow reads the recorded distance, and the next one reads
+      about 2 m more.
+
+      | Scope | First difference | The blow | Recorded | Now |
+      |---|---|---|---|---|
+      | b | record 125,694 | Hallowed Strike, a critical hit with the staff | 2.80 m | 4.80 m |
+      | mage | record 18,915 | Frozen Shock, whose sub-effect 8217 staggers | 2.35 m | 4.11 m |
+      | sorcerer | record 4,275 | Frozen Shock | 14.09 m | 16.09 m |
+      | chanter | record 46,350 | Thunderbolt Strike, a critical hit with the staff | 4.41 m | 6.67 m |
+      | gladiator | record 3,136 | Wrathful Strike, whose sub-effect 8218 stumbles | 3.12 m | 5.12 m |
+      | ranger | record 10,905 | Rupture Arrow, whose sub-effect 8217 staggers; the blow kills | its walk to the corpse | another walk |
+
+      Hallowed Strike and Thunderbolt Strike have no effect of their own that moves a
+      target; theirs is the stumble of a critical hit with a staff (Java
+      SkillEngine.createCriticalProcEffect 193-221). Scopes b and mage differ at the
+      records the first attempt found.
+    - **Recorded again** at 382308064 on a clean tree, with -Record -ReRecord (run
+      record-a1, run/nr/NR-110g/record-a1/verdict.json; 2,722 s): each of the six
+      repeats in its two passes. The traces are under run/cp/baseline/382308064... and
+      in the second copy; the old ones stay in their folders.
+
+      | Scope | Records before | Records now | sha256 | What moved |
+      |---|---|---|---|---|
+      | b | 131,197 | 131,197 | 6e196405b7974807 | no count of its row |
+      | mage | 23,555 | 23,555 | 2fcf560a8817d42b | no count of its row |
+      | sorcerer | 32,666 | 35,591 | b066887475531be6 | 7 retreats where it had 13; 310 pull plans where it had 275 |
+      | chanter | 67,343 | 67,343 | caa0976216e751fb | no count of its row |
+      | gladiator | 38,006 | 35,420 | 737130c998e97902 | 8 retreats where it had 6; 275 pull plans where it had 267 |
+      | ranger | 32,848 | 33,789 | b1b66ab514c4b584 | 6 retreats where it had 4; 231 pull plans where it had 229 |
+
+      Each journey ends as it did: the replay of every scope passes. Line, replay,
+      environment and ignore list of each row are unchanged.
+    - **The gate after** (run guard3-p8, run/nr/NR-110g/guard3-p8/verdict.json):
+      nineteen scopes identical. The unit suite (4,632 passed, 16 skipped), the seven
+      checks, on the tree with the change and again on the recorded one, and Fast
+      (nr110g2-fast) pass.
+    - **Still to do here.** Stone Shock and Frozen Shock go back into the Spirit
+      Master's table (NR-110h), row spirit-master-fight is played with them, and scope
+      spiritmaster is recorded again. The Gunner's Trunk Shot, left out for the same
+      reason, gets an item of its own, NR-120c: it needs a place in the Gunner's table,
+      which it never had.
 - [x] **NR-110h - The Spirit Master without its staggers, until NR-110g.** Depends: NR-110d
   - Work: The way round NR-110g (rule (t)). A stagger puts the monster 2 m from the
     spirit that holds it, at a place the bot does not see, and the server's audit then
@@ -7663,6 +7714,15 @@ The template:
     11's end at level 25 with 164 quests. Captured as altgard-rc-l6-gunner to
     altgard-rc-l11-gunner,
     records that point at character 133266 in the round snapshots of those rounds.
+- [ ] **NR-120c - The Gunner's Trunk Shot and Volley.** Depends: NR-110g
+  - Work: Trunk Shot I to III stagger their target and were left out of the Gunner's
+    table for NR-110g, and Volley I to III with them, which follow Trunk Shot only
+    (NR-120's table). The bot now sees where a stagger puts a monster. Java first for
+    both skills: range, cost, cooldown, the chain and the stagger. Give each a role and
+    a place in the Gunner's two lists, and take both reasons out. Only the Gunner's own
+    profile changes.
+  - Proof: A Gunner probe row with a fight in which Trunk Shot and Volley are cast and
+    the server's audit has no line; the full gate identical.
 - [ ] **NR-125 - Gunner: coin gear and Haramel.** Depends: NR-124; ticked by its round
   - Work: The coin-gear leg (leather, by its manifest, NR-38a) and Haramel with chest
     700830 (NR-40), captured as altgard-coingear-gunner and
@@ -11921,3 +11981,11 @@ report what was done, what is parked or blocked, and what the operator must deci
   with nothing won; the Rider stops in Haramel at 172 quests on a pull spot no route
   leaves (NR-R21a written, and round 22 now depends on it). Seven checks pass.
   Next: NR-110g.
+- 2026-10-11 — Loop: NR-110g, the world's part. The world puts a monster where the bot's
+  own blow puts it (382308064). Gate guard2-p8: thirteen scopes identical, six differ,
+  each first at such a blow (b 125,694; mage 18,915; sorcerer 4,275; chanter 46,350;
+  gladiator 3,136; ranger 10,905). The six are recorded again at 382308064 (record-a1,
+  two passes identical each): b 131,197, mage 23,555, sorcerer 35,591, chanter 67,343,
+  gladiator 35,420, ranger 33,789 records. Gate guard3-p8: nineteen scopes identical.
+  Unit suite, seven checks and Fast nr110g2-fast pass. Written: NR-120c, the Gunner's
+  Trunk Shot. Next: NR-110g still, the Spirit Master's staggers and its row.
