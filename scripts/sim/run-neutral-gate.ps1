@@ -87,6 +87,9 @@ $scopeTable = [ordered]@{
 	# NR-148: the Bard's scope is Haramel too, where its rules differ most from the Artist's: it plays its chains from
 	# range and holds a target before it retreats.
 	bard     = @{ line = 'artist-bard'; replay = [ordered]@{ AltgardLeg1 = $true; Leg = 'l12'; From = 'altgard-coingear-bard'; LaterCapital = $true } }
+	# NR-88: the Gladiator's scope is Haramel too, where its rules differ most from the Templar's: it fights with a
+	# greatsword and no shield and plays its strike chains at melee.
+	gladiator = @{ line = 'warrior-gladiator'; replay = [ordered]@{ AltgardLeg1 = $true; Leg = 'l12'; From = 'altgard-coingear-gladiator'; LaterCapital = $true } }
 }
 # The environment every gate run is pinned to. Null is unset: help items on, the bot monitor at its default port.
 $pinned = [ordered]@{ AION_SIM_SEED = '1'; NA_HELP_ITEMS = $null; AION_BOT_DASHBOARD_PORT = $null; AION_SIM_PROCESS_KEY = $null }
