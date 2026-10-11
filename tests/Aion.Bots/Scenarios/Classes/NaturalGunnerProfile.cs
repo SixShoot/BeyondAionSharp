@@ -47,9 +47,11 @@ public static class NaturalGunnerProfile
 		[249] = "mp-recovery", [250] = "mp-recovery", [252] = "mp-recovery", [254] = "mp-recovery",
 	};
 
-	private const string Stagger = "staggers its target 2 m back. The server tells a client where a monster lands only inside the cast " +
-		"result, which the bot does not read to its end (NR-110g, blocked by NR-Q17); a rooted monster would stay where the bot does not " +
-		"see it.";
+	// NR-120c: Trunk Shot was left out for its stagger until the bot saw where a stagger puts a monster (NR-110g). It stays out
+	// for what the shipped data says of it: one cooldown for three openers, and the weakest chain of the three.
+	private const string ThirdOpener = "opens a chain on the cooldown Gunshot and Crosstrigger share (cooldownId 1802) and is ready after " +
+		"24 s, where Gunshot is after 16 s. Its chain, Volley twice, hits for about half of what Rapidfire twice and Automatic Fire twice " +
+		"hit for after Gunshot, and gives no mana as Crosstrigger's does. The table opens one chain at a time and has no turn for it.";
 	private const string AfterTrunk = "follows Trunk Shot only, which is left out.";
 	private const string Cannon = "needs an aethercannon in hand (startconditions/weapon), and the Gunner holds pistols: every other skill " +
 		"of its table needs those.";
@@ -59,7 +61,7 @@ public static class NaturalGunnerProfile
 	/// <summary>Every other active skill a Gunner learns by itself to level 26, and why it is not cast.</summary>
 	private static readonly IReadOnlyDictionary<int, string> Excluded = new Dictionary<int, string>
 	{
-		[2055] = "Trunk Shot I " + Stagger, [2056] = "Trunk Shot II " + Stagger, [2057] = "Trunk Shot III " + Stagger,
+		[2055] = "Trunk Shot I " + ThirdOpener, [2056] = "Trunk Shot II " + ThirdOpener, [2057] = "Trunk Shot III " + ThirdOpener,
 		[1912] = "Volley I " + AfterTrunk, [1913] = "Volley II " + AfterTrunk, [1914] = "Volley III " + AfterTrunk,
 		[2350] = "Parting Shot I " + BackDash, [2351] = "Parting Shot II " + BackDash,
 		[2210] = "Harassing Fire " + Cannon,

@@ -7387,7 +7387,7 @@ The template:
       | Return, Bandage Heal, Escape: 1 | As for every class (CP-35, CP-Q11). |
       | Automatic Fire: 16, 21, 26 | It follows Rapidfire only after two Rapidfires, and the table's reading of a chain does not count the step before. Item NR-120a. |
       | Reload: 10 | It ends the cooldown of the three openers; the fight loop keeps a cooldown from its own cast and does not read that it was ended. Item NR-120b. |
-      | Trunk Shot: 13, 18, 23 | It staggers its target, and the bot does not read where a stagger puts a monster (NR-110g, blocked by NR-Q17). |
+      | Trunk Shot: 13, 18, 23 | Since NR-120c: it opens a chain on the cooldown Gunshot and Crosstrigger share, is ready after 24 s where Gunshot is after 16 s, and its chain hits for about half of Gunshot's. Before that: its stagger (NR-110g). |
       | Volley: 13, 18, 23 | It follows Trunk Shot only. |
       | Parting Shot: 19, 24 | It throws the Gunner 15 m back, to a place only the cast's result names. |
       | Harassing Fire, Incendiary Shell: 25 | They need an aethercannon, and the Gunner holds pistols. |
@@ -7749,7 +7749,7 @@ The template:
     11's end at level 25 with 164 quests. Captured as altgard-rc-l6-gunner to
     altgard-rc-l11-gunner,
     records that point at character 133266 in the round snapshots of those rounds.
-- [ ] **NR-120c - The Gunner's Trunk Shot and Volley.** Depends: NR-110g
+- [x] **NR-120c - The Gunner's Trunk Shot and Volley.** Depends: NR-110g
   - Work: Trunk Shot I to III stagger their target and were left out of the Gunner's
     table for NR-110g, and Volley I to III with them, which follow Trunk Shot only
     (NR-120's table). The bot now sees where a stagger puts a monster. Java first for
@@ -7758,6 +7758,31 @@ The template:
     profile changes.
   - Proof: A Gunner probe row with a fight in which Trunk Shot and Volley are cast and
     the server's audit has no line; the full gate identical.
+  - 2026-10-11: done, and not as the work above says. Trunk Shot and Volley stay out
+    of the Gunner's table, with the reason the data gives. They get no role and no
+    place in a list, so no row casts them.
+    - **Java, the data** (skill_templates.xml, the same in both trees). Trunk Shot I
+      to III (2055 to 2057; levels 13, 18, 23): 25 to 34 MP, 243 to 333 and a stagger
+      of 2 s, a cooldown of 24 s on cooldownId 1802. It opens chain E_CHAINB_1TH_1.
+      Volley I to III (1912 to 1914) follows it within 2 s, twice: 183 to 253 each.
+      Gunshot (16 s) and Crosstrigger (24 s) are on cooldownId 1802 too, as NR-120's
+      survey has it: one cooldown for three openers.
+    - **Why it has no turn.** The table opens one chain at a time. At the top ranks
+      Trunk Shot's chain is 333 + 2 x 253 = 839 every 24 s. Gunshot's is 342 + 2 x 337
+      + 2 x 260 = 1,536 every 16 s, and Crosstrigger's is the Gunner's mana (NR-121).
+    - **Tried first and not kept** (run/nr/NR-R21a/gunner-roles-not-kept.patch): roles
+      trunk and volley after Automatic Fire in both lists. The six Gunner rows passed
+      with it and cast neither once (run/nr/NR-R21a, logs probe3-<row>.log and their
+      traces). In row gunner-chain the decision after the Gunshot chain reads, for
+      Trunk Shot: "Client-observed cooldown is active."
+    - **The change** (Sc/Classes/NaturalGunnerProfile.cs): the reason of Trunk Shot I
+      to III says the above. The stagger is no reason any more, and NR-Q17's name is
+      out of the profile. The Gunner's survey table is changed with it.
+    - **Proof.** The six Gunner rows pass as before, with no line of the server's audit
+      (logs probe4-<row>.log). One bundle on one tree for NR-120c, NR-R21a and NR-R21b
+      (run/nr/NR-R21a, chain4): the unit suite (4,632 passed, 16 skipped), the seven
+      checks, the script tests and Fast (nrr21a4-fast) pass. Gate guard4-p8: eighteen
+      scopes identical; scope gladiator differs for NR-R21a, which records it again.
 - [ ] **NR-125 - Gunner: coin gear and Haramel.** Depends: NR-124; ticked by its round
   - Work: The coin-gear leg (leather, by its manifest, NR-38a) and Haramel with chest
     700830 (NR-40), captured as altgard-coingear-gunner and
@@ -12032,3 +12057,11 @@ report what was done, what is parked or blocked, and what the operator must deci
   identical): 57,507 records, sha256 c98ebe14cde13b99, no death, Stone Shock cast 51
   times. Gate guard5-p8: nineteen scopes identical. Unit suite, seven checks and Fast
   nr110g4-fast pass. Next: NR-120c, the Gunner's Trunk Shot and Volley.
+- 2026-10-11 — Loop: NR-120c done, and not as written: Trunk Shot and Volley stay out of
+  the Gunner's table. Trunk Shot is on the cooldown Gunshot and Crosstrigger share, is
+  ready after 24 s against 16 s, and its chain hits for 839 where Gunshot's hits for 1,536.
+  With roles in both lists six rows cast neither once; that form is not kept. The profile
+  now gives this reason and no longer NR-110g's. One bundle for NR-120c, NR-R21a and
+  NR-R21b (run/nr/NR-R21a, chain4): unit suite, seven checks, script tests, six Gunner
+  rows and Fast nrr21a4-fast pass; gate guard4-p8 has eighteen scopes identical and
+  gladiator for NR-R21a. Next: NR-R21a.
