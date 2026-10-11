@@ -5780,10 +5780,15 @@ The template:
     level 14, 55 quests complete, 193 fights with 167 kills, no death. Its
     bridge-completion.json says verified. Captured as altgard-assassin-s1, a record that points at
     character 133266 in the round snapshot nr-r1-w4.
-- [ ] **NR-93 - Assassin: Altgard legs l1 to l5.** Depends: NR-92; ticked by its round
+- [x] **NR-93 - Assassin: Altgard legs l1 to l5.** Depends: NR-92; ticked by its round
   - Work: The Cleric's legs in order, each end captured under the Cleric's snapshot name
     with -assassin (NR-41). In leg 1 it swings its daggers at the fungus in flight.
   - Proof: Each capture verifies.
+  - 2026-10-10: done in rounds 3, 5, 6, 9 and 10 (NR-R3, NR-R5, NR-R6, NR-R9, NR-R10,
+    world 4). Each leg ended with a receipt that says verified, and the Assassin stands
+    at leg 5's end at level 21 with 109 quests. Captured as altgard-rc-l1-assassin to
+    altgard-rc-l5-assassin, records that point at character 133266 in the round
+    snapshots nr-r3-w4, nr-r5-w4, nr-r6-w4, nr-r9-w4 and nr-r10-w4.
 - [ ] **NR-94 - Assassin: Altgard legs l6 to l11.** Depends: NR-93; ticked by its round
   - Work: As NR-93. Leg 11 is the destiny quest: its stone is the Templar's, 140000003
     (NR-39).
@@ -8687,13 +8692,45 @@ through these: each is ticked by the round that gave its capture.
       before the insignia box (NR-R8c). The Bard, after the Rider's escort in their
       world, waited for Disguised Germir's morning and escorted him at the first
       attempt (NR-R8d).
-- [ ] **NR-R10 - Round 10: leg 8 for three, leg 7 for four, leg 6 for the Chanter and leg 5 for the Assassin.** Depends: NR-R9
+- [x] **NR-R10 - Round 10: leg 8 for three, leg 7 for four, leg 6 for the Chanter and leg 5 for the Assassin.** Depends: NR-R9
   - Work: The eight worlds resumed from nr-r9 with -Capture nr-r10 (round file
     run/nr/NR-R10/round-10.json). The Sorcerer, Ranger and Spirit Master play leg 8;
     the Gladiator, Bard, Gunner and Rider play leg 7; the Chanter plays leg 6 and the
     Assassin leg 5. Captures as altgard-rc-<leg>-<class>. One outcome line for each
     class; a stop gets a lettered item. The Assassin's leg 5 gives it legs l1 to l5:
     NR-93 is ticked with the round that captures it.
+  - Proof: round.json with nine outcome records; for each class that reached its
+    stage's end the completion receipt says verified and its capture is written.
+  - 2026-10-10: played. All nine reached their stage's end and all nine are captured.
+    The Assassin has legs l1 to l5: NR-93 is ticked.
+    - **The round** (run r10-a1 at 96e4d5586, -From nr-r9, -Capture nr-r10;
+      run/nr/NR-R10/r10-a1; round file run/nr/NR-R10/round-10.json). Eight worlds side by
+      side, 650 seconds of wall time.
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 1 | mage-sorcerer | Sorcerer | l8 | reached | 22 | 142 | 24.7 | 27, 23 kills | 0 | altgard-rc-l8-sorcerer |
+      | 2 | priest-chanter | Chanter | l6 | reached | 22 | 119 | 72.8 | 114, 104 kills | 0 | altgard-rc-l6-chanter |
+      | 3 | warrior-gladiator | Gladiator | l7 | reached | 22 | 135 | 49.4 | 48, 47 kills | 0 | altgard-rc-l7-gladiator |
+      | 4 | scout-assassin | Assassin | l5 | reached | 21 | 109 | 187.2 | 244, 188 kills | 3 | altgard-rc-l5-assassin |
+      | 5 | scout-ranger | Ranger | l8 | reached | 22 | 142 | 52.1 | 41, 31 kills | 5 | altgard-rc-l8-ranger |
+      | 6 | mage-spirit-master | Spirit Master | l8 | reached | 22 | 142 | 23.4 | 26, 22 kills | 0 | altgard-rc-l8-spirit-master |
+      | 7 | engineer-gunner | Gunner | l7 | reached | 22 | 135 | 48.3 | 42, 39 kills | 1 | altgard-rc-l7-gunner |
+      | 8 | artist-bard | Bard | l7 | reached | 22 | 135 | 40.3 | 29, 23 kills | 0 | altgard-rc-l7-bard |
+      | 8 | engineer-rider | Rider | l7 | reached | 22 | 135 | 43.5 | 33, 31 kills | 0 | altgard-rc-l7-rider |
+
+      Each receipt says verified. The captures are records that point into the round
+      snapshots nr-r10-w1 to nr-r10-w8.
+    - **Deaths: nine.** Five are the Ranger's in leg 8, all at Q2270's watch (a watch
+      shaman four times, a watch bodyguard once, level 17); the Sorcerer and the Spirit
+      Master passed the same quest without one. Three are the Assassin's in leg 5 and
+      one the Gunner's in leg 7. Each stood up at its obelisk and went on.
+- [ ] **NR-R11 - Round 11: leg 9 for three, leg 8 for four, leg 7 for the Chanter and leg 6 for the Assassin.** Depends: NR-R10
+  - Work: The eight worlds resumed from nr-r10 with -Capture nr-r11 (round file
+    run/nr/NR-R11/round-11.json). The Sorcerer, Ranger and Spirit Master play leg 9;
+    the Gladiator, Bard, Gunner and Rider play leg 8; the Chanter plays leg 7 and the
+    Assassin leg 6. Captures as altgard-rc-<leg>-<class>. One outcome line for each
+    class; a stop gets a lettered item, in round 11's own letters.
   - Proof: round.json with nine outcome records; for each class that reached its
     stage's end the completion receipt says verified and its capture is written.
 
@@ -9867,3 +9904,11 @@ report what was done, what is parked or blocked, and what the operator must deci
   quests), so NR-73 is ticked; the Assassin ended leg 4 (95 quests) and is past Comrade
   Sumarhon. Written: NR-R10, round 10. Seven checks pass. Next: NR-R10, round 10: leg 8
   for three, leg 7 for four, leg 6 for the Chanter and leg 5 for the Assassin.
+- 2026-10-10 — Loop: NR-R10 played. Round 10 (r10-a1 at 96e4d5586, -From nr-r9, 650 s):
+  all nine reached their stage's end and are captured in nr-r10-w1 to w8. The Sorcerer,
+  Ranger and Spirit Master ended Altgard leg 8 (level 22, 142 quests); the Gladiator,
+  Bard, Gunner and Rider ended leg 7 (135 quests); the Chanter ended leg 6 (119 quests);
+  the Assassin ended leg 5 (109 quests), so NR-93 is ticked. Nine deaths, five of them
+  the Ranger's at Q2270's watch. Written: NR-R11, round 11. Seven checks pass. Next:
+  NR-R11, round 11: leg 9 for three, leg 8 for four, leg 7 for the Chanter and leg 6 for
+  the Assassin.
