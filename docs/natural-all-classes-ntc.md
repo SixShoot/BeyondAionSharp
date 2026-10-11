@@ -5675,10 +5675,26 @@ The template:
     Q2946, Q2947 and Q2042 complete, 181 quests in all. Captured as
     morheim-abyss-entry-s1-gladiator, a record that points at character 133266 in the
     round snapshot nr-r20-w3.
-- [ ] **NR-87 - Gladiator: the endpoint.** Depends: NR-86; ticked by its round
+- [x] **NR-87 - Gladiator: the endpoint.** Depends: NR-86; ticked by its round
   - Work: Captured and verified as ntc-ready-gladiator-s1: alive at Morheim Ice Fortress,
     level 25 or higher, Q2945, Q2946, Q2947 and Q2042 complete.
   - Proof: The capture verifies.
+  - 2026-10-11: done. ntc-ready-gladiator-s1 is captured and verified.
+    - **Captured** at a1c824f3f: sim-snapshot.ps1 -Action Capture -AltgardLeg1 -Leg ax
+      -From altgard-rc-complete-s1-gladiator -Name ntc-ready-gladiator-s1 (run
+      nr87-ax-a1, log run/nr/NR-87/capture-a1.log), as the Sorcerer's was (NR-67). The
+      leg was played once more, alone, as round 20 played it: 16 min 49 s, no death, the
+      arena and the ring course each at the first try, 101,674,081 ms of game time since
+      creation. Dump sha256 90e8cf7d62d61180.
+    - **The endpoint, from the receipt.** Character 133266, created by packets: a
+      Gladiator of level 26, alive at Morheim Ice Fortress and bound there; Q24020,
+      Q2945, Q2946, Q2947 and Q2042 complete, 181 quests in all. It wears the greatsword
+      100901214 and four level-26 coin pieces.
+    - **Proof.** sim-snapshot.ps1 -Action Verify -Name ntc-ready-gladiator-s1, run
+      nr87-verify-a1 (run/nr/NR-87/verify-a1.log; evidence under
+      run/snapshots/_verify/nr87-verify-a1): "Verified snapshot ntc-ready-gladiator-s1:
+      character 133266 resumed at its endpoint." Seven pre-commit checks pass
+      (run/nr/NR-87/checks.log, on the tree of the finish captures of this chain).
 - [ ] **NR-88 - Gladiator: the class scope.** Depends: NR-87
   - Work: One scope of the Gladiator's play, chosen where its rules differ most from the
     Templar's, recorded by a bot alone, twice, and added to the gate's sets.
@@ -11686,3 +11702,9 @@ report what was done, what is parked or blocked, and what the operator must deci
   and ends leg 10 with 162. The Assassin counted five more of Q2281 before its hour ran
   out; it is the one class still in leg 10. Written: NR-R21, round 21. Seven checks
   pass. Next: NR-87, the Gladiator's finish capture.
+- 2026-10-11 — Loop: NR-87 done. ntc-ready-gladiator-s1 is captured at a1c824f3f (run
+  nr87-ax-a1: the Abyss entry played once more alone, 16 min 49 s, no death) and
+  verified (run nr87-verify-a1): a Gladiator of level 26, alive at Morheim Ice Fortress,
+  Q2945, Q2946, Q2947 and Q2042 complete, 181 quests. It is the seventh class at the
+  plan's finish. Seven checks pass. Next: NR-107, the Ranger's finish capture, made in
+  the same chain.
