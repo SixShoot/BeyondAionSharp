@@ -718,6 +718,53 @@
         "binds": 1,
         "soulHeals": 0
       }
+    },
+    {
+      "scope": "bard",
+      "line": "artist-bard",
+      "replay": {
+        "AltgardLeg1": true,
+        "Leg": "l12",
+        "From": "altgard-coingear-bard",
+        "LaterCapital": true
+      },
+      "snapshot": "altgard-coingear-bard",
+      "commit": "5294e08dbc014c8e37fdc02f77d9e8f9d079f378",
+      "environment": {
+        "AION_SIM_SEED": "1",
+        "NA_HELP_ITEMS": null,
+        "AION_BOT_DASHBOARD_PORT": null,
+        "AION_SIM_PROCESS_KEY": null
+      },
+      "ignore": [],
+      "records": 41392,
+      "sha256": "0a2193e15e717852139aee362024e31331d8d98c2ff926e031d4e00e6d2f24fc",
+      "counts": {
+        "records": 41393,
+        "deaths": 1,
+        "reviveSteps": 2,
+        "retreats": 8,
+        "retreatRoutes": 14,
+        "restSitsTraced": 0,
+        "restInterrupts": 0,
+        "betweenFightHeals": 1,
+        "powderRestCasts": 5,
+        "vendorBuys": 0,
+        "pullPlans": 281,
+        "patrolWaits": 163,
+        "emergencyDecisions": 1,
+        "atTargetPulls": 4,
+        "lifePotions": 1,
+        "restLifePotions": 0,
+        "restSitsForHealth": 0,
+        "manaPotions": 0,
+        "shieldScrolls": 0,
+        "speedScrolls": 19,
+        "runningScrolls": 0,
+        "helpItemsSupplied": 1,
+        "binds": 1,
+        "soulHeals": 0
+      }
     }
   ]
 }

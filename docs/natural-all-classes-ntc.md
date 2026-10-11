@@ -8144,10 +8144,32 @@ The template:
       run/snapshots/_verify/nr147-verify-a1): "Verified snapshot ntc-ready-bard-s1:
       character 133266 resumed at its endpoint." Seven pre-commit checks pass
       (run/nr/NR-77/checks.log, on the tree of the three finish captures of this chain).
-- [ ] **NR-148 - Bard: the class scope.** Depends: NR-147
+- [x] **NR-148 - Bard: the class scope.** Depends: NR-147
   - Work: One scope of the Bard's play, chosen where its rules differ most from the
     Artist's, recorded by a bot alone, twice, and added to the gate's sets.
   - Proof: The two recordings are identical.
+  - 2026-10-11: done. Scope bard is recorded and stands in the baseline file.
+    - **The scope.** Haramel, leg l12 from altgard-coingear-bard with the later capital,
+      as the Templar's and the Sorcerer's are. It is where the Bard plays least like the
+      Artist it was: it plays its chains from range and holds a target before it
+      retreats. The capture it starts from is a round character, replayed alone (NR-67a,
+      NR-67b).
+    - **The row** (scripts/sim/run-neutral-gate.ps1, committed first as 689768fa6). One
+      bundle stands for the rows of NR-78, NR-118 and NR-148, on the tree with the
+      three: the script tests, the full gate on fourteen scopes (run guard-p8 of NR-78),
+      the seven checks, the unit suite (4,632 passed, 16 skipped) and Fast nr78-fast.
+    - **The recording** at 5294e08db on a clean tree (run record-a1,
+      run/nr/NR-148/record-a1/verdict.json): two passes, identical after normalization:
+      41,392 records, sha256 0a2193e15e717852. One death, 8 retreats, 281 pull plans,
+      163 holds of the patrol rule, one help item supplied. The traces are kept under
+      run/cp/baseline/5294e08db... and in the second copy beside the repository.
+    - **Proof.** A comparison of the scope with its new row passes (run guard-bard,
+      run/nr/NR-148/guard-bard/verdict.json). Seven pre-commit checks and the three
+      script tests pass on the tree with the new row (run/nr/NR-148/checks2.log,
+      run/nr/NR-148/script-tests2.log).
+    - **The full gate from here** is set
+      all+mage+warrior+artist+engineer+scout+templar+sorcerer+chanter+spiritmaster+bard:
+      seventeen scopes.
 
 ### D2. The rounds
 
@@ -11388,3 +11410,9 @@ report what was done, what is parked or blocked, and what the operator must deci
   records, sha256 da826332d9426677, and guard-spiritmaster passes. The full gate is now
   sixteen scopes. Seven checks and the script tests pass. Next: NR-148, the Bard's class
   scope.
+- 2026-10-11 — Loop: NR-148 done. Scope bard is Haramel from altgard-coingear-bard, a
+  round character replayed alone. Its row was committed as 689768fa6; one bundle stands
+  for the three rows of this batch (fourteen scopes identical, nr78-fast). Recorded at
+  5294e08db: two passes identical, 41,392 records, sha256 0a2193e15e717852, and
+  guard-bard passes. The full gate is now seventeen scopes. Seven checks and the script
+  tests pass. Next: NR-R18a, the Rider's own path through Q24016.
