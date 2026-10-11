@@ -684,5 +684,145 @@
     ],
     "radius": 60,
     "heldQuestIds": []
-  }
+  },
+  "classPaths": [
+    {
+      "class": "RIDER",
+      "questId": 24016,
+      "javaReference": "_24016AStrangeNewThread.java 52-58 (Suthran: page 1011, SELECT1_1_1, movie 219, page 1013), 78-80 (Officer Tavasha 233876, var 3), 98-99 (reward page 2034), 132-133 (the kill sets var 4)",
+      "steps": [
+        {
+          "key": "q24016-v0-suthran",
+          "questId": 24016,
+          "var": 0,
+          "npcId": 203557,
+          "position": [
+            1662.63,
+            1748.56,
+            260.236
+          ],
+          "talkRange": 5,
+          "teleport": {
+            "mapId": 220030000,
+            "position": [
+              2467.6052,
+              2548.0076,
+              316.12375
+            ]
+          },
+          "actions": [
+            "QUEST_SELECT",
+            "SELECT1_1_1",
+            "SETPRO1"
+          ],
+          "pages": [
+            1011,
+            1013
+          ],
+          "movieId": 219
+        },
+        {
+          "key": "q24016-reward-suthran",
+          "questId": 24016,
+          "var": null,
+          "npcId": 203557,
+          "position": [
+            1662.63,
+            1748.56,
+            260.236
+          ],
+          "talkRange": 5,
+          "actions": [
+            "USE_OBJECT",
+            "SELECTED_QUEST_REWARD8"
+          ],
+          "pages": [
+            2034
+          ],
+          "status": "REWARD"
+        }
+      ],
+      "objectUses": [
+        {
+          "key": "q24016-guardian",
+          "questId": 24016,
+          "npcId": 700140,
+          "fromVar": 2,
+          "toVar": 3,
+          "uses": 1,
+          "lootItemId": null,
+          "disappears": false,
+          "area": "bregirun",
+          "mapId": 320030000
+        },
+        {
+          "key": "q24016-gate",
+          "questId": 24016,
+          "npcId": 700141,
+          "fromVar": 4,
+          "toVar": 5,
+          "uses": 1,
+          "lootItemId": null,
+          "disappears": false,
+          "area": "bregirun",
+          "mapId": 320030000,
+          "movieId": 154
+        }
+      ],
+      "hunts": [
+        {
+          "questId": 24016,
+          "npcIds": [
+            233876
+          ],
+          "fromVar": 3,
+          "toVar": 4,
+          "area": "bregirun",
+          "mapId": 320030000
+        }
+      ],
+      "instanceTrips": [
+        {
+          "questId": 24016,
+          "mapId": 320030000,
+          "fromVar": 1,
+          "enterVar": 2,
+          "portalNpcId": 700089,
+          "portalPosition": [
+            2451.53,
+            2546.45,
+            317.129
+          ],
+          "useMillis": 3000,
+          "arrival": [
+            274.2,
+            171.7,
+            204.3
+          ],
+          "exitNpcId": 700184,
+          "exitPosition": [
+            275.738,
+            162.703,
+            205.332
+          ],
+          "exitUseMillis": 5000,
+          "resetVar": 1,
+          "bossNpcId": 233876,
+          "bossPosition": [
+            260.12,
+            234.93,
+            216
+          ],
+          "spawnVar": 3,
+          "killVar": 4,
+          "movieId": 154,
+          "movieExitPosition": [
+            1683.2405,
+            1757.608,
+            259.44543
+          ]
+        }
+      ]
+    }
+  ]
 }

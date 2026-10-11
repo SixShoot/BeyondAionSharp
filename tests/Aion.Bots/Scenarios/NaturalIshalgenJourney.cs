@@ -348,6 +348,8 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 				byte? classId = world.Objects.GetValueOrDefault(session.CharacterId)?.PlayerClass;
 				if (classId is not { } observedId || PlayerClassExtensions.GetPlayerClassById(observedId, true) is not { } observedClass ||
 					observedClass.ToString() == leg.Start.Class) return leg;
+				// NR-R18a: where the server's handler branches on the class, the leg has that class's own entries of the quest.
+				leg = leg.ForClassPath(observedClass.ToString());
 				NaturalGearRules rules = NaturalClassProfiles.For(classId, ClassLine, runtime.Data).Gear;
 				int[] contractItems = [.. leg.CoinGear?.ProtectedItemIds ?? [], .. leg.Haramel?.ProtectedItemIds ?? [], .. leg.AbyssEntry?.ProtectedItemIds ?? []];
 				NaturalIshalgenInventoryPolicy rewards = NaturalIshalgenInventoryPolicy.Load(runtime.RepoRoot,

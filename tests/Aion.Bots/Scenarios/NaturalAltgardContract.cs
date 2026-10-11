@@ -54,7 +54,8 @@ public sealed record NaturalAltgardContract(
 	NaturalAltgardDestiny? Destiny = null,
 	NaturalCoinGear? CoinGear = null,
 	NaturalHaramel? Haramel = null,
-	NaturalAbyssEntry? AbyssEntry = null)
+	NaturalAbyssEntry? AbyssEntry = null,
+	NaturalAltgardClassPath[]? ClassPaths = null)
 {
 	/// <summary>The contract file and plan directory of each leg (none when the leg has no template quests).</summary>
 	public static readonly IReadOnlyDictionary<string, (string Contract, string? Plans)> Legs = new Dictionary<string, (string, string?)>
@@ -135,6 +136,28 @@ public sealed record NaturalAltgardContract(
 			Start = Start with { CompletedQuestIds = [.. Start.CompletedQuestIds.Where(id => !questIds.Contains(id))] },
 			Endpoint = Endpoint with { CompletedQuestIds = [.. Endpoint.CompletedQuestIds.Where(id => !questIds.Contains(id))] },
 		};
+	}
+
+	/// <summary>
+	/// NR-R18a: the same leg for a class the server gives a path of its own through a quest (<see cref="ClassPaths"/>).
+	/// Each step and object use the class's path names replaces the leg's entry with the same key; its hunts and its
+	/// instance trips replace the leg's of that quest. With no path for the class the contract itself is returned.
+	/// </summary>
+	public NaturalAltgardContract ForClassPath(string playerClass)
+	{
+		NaturalAltgardContract leg = this;
+		foreach (NaturalAltgardClassPath path in (ClassPaths ?? []).Where(path => path.Class == playerClass))
+			leg = leg with
+			{
+				Steps = [.. leg.Steps.Select(step => path.Steps?.FirstOrDefault(own => own.Key == step.Key) ?? step)],
+				ObjectUses = leg.ObjectUses == null ? null
+					: [.. leg.ObjectUses.Select(use => path.ObjectUses?.FirstOrDefault(own => own.Key == use.Key) ?? use)],
+				Hunts = path.Hunts == null || leg.Hunts == null ? leg.Hunts
+					: [.. leg.Hunts.Where(hunt => hunt.QuestId != path.QuestId), .. path.Hunts],
+				InstanceTrips = path.InstanceTrips == null || leg.InstanceTrips == null ? leg.InstanceTrips
+					: [.. leg.InstanceTrips.Where(trip => trip.QuestId != path.QuestId), .. path.InstanceTrips],
+			};
+		return leg;
 	}
 
 	/// <summary>
@@ -263,6 +286,16 @@ public sealed record NaturalAltgardContract(
 		contract.CoinGear?.Validate(contract);
 		contract.Haramel?.Validate(contract);
 		contract.AbyssEntry?.Validate(contract);
+		foreach (NaturalAltgardClassPath own in contract.ClassPaths ?? [])
+		{
+			if (!Enum.TryParse<Aion.GameServer.Model.PlayerClass>(own.Class, out _) || !questIds.Contains(own.QuestId) ||
+				(own.Steps ?? []).Any(step => step.QuestId != own.QuestId || !stepKeys.Contains(step.Key)) ||
+				(own.ObjectUses ?? []).Any(use => use.QuestId != own.QuestId || !contract.ObjectUseList.Any(shipped => shipped.Key == use.Key)) ||
+				(own.Hunts ?? []).Any(hunt => hunt.QuestId != own.QuestId) ||
+				(own.InstanceTrips ?? []).Any(trip => trip.QuestId != own.QuestId))
+				throw new InvalidDataException($"Natural Altgard class path of {own.Class} for Q{own.QuestId} names what the leg does not have.");
+			foreach (string action in (own.Steps ?? []).SelectMany(step => step.Actions)) NaturalAscensionContract.DialogActionId(action);
+		}
 		if (contract.AbyssEntry == null == (contract.Leg == NaturalAbyssEntry.Leg))
 			throw new InvalidDataException("Only the ax leg carries the Abyss-entry scope, and it must carry it.");
 		return contract;
@@ -446,6 +479,13 @@ public sealed record NaturalAltgardBind(int NpcId, float[] Position, bool OnArri
 /// <summary>AB-01: a custom handler's kill counter: each kill of <paramref name="NpcIds"/> moves the var from
 /// <paramref name="FromVar"/> toward <paramref name="ToVar"/> (Q2288, Q2289, Q24112, Q24013).</summary>
 public sealed record NaturalAltgardHunt(int QuestId, int[] NpcIds, int FromVar, int ToVar, string Area, string? Note = null, int? MapId = null);
+
+/// <summary>NR-R18a: a class's own entries of one quest, for a quest whose server handler branches on the class (Java
+/// <c>_24016AStrangeNewThread</c> gives the Rider other pages, another boss and other vars). A leg's steps, object uses,
+/// hunts and instance trips are those of the class its contract was written for; these replace them for
+/// <paramref name="Class"/> (<see cref="NaturalAltgardContract.ForClassPath"/>).</summary>
+public sealed record NaturalAltgardClassPath(string Class, int QuestId, string JavaReference, NaturalAltgardStep[]? Steps = null,
+	NaturalAltgardObjectUse[]? ObjectUses = null, NaturalAltgardHunt[]? Hunts = null, NaturalAltgardInstanceTrip[]? InstanceTrips = null);
 
 /// <summary>AB-01: a timed quest. The server's QUEST_TIMER starts at <paramref name="StartStep"/>; at its end the quest is
 /// abandoned or, for a new chance, the next check takes <paramref name="LostItemIds"/> (page <paramref name="ExpiredPage"/>)

@@ -9991,7 +9991,7 @@ through these: each is ticked by the round that gave its capture.
       in round 15. Its hour won two quests all the same. A second such hour for one
       class gets an item, as NR-R15b says.
     - **Deaths: 14.**
-- [ ] **NR-R18a - The Rider's own path through Q24016.** Depends: NR-R18
+- [x] **NR-R18a - The Rider's own path through Q24016.** Depends: NR-R18
   - Work: Java first: _24016AStrangeNewThread whole, with what it spawns and where,
     and the port beside it. A leg's steps, object uses, hunts and instance trip are
     written for the class of its contract; where the server branches on the class the
@@ -10000,7 +10000,58 @@ through these: each is ticked by the round that gave its capture.
     and write the Rider's for Q24016.
   - Proof: The full gate identical, with the bundle. The Rider, resumed from nr-r18-w8
     without a capture, ends leg 10.
-- [ ] **NR-R19 - Round 19: Haramel for the Gladiator and the Ranger, leg 10 for three.** Depends: NR-R18a
+  - 2026-10-11: done. A leg can carry a class's own entries of one quest, and leg 10
+    carries the Rider's of Q24016.
+    - **Java** (_24016AStrangeNewThread). The handler asks for the class four times.
+      - 52-58: at Suthran a Rider sees page 1011, chooses SELECT1_1_1, sees movie 219
+        and page 1013. Every other class sees 1693, SELECT3_1_1, movie 66 and 1695.
+      - 78-80: the guardian stone spawns Officer Tavasha (233876) for a Rider and
+        sets var 3. For the others it spawns Kuninasha (210753) and sets var 13.
+      - 132-133: the Rider's kill sets var 4, the others' var 14. The gate takes
+        either (88-90).
+      - 98-99: the Rider's reward page is 2034, the others' 1352.
+
+      The port has the same four (Handlers/Quest/altgard/_24016AStrangeNewThread.cs
+      51-60, 89-91, 117-119, 158-160). Nothing of the server's is changed.
+    - **The change, generic.**
+      - **The contract** (Sc/NaturalAltgardContract.cs) has ClassPaths: for a class
+        and a quest, the steps, object uses, hunts and instance trips that are that
+        class's own. ForClassPath gives the leg with them: a step or an object use
+        replaces the leg's entry of the same key, the hunts and the trips replace the
+        leg's of that quest. A path that names a step or a use the leg does not have
+        is refused when the leg is loaded.
+      - **The journey** (Sc/NaturalIshalgenJourney.cs) takes the class's path where
+        it fits a leg to the class it observes, before the reward picks. No code asks
+        which class plays.
+      - **The data** (parity-artifacts/e2e/natural-altgard-l10-contract.json): the
+        Rider's Q24016. Suthran's talk with pages 1011 and 1013 and movie 219, the
+        reward page 2034, the guardian stone from var 2 to 3, the hunt of 233876 from
+        3 to 4, the gate at 4, and the instance trip with that boss and those vars.
+    - **Proof round** (run change-a1, the change in the working tree, round 19's file
+      from nr-r18 without a capture; run/nr/NR-R18a/change-a1; 297 s, five worlds).
+      The Rider sees pages 1011 and 1013, enters the instance, uses the stone, kills
+      Officer Tavasha at 0:14:51, uses the gate and is rewarded on page 2034. It ends
+      leg 10: level 24, 162 quests, 7.4 game minutes, no death, receipt verified.
+    - **Also seen in that round, of round 19.** The Ranger ends Haramel with 174
+      quests in 86.1 game minutes and no death. The Assassin's and the Gunner's hours
+      run out in leg 10. The Gladiator stops inside Haramel at 1:26:31: it missed a
+      lift's window and then found "No checked Haramel ground route" for the 4 m back
+      to the lift's waiting place. A captured round would keep it inside the
+      instance, so it is mended before round 19: NR-R18b.
+    - **Proof.** Gate, set
+      all+mage+warrior+artist+engineer+scout+templar+sorcerer+chanter+spiritmaster+bard,
+      -Parallel 8, run guard-p8 (run/nr/NR-R18a/guard-p8/verdict.json): verdict pass,
+      all seventeen scopes identical. Seven pre-commit checks pass,
+      Aion.GameServer.Tests passes (4,632 passed, 16 skipped) and Fast passes (run
+      nrr18a-fast, 11 passed).
+- [ ] **NR-R18b - A missed lift in Haramel, and no way back to its waiting place.** Depends: NR-R18a
+  - Work: The Gladiator missed a lift's window in Haramel (haramel-missed-elevator-window)
+    and stood 4 m from the waiting place with no checked ground route to it. Find
+    where it stood and why the walk back has no route, in the Haramel travel that every
+    class shares, and mend it there. Nothing of the server's is expected to change.
+  - Proof: The full gate identical, with the bundle. The Gladiator, resumed from
+    nr-r18-w3 without a capture, ends Haramel or stops for another reason.
+- [ ] **NR-R19 - Round 19: Haramel for the Gladiator and the Ranger, leg 10 for three.** Depends: NR-R18b
   - Work: Five worlds resumed from nr-r18 with -Capture nr-r19 (round file
     run/nr/NR-R19/round-19.json; worlds 1, 2 and 6 have no bot). The Gladiator and the
     Ranger play Haramel (stage l12); the Assassin, the Gunner and the Rider go on in
@@ -11416,3 +11467,12 @@ report what was done, what is parked or blocked, and what the operator must deci
   5294e08db: two passes identical, 41,392 records, sha256 0a2193e15e717852, and
   guard-bard passes. The full gate is now seventeen scopes. Seven checks and the script
   tests pass. Next: NR-R18a, the Rider's own path through Q24016.
+- 2026-10-11 — Loop: NR-R18a done. Java's handler of Q24016 asks for the class four times
+  and gives the Rider other pages, another boss and other vars. A leg's contract can now
+  carry a class's own entries of one quest, the journey takes them where it fits a leg
+  to the class it observes, and leg 10 carries the Rider's. Proof round (change-a1, 297
+  s): the Rider kills Officer Tavasha and ends leg 10 with 162 quests. Full gate guard-p8
+  (seventeen scopes identical), seven checks, unit suite (4,632 passed, 16 skipped) and
+  Fast (nrr18a-fast) pass. The round showed the Gladiator missing a lift in Haramel and
+  finding no way back to its waiting place: NR-R18b is written, before round 19. Next:
+  NR-R18b.
