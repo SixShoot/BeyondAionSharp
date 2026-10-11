@@ -5269,10 +5269,26 @@ The template:
     Q2946, Q2947 and Q2042 complete, 181 quests in all. Captured as
     morheim-abyss-entry-s1-chanter, a record that points at character 133266 in the
     round snapshot nr-r18-w2.
-- [ ] **NR-77 - Chanter: the endpoint.** Depends: NR-76; ticked by its round
+- [x] **NR-77 - Chanter: the endpoint.** Depends: NR-76; ticked by its round
   - Work: Captured and verified as ntc-ready-chanter-s1: alive at Morheim Ice Fortress,
     level 25 or higher, Q2945, Q2946, Q2947 and Q2042 complete.
   - Proof: The capture verifies.
+  - 2026-10-11: done. ntc-ready-chanter-s1 is captured and verified.
+    - **Captured** at 319ff9c0e: sim-snapshot.ps1 -Action Capture -AltgardLeg1 -Leg ax
+      -From altgard-rc-complete-s1-chanter -Name ntc-ready-chanter-s1 (run nr77-ax-a1,
+      log run/nr/NR-77/capture-a1.log), as the Sorcerer's was (NR-67). The leg was
+      played once more, alone, as round 18 played it: 16 min 30 s, no death, the arena
+      and the ring course each at the first try, 83,872,372 ms of game time since
+      creation. Dump sha256 02f8787b5a4b56c3.
+    - **The endpoint, from the receipt.** Character 133266, created by packets: a
+      Chanter of level 26, alive at Morheim Ice Fortress and bound there; Q24020, Q2945,
+      Q2946, Q2947 and Q2042 complete, 181 quests in all. It wears the level-26 coin
+      staff 101500818 and four level-26 coin pieces.
+    - **Proof.** sim-snapshot.ps1 -Action Verify -Name ntc-ready-chanter-s1, run
+      nr77-verify-a1 (run/nr/NR-77/verify-a1.log; evidence under
+      run/snapshots/_verify/nr77-verify-a1): "Verified snapshot ntc-ready-chanter-s1:
+      character 133266 resumed at its endpoint." Seven pre-commit checks pass
+      (run/nr/NR-77/checks.log, on the tree of the three finish captures of this chain).
 - [ ] **NR-78 - Chanter: the class scope.** Depends: NR-77
   - Work: One scope of the Chanter's play, chosen where its rules differ most from the
     Cleric's, recorded by a bot alone, twice, and added to the gate's sets.
@@ -11266,3 +11282,9 @@ report what was done, what is parked or blocked, and what the operator must deci
   their hours. The Rider fell at login, ended Q2282 and stopped at Q24016, where Java
   gives the Rider a path of its own: NR-R18a. Written: NR-R18a and NR-R19, round 19.
   Seven checks pass. Next: NR-77, the Chanter's finish capture.
+- 2026-10-11 — Loop: NR-77 done. ntc-ready-chanter-s1 is captured at 319ff9c0e (run
+  nr77-ax-a1: the Abyss entry played once more alone, 16 min 30 s, no death) and
+  verified (run nr77-verify-a1): a Chanter of level 26, alive at Morheim Ice Fortress,
+  Q2945, Q2946, Q2947 and Q2042 complete, 181 quests. It is the fourth class at the
+  plan's finish. Seven checks pass. Next: NR-117, the Spirit Master's finish capture,
+  made in the same chain.
