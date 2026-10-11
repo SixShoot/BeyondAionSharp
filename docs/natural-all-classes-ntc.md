@@ -6798,7 +6798,7 @@ The template:
       run guard-p8 (run/nr/NR-110d/guard-p8/verdict.json): verdict pass, all thirteen
       scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests passes (4,629
       passed, 16 skipped) and Fast passes (run nr110d-fast, 11 passed).
-- [ ] **NR-110g - A stagger moves the monster for the bot too.** Depends: NR-110d
+- [x] **NR-110g - A stagger moves the monster for the bot too.** Depends: NR-110d
   - Work: Found by NR-110d. Java first: SM_CASTSPELL_RESULT's list of effects, the
     spell status of each and the place it carries for a stagger, a stumble, a lift and
     a pull, and which of them send SM_FORCED_MOVE besides. The bot's decoder reads the
@@ -6910,6 +6910,41 @@ The template:
       spiritmaster is recorded again. The Gunner's Trunk Shot, left out for the same
       reason, gets an item of its own, NR-120c: it needs a place in the Gunner's table,
       which it never had.
+  - 2026-10-11: done. The Spirit Master has its two staggers back, its row passes, and
+    its scope is recorded again.
+    - **The change** (21f9b9d16: Sc/Classes/NaturalSpiritMasterProfile.cs). Stone Shock
+      I to III and Frozen Shock I have their roles again, the roles stone and shock
+      stand in both lists where they stood before NR-110h, and their reason is gone.
+      Only the Spirit Master's own profile changes.
+    - **The rows** (run/nr/NR-110g/probe3-<row>.log), each with no line of the
+      server's audit.
+      - spirit-master-fight: the mosbear is dead after 12.5 s, where it took 14.4 s
+        without Stone Shock. Chain of Earth at 11.3 s and Stone Shock at 12.0 s. The
+        spirit follows the staggered mosbear, eight steps; the mosbear strikes the
+        spirit four times and its master never.
+      - spirit-master-orders: three kills, and the step after a kill runs three times.
+        Stone Shock follows Chain of Earth in the first and the third fight. The row
+        had pinned NR-110i's case, a cast refused on a mosbear the spirit had just
+        killed, to its second fight; with Stone Shock in the table that fight ends by
+        the bot's own Erosion, and the row failed on it once (probe2). It now checks
+        the case when it arises (same commit). The recorded scope holds the case 17
+        times.
+      - spirit-master-pack: as before, it leaves two mosbears that are on the spirit
+        alone, and nothing strikes the bot.
+    - **The gate before the recording** (run guard4-p8): eighteen scopes identical.
+      Scope spiritmaster differs first at record 2,526, where Stone Shock stands among
+      a decision's candidates.
+    - **Recorded again** at 21f9b9d16 on a clean tree (run record-b1,
+      run/nr/NR-110g/record-b1/verdict.json; 524 s): two passes identical, 57,507
+      records where it had 58,980, sha256 c98ebe14cde13b99. Haramel ends as before,
+      without a death. Stone Shock is cast 51 times; 7 retreats where it had 10, 248
+      pull plans where it had 282, 137 waits for a patrol where it had 173.
+    - **The gate after** (run guard5-p8, run/nr/NR-110g/guard5-p8/verdict.json):
+      nineteen scopes identical. The unit suite (4,632 passed, 16 skipped), the seven
+      checks, on the tree with the change and again on the recorded one, and Fast
+      (nr110g4-fast) pass.
+    - **Not changed.** ntc-ready-spirit-master-s1 was played without the two staggers
+      and stays as it is.
 - [x] **NR-110h - The Spirit Master without its staggers, until NR-110g.** Depends: NR-110d
   - Work: The way round NR-110g (rule (t)). A stagger puts the monster 2 m from the
     spirit that holds it, at a place the bot does not see, and the server's audit then
@@ -11989,3 +12024,11 @@ report what was done, what is parked or blocked, and what the operator must deci
   gladiator 35,420, ranger 33,789 records. Gate guard3-p8: nineteen scopes identical.
   Unit suite, seven checks and Fast nr110g2-fast pass. Written: NR-120c, the Gunner's
   Trunk Shot. Next: NR-110g still, the Spirit Master's staggers and its row.
+- 2026-10-11 — Loop: NR-110g done. Stone Shock and Frozen Shock are back in the Spirit
+  Master's table (21f9b9d16). Rows spirit-master-fight, spirit-master-orders and
+  spirit-master-pack pass with no line of the server's audit; the orders row now checks
+  NR-110i's case when it arises. Gate guard4-p8: eighteen scopes identical, spiritmaster
+  differs first at record 2,526. Recorded again at 21f9b9d16 (record-b1, two passes
+  identical): 57,507 records, sha256 c98ebe14cde13b99, no death, Stone Shock cast 51
+  times. Gate guard5-p8: nineteen scopes identical. Unit suite, seven checks and Fast
+  nr110g4-fast pass. Next: NR-120c, the Gunner's Trunk Shot and Volley.
