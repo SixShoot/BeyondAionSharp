@@ -5695,10 +5695,32 @@ The template:
       run/snapshots/_verify/nr87-verify-a1): "Verified snapshot ntc-ready-gladiator-s1:
       character 133266 resumed at its endpoint." Seven pre-commit checks pass
       (run/nr/NR-87/checks.log, on the tree of the finish captures of this chain).
-- [ ] **NR-88 - Gladiator: the class scope.** Depends: NR-87
+- [x] **NR-88 - Gladiator: the class scope.** Depends: NR-87
   - Work: One scope of the Gladiator's play, chosen where its rules differ most from the
     Templar's, recorded by a bot alone, twice, and added to the gate's sets.
   - Proof: The two recordings are identical.
+  - 2026-10-11: done. Scope gladiator is recorded and stands in the baseline file.
+    - **The scope.** Haramel, leg l12 from altgard-coingear-gladiator with the later
+      capital, as the Templar's and the Sorcerer's are. It is where the Gladiator plays
+      least like the Templar: it fights with a greatsword and no shield, and plays its
+      strike chains at melee where the Templar taunts and holds. The capture it starts
+      from is a round character, replayed alone (NR-67a, NR-67b).
+    - **The row** (scripts/sim/run-neutral-gate.ps1, committed first as cba19113f). One
+      bundle stands for the rows of NR-88 and NR-108, on the tree with the two: the
+      script tests, the full gate on seventeen scopes (run guard-p8 of NR-88), the seven
+      checks, the unit suite (4,632 passed, 16 skipped) and Fast nr88-fast.
+    - **The recording** at f7392b9c7 on a clean tree (run record-a1,
+      run/nr/NR-88/record-a1/verdict.json): two passes, identical after normalization:
+      38,006 records, sha256 6cc82e5f937f980f. No death, 6 retreats, 267 pull plans, 155
+      holds of the patrol rule, 0 help items supplied. The traces are kept under
+      run/cp/baseline/f7392b9c7... and in the second copy beside the repository.
+    - **Proof.** A comparison of the scope with its new row passes (run guard-gladiator,
+      run/nr/NR-88/guard-gladiator/verdict.json). Seven pre-commit checks and the three
+      script tests pass on the tree with the new row (run/nr/NR-88/checks2.log,
+      run/nr/NR-88/script-tests2.log).
+    - **The full gate from here** is set
+      all+mage+warrior+artist+engineer+scout+templar+sorcerer+chanter+spiritmaster+bard+gladiator:
+      eighteen scopes.
 - [x] **NR-90 - Assassin: survey and profile data.** Depends: the close of phase C, NR-04
   - 2026-10-10: done. The Assassin has a class line, a gear table and a profile the
     validator accepts. Nothing has been played. One thing its skills need that the shared
@@ -11730,3 +11752,10 @@ report what was done, what is parked or blocked, and what the operator must deci
   verified (run nr107-verify-a1): a Ranger of level 26, alive at Morheim Ice Fortress,
   Q2945, Q2946, Q2947 and Q2042 complete, 179 quests. It is the eighth class at the
   plan's finish. Seven checks pass. Next: NR-88, the Gladiator's class scope.
+- 2026-10-11 — Loop: NR-88 done. Scope gladiator is Haramel from
+  altgard-coingear-gladiator, a round character replayed alone. Its row was committed as
+  cba19113f; one bundle stands for the two rows of this batch (seventeen scopes
+  identical, nr88-fast). Recorded at f7392b9c7: two passes identical, 38,006 records,
+  sha256 6cc82e5f937f980f, and guard-gladiator passes. The full gate is now eighteen
+  scopes. Seven checks and the script tests pass. Next: NR-108, the Ranger's class
+  scope.

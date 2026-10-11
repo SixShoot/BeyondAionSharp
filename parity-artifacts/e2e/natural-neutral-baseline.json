@@ -765,6 +765,53 @@
         "binds": 1,
         "soulHeals": 0
       }
+    },
+    {
+      "scope": "gladiator",
+      "line": "warrior-gladiator",
+      "replay": {
+        "AltgardLeg1": true,
+        "Leg": "l12",
+        "From": "altgard-coingear-gladiator",
+        "LaterCapital": true
+      },
+      "snapshot": "altgard-coingear-gladiator",
+      "commit": "f7392b9c746595e0e1574d6a9ea1e32fd5d8630e",
+      "environment": {
+        "AION_SIM_SEED": "1",
+        "NA_HELP_ITEMS": null,
+        "AION_BOT_DASHBOARD_PORT": null,
+        "AION_SIM_PROCESS_KEY": null
+      },
+      "ignore": [],
+      "records": 38006,
+      "sha256": "6cc82e5f937f980f69c6bd398d3744a1c6c9b766947331533449e62c32852a8c",
+      "counts": {
+        "records": 38007,
+        "deaths": 0,
+        "reviveSteps": 0,
+        "retreats": 6,
+        "retreatRoutes": 11,
+        "restSitsTraced": 0,
+        "restInterrupts": 0,
+        "betweenFightHeals": 0,
+        "powderRestCasts": 6,
+        "vendorBuys": 0,
+        "pullPlans": 267,
+        "patrolWaits": 155,
+        "emergencyDecisions": 0,
+        "atTargetPulls": 4,
+        "lifePotions": 1,
+        "restLifePotions": 0,
+        "restSitsForHealth": 0,
+        "manaPotions": 0,
+        "shieldScrolls": 0,
+        "speedScrolls": 6,
+        "runningScrolls": 0,
+        "helpItemsSupplied": 0,
+        "binds": 1,
+        "soulHeals": 0
+      }
     }
   ]
 }
