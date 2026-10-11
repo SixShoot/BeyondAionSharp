@@ -5655,11 +5655,16 @@ The template:
     the Gladiator stands at leg 11's end at level 25 with 164 quests. Captured as
     altgard-rc-l6-gladiator to altgard-rc-l11-gladiator, records that point at character 133266
     in the round snapshots of those rounds.
-- [ ] **NR-85 - Gladiator: coin gear and Haramel.** Depends: NR-84; ticked by its round
+- [x] **NR-85 - Gladiator: coin gear and Haramel.** Depends: NR-84; ticked by its round
   - Work: The coin-gear leg (plate, by its manifest, NR-38a) and Haramel with chest
     700829 (NR-40), captured as altgard-coingear-gladiator and
     altgard-rc-complete-s1-gladiator.
   - Proof: Each capture verifies.
+  - 2026-10-11: done in rounds 18 and 19 (NR-R18, NR-R19, world 3). The coin-gear stage
+    ended with 165 quests and Haramel at level 25 with 176 quests, in 103.3 game minutes
+    without a death, each with a receipt that says verified. Captured as
+    altgard-coingear-gladiator and altgard-rc-complete-s1-gladiator, records that point at
+    character 133266 in the round snapshots nr-r18-w3 and nr-r19-w3.
 - [ ] **NR-86 - Gladiator: the Abyss entry.** Depends: NR-85; ticked by its round
   - Work: Q24020, then Q2945, Q2946, Q2947 and Q2042 with the coin tiers it can wear
     (NR-38b, NR-Q14, NR-Q16), captured as morheim-abyss-entry-s1-gladiator.
@@ -6180,11 +6185,16 @@ The template:
     the Ranger stands at leg 11's end at level 25 with 162 quests. Leg 10 is without Q2282 and Q2283, which the Ranger leaves out (NR-R15c). Captured as
     altgard-rc-l6-ranger to altgard-rc-l11-ranger, records that point at character 133266
     in the round snapshots of those rounds.
-- [ ] **NR-105 - Ranger: coin gear and Haramel.** Depends: NR-104; ticked by its round
+- [x] **NR-105 - Ranger: coin gear and Haramel.** Depends: NR-104; ticked by its round
   - Work: The coin-gear leg (leather, by its manifest, NR-38a) and Haramel with chest
     700830 (NR-40), captured as altgard-coingear-ranger and
     altgard-rc-complete-s1-ranger.
   - Proof: Each capture verifies.
+  - 2026-10-11: done in rounds 18 and 19 (NR-R18, NR-R19, world 5). The coin-gear stage
+    ended with 163 quests and Haramel at level 25 with 174 quests, in 86.1 game minutes
+    without a death, each with a receipt that says verified. Captured as
+    altgard-coingear-ranger and altgard-rc-complete-s1-ranger, records that point at
+    character 133266 in the round snapshots nr-r18-w5 and nr-r19-w5.
 - [ ] **NR-106 - Ranger: the Abyss entry.** Depends: NR-105; ticked by its round
   - Work: Q24020, then Q2945, Q2946, Q2947 and Q2042 with the coin tiers it can wear
     (NR-38b, NR-Q14, NR-Q16), captured as morheim-abyss-entry-s1-ranger.
@@ -10080,7 +10090,7 @@ through these: each is ticked by the round that gave its capture.
       all seventeen scopes identical; the Cleric's Haramel scope, hm, rides this lift
       down once. Seven pre-commit checks pass, Aion.GameServer.Tests passes (4,632
       passed, 16 skipped) and Fast passes (run nrr18b-fast, 11 passed).
-- [ ] **NR-R19 - Round 19: Haramel for the Gladiator and the Ranger, leg 10 for three.** Depends: NR-R18b
+- [x] **NR-R19 - Round 19: Haramel for the Gladiator and the Ranger, leg 10 for three.** Depends: NR-R18b
   - Work: Five worlds resumed from nr-r18 with -Capture nr-r19 (round file
     run/nr/NR-R19/round-19.json; worlds 1, 2 and 6 have no bot). The Gladiator and the
     Ranger play Haramel (stage l12); the Assassin, the Gunner and the Rider go on in
@@ -10088,6 +10098,49 @@ through these: each is ticked by the round that gave its capture.
     outcome line for each class, and the table of leg 10's attempts carried on. A stop
     outside leg 10's hunts gets a lettered item, in round 19's own letters; so does a
     class with three attempts at one quest and nothing won.
+  - Proof: round.json with five outcome records; for each class that reached its
+    stage's end the completion receipt says verified and its capture is written.
+  - 2026-10-11: played. Three reached their stage's end and are captured, and two
+    class items are ticked: the Gladiator and the Ranger end Haramel (NR-85, NR-105).
+    The Rider ends leg 10. The Assassin's and the Gunner's hours ran out in leg 10. No
+    stop of this round is a defect: NR-R18a and NR-R18b mended the two that the rounds
+    before it had shown.
+    - **The round** (run r19-a1 at 6f291b7e7, -From nr-r18, -Capture nr-r19;
+      run/nr/NR-R19/r19-a1; round file run/nr/NR-R19/round-19.json). Five worlds side by
+      side, worlds 3, 4, 5, 7 and 8, 315 seconds of wall time. It plays as NR-R18b's
+      round without a capture did.
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 3 | warrior-gladiator | Gladiator | l12 | reached | 25 | 176 | 103.3 | 136, 126 kills | 0 | altgard-rc-complete-s1-gladiator |
+      | 4 | scout-assassin | Assassin | l10 | stopped | 23 | 152 | 135.6 | 160, 103 kills | 11 | none |
+      | 5 | scout-ranger | Ranger | l12 | reached | 25 | 174 | 86.1 | 136, 128 kills | 0 | altgard-rc-complete-s1-ranger |
+      | 7 | engineer-gunner | Gunner | l10 | stopped | 24 | 152 | 60.0 | 54, 30 kills | 2 | none |
+      | 8 | engineer-rider | Rider | l10 | reached | 24 | 162 | 7.4 | 9, 9 kills | 0 | altgard-rc-l10-rider |
+
+      Each receipt of a class that reached its stage's end says verified. The captures
+      are records that point into the round snapshots nr-r19-w3 to nr-r19-w8, which hold
+      the two that stopped as they stood.
+    - **What the two items before it gave.** The Gladiator waited for the next lift in
+      Haramel (NR-R18b) and ended it in 103.3 game minutes without a death. The Rider
+      played its own path through Q24016 (NR-R18a), pages 1011, 1013 and 2034, and
+      ended leg 10 in 7.4 game minutes.
+    - **Leg 10, the attempts so far.**
+
+      | Class | Where its hour ran out | Attempts with nothing won | Note |
+      |---|---|---|---|
+      | Rider | none: ended | - | NR-R18a |
+      | Assassin | Q2281 | 0 | Q2280 ended at 0:33:39 and six counts of Q2281; 39 flights at low health, 11 deaths, 20 fights that ended in a blocked approach |
+      | Gunner | Q2282 | 2 | no fight with a warlock in the hour; 13 fights left at two attackers. It has two of three from rounds 16 and 17. A third such hour gets an item under NR-Q4 |
+    - **Deaths: 13.**
+- [ ] **NR-R20 - Round 20: the Abyss entry for the Gladiator and the Ranger, leg 11 for the Rider, leg 10 for two.** Depends: NR-R19
+  - Work: Five worlds resumed from nr-r19 with -Capture nr-r20 (round file
+    run/nr/NR-R20/round-20.json; worlds 1, 2 and 6 have no bot). The Gladiator and the
+    Ranger play the Abyss entry (stage ax); the Rider plays leg 11; the Assassin and
+    the Gunner go on in leg 10, each from where it stopped. Captures as the class items
+    name them. One outcome line for each class, and the table of leg 10's attempts
+    carried on. A stop outside leg 10's hunts gets a lettered item, in round 20's own
+    letters; so does a class with three attempts at one quest and nothing won.
   - Proof: round.json with five outcome records; for each class that reached its
     stage's end the completion receipt says verified and its capture is written.
 
@@ -11513,3 +11566,9 @@ report what was done, what is parked or blocked, and what the operator must deci
   the next lift and ends Haramel with 176 quests. Full gate guard-p8 (seventeen scopes
   identical), seven checks, unit suite (4,632 passed, 16 skipped) and Fast (nrr18b-fast)
   pass. Next: NR-R19, round 19, with its captures.
+- 2026-10-11 — Loop: NR-R19 played. Round 19 (r19-a1 at 6f291b7e7, -From nr-r18, 315 s,
+  five worlds): three reached their stage's end and are captured in nr-r19-w3 to w8. The
+  Gladiator (176 quests) and the Ranger (174) end Haramel (NR-85, NR-105); the Rider ends
+  leg 10 with 162. The Assassin ended Q2280 and began Q2281 before its hour ran out; the
+  Gunner's hour at Q2282 won nothing, the second in a row. Written: NR-R20, round 20.
+  Seven checks pass. Next: NR-R20, round 20, with its captures.
