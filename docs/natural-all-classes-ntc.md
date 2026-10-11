@@ -8725,12 +8725,80 @@ through these: each is ticked by the round that gave its capture.
       shaman four times, a watch bodyguard once, level 17); the Sorcerer and the Spirit
       Master passed the same quest without one. Three are the Assassin's in leg 5 and
       one the Gunner's in leg 7. Each stood up at its obelisk and went on.
-- [ ] **NR-R11 - Round 11: leg 9 for three, leg 8 for four, leg 7 for the Chanter and leg 6 for the Assassin.** Depends: NR-R10
+- [x] **NR-R11 - Round 11: leg 9 for three, leg 8 for four, leg 7 for the Chanter and leg 6 for the Assassin.** Depends: NR-R10
   - Work: The eight worlds resumed from nr-r10 with -Capture nr-r11 (round file
     run/nr/NR-R11/round-11.json). The Sorcerer, Ranger and Spirit Master play leg 9;
     the Gladiator, Bard, Gunner and Rider play leg 8; the Chanter plays leg 7 and the
     Assassin leg 6. Captures as altgard-rc-<leg>-<class>. One outcome line for each
     class; a stop gets a lettered item, in round 11's own letters.
+  - Proof: round.json with nine outcome records; for each class that reached its
+    stage's end the completion receipt says verified and its capture is written.
+  - 2026-10-10: played. Seven reached their stage's end and are captured. The Spirit
+    Master ended leg 9 too, but its run recorded an error of the server's, so it has no
+    capture: NR-R11a, a defect of the port. The Gunner stopped in leg 8 at a talk:
+    NR-R11b.
+    - **The round** (run r11-a1 at f6f824ac5, -From nr-r10, -Capture nr-r11;
+      run/nr/NR-R11/r11-a1; round file run/nr/NR-R11/round-11.json). Eight worlds side by
+      side, 305 seconds of wall time.
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 1 | mage-sorcerer | Sorcerer | l9 | reached | 22 | 152 | 63.0 | 51, 49 kills | 1 | altgard-rc-l9-sorcerer |
+      | 2 | priest-chanter | Chanter | l7 | reached | 22 | 135 | 39.2 | 36, 35 kills | 0 | altgard-rc-l7-chanter |
+      | 3 | warrior-gladiator | Gladiator | l8 | reached | 22 | 142 | 55.9 | 60, 45 kills | 4 | altgard-rc-l8-gladiator |
+      | 4 | scout-assassin | Assassin | l6 | reached | 21 | 119 | 65.5 | 93, 88 kills | 0 | altgard-rc-l6-assassin |
+      | 5 | scout-ranger | Ranger | l9 | reached | 22 | 152 | 60.6 | 60, 52 kills | 1 | altgard-rc-l9-ranger |
+      | 6 | mage-spirit-master | Spirit Master | l9 | stopped | 22 | 152 | 63.6 | 44, 38 kills | 0 | none |
+      | 7 | engineer-gunner | Gunner | l8 | stopped | 22 | 140 | 65.1 | 54, 36 kills | 4 | none |
+      | 8 | artist-bard | Bard | l8 | reached | 22 | 142 | 22.5 | 23, 19 kills | 0 | altgard-rc-l8-bard |
+      | 8 | engineer-rider | Rider | l8 | reached | 22 | 142 | 31.3 | 30, 27 kills | 0 | altgard-rc-l8-rider |
+
+      Each receipt of a class that reached its stage's end says verified. The captures
+      are records that point into the round snapshots nr-r11-w1 to nr-r11-w8, which hold
+      the Spirit Master at leg 9's end and the Gunner as it stood.
+    - **The Spirit Master, leg 9: an error of the server's.** The leg ended and its
+      receipt says verified (level 22, 152 quests). The run is counted as stopped
+      because the server logged an error while it handled one of the bot's packets, a
+      skill ordered of the spirit: "[205] CM_SUMMON_CASTSPELL ...
+      System.NotSupportedException: Collection is read-only" at EffectTemplate.Calculate
+      (SkillEngine/Effect/EffectTemplate.cs 246), under Effect.Initialize and
+      SummonController.UseSkill. The line is Java's effect.getSuccessEffects().clear()
+      (EffectTemplate.java 316). Java's getSuccessEffects() is the map's live values()
+      view, and clear() on it empties the map; the port returns
+      ConcurrentDictionary.Values, a read-only copy, and Clear() on that throws. It is
+      reached when an effect after a skill's first is dodged or resisted and the first
+      is not a damage effect. A defect of the port's alone: item NR-R11a.
+    - **The Gunner, leg 8: a talk to a guard who was fighting.** "No SM_DIALOG_WINDOW
+      packet within 3 minutes of real time", at Q2266's Neifenmer (203655, a guard). A
+      watch mage (210721) was fighting him when the bot asked for the dialog, and no
+      window came. The bot waited for it without letting the clock run, so the fight
+      never ended. Item NR-R11b.
+    - **Deaths: ten.** Four are the Gladiator's and four the Gunner's in leg 8, one the
+      Sorcerer's and one the Ranger's in leg 9.
+- [ ] **NR-R11a - The port's getSuccessEffects().clear() throws.** Depends: NR-R11
+  - Work: Java first (rule (t)): Effect.getSuccessEffects (Effect.java 854-856) and its
+    one caller that changes it (EffectTemplate.java 315-316). Give the port's
+    Effect.GetSuccessEffects() Java's meaning, a view whose Clear() empties the map, so
+    the caller stays Java's line. A port test for the view, as the skill engine's other
+    port tests are; this is the server, not bot work.
+  - Proof: The port test. The full gate identical, with the bundle. Round 12 captures
+    the Spirit Master at leg 9's end with no server problem recorded.
+- [ ] **NR-R11b - A talk to an NPC who is fighting.** Depends: NR-R11a
+  - Work: Java first: what a guard in a fight does with a dialog request
+    (CM_SHOW_DIALOG, the AI's DIALOG_START). Then the bot, in the shared talk step: it
+    does not wait for a dialog window without the clock running, and when the NPC it
+    wants to talk to is fighting a monster it does what a player does, fights that
+    monster or lets the guard finish, and asks again.
+  - Proof: The full gate identical, with the bundle. The Gunner, resumed from nr-r11-w7
+    without a capture, talks to Neifenmer and ends leg 8.
+- [ ] **NR-R12 - Round 12: leg 10 for two, leg 9 for four, and the legs of the Chanter, the Assassin and the Gunner.** Depends: NR-R11b
+  - Work: The eight worlds resumed from nr-r11 with -Capture nr-r12 (round file
+    run/nr/NR-R12/round-12.json). The Sorcerer and the Ranger play leg 10; the
+    Gladiator, Bard and Rider play leg 9, and the Spirit Master's leg 9 is played again
+    from its end for the capture; the Chanter plays leg 8 and the Assassin leg 7; the
+    Gunner goes on in leg 8 from where it stopped. Captures as
+    altgard-rc-<leg>-<class>. One outcome line for each class; a stop gets a lettered
+    item, in round 12's own letters.
   - Proof: round.json with nine outcome records; for each class that reached its
     stage's end the completion receipt says verified and its capture is written.
 
@@ -9912,3 +9980,11 @@ report what was done, what is parked or blocked, and what the operator must deci
   the Ranger's at Q2270's watch. Written: NR-R11, round 11. Seven checks pass. Next:
   NR-R11, round 11: leg 9 for three, leg 8 for four, leg 7 for the Chanter and leg 6 for
   the Assassin.
+- 2026-10-10 — Loop: NR-R11 played. Round 11 (r11-a1 at f6f824ac5, -From nr-r10, 305 s):
+  seven reached their stage's end and are captured in nr-r11-w1 to w8: the Sorcerer and
+  the Ranger leg 9 (152 quests), the Gladiator, Bard and Rider leg 8 (142), the Chanter
+  leg 7 (135) and the Assassin leg 6 (119). The Spirit Master ended leg 9 with a server
+  error recorded: the port's getSuccessEffects().Clear() throws on a read-only copy where
+  Java clears the map. The Gunner stopped in leg 8, asking a guard who was fighting for a
+  dialog. Written: NR-R11a, NR-R11b and NR-R12, round 12. Seven checks pass. Next:
+  NR-R11a.
