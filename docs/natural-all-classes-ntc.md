@@ -5665,10 +5665,16 @@ The template:
     without a death, each with a receipt that says verified. Captured as
     altgard-coingear-gladiator and altgard-rc-complete-s1-gladiator, records that point at
     character 133266 in the round snapshots nr-r18-w3 and nr-r19-w3.
-- [ ] **NR-86 - Gladiator: the Abyss entry.** Depends: NR-85; ticked by its round
+- [x] **NR-86 - Gladiator: the Abyss entry.** Depends: NR-85; ticked by its round
   - Work: Q24020, then Q2945, Q2946, Q2947 and Q2042 with the coin tiers it can wear
     (NR-38b, NR-Q14, NR-Q16), captured as morheim-abyss-entry-s1-gladiator.
   - Proof: The capture verifies.
+  - 2026-10-11: done in round 20 (NR-R20, world 3). The Abyss entry ended in 16 min
+    49 s without a death, the arena and the ring course each at the first try, with a
+    receipt that says verified: level 26, alive at Morheim Ice Fortress, Q24020, Q2945,
+    Q2946, Q2947 and Q2042 complete, 181 quests in all. Captured as
+    morheim-abyss-entry-s1-gladiator, a record that points at character 133266 in the
+    round snapshot nr-r20-w3.
 - [ ] **NR-87 - Gladiator: the endpoint.** Depends: NR-86; ticked by its round
   - Work: Captured and verified as ntc-ready-gladiator-s1: alive at Morheim Ice Fortress,
     level 25 or higher, Q2945, Q2946, Q2947 and Q2042 complete.
@@ -6195,10 +6201,16 @@ The template:
     without a death, each with a receipt that says verified. Captured as
     altgard-coingear-ranger and altgard-rc-complete-s1-ranger, records that point at
     character 133266 in the round snapshots nr-r18-w5 and nr-r19-w5.
-- [ ] **NR-106 - Ranger: the Abyss entry.** Depends: NR-105; ticked by its round
+- [x] **NR-106 - Ranger: the Abyss entry.** Depends: NR-105; ticked by its round
   - Work: Q24020, then Q2945, Q2946, Q2947 and Q2042 with the coin tiers it can wear
     (NR-38b, NR-Q14, NR-Q16), captured as morheim-abyss-entry-s1-ranger.
   - Proof: The capture verifies.
+  - 2026-10-11: done in round 20 (NR-R20, world 5). The Abyss entry ended in 15 min
+    32 s without a death, the arena and the ring course each at the first try, with a
+    receipt that says verified: level 26, alive at Morheim Ice Fortress, Q24020, Q2945,
+    Q2946, Q2947 and Q2042 complete, 179 quests in all. Q2282 and Q2283 are not among them (NR-R15c). Captured as
+    morheim-abyss-entry-s1-ranger, a record that points at character 133266 in the
+    round snapshot nr-r20-w5.
 - [ ] **NR-107 - Ranger: the endpoint.** Depends: NR-106; ticked by its round
   - Work: Captured and verified as ntc-ready-ranger-s1: alive at Morheim Ice Fortress,
     level 25 or higher, Q2945, Q2946, Q2947 and Q2042 complete.
@@ -7893,9 +7905,14 @@ The template:
     receipt that says verified, and the Rider stands at leg 5's end at level 21 with
     109 quests. Captured as altgard-rc-l1-rider to altgard-rc-l5-rider, records
     that point at character 133702 in the round snapshots nr-r3-w8 to nr-r7-w8.
-- [ ] **NR-134 - Rider: Altgard legs l6 to l11.** Depends: NR-133; ticked by its round
+- [x] **NR-134 - Rider: Altgard legs l6 to l11.** Depends: NR-133; ticked by its round
   - Work: As NR-133. Leg 11 is the destiny quest: its stone is 140000002 (NR-39).
   - Proof: Each capture verifies.
+  - 2026-10-11: done in rounds 9 to 11, 13, 19 and 20 (NR-R9 to NR-R11, NR-R13, NR-R19,
+    NR-R20, world 8). Each leg ended with a receipt that says verified, leg 10 by the
+    Rider's own path through Q24016 (NR-R18a), and the Rider stands at leg 11's end at
+    level 25 with 164 quests. Captured as altgard-rc-l6-rider to altgard-rc-l11-rider,
+    records that point at character 133702 in the round snapshots of those rounds.
 - [ ] **NR-135 - Rider: coin gear and Haramel.** Depends: NR-134; ticked by its round
   - Work: The coin-gear leg (chain, by its manifest, NR-38a) and Haramel with chest
     700832 (NR-40), captured as altgard-coingear-rider and
@@ -10168,7 +10185,7 @@ through these: each is ticked by the round that gave its capture.
       all seventeen scopes identical. Seven pre-commit checks pass,
       Aion.GameServer.Tests passes (4,632 passed, 16 skipped) and Fast passes (run
       nrr19a-fast, 11 passed).
-- [ ] **NR-R20 - Round 20: the Abyss entry for the Gladiator and the Ranger, leg 11 for the Rider, leg 10 for two.** Depends: NR-R19a
+- [x] **NR-R20 - Round 20: the Abyss entry for the Gladiator and the Ranger, leg 11 for the Rider, leg 10 for two.** Depends: NR-R19a
   - Work: Five worlds resumed from nr-r19 with -Capture nr-r20 (round file
     run/nr/NR-R20/round-20.json; worlds 1, 2 and 6 have no bot). The Gladiator and the
     Ranger play the Abyss entry (stage ax); the Rider plays leg 11; the Assassin and
@@ -10177,6 +10194,53 @@ through these: each is ticked by the round that gave its capture.
     carried on. A stop outside leg 10's hunts gets a lettered item, in round 20's own
     letters; so does a class with three attempts at one quest and nothing won.
   - Proof: round.json with five outcome records; for each class that reached its
+    stage's end the completion receipt says verified and its capture is written.
+  - 2026-10-11: played. Four reached their stage's end and are captured, and three
+    class items are ticked: the Gladiator and the Ranger end the Abyss entry (NR-86,
+    NR-106), and the Rider ends leg 11, the last of its legs l6 to l11 (NR-134). The
+    Gunner ends leg 10. The Assassin's hour ran out in leg 10. No stop of this round
+    is a defect: NR-R19a mended the one its preview had shown.
+    - **The round** (run r20-a1 at 9a4063e8d, -From nr-r19, -Capture nr-r20;
+      run/nr/NR-R20/r20-a1; round file run/nr/NR-R20/round-20.json). Five worlds side by
+      side, worlds 3, 4, 5, 7 and 8, 233 seconds of wall time. It plays as NR-R19a's
+      round without a capture did.
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 3 | warrior-gladiator | Gladiator | ax | reached | 26 | 181 | 16.8 | 10, 10 kills | 0 | morheim-abyss-entry-s1-gladiator |
+      | 4 | scout-assassin | Assassin | l10 | stopped | 24 | 152 | 101.3 | 126, 69 kills | 13 | none |
+      | 5 | scout-ranger | Ranger | ax | reached | 26 | 179 | 15.5 | 10, 10 kills | 0 | morheim-abyss-entry-s1-ranger |
+      | 7 | engineer-gunner | Gunner | l10 | reached | 25 | 162 | 100.9 | 89, 74 kills | 0 | altgard-rc-l10-gunner |
+      | 8 | engineer-rider | Rider | l11 | reached | 25 | 164 | 12.3 | 9, 9 kills | 0 | altgard-rc-l11-rider |
+
+      Each receipt of a class that reached its stage's end says verified. The captures
+      are records that point into the round snapshots nr-r20-w3 to nr-r20-w8, which hold
+      the Assassin as it stood.
+    - **Six of the nine classes of the rounds stand at the Abyss entry's end now.**
+      Four have their finish captures. The Gladiator's and the Ranger's are NR-87 and
+      NR-107; their worlds have no bot from round 21 on. The Ranger's 179 quests are
+      the others' 181 without Q2282 and Q2283.
+    - **The Gunner ends leg 10.** It killed its third warlock of Q2282 at 0:13:24,
+      after two hours with none, handed the village's quests in and did the campaign:
+      162 quests, 100.9 game minutes, no death.
+    - **The Rider's fight with the Hellion** ended with the teleport before the
+      fight's own end, as in the preview, and went on (NR-R19a).
+    - **Leg 10, the attempts so far.**
+
+      | Class | Where its hour ran out | Attempts with nothing won | Note |
+      |---|---|---|---|
+      | Gunner | none: ended | - | |
+      | Assassin | Q2281 | 0 | five more counts of Q2281 by 0:41:19, then an hour with none; 33 flights at low health, 13 deaths, 34 fights that ended in a blocked approach. It is the one class still in leg 10 |
+    - **Deaths: 13,** all the Assassin's.
+- [ ] **NR-R21 - Round 21: leg 11 for the Gunner, the coin gear for the Rider, leg 10 for the Assassin.** Depends: NR-R20
+  - Work: Three worlds resumed from nr-r20 with -Capture nr-r21 (round file
+    run/nr/NR-R21/round-21.json; worlds 1, 2, 3, 5 and 6 have no bot). The Gunner
+    plays leg 11; the Rider plays the coin-gear stage; the Assassin goes on in leg 10
+    from where it stopped. Captures as the class items name them. One outcome line for
+    each class, and the table of leg 10's attempts carried on. A stop outside leg 10's
+    hunts gets a lettered item, in round 21's own letters; so does a class with three
+    attempts at one quest and nothing won.
+  - Proof: round.json with three outcome records; for each class that reached its
     stage's end the completion receipt says verified and its capture is written.
 
 ### E. Close
@@ -11615,3 +11679,10 @@ report what was done, what is parked or blocked, and what the operator must deci
   quests. Full gate guard-p8 (seventeen scopes identical), seven checks, unit suite
   (4,632 passed, 16 skipped) and Fast (nrr19a-fast) pass. Next: NR-R20, round 20, with
   its captures.
+- 2026-10-11 — Loop: NR-R20 played. Round 20 (r20-a1 at 9a4063e8d, -From nr-r19, 233 s,
+  five worlds): four reached their stage's end and are captured in nr-r20-w3 to w8. The
+  Gladiator (181 quests) and the Ranger (179) end the Abyss entry at level 26 (NR-86,
+  NR-106); the Rider ends leg 11 with 164 (NR-134); the Gunner killed its third warlock
+  and ends leg 10 with 162. The Assassin counted five more of Q2281 before its hour ran
+  out; it is the one class still in leg 10. Written: NR-R21, round 21. Seven checks
+  pass. Next: NR-87, the Gladiator's finish capture.
