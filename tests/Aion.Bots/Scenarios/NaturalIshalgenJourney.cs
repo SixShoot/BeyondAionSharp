@@ -6438,9 +6438,10 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 				if (LostTravel()) return false;
 				// CP-40: a walk-in class reaches what it can walk to from its staging spot, the fight-through's pull range;
 				// every other style reaches what its spell does.
+				float reach = combat.ClassProfile.PullStyle == NaturalPullStyle.WalkIn
+					? combat.ClassProfile.Ranges.FightThroughPullRange : combat.ClassProfile.Ranges.SpellRange + 3;
 				bool OutOfReach(NaturalNavigationObject npc) =>
-					Distance(session.CurrentPosition, npc.Position) > (combat.ClassProfile.PullStyle == NaturalPullStyle.WalkIn
-						? combat.ClassProfile.Ranges.FightThroughPullRange : combat.ClassProfile.Ranges.SpellRange + 3) ||
+					Distance(session.CurrentPosition, npc.Position) > reach ||
 					!geometry.HasLineOfSight(contract.MapId, session.CurrentPosition, npc.Position);
 				NaturalNavigationObject? target;
 				if (pull == null)
@@ -6516,6 +6517,35 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 					target = navigator.Observe().Npcs.FirstOrDefault(npc => npc.ObjectId == again.Target.Npc.ObjectId);
 				}
 				if (target == null) return true; // it moved away or despawned: re-plan from here
+				// NR-R8c: the plan left the bot where it stands, and from there the blocker is farther than the class reaches.
+				// The planner measures on the map and the reach is measured through the air: on the ledge above Q2246's
+				// insignia box a Blackened Angolem is 14.6 m off on the map and 17.6 m away, and a class with the Templar's
+				// ranges reaches 17. Planning again answers the same spot. Walk the checked fight-through route toward the
+				// blocker until it is in reach, as when no spot was found. A blocker in reach but out of sight is left as before.
+				if (Distance(session.CurrentPosition, target.Position) > reach && fightRoute.Count > 1 &&
+					Distance(session.CurrentPosition, fightRoute[0]) < 3)
+				{
+					int blocker = target.ObjectId;
+					int nearest = Enumerable.Range(0, fightRoute.Count)
+						.OrderBy(i => Distance(fightRoute[i], target.Position)).ThenBy(i => i).First();
+					session.TraceDiagnostic("fight-through-close-in", new Dictionary<string, object?>
+					{
+						["target"] = $"{target.TemplateId}/{target.ObjectId}",
+						["distance"] = Distance(session.CurrentPosition, target.Position),
+						["reach"] = reach,
+						["routePoints"] = nearest + 1,
+						["position"] = session.CurrentPosition,
+					});
+					foreach (BotPosition[] pair in fightRoute.Take(nearest + 1).Skip(1).Chunk(2))
+					{
+						await navigator.MoveAsync(pair, token);
+						await navigator.SynchronizeAsync(token);
+						if (LostTravel()) return false;
+						target = navigator.Observe().Npcs.FirstOrDefault(npc => npc.ObjectId == blocker);
+						if (target == null || !OutOfReach(target)) break;
+					}
+					if (target == null) return true;
+				}
 				if (OutOfReach(target))
 				{
 					rejected.Add(target.ObjectId);

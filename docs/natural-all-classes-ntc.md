@@ -8549,13 +8549,62 @@ through these: each is ticked by the round that gave its capture.
       it gets an item.
     - **Proof.** No code changes, so the gate is NR-R8a's (guard-p8, thirteen scopes
       identical at this tree). Seven pre-commit checks pass.
-- [ ] **NR-R8c - The Rider at Q2246's insignia box.** Depends: NR-R8b
+- [x] **NR-R8c - The Rider at Q2246's insignia box.** Depends: NR-R8b
   - Work: Java first for what the step relies on. Find why the pull of the blocker
     answers "moved" from a place the Rider does not leave, and mend it in the shared
     code: a class whose skills reach 5 m must be able to clear a blocker.
   - Proof: The full gate identical. The Rider, resumed from nr-r8-w8 without a
     capture, opens the insignia box and ends leg 6.
-- [ ] **NR-R9 - Round 9: leg 7 for three, leg 6 for four, and the Chanter's and the Assassin's legs.** Depends: NR-R8c
+  - 2026-10-10: done, for the Rider and for the Gladiator, which stops at the same place
+    (NR-R8a's proof round).
+    - **Why the Rider did not walk.** Both stand on a ledge 10 m above the box, at the
+      route's last point outside the circle of a Blackened Angolem (210487) that blocks
+      the way down. The pull planner measures on the map: the Angolem is 14.6 m off, a
+      place to pull from, and it answers "pull from here". The fight-through measures
+      the reach through the air: 17.6 m, and a class with the Templar's ranges reaches
+      17 (its spell range of 14 and 3). So the blocker is "moved", the pull is planned
+      again, the answer is the same spot, and after three such the blocker is refused;
+      the way stays closed, and the walk to the box fails. The ranged classes reach 25
+      and shot the Angolem from the ledge.
+    - **Java.** Nothing of the server's is relied on.
+    - **The change, generic** (Sc/NaturalIshalgenJourney.cs, TryFightThroughAsync).
+      When the plan has left the bot where it stands and the blocker is farther than
+      the class reaches, the bot walks the checked fight-through route toward it until
+      it is in reach and in sight, as it already does when no spot is found, and then
+      fights it; the trace says fight-through-close-in. A blocker within reach but out
+      of sight is refused as before. That is the case two recorded scopes hold, m (14.4
+      m of the Priest's 25) and templar (12.4 m of 17), and neither changes.
+    - **Proof round** (run change-a1, the change in the working tree, round 9's file
+      from nr-r8 without a capture; run/nr/NR-R8c/change-a1; 291 s). The Rider walked
+      down at 0:10:00, killed the Angolem, took the insignia from the box at 0:10:56 and
+      ended leg 6 at level 21 with 119 quests, 45.3 game minutes and one death. The
+      Gladiator did the same at 0:33:28 and 0:34:18 and ended leg 6 at level 21 with
+      119 quests, 127.1 game minutes and no death. The walk ran once for each and for
+      no other class.
+    - **Also seen in that round: the Bard stopped in leg 6,** in the world it shares
+      with the Rider, at Q2284's escort: "No client-observed NPC 798041", Disguised
+      Germir. The Rider had escorted him from 0:34 to 0:41 on the world's clock, just
+      before the Bard came for him at 0:42. The Bard waited, and he was back at 0:46:02,
+      295 s after the Rider's escort had ended. The Bard then went to clear the escort's
+      line of monsters; when it came back at 1:00:25 he was gone again, six waits did
+      not bring him, and the step gave up at 1:06:26. In NR-R8a's proof round, where
+      the Rider stopped before the escort, the Bard had him to itself and ended the
+      leg. Item NR-R8d.
+    - **Proof.** Gate, set all+mage+warrior+artist+engineer+scout+templar, -Parallel 8,
+      run guard-p8 (run/nr/NR-R8c/guard-p8/verdict.json): verdict pass, all thirteen
+      scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests passes (4,629
+      passed, 16 skipped) and Fast passes (run nrr8c-fast, 11 passed).
+- [ ] **NR-R8d - The Bard at Q2284's follower after another bot's escort.** Depends: NR-R8c
+  - Work: Java first: what Q2284's handler does with Disguised Germir when an escort
+    ends, and when and where the server brings him back; then the port, line by line.
+    A difference of the port is mended Java-first (rule (t)). If the server is right,
+    find why he was gone again when the Bard came back from clearing the escort's line,
+    and mend the escort in the shared code. Two bots in one world may want one
+    follower: the second waits for him and then has him.
+  - Proof: The full gate identical; Fast and the unit suite when server code changes.
+    Round 9's file, played from nr-r8 without a capture: the Bard, in the Rider's world,
+    escorts Germir after the Rider has and ends leg 6.
+- [ ] **NR-R9 - Round 9: leg 7 for three, leg 6 for four, and the Chanter's and the Assassin's legs.** Depends: NR-R8d
   - Work: The eight worlds resumed from nr-r8 with -Capture nr-r9 (round file
     run/nr/NR-R9/round-9.json). The Sorcerer, Ranger and Spirit Master play leg 7; the
     Gladiator and the Bard play leg 6; the Gunner and the Rider go on in leg 6, the
@@ -9707,3 +9756,12 @@ report what was done, what is parked or blocked, and what the operator must deci
   proof round at the tree that is HEAD now, takes Q2247 and ends leg 6 (level 21, 119
   quests, one death). The lost hour is a finding. Seven checks pass. Next: NR-R8c, the
   insignia box, for the Rider and the Gladiator.
+- 2026-10-10 — Loop: NR-R8c done. On the ledge above Q2246's insignia box the pull planner
+  measures a Blackened Angolem on the map (14.6 m, "pull from here") and the fight-through
+  measures the reach through the air (17.6 m of the 17 a class with the Templar's ranges
+  has), so the Rider and the Gladiator never walked. The fight-through now walks its
+  checked route toward a blocker that is farther than the class reaches. Proof round
+  (change-a1, 291 s): both killed the Angolem, opened the box and ended leg 6. Full gate
+  guard-p8 (thirteen scopes identical), seven checks, unit suite (4,629 passed, 16
+  skipped) and Fast (nrr8c-fast) pass. The same round showed the Bard stopping at Q2284's
+  follower after the Rider's escort in their shared world. Written: NR-R8d. Next: NR-R8d.
