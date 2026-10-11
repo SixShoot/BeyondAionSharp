@@ -812,6 +812,53 @@
         "binds": 1,
         "soulHeals": 0
       }
+    },
+    {
+      "scope": "ranger",
+      "line": "scout-ranger",
+      "replay": {
+        "AltgardLeg1": true,
+        "Leg": "l12",
+        "From": "altgard-coingear-ranger",
+        "LaterCapital": true
+      },
+      "snapshot": "altgard-coingear-ranger",
+      "commit": "836ce5c4e116933365475ad5b3c104ef60812a5c",
+      "environment": {
+        "AION_SIM_SEED": "1",
+        "NA_HELP_ITEMS": null,
+        "AION_BOT_DASHBOARD_PORT": null,
+        "AION_SIM_PROCESS_KEY": null
+      },
+      "ignore": [],
+      "records": 32848,
+      "sha256": "8c9662e82819155d54191ffc722251a1af352efa0d75f57d081aedd2c756decb",
+      "counts": {
+        "records": 32849,
+        "deaths": 0,
+        "reviveSteps": 0,
+        "retreats": 4,
+        "retreatRoutes": 7,
+        "restSitsTraced": 0,
+        "restInterrupts": 0,
+        "betweenFightHeals": 0,
+        "powderRestCasts": 7,
+        "vendorBuys": 0,
+        "pullPlans": 229,
+        "patrolWaits": 121,
+        "emergencyDecisions": 0,
+        "atTargetPulls": 3,
+        "lifePotions": 2,
+        "restLifePotions": 1,
+        "restSitsForHealth": 0,
+        "manaPotions": 0,
+        "shieldScrolls": 0,
+        "speedScrolls": 0,
+        "runningScrolls": 0,
+        "helpItemsSupplied": 0,
+        "binds": 1,
+        "soulHeals": 0
+      }
     }
   ]
 }

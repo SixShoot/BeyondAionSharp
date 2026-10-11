@@ -6270,10 +6270,32 @@ The template:
       run/snapshots/_verify/nr107-verify-a1): "Verified snapshot ntc-ready-ranger-s1:
       character 133266 resumed at its endpoint." Seven pre-commit checks pass
       (run/nr/NR-87/checks.log, on the tree of the finish captures of this chain).
-- [ ] **NR-108 - Ranger: the class scope.** Depends: NR-107
+- [x] **NR-108 - Ranger: the class scope.** Depends: NR-107
   - Work: One scope of the Ranger's play, chosen where its rules differ most from the
     Scout's, recorded by a bot alone, twice, and added to the gate's sets.
   - Proof: The two recordings are identical.
+  - 2026-10-11: done. Scope ranger is recorded and stands in the baseline file.
+    - **The scope.** Haramel, leg l12 from altgard-coingear-ranger with the later
+      capital, as the Templar's and the Sorcerer's are. It is where the Ranger plays
+      least like the Scout it was: it fights from range with the bow, snares and stuns
+      its target, plays its arrow chains and keeps its own buff up. The capture it
+      starts from is a round character, replayed alone (NR-67a, NR-67b).
+    - **The row** (scripts/sim/run-neutral-gate.ps1, committed first as f7392b9c7). One
+      bundle stands for the rows of NR-88 and NR-108, on the tree with the two: the
+      script tests, the full gate on seventeen scopes (run guard-p8 of NR-88), the seven
+      checks, the unit suite (4,632 passed, 16 skipped) and Fast nr88-fast.
+    - **The recording** at 836ce5c4e on a clean tree (run record-a1,
+      run/nr/NR-108/record-a1/verdict.json): two passes, identical after normalization:
+      32,848 records, sha256 8c9662e82819155d. No death, 4 retreats, 229 pull plans, 121
+      holds of the patrol rule, 0 help items supplied. The traces are kept under
+      run/cp/baseline/836ce5c4e... and in the second copy beside the repository.
+    - **Proof.** A comparison of the scope with its new row passes (run guard-ranger,
+      run/nr/NR-108/guard-ranger/verdict.json). Seven pre-commit checks and the three
+      script tests pass on the tree with the new row (run/nr/NR-108/checks2.log,
+      run/nr/NR-108/script-tests2.log).
+    - **The full gate from here** is set
+      all+mage+warrior+artist+engineer+scout+templar+sorcerer+chanter+spiritmaster+bard+gladiator+ranger:
+      nineteen scopes.
 - [x] **NR-110 - Spirit Master: survey and profile data.** Depends: the close of phase C
   - 2026-10-10: done. The Spirit Master has a class line, a gear table and a profile the
     validator accepts. Nothing has been played. The profile is a caster's: its spirit,
@@ -11759,3 +11781,9 @@ report what was done, what is parked or blocked, and what the operator must deci
   sha256 6cc82e5f937f980f, and guard-gladiator passes. The full gate is now eighteen
   scopes. Seven checks and the script tests pass. Next: NR-108, the Ranger's class
   scope.
+- 2026-10-11 — Loop: NR-108 done. Scope ranger is Haramel from altgard-coingear-ranger,
+  a round character replayed alone. Its row was committed as f7392b9c7; one bundle
+  stands for the two rows of this batch (seventeen scopes identical, nr88-fast).
+  Recorded at 836ce5c4e: two passes identical, 32,848 records, sha256 8c9662e82819155d,
+  and guard-ranger passes. The full gate is now nineteen scopes. Seven checks and the
+  script tests pass. Next: NR-R21, round 21, with its captures.
