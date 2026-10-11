@@ -19,6 +19,9 @@
 #   stopAt             a diagnostic stop boundary (questId:status:packedVars). Leave it out to play to the stage's end.
 #   name               the character's name when it is not the line's (the Cleric's and the Chanter's lines share one).
 #   capture            with -Capture: the name of this character's own capture, written when the bot reached its end.
+#                      NR-R21b: a list of names gives one record for each. The end of the Abyss entry is two captures,
+#                      morheim-abyss-entry-s1-<class> and the plan's finish, ntc-ready-<class>-s1 (NR-Q9: a class's
+#                      captures come straight out of the round's world).
 #
 # -Capture <name>  When a world's last bot has ended its schema is dumped once: the round snapshot <name>-w<n>, with a
 #                  record of every character in it, reached or stopped short. A bot's capture is a small record that
@@ -193,18 +196,19 @@ if ($World -gt 0) {
 			} | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath (Join-Path $directory 'snapshot.json') -Encoding utf8
 			# A bot's own capture: a record that points at the round snapshot and its character.
 			for ($index = 0; $index -lt $bots.Count; $index++) {
-				$own = Get-Field $bots[$index] 'capture'
 				$result = $outcome.bots[$index]
-				if (-not $own -or $result.Outcome -ne 'reached' -or $result.CharacterId -le 0) { continue }
-				$ownDirectory = Join-Path $SnapshotRoot $own
-				if (Test-Path -LiteralPath $ownDirectory) { throw "Snapshot already exists: $ownDirectory (snapshots are never overwritten)" }
-				New-Item -ItemType Directory -Path $ownDirectory | Out-Null
-				[ordered]@{
-					schemaVersion = 1; name = $own; source = 'natural-round-character'; roundSnapshot = $name
-					classLine = $result.Line; characterId = $result.CharacterId; account = $result.Account; characterName = $result.Name
-					stage = (Get-Field $result 'Stage'); level = $result.Level; completedQuests = $result.CompletedQuests
-					run = "$Run-w$World"; seed = $Seed; gitSha = $BuiltSha; capturedUtc = $captured
-				} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $ownDirectory 'snapshot.json') -Encoding utf8
+				if ($result.Outcome -ne 'reached' -or $result.CharacterId -le 0) { continue }
+				foreach ($own in @(Get-Field $bots[$index] 'capture' | Where-Object { $_ })) {
+					$ownDirectory = Join-Path $SnapshotRoot $own
+					if (Test-Path -LiteralPath $ownDirectory) { throw "Snapshot already exists: $ownDirectory (snapshots are never overwritten)" }
+					New-Item -ItemType Directory -Path $ownDirectory | Out-Null
+					[ordered]@{
+						schemaVersion = 1; name = $own; source = 'natural-round-character'; roundSnapshot = $name
+						classLine = $result.Line; characterId = $result.CharacterId; account = $result.Account; characterName = $result.Name
+						stage = (Get-Field $result 'Stage'); level = $result.Level; completedQuests = $result.CompletedQuests
+						run = "$Run-w$World"; seed = $Seed; gitSha = $BuiltSha; capturedUtc = $captured
+					} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $ownDirectory 'snapshot.json') -Encoding utf8
+				}
 			}
 		}
 		Write-Host "World $World of round $Run played to its end. Evidence: $worldEvidence"
@@ -226,7 +230,7 @@ if ($Capture) {
 	$changes = @(& $Git -C $repoRoot status --porcelain -- src tests game-server parity-artifacts scripts/sim)
 	if ($changes.Count) { throw 'A captured round requires committed runtime and script code; commit those changes first.' }
 	foreach ($n in $played) {
-		$taken = @("$Capture-w$n") + @($worlds[$n - 1].bots | ForEach-Object { Get-Field $_ 'capture' } | Where-Object { $_ })
+		$taken = @("$Capture-w$n") + @($worlds[$n - 1].bots | ForEach-Object { @(Get-Field $_ 'capture') } | Where-Object { $_ })
 		foreach ($name in $taken) {
 			if ($name -notmatch '^[a-z0-9][a-z0-9-]*$') { throw "Not a snapshot name: $name" }
 			if (Test-Path -LiteralPath (Join-Path $SnapshotRoot $name)) { throw "Snapshot already exists: $name (snapshots are never overwritten)" }

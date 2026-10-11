@@ -10565,7 +10565,7 @@ through these: each is ticked by the round that gave its capture.
     - **The bundle** (run/nr/NR-R21a, chain4; one tree for NR-120c, NR-R21a and
       NR-R21b): the unit suite (4,632 passed, 16 skipped), the seven checks, the script
       tests and Fast (nrr21a4-fast) pass.
-- [ ] **NR-R21b - A round's Abyss entry gives the finish capture.** Depends: NR-R21
+- [x] **NR-R21b - A round's Abyss entry gives the finish capture.** Depends: NR-R21
   - Work: The operator's answers to NR-Q9 (2026-10-09, 2026-10-11): a class's captures,
     ntc-ready-<class>-s1 among them, come straight out of the round's world. A round
     gives a bot one capture today, and the Abyss entry's is
@@ -10576,6 +10576,24 @@ through these: each is ticked by the round that gave its capture.
     proof is Verify of that record. The eight that exist are not touched.
   - Proof: The script tests, with the bundle and the full gate. Its first use is the
     first of the three classes to end the Abyss entry.
+  - 2026-10-11: done. A round's bot may name several captures, and each gets its
+    record.
+    - **The change** (scripts/sim/run-round.ps1). capture in a round file is one name
+      or a list of names. For a bot that reached its stage's end each name gets a
+      record that points at its character in the round snapshot, and every name is
+      checked before the round starts, as the one name was. The world's own process
+      does not read the field.
+    - **Proof.** The script tests pass (test-sim-snapshot.ps1, test_compare_traces.py,
+      test-code-coverage.ps1); none of them plays a round. The two expressions that
+      changed were run by themselves on one name, a list, null, none and an empty list
+      (run/nr/NR-R21b/capture-names.ps1 and its log). Round 22's file plays without a
+      capture as before (run change-a4 of NR-R21a). The bundle is NR-R21a's (chain4):
+      unit suite, seven checks and Fast nrr21a4-fast pass, and gate guard4-p8 differs
+      in gladiator alone, for NR-R21a.
+    - **Its uses.** Round 22 names one capture for each bot and is the first captured
+      round on this code. The first round in which a class ends the Abyss entry names
+      two, morheim-abyss-entry-s1-<class> and ntc-ready-<class>-s1, and Verify of the
+      second is that class's proof (NR-97, NR-127, NR-137).
 - [ ] **NR-R22 - Round 22: the coin gear for the Gunner, Haramel for the Rider, leg 10 for the Assassin.** Depends: NR-R21a
   - Work: Three worlds resumed from nr-r21 with -Capture nr-r22 (round file
     run/nr/NR-R22/round-22.json; worlds 1, 2, 3, 5 and 6 have no bot). The Gunner
@@ -12130,3 +12148,9 @@ report what was done, what is parked or blocked, and what the operator must deci
   replay does not end with each; written under Blocked. Gate guard4-p8: eighteen scopes
   identical; gladiator differs first at record 18,540, where it had planned the same
   spot. Next: NR-R21b, then scope gladiator recorded again for NR-R21a.
+- 2026-10-11 — Loop: NR-R21b done. A round's bot may name several captures
+  (scripts/sim/run-round.ps1); each gets a record that points into the round snapshot,
+  so ntc-ready-<class>-s1 comes out of the round's world beside the Abyss entry's own
+  capture. Script tests pass; the changed expressions were run by themselves on every
+  shape of the field; the bundle is NR-R21a's. Next: NR-R21a still, scope gladiator
+  recorded again.
