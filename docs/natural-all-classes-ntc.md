@@ -5259,10 +5259,16 @@ The template:
     without a death, each with a receipt that says verified. Captured as
     altgard-coingear-chanter and altgard-rc-complete-s1-chanter, records that point at
     character 133266 in the round snapshots nr-r16-w2 and nr-r17-w2.
-- [ ] **NR-76 - Chanter: the Abyss entry.** Depends: NR-75; ticked by its round
+- [x] **NR-76 - Chanter: the Abyss entry.** Depends: NR-75; ticked by its round
   - Work: Q24020, then Q2945, Q2946, Q2947 and Q2042 with the coin tiers it can wear
     (NR-38b, NR-Q14, NR-Q16), captured as morheim-abyss-entry-s1-chanter.
   - Proof: The capture verifies.
+  - 2026-10-11: done in round 18 (NR-R18, world 2). The Abyss entry ended in 16 min
+    30 s without a death, the arena and the ring course each at the first try, with a
+    receipt that says verified: level 26, alive at Morheim Ice Fortress, Q24020, Q2945,
+    Q2946, Q2947 and Q2042 complete, 181 quests in all. Captured as
+    morheim-abyss-entry-s1-chanter, a record that points at character 133266 in the
+    round snapshot nr-r18-w2.
 - [ ] **NR-77 - Chanter: the endpoint.** Depends: NR-76; ticked by its round
   - Work: Captured and verified as ntc-ready-chanter-s1: alive at Morheim Ice Fortress,
     level 25 or higher, Q2945, Q2946, Q2947 and Q2042 complete.
@@ -6978,10 +6984,16 @@ The template:
     without a death, each with a receipt that says verified. Captured as
     altgard-coingear-spirit-master and altgard-rc-complete-s1-spirit-master, records that point at
     character 133266 in the round snapshots nr-r16-w6 and nr-r17-w6.
-- [ ] **NR-116 - Spirit Master: the Abyss entry.** Depends: NR-115; ticked by its round
+- [x] **NR-116 - Spirit Master: the Abyss entry.** Depends: NR-115; ticked by its round
   - Work: Q24020, then Q2945, Q2946, Q2947 and Q2042 with the coin tiers it can wear
     (NR-38b, NR-Q14, NR-Q16), captured as morheim-abyss-entry-s1-spirit-master.
   - Proof: The capture verifies.
+  - 2026-10-11: done in round 18 (NR-R18, world 6). The Abyss entry ended in 17 min
+    13 s without a death, the arena and the ring course each at the first try, with a
+    receipt that says verified: level 26, alive at Morheim Ice Fortress, Q24020, Q2945,
+    Q2946, Q2947 and Q2042 complete, 181 quests in all. Captured as
+    morheim-abyss-entry-s1-spirit-master, a record that points at character 133266 in the
+    round snapshot nr-r18-w6.
 - [ ] **NR-117 - Spirit Master: the endpoint.** Depends: NR-116; ticked by its round
   - Work: Captured and verified as ntc-ready-spirit-master-s1: alive at Morheim Ice
     Fortress, level 25 or higher, Q2945, Q2946, Q2947 and Q2042 complete.
@@ -8026,10 +8038,16 @@ The template:
     without a death, each with a receipt that says verified. Captured as
     altgard-coingear-bard and altgard-rc-complete-s1-bard, records that point at
     character 133266 in the round snapshots nr-r16-w8 and nr-r17-w8.
-- [ ] **NR-146 - Bard: the Abyss entry.** Depends: NR-145; ticked by its round
+- [x] **NR-146 - Bard: the Abyss entry.** Depends: NR-145; ticked by its round
   - Work: Q24020, then Q2945, Q2946, Q2947 and Q2042 with the coin tiers it can wear
     (NR-38b, NR-Q14, NR-Q16), captured as morheim-abyss-entry-s1-bard.
   - Proof: The capture verifies.
+  - 2026-10-11: done in round 18 (NR-R18, world 8). The Abyss entry ended in 16 min
+    35 s without a death, the arena and the ring course each at the first try, with a
+    receipt that says verified: level 26, alive at Morheim Ice Fortress, Q24020, Q2945,
+    Q2946, Q2947 and Q2042 complete, 181 quests in all. Captured as
+    morheim-abyss-entry-s1-bard, a record that points at character 133266 in the
+    round snapshot nr-r18-w8.
 - [ ] **NR-147 - Bard: the endpoint.** Depends: NR-146; ticked by its round
   - Work: Captured and verified as ntc-ready-bard-s1: alive at Morheim Ice Fortress,
     level 25 or higher, Q2945, Q2946, Q2947 and Q2042 complete.
@@ -9800,7 +9818,7 @@ through these: each is ticked by the round that gave its capture.
       -Parallel 8, run guard-p8 (run/nr/NR-R17b/guard-p8/verdict.json): verdict pass, all
       thirteen scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests
       passes (4,632 passed, 16 skipped) and Fast passes (run nrr17b-fast, 11 passed).
-- [ ] **NR-R18 - Round 18: the Abyss entry for three, the coin gear for two, leg 10 for three.** Depends: NR-R17b
+- [x] **NR-R18 - Round 18: the Abyss entry for three, the coin gear for two, leg 10 for three.** Depends: NR-R17b
   - Work: Seven worlds resumed from nr-r17 with -Capture nr-r18 (round file
     run/nr/NR-R18/round-18.json; world 1 has no bot). The Chanter, the Spirit Master
     and the Bard play the Abyss entry (stage ax); the Gladiator and the Ranger play the
@@ -9810,6 +9828,73 @@ through these: each is ticked by the round that gave its capture.
     gets a lettered item, in round 18's own letters; so does a class with three
     attempts at one quest and nothing won.
   - Proof: round.json with eight outcome records; for each class that reached its
+    stage's end the completion receipt says verified and its capture is written.
+  - 2026-10-11: played. Five reached their stage's end and are captured, and three
+    class items are ticked: the Chanter, the Spirit Master and the Bard end the Abyss
+    entry (NR-76, NR-116, NR-146). The Gladiator and the Ranger end the coin-gear
+    stage. The Assassin's and the Gunner's hours ran out in leg 10. The Rider stopped
+    at Q24016, where Java gives its class a path of its own: NR-R18a.
+    - **The round** (run r18-a1 at 5e7b56ee6, -From nr-r17, -Capture nr-r18;
+      run/nr/NR-R18/r18-a1; round file run/nr/NR-R18/round-18.json). Seven worlds side by
+      side, worlds 2 to 8, 525 seconds of wall time. It plays as NR-R17b's round without
+      a capture did.
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 2 | priest-chanter | Chanter | ax | reached | 26 | 181 | 16.5 | 10, 10 kills | 0 | morheim-abyss-entry-s1-chanter |
+      | 3 | warrior-gladiator | Gladiator | cg | reached | 25 | 165 | 16.8 | 27, 26 kills | 0 | altgard-coingear-gladiator |
+      | 4 | scout-assassin | Assassin | l10 | stopped | 23 | 152 | 148.0 | 227, 90 kills | 11 | none |
+      | 5 | scout-ranger | Ranger | cg | reached | 25 | 163 | 13.5 | 27, 27 kills | 0 | altgard-coingear-ranger |
+      | 6 | mage-spirit-master | Spirit Master | ax | reached | 26 | 181 | 17.2 | 10, 10 kills | 0 | morheim-abyss-entry-s1-spirit-master |
+      | 7 | engineer-gunner | Gunner | l10 | stopped | 24 | 152 | 60.0 | 57, 47 kills | 2 | none |
+      | 8 | artist-bard | Bard | ax | reached | 26 | 181 | 16.6 | 10, 10 kills | 0 | morheim-abyss-entry-s1-bard |
+      | 8 | engineer-rider | Rider | l10 | stopped | 24 | 161 | 92.2 | 99, 57 kills | 1 | none |
+
+      Each receipt of a class that reached its stage's end says verified. The captures
+      are records that point into the round snapshots nr-r18-w2 to nr-r18-w8, which hold
+      the three that stopped as they stood. World 1 was not played (NR-R17a).
+    - **Four classes stand at the Abyss entry's end now:** the Sorcerer, whose finish
+      capture is made (NR-67), and the Chanter, the Spirit Master and the Bard, whose
+      finish captures are NR-77, NR-117 and NR-147. Their worlds have no bot from round
+      19 on.
+    - **The Rider: its own path through Q24016.** It fell to the ground at login
+      (NR-R17b), killed its third warlock, handed in the village's five quests and
+      Q2283, did Q24014 and Q24015, and stopped at Suthran: "No SM_DIALOG_WINDOW packet
+      within 3 minutes". Java's handler branches on the class
+      (_24016AStrangeNewThread 52-58, 78-80, 98-99, 132-133): for a Rider Suthran
+      shows page 1011 and not 1693, the guardian stone spawns Officer Tavasha (233876)
+      and sets var 3 and not 13, his death sets var 4 and not 14, and the reward page
+      is 2034 and not 1352. The leg's steps are the other classes'. Item NR-R18a.
+    - **Leg 10, the attempts so far.**
+
+      | Class | Where its hour ran out | Attempts with nothing won | Note |
+      |---|---|---|---|
+      | Assassin | Q2280, the shamans | 0 | Q2273 and Q2277 in this round, and one of Q2280's four; 117 of its 227 fights ended in a blocked approach, and it fled 31 times at low health; 11 deaths |
+      | Gunner | Q2282 | 1 | one fight with a warlock, no kill; it has two of three from before |
+      | Rider | not an hour: Q24016's first talk | - | Q2282 and the village's hand-ins, Q24014 and Q24015. NR-R18a |
+    - **Carried from NR-R15b.** The Assassin is the third class with an hour full of
+      fights that end in a blocked approach, after the Chanter in round 7 and the Rider
+      in round 15. Its hour won two quests all the same. A second such hour for one
+      class gets an item, as NR-R15b says.
+    - **Deaths: 14.**
+- [ ] **NR-R18a - The Rider's own path through Q24016.** Depends: NR-R18
+  - Work: Java first: _24016AStrangeNewThread whole, with what it spawns and where,
+    and the port beside it. A leg's steps, object uses, hunts and instance trip are
+    written for the class of its contract; where the server branches on the class the
+    leg needs that class's own. Give the leg data a place for a class's own entries of
+    one quest and the journey the reading of it, with no branch on a class in code,
+    and write the Rider's for Q24016.
+  - Proof: The full gate identical, with the bundle. The Rider, resumed from nr-r18-w8
+    without a capture, ends leg 10.
+- [ ] **NR-R19 - Round 19: Haramel for the Gladiator and the Ranger, leg 10 for three.** Depends: NR-R18a
+  - Work: Five worlds resumed from nr-r18 with -Capture nr-r19 (round file
+    run/nr/NR-R19/round-19.json; worlds 1, 2 and 6 have no bot). The Gladiator and the
+    Ranger play Haramel (stage l12); the Assassin, the Gunner and the Rider go on in
+    leg 10, each from where it stopped. Captures as the class items name them. One
+    outcome line for each class, and the table of leg 10's attempts carried on. A stop
+    outside leg 10's hunts gets a lettered item, in round 19's own letters; so does a
+    class with three attempts at one quest and nothing won.
+  - Proof: round.json with five outcome records; for each class that reached its
     stage's end the completion receipt says verified and its capture is written.
 
 ### E. Close
@@ -11173,3 +11258,11 @@ report what was done, what is parked or blocked, and what the operator must deci
   32,666 records, sha256 13cbe76fa6a44e6e, and guard-sorcerer passes. The full gate is
   now fourteen scopes, set all+mage+warrior+artist+engineer+scout+templar+sorcerer. Seven
   checks and the script tests pass. Next: NR-R18, round 18, with its captures.
+- 2026-10-11 — Loop: NR-R18 played. Round 18 (r18-a1 at 5e7b56ee6, -From nr-r17, 525 s,
+  seven worlds): five reached their stage's end and are captured in nr-r18-w2 to w8. The
+  Chanter, the Spirit Master and the Bard end the Abyss entry at level 26 with 181
+  quests (NR-76, NR-116, NR-146); the Gladiator (165) and the Ranger (163) end the
+  coin-gear stage. The Assassin won two quests of leg 10 and the Gunner nothing in
+  their hours. The Rider fell at login, ended Q2282 and stopped at Q24016, where Java
+  gives the Rider a path of its own: NR-R18a. Written: NR-R18a and NR-R19, round 19.
+  Seven checks pass. Next: NR-77, the Chanter's finish capture.
