@@ -577,6 +577,53 @@
         "binds": 1,
         "soulHeals": 0
       }
+    },
+    {
+      "scope": "sorcerer",
+      "line": "mage-sorcerer",
+      "replay": {
+        "AltgardLeg1": true,
+        "Leg": "l12",
+        "From": "altgard-coingear-sorcerer",
+        "LaterCapital": true
+      },
+      "snapshot": "altgard-coingear-sorcerer",
+      "commit": "47451e50e1688e34502b8bcc0acc78e27cc98855",
+      "environment": {
+        "AION_SIM_SEED": "1",
+        "NA_HELP_ITEMS": null,
+        "AION_BOT_DASHBOARD_PORT": null,
+        "AION_SIM_PROCESS_KEY": null
+      },
+      "ignore": [],
+      "records": 32666,
+      "sha256": "13cbe76fa6a44e6e9a229e5ece80a1fd91bd035d3f2d7d5f904e367b6f683f80",
+      "counts": {
+        "records": 32667,
+        "deaths": 0,
+        "reviveSteps": 0,
+        "retreats": 13,
+        "retreatRoutes": 16,
+        "restSitsTraced": 0,
+        "restInterrupts": 0,
+        "betweenFightHeals": 0,
+        "powderRestCasts": 0,
+        "vendorBuys": 0,
+        "pullPlans": 275,
+        "patrolWaits": 170,
+        "emergencyDecisions": 0,
+        "atTargetPulls": 7,
+        "lifePotions": 0,
+        "restLifePotions": 0,
+        "restSitsForHealth": 0,
+        "manaPotions": 0,
+        "shieldScrolls": 0,
+        "speedScrolls": 17,
+        "runningScrolls": 0,
+        "helpItemsSupplied": 1,
+        "binds": 1,
+        "soulHeals": 0
+      }
     }
   ]
 }

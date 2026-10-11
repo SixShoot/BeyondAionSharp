@@ -4881,10 +4881,34 @@ The template:
       evidence under run/snapshots/_verify/nr67-verify-a2): "Verified snapshot
       ntc-ready-sorcerer-s1: character 133266 resumed at its endpoint." Seven
       pre-commit checks pass (run/nr/NR-67/checks.log).
-- [ ] **NR-68 - Sorcerer: the class scope.** Depends: NR-67
+- [x] **NR-68 - Sorcerer: the class scope.** Depends: NR-67
   - Work: One scope of the Sorcerer's play, chosen where its rules differ most from the
     Mage's, recorded by a bot alone, twice, and added to the gate's sets.
   - Proof: The two recordings are identical.
+  - 2026-10-11: done. Scope sorcerer is recorded and stands in the baseline file.
+    - **The scope.** Haramel, leg l12 from altgard-coingear-sorcerer with the later
+      capital, as the Templar's scope is. It is where the Sorcerer plays least like the
+      Mage it was: it pulls from range, plays its chains, holds a target before it
+      retreats, retreats 13 times and dies never, and the patrol rule holds 170 times
+      over 275 pull plans. It is of the size of the Cleric's own Haramel scope, hm.
+    - **A round character alone.** The capture it starts from is a record that points
+      into the round snapshot nr-r15-w1. The gate replays it as any other, since
+      NR-67a and NR-67b. One replay was played first to see that (run probe-a1,
+      run/nr/NR-68/probe-a1): verified, no death, 98.6 game minutes, as round 16 played
+      the leg.
+    - **The row** (scripts/sim/run-neutral-gate.ps1, committed first as 47451e50e with
+      the script tests, the full gate on thirteen scopes, the seven checks, the unit
+      suite and Fast nr68-fast).
+    - **The recording** at 47451e50e on a clean tree (run record-a1,
+      run/nr/NR-68/record-a1/verdict.json): two passes, identical after normalization:
+      32,666 records, sha256 13cbe76fa6a44e6e. No death, 13 retreats, 275 pull plans,
+      one help item supplied. The traces are kept under run/cp/baseline/47451e50e...
+      and in the second copy beside the repository.
+    - **Proof.** A comparison of the scope with its new row passes (run guard-sorcerer,
+      run/nr/NR-68/guard-sorcerer/verdict.json). Seven pre-commit checks and the three
+      script tests pass on the tree with the new row (run/nr/NR-68/chain.log).
+    - **The full gate from here** is set
+      all+mage+warrior+artist+engineer+scout+templar+sorcerer: fourteen scopes.
 - [x] **NR-70 - Chanter: survey and profile data.** Depends: the close of phase C
   - 2026-10-10: done. The Chanter's placeholder is a profile of its own now, and the
     validator accepts it. Its class line and its gear table stood already (CP-29a, CP-32).
@@ -11143,3 +11167,9 @@ report what was done, what is parked or blocked, and what the operator must deci
   Q2946, Q2947 and Q2042 complete, 181 quests. It is the third class at the plan's
   finish, after the Cleric and the Templar. Seven checks pass. Next: NR-68, the
   Sorcerer's class scope.
+- 2026-10-11 — Loop: NR-68 done. Scope sorcerer is Haramel from altgard-coingear-sorcerer,
+  a round character replayed alone. Its row was committed as 47451e50e with the bundle
+  (thirteen scopes identical, nr68-fast), then recorded there: two passes identical,
+  32,666 records, sha256 13cbe76fa6a44e6e, and guard-sorcerer passes. The full gate is
+  now fourteen scopes, set all+mage+warrior+artist+engineer+scout+templar+sorcerer. Seven
+  checks and the script tests pass. Next: NR-R18, round 18, with its captures.
