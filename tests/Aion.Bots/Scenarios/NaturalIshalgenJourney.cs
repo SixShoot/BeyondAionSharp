@@ -6201,6 +6201,10 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 							point => geometry.SnapToGround(contract.MapId, point), PullSpotReachable,
 							combat.ClassProfile.Ranges.MeleeReach, audit: evaluatedPullCandidates.Add)
 						: PlanFiringSpotOnce();
+					// NR-R21a: a spot is reached when the checked route to it ends on it. The ground rule looks two metres up, and under
+					// a plank of Haramel's office it took the plank's underside for the ground of the route's last step, 1.85 m over
+					// the spot: the walk ended up there, and no route left it.
+					static bool EndsOn(IReadOnlyList<BotPosition> route, BotPosition spot) => route.Count > 0 && MathF.Abs(route[^1].Z - spot.Z) <= 1f;
 					bool PullSpotReachable(BotPosition spot)
 					{
 						if (avoidDeaths && combat.DeathSpots.Any(death => Distance(death, spot) < DeathSpotAvoidance)) return false;
@@ -6210,9 +6214,9 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 							reachable[key] = ok = Distance(session.CurrentPosition, spot) < 1 ||
 								(geometry.NavMesh is { } router && router.NavMeshes.Get(contract.MapId) is { } mesh
 									? mesh.IslandOf(spot) >= 0 && mesh.IslandOf(spot) == mesh.IslandOf(session.CurrentPosition) &&
-										router.FindPath(contract.MapId, session.CurrentPosition, spot,
-											BotNavQuery.Default with { Hazards = hazards }).Count > 0
-									: geometry.FindJourneyPathAvoiding(contract.MapId, session.CurrentPosition, spot, hazards).Count > 0);
+										EndsOn(router.FindPath(contract.MapId, session.CurrentPosition, spot,
+											BotNavQuery.Default with { Hazards = hazards }), spot)
+									: EndsOn(geometry.FindJourneyPathAvoiding(contract.MapId, session.CurrentPosition, spot, hazards), spot));
 						return ok;
 					}
 					NaturalPullPlan? PlanFiringSpotOnce() => NaturalPullPlanner.Plan(session.CurrentPosition, pullTargets, monsters, stagingPoints, CanSupport,
@@ -6229,9 +6233,9 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 								reachable[key] = ok = Distance(session.CurrentPosition, spot) < 1 ||
 									(geometry.NavMesh is { } router && router.NavMeshes.Get(contract.MapId) is { } mesh
 										? mesh.IslandOf(spot) >= 0 && mesh.IslandOf(spot) == mesh.IslandOf(session.CurrentPosition) &&
-											router.FindPath(contract.MapId, session.CurrentPosition, spot,
-												BotNavQuery.Default with { Hazards = hazards }).Count > 0
-										: geometry.FindJourneyPathAvoiding(contract.MapId, session.CurrentPosition, spot, hazards).Count > 0);
+											EndsOn(router.FindPath(contract.MapId, session.CurrentPosition, spot,
+												BotNavQuery.Default with { Hazards = hazards }), spot)
+										: EndsOn(geometry.FindJourneyPathAvoiding(contract.MapId, session.CurrentPosition, spot, hazards), spot));
 							return ok;
 						}, audit: evaluatedPullCandidates.Add,
 						pullDistanceMeters: combat.ClassProfile.PullDistance(mauPolicy));

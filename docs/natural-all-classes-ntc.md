@@ -10520,6 +10520,51 @@ through these: each is ticked by the round that gave its capture.
     made from ground a route leaves. No branch on a class.
   - Proof: Round 22's file from nr-r21 without a capture: the Rider passes the place.
     The bundle with the full gate.
+  - 2026-10-11, the code: mended in the journey, not in the ground rule. A pull spot
+    counts as reached only when the checked route to it ends on it. The Rider passes
+    the place and ends Haramel. Scope gladiator, which had planned the same spot, is
+    recorded again; the item is ticked with that.
+    - **Why the walk ended above the spot.** At 242.943, 234.108 the office floor is
+      at 87.66 and a plank lies over it, its underside at 89.65 and its top at 89.86
+      (tools/Aion.NavBake columns on map 300200000). The bot's ground rule is the
+      server's own (GeoMap.GetZ, Java GeoMap.getZ 122-135): the first surface under a
+      point two metres above the height expected. The navmesh has the floor at 87.8,
+      so the ray starts at 89.8, inside the plank, and the first face it meets is the
+      plank's underside. The route's last step was put there, 1.85 m over the spot.
+      From there the fight's two walks toward the guard and the next object's route
+      found nothing.
+    - **Tried first, the ground rule itself, in two forms; neither is kept**
+      (run/nr/NR-R21a/ground-rule-first-form.py and ground-rule-second-form.patch).
+      The Rider ends Haramel with either (runs change-a1 and change-a2: 176 quests).
+      - First form: a surface more than 1 m over the height asked for, with a level
+        surface within 1.5 m over it, is not ground. Gate guard-p8: twelve of nineteen
+        scopes differ (m, b, c, hm, artist, templar, sorcerer, chanter, spiritmaster,
+        bard, gladiator, ranger), and the Chanter's replay does not end.
+      - Second form: a surface within 0.5 m under the ray's start, with another within
+        0.5 m over it, is the underside of a slab. Gate guard2-p8: thirteen differ
+        (those and engineer), and the Artist's replay stops with "Natural journey
+        required an observed object."
+
+      The ray starts inside something overhead far more often than at this plank, and
+      the recorded routes rest on what the rule answers there: a route the geometry
+      refused is found, or runs otherwise. Four of the scopes are the Cleric's. It is
+      written under Blocked for the operator, and nothing of it is committed.
+    - **The change** (Sc/NaturalIshalgenJourney.cs, the two reachability checks of
+      MoveToPullSpotAsync). A spot's checked route must end within 1 m of the spot's
+      height, or the spot is not reachable and the planner takes another. No branch on
+      a class.
+    - **Proof, the round** (run change-a4: round 22's file from nr-r21 without a
+      capture, on the tree of the three items). The Rider ends Haramel: level 25, 176
+      quests, 132.1 game minutes, no death, with a receipt that says verified. The Gunner
+      ends the coin-gear stage with 165 quests. The Assassin's hour wins nothing.
+    - **The gate** (run guard4-p8, run/nr/NR-R21a/guard4-p8/verdict.json): eighteen
+      scopes identical. Scope gladiator differs first at record 18,540: its pull plan
+      for the same guard (216909) had chosen the same spot, 242.943, 234.108. That
+      spot now reads "No checked route to firing spot" and the plan takes 242.943,
+      232.158. Its Haramel ends as before.
+    - **The bundle** (run/nr/NR-R21a, chain4; one tree for NR-120c, NR-R21a and
+      NR-R21b): the unit suite (4,632 passed, 16 skipped), the seven checks, the script
+      tests and Fast (nrr21a4-fast) pass.
 - [ ] **NR-R21b - A round's Abyss entry gives the finish capture.** Depends: NR-R21
   - Work: The operator's answers to NR-Q9 (2026-10-09, 2026-10-11): a class's captures,
     ntc-ready-<class>-s1 among them, come straight out of the round's world. A round
@@ -10600,6 +10645,17 @@ Nothing is blocked at the start.
     classes of a later plan.
   - 2026-10-11: answered, NR-Q18: "Do what is needed." Item NR-R7b, taken when the
     classes are done.
+- **Recorded by NR-R21a, blocking nothing: the ground rule takes the underside of what is
+  overhead for ground.** The bot asks the server's geometry for the first surface under a
+  point two metres above the height it expects (GeoMap.GetZ, Java GeoMap.getZ 122-135).
+  When that point is inside something, a plank, a bough, a roof's edge, the first face
+  met is that thing's underside, and a route's step is put there or the route is
+  refused. In Haramel's office it put the Rider 1.85 m over its pull spot (NR-R21a,
+  mended for pull spots alone). Two forms of a mend in the rule were tried and are kept
+  as evidence only (run/nr/NR-R21a): twelve and thirteen of nineteen scopes differ, four
+  of them the Cleric's, and one replay does not end with each (the Chanter's, the
+  Artist's). To decide: whether the rule is mended and every scope it changes recorded
+  again, in an item of its own that first makes those two journeys end.
 - **For a later look with the operator, blocking nothing (2026-10-11).**
   - **The Ranger's Q2282 and Q2283** stay left out (NR-R15c). The operator: "leave it
     for later evaluation where we can look into it. Not a blocker at this time."
@@ -12065,3 +12121,12 @@ report what was done, what is parked or blocked, and what the operator must deci
   NR-R21b (run/nr/NR-R21a, chain4): unit suite, seven checks, script tests, six Gunner
   rows and Fast nrr21a4-fast pass; gate guard4-p8 has eighteen scopes identical and
   gladiator for NR-R21a. Next: NR-R21a.
+- 2026-10-11 — Loop: NR-R21a, the code. A pull spot counts as reached only when the
+  checked route ends within 1 m of its height. In Haramel's office the ground rule's ray
+  starts inside a plank that lies 1.85 m over the floor and takes its underside for
+  ground; the Rider's walk to its spot ended there. Round 22's file without a capture
+  (change-a4): the Rider ends Haramel with 176 quests. Mending the ground rule itself
+  was tried in two forms and is not kept: twelve and thirteen scopes differ and one
+  replay does not end with each; written under Blocked. Gate guard4-p8: eighteen scopes
+  identical; gladiator differs first at record 18,540, where it had planned the same
+  spot. Next: NR-R21b, then scope gladiator recorded again for NR-R21a.
