@@ -8594,7 +8594,7 @@ through these: each is ticked by the round that gave its capture.
       run guard-p8 (run/nr/NR-R8c/guard-p8/verdict.json): verdict pass, all thirteen
       scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests passes (4,629
       passed, 16 skipped) and Fast passes (run nrr8c-fast, 11 passed).
-- [ ] **NR-R8d - The Bard at Q2284's follower after another bot's escort.** Depends: NR-R8c
+- [x] **NR-R8d - The Bard at Q2284's follower after another bot's escort.** Depends: NR-R8c
   - Work: Java first: what Q2284's handler does with Disguised Germir when an escort
     ends, and when and where the server brings him back; then the port, line by line.
     A difference of the port is mended Java-first (rule (t)). If the server is right,
@@ -8604,6 +8604,46 @@ through these: each is ticked by the round that gave its capture.
   - Proof: The full gate identical; Fast and the unit suite when server code changes.
     Round 9's file, played from nr-r8 without a capture: the Bard, in the Rider's world,
     escorts Germir after the Rider has and ends leg 6.
+  - 2026-10-10: done. The server is right; the escort's clearing no longer ends the leg
+    when the follower's hours have run out.
+    - **Java.** An escort's end deletes a follower of the "following" AI and schedules
+      his respawn (FollowEventHandler.stopFollow 61-68, called from
+      FollowingNpcCheckTask.stopFollowing 62-69); Q2284 starts it with
+      defaultStartFollowEvent and ends it with defaultFollowEndEvent
+      (_2284EscapingAsmodae 59, 89, 94). The port has all three line for line
+      (Ai/Handler/FollowEventHandler.cs, Questengine/Task/FollowingNpcCheckTask.cs).
+      Disguised Germir's spawn keeps hours, in Java's data and the port's alike:
+      respawn_time 295 and temporary_spawn from 04:00 to 21:00
+      (spawns/Npcs/220030000_Altgard.xml). So he came back 295 s after the Rider's
+      escort, as he should, and at 21:00 he left for the night, as he should.
+    - **What stopped the Bard.** The leg already knows his hours (AG-07): it fetches him
+      only when the escort can end inside them, and a protocol run that finds the hour
+      past ends as off-hours and waits for his window. The Bard's escort was planned
+      with time to spare. Then the Rider's escort cost it four minutes, and its clearing
+      of the escort's line, which goes to the goal's end and then walks back to the
+      follower, took fourteen more, with a retreat and a road refused on the way. Night
+      fell meanwhile. The walk back is a walk to the follower himself; he was not
+      there, and that walk's failure ended the leg before the protocol could look at
+      the clock again.
+    - **The change, generic** (Sc/NaturalIshalgenJourney.cs, RunEscortAsync's clearing).
+      The clearing does not set out for a follower whose hours are over, and when the
+      walk to him fails with his hours over it stops clearing; the trace says
+      escort-follower-hours-ended. The protocol's next tick ends the escort as
+      off-hours, as it was written to. A follower who is missing inside his hours is
+      walked to and waited for as before. No leg with an escort is in a recorded scope.
+    - **Proof round** (run change-a1, the change in the working tree, round 9's file
+      from nr-r8 without a capture; run/nr/NR-R8d/change-a1; 315 s). In the Rider's
+      world the Rider claimed Q2284 at 0:41:07. The Bard came for the follower at 0:42,
+      had him back at 0:46, cleared, and found him gone for the night at 1:06:26: the
+      escort ended as off-hours with no attempt used. The leg did its other work,
+      waited three times for his window ("798041 keeps 04:00-21:00"), went back at
+      1:32:41, started the escort at 1:43:21 and brought him in at 1:44:10, first
+      attempt. The Bard ended leg 6 at level 21 with 119 quests. All nine bots of the
+      round reached their stage's end.
+    - **Proof.** Gate, set all+mage+warrior+artist+engineer+scout+templar, -Parallel 8,
+      run guard-p8 (run/nr/NR-R8d/guard-p8/verdict.json): verdict pass, all thirteen
+      scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests passes (4,629
+      passed, 16 skipped) and Fast passes (run nrr8d-fast, 11 passed).
 - [ ] **NR-R9 - Round 9: leg 7 for three, leg 6 for four, and the Chanter's and the Assassin's legs.** Depends: NR-R8d
   - Work: The eight worlds resumed from nr-r8 with -Capture nr-r9 (round file
     run/nr/NR-R9/round-9.json). The Sorcerer, Ranger and Spirit Master play leg 7; the
@@ -9765,3 +9805,13 @@ report what was done, what is parked or blocked, and what the operator must deci
   guard-p8 (thirteen scopes identical), seven checks, unit suite (4,629 passed, 16
   skipped) and Fast (nrr8c-fast) pass. The same round showed the Bard stopping at Q2284's
   follower after the Rider's escort in their shared world. Written: NR-R8d. Next: NR-R8d.
+- 2026-10-10 — Loop: NR-R8d done. The server is right: Disguised Germir keeps hours
+  (temporary_spawn 04:00 to 21:00, in Java's data too) and respawns 295 s after an escort,
+  and the port's follower code is Java's line for line. The Rider's escort and a long
+  clearing took the Bard past 21:00, and the clearing's walk back to a follower who had
+  left for the night ended the leg. The clearing now stops there, and the escort ends as
+  off-hours and waits for his window, as the leg was written to. Proof round (change-a1,
+  315 s): the Bard waited for 04:00, escorted him at the first attempt and ended leg 6; all
+  nine bots reached their stage's end. Full gate guard-p8 (thirteen scopes identical),
+  seven checks, unit suite (4,629 passed, 16 skipped) and Fast (nrr8d-fast) pass. Next:
+  NR-R9, round 9, with its captures.

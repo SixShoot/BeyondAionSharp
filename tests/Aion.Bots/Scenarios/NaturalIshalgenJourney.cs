@@ -4682,6 +4682,10 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 					IReadOnlyList<BotPosition> escortRoute = geometry.FindJourneyPath(map, followerStart, stand);
 					Require.True(escortRoute.Count > 0, $"No route for the {escort.Key} escort.");
 					bool InClearArea(BotPosition at) => escort.ClearAreas.Any(key => leg.Area(key).Contains(at.X, at.Y, at.Z));
+					Func<bool>? followerOffHours = escort.FollowerSpawnHour is int opens && escort.FollowerDespawnHour is int closes
+						? () => session.Api.World.GameMinutesAt(session.Api.Timing.Now) is long minutes &&
+							!NaturalGameClock.Within(minutes, opens, closes)
+						: null;
 					var protocol = new NaturalEscortProtocol(session, leg, escort, () => runtime.NowMillis)
 					{
 						WalkToAsync = async (to, walkToken) =>
@@ -4702,7 +4706,21 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 							int kills = 0;
 							foreach (int anchorNpc in new[] { escort.GoalNpcId, escort.FollowerNpcId })
 							{
-								await ApproachShippedSpawnAsync(anchorNpc, withinRange: 15);
+								// NR-R8d: a follower that keeps hours (Java temporary_spawn; Q2284's, 04:00-21:00) can be gone when the
+								// clearing comes back to him: the Bard's clearing ran into the night after another bot's escort had cost it
+								// the start of his day. He is then not there to walk to, and that walk ended the leg. Stop clearing: the
+								// protocol's next tick ends the escort as off-hours and the leg waits for his window.
+								if (anchorNpc == escort.FollowerNpcId && followerOffHours?.Invoke() == true) break;
+								try { await ApproachShippedSpawnAsync(anchorNpc, withinRange: 15); }
+								catch (InvalidDataException gone) when (anchorNpc == escort.FollowerNpcId && followerOffHours?.Invoke() == true)
+								{
+									session.TraceDiagnostic("escort-follower-hours-ended", new Dictionary<string, object?>
+									{
+										["escort"] = escort.Key, ["follower"] = escort.FollowerNpcId, ["reason"] = gone.Message,
+										["position"] = session.CurrentPosition,
+									});
+									break;
+								}
 								for (int round = 0; round < 16; round++)
 								{
 									if (!await DefendAgainstEngagedAsync($"escort-{escort.Key}-clear") || session.Api.World.IsDead) return null;
@@ -4734,10 +4752,7 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 						PriorAttempts = escortAttempts,
 						EndedFollowerObjectIds = escortEndedFollowers,
 						FollowerGoneAtMillis = escortFollowerGoneAt,
-						OffHours = escort.FollowerSpawnHour is int opens && escort.FollowerDespawnHour is int closes
-							? () => session.Api.World.GameMinutesAt(session.Api.Timing.Now) is long minutes &&
-								!NaturalGameClock.Within(minutes, opens, closes)
-							: null,
+						OffHours = followerOffHours,
 					};
 					NaturalEscortResult result = await protocol.RunAsync(token);
 					escortAttempts = result.Attempts;
