@@ -1820,6 +1820,23 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 						NaturalHelpItemSupply.ProfileJson(helpSupplied), token);
 			}
 
+			// NR-R17b: a character that logs in above the ground falls to it, as a client does (Java CM_MOVE's FALL flag and
+			// PlayerMoveController.stopFalling, which deals the fall's damage). A bot that stopped is not logged out, so its
+			// snapshot holds the place the server last saved for it, and that can be in the air of a flight. Such a place is
+			// off the navmesh, with static ground under it.
+			async Task FallFromLoginPlaceAsync()
+			{
+				BotPosition hung = session.CurrentPosition;
+				if (session.Api.World.MapId is not int map || geometry.SnapToGround(map, hung) != null ||
+					geometry.StaticGroundBelow(map, hung, 60) is not { } below || hung.Z - below.Z <= 2) return;
+				session.TraceDiagnostic("login-fall", new Dictionary<string, object?>
+				{
+					["from"] = hung, ["ground"] = below, ["metres"] = hung.Z - below.Z, ["hp"] = session.Api.World.CurrentHp,
+				});
+				await NaturalFlightProtocol.FallAsync(session, hung, below.Z, token);
+				await session.SynchronizeAsync(token);
+			}
+
 			async Task RunAllAltgardLegsAsync()
 			{
 				int characterId = session.CharacterId;
@@ -2053,6 +2070,7 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 					if (turnIn) inventoryChecks++;
 					else otherInventoryChecks++;
 				}
+				await FallFromLoginPlaceAsync();
 				await TopUpHelpItemsAsync("run-start");
 				await combat.BuffOurselfAsync(NaturalHelpTrigger.AfterRelog, token);
 				await InventoryCheckAsync("leg-start");
@@ -2724,6 +2742,7 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 					haramelApproach = ApproachHaramelAsync;
 					haramelKind = HaramelKind;
 				}
+				await FallFromLoginPlaceAsync();
 				await TopUpHelpItemsAsync("run-start");
 				await combat.BuffOurselfAsync(NaturalHelpTrigger.AfterRelog, token);
 				// The revised roomy cube need not trigger generic inventory maintenance after Q24016.

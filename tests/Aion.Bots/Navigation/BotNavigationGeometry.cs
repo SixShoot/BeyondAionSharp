@@ -86,6 +86,14 @@ public sealed class BotNavigationGeometry(Func<int, GeoMap> maps, int instanceId
         return float.IsFinite(z) ? point with { Z = z } : null;
     }
 
+    /// <summary>NR-R17b: the static ground under a point that hangs in the air, down to <paramref name="depth"/> metres
+    /// below it, or null.</summary>
+    public BotPosition? StaticGroundBelow(int mapId, BotPosition point, float depth)
+    {
+        float z = maps(mapId).GetZ(point.X, point.Y, point.Z, point.Z - depth, instanceId, true);
+        return float.IsFinite(z) ? point with { Z = z } : null;
+    }
+
     private BotNavMeshRouter? navMesh;
     private bool navMeshResolved;
 

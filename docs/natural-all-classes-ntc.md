@@ -9715,13 +9715,50 @@ through these: each is ticked by the round that gave its capture.
       -Parallel 8, run guard-p8 (run/nr/NR-R17a/guard-p8/verdict.json): verdict pass, all
       thirteen scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests
       passes (4,632 passed, 16 skipped) and Fast passes (run nrr17a-fast, 11 passed).
-- [ ] **NR-R17b - A character that logs in above the ground.** Depends: NR-R17a
+- [x] **NR-R17b - A character that logs in above the ground.** Depends: NR-R17a
   - Work: Java first: when the server saves a player's place, where it puts a player
     who logs in, and what a fall costs. A client that finds itself in the air falls to
     the ground below. Give the bot that at login, in the shared code, with what Java
     asks of a fall.
   - Proof: The full gate identical, with the bundle. The Rider, resumed from nr-r17-w8
     without a capture, begins its hour.
+  - 2026-10-11: done. A character that logs in off the navmesh with ground under it
+    falls to that ground, as a client does.
+    - **Java.** CM_MOVE 151-155: a move with the FALL flag adds to the fall
+      (PlayerMoveController.updateFalling) and the first move without it ends the fall.
+      PlayerMoveController.stopFalling 82-97 then deals
+      StatFunctions.calculateFallDamage 628-637: nothing under 10 m, from 10 m one
+      hundredth of the most HP for each metre, and all of the HP from 50 m. The server
+      does not make a player fall; the client reports it.
+    - **The change, generic.**
+      - **The geometry** (Bots/Navigation/BotNavigationGeometry.cs) has
+        StaticGroundBelow: the static ground under a point, down to a depth.
+      - **The journey** (Sc/NaturalIshalgenJourney.cs, FallFromLoginPlaceAsync). At
+        the start of an Altgard stage and of the Abyss entry, a character that stands
+        where the navmesh has nothing within its snap and static ground lies more than
+        2 m and at most 60 m under it falls there by NaturalFlightProtocol.FallAsync,
+        the fall the ring course already uses. The trace says login-fall. A character
+        that stands on the ground is left as it is.
+    - **Proof round** (run change-a1, the tree with NR-67b's and NR-R17b's changes,
+      round 18's file from nr-r17 without a capture; run/nr/NR-R17b/change-a1; 558 s).
+      The Rider falls 12.14 m at login and the server takes 196 of its 1,622 HP,
+      Java's figure to the point. It then kills its third warlock, hands in the
+      village's five quests and Q2283, and does Q24014 and Q24015: 161 quests in 92.2
+      game minutes with one death. No other bot of the round falls.
+    - **Also seen in that round, of round 18: the Rider at Q24016.** It stops at
+      Suthran: "No SM_DIALOG_WINDOW packet within 3 minutes". Java's handler has a path
+      of its own for the Rider (_24016AStrangeNewThread 52-58 and on): Suthran shows
+      page 1011 where every other class sees 1693, the guardian stone spawns Officer
+      Tavasha (233876) and sets var 3, the kill sets var 4, and the reward page is
+      2034. The leg's steps are the other classes'. It stands on the ground at
+      Suthran with nothing lost, so round 18 records the stop and its item is written
+      there.
+    - **Proof.** One bundle for NR-67b and NR-R17b, on the tree with both changes. The
+      script tests pass (test-sim-snapshot.ps1, test_compare_traces.py,
+      test-code-coverage.ps1). Gate, set all+mage+warrior+artist+engineer+scout+templar,
+      -Parallel 8, run guard-p8 (run/nr/NR-R17b/guard-p8/verdict.json): verdict pass, all
+      thirteen scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests
+      passes (4,632 passed, 16 skipped) and Fast passes (run nrr17b-fast, 11 passed).
 - [ ] **NR-R18 - Round 18: the Abyss entry for three, the coin gear for two, leg 10 for three.** Depends: NR-R17b
   - Work: Seven worlds resumed from nr-r17 with -Capture nr-r18 (round file
     run/nr/NR-R18/round-18.json; world 1 has no bot). The Chanter, the Spirit Master
@@ -11077,3 +11114,9 @@ report what was done, what is parked or blocked, and what the operator must deci
   tests, full gate guard-p8 of NR-R17b (thirteen scopes identical), seven checks, unit
   suite (4,632 passed, 16 skipped) and Fast (nrr17b-fast) pass. Next: NR-R17b, whose
   proof is in the same bundle, then NR-67's record.
+- 2026-10-11 — Loop: NR-R17b done. A character that logs in off the navmesh with ground
+  under it falls there, with the client's FALL flag, and Java deals the fall's damage.
+  Proof round (change-a1, 558 s): the Rider falls 12.14 m for 196 HP, ends Q2282 and goes
+  on to 161 quests. It then stops at Q24016's first talk: Java gives the Rider a path of
+  its own there, and round 18 will record it. The bundle is NR-67b's. Next: NR-67's
+  record.
