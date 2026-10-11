@@ -9521,13 +9521,39 @@ through these: each is ticked by the round that gave its capture.
       (run/nr/NR-R16c/guard-p8/verdict.json): verdict pass, all thirteen scopes
       identical. Seven pre-commit checks pass, Aion.GameServer.Tests passes (4,632
       passed, 16 skipped) and Fast passes (run nrr16c-fast, 11 passed).
-- [ ] **NR-R16c - A looted item that does not stack.** Depends: NR-R16b
+- [x] **NR-R16c - A looted item that does not stack.** Depends: NR-R16b
   - Work: Java first: how ItemService.addItem puts a looted item away, and which
     packet says so. Mend the loot sweep's wait: a change of a stack the character has
     room in, else a new item.
   - Proof: The full gate identical, with the bundle. The Chanter, resumed from
     nr-r16-w2 without a capture, is not stopped at a loot and ends Haramel or stops
     for another reason.
+  - 2026-10-11: done. The loot sweep waits for the packet the server sends for the
+    item it took: a change of a stack with room in it, else a new item.
+    - **Java.** ItemService.addItem 70-98 sends an item that stacks to
+      addStackableItem 148-178, which fills the stacks the player has, an update for
+      each, and makes new items for what is left. One that does not stack goes to
+      addNonStackableItem 103-118: a new item each time. The Rusty Key (185000103)
+      has no stack count in the item data.
+    - **The change, generic** (Sc/NaturalIshalgenJourney.cs, LootQuestItemsAsync).
+      Before the loot is sent, the sweep looks for a stack of the item that the
+      character holds with room in it. With one it waits for that stack's update, as
+      before. With none, or for an item that does not stack, it waits for the new
+      item. The rule for a limit-one item stays.
+    - **Finding, not mended.** TryLootCorpseItemAsync, the loot of one wanted quest
+      drop, waits the same old way and asks for one stack of the item at most. No run
+      has met it; it has no item data to ask and its drops stack.
+    - **Proof round** (run change-a1, the tree with NR-R16b's and NR-R16c's changes,
+      round 17's file from nr-r16 without a capture; run/nr/NR-R16c/change-a1; 352 s).
+      The Chanter takes its third Rusty Key at 1:53:22, where it stopped before, and
+      goes on: Haramel ends at 2:15:52 with its eleven quests, level 25, 176 quests,
+      135.9 game minutes, no death, receipt verified. The other seven play as in
+      NR-R16a's proof round.
+    - **Proof.** One gate for NR-R16b and NR-R16c, on the tree with both changes: set
+      all+mage+warrior+artist+engineer+scout+templar, -Parallel 8, run guard-p8
+      (run/nr/NR-R16c/guard-p8/verdict.json): verdict pass, all thirteen scopes
+      identical. Seven pre-commit checks pass, Aion.GameServer.Tests passes (4,632
+      passed, 16 skipped) and Fast passes (run nrr16c-fast, 11 passed).
 - [ ] **NR-R17 - Round 17: the Abyss entry for the Sorcerer, Haramel for three, leg 11 for two, leg 10 for three.** Depends: NR-R16c
   - Work: The eight worlds resumed from nr-r16 with -Capture nr-r17 (round file
     run/nr/NR-R17/round-17.json). The Sorcerer plays the Abyss entry (stage ax); the
@@ -10850,3 +10876,9 @@ report what was done, what is parked or blocked, and what the operator must deci
   One gate for the two items, guard-p8 of NR-R16c (thirteen scopes identical), seven
   checks, unit suite (4,632 passed, 16 skipped) and Fast (nrr16c-fast) pass. Next:
   NR-R16c.
+- 2026-10-11 — Loop: NR-R16c done. The loot sweep waited for a change of the stack it
+  held when it took an item again; an item that does not stack comes as a new item (Java
+  ItemService.addNonStackableItem). It now waits for a stack's update only when a stack
+  has room. Proof round (change-a1, 352 s): the Chanter ends Haramel with 176 quests.
+  The gate and the bundle are NR-R16b's, on the tree with both changes. Next: NR-R17,
+  round 17, with its captures.

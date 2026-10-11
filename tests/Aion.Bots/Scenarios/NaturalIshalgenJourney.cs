@@ -9203,12 +9203,16 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 			BotInventoryItem? existing = session.Api.World.Inventory.Values.FirstOrDefault(owned => owned.ItemId == itemId);
 			// Java DropService rejects a second limit-one item; there will be no inventory update to wait for.
 			if (existing != null && template.HasLimitOne()) continue;
+			// NR-R16c: Java ItemService.addItem fills a stack the player has room in (addStackableItem: an update of that
+			// stack) and makes a new item for one that does not stack or finds every stack full (addNonStackableItem).
+			BotInventoryItem? stack = !template.IsStackable() ? null : session.Api.World.Inventory.Values
+				.FirstOrDefault(owned => owned.ItemId == itemId && owned.Count < template.GetMaxStackCount());
 			await session.SendPacketAsync(session.Api.Loot(objectId, Get<byte>(entry, "index")), token);
-			if (existing == null)
+			if (stack == null)
 				await session.WaitForPacketAsync(typeof(SM_INVENTORY_ADD_ITEM), token,
 					packet => packet.Get<List<IReadOnlyDictionary<string, object?>>>("items").Any(item => Get<int>(item, "itemId") == itemId));
 			else
-				await session.WaitForPacketAsync(typeof(SM_INVENTORY_UPDATE_ITEM), token, packet => packet.Get<int>("objectId") == existing.ObjectId);
+				await session.WaitForPacketAsync(typeof(SM_INVENTORY_UPDATE_ITEM), token, packet => packet.Get<int>("objectId") == stack.ObjectId);
 			taken.Add(itemId);
 		}
 		await session.SendPacketAsync(session.Api.Loot(objectId, close: true), token);
