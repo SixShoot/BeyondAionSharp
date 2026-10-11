@@ -7010,10 +7010,27 @@ The template:
     Q2946, Q2947 and Q2042 complete, 181 quests in all. Captured as
     morheim-abyss-entry-s1-spirit-master, a record that points at character 133266 in the
     round snapshot nr-r18-w6.
-- [ ] **NR-117 - Spirit Master: the endpoint.** Depends: NR-116; ticked by its round
+- [x] **NR-117 - Spirit Master: the endpoint.** Depends: NR-116; ticked by its round
   - Work: Captured and verified as ntc-ready-spirit-master-s1: alive at Morheim Ice
     Fortress, level 25 or higher, Q2945, Q2946, Q2947 and Q2042 complete.
   - Proof: The capture verifies.
+  - 2026-10-11: done. ntc-ready-spirit-master-s1 is captured and verified.
+    - **Captured** at 319ff9c0e: sim-snapshot.ps1 -Action Capture -AltgardLeg1 -Leg ax
+      -From altgard-rc-complete-s1-spirit-master -Name ntc-ready-spirit-master-s1 (run
+      nr117-ax-a1, log run/nr/NR-117/capture-a1.log), as the Sorcerer's was (NR-67). The
+      leg was played once more, alone, as round 18 played it: 17 min 13 s, no death, the
+      arena and the ring course each at the first try, 103,863,001 ms of game time since
+      creation. Dump sha256 b2ed7899ce7362b1.
+    - **The endpoint, from the receipt.** Character 133266, created by packets: a Spirit
+      Master of level 26, alive at Morheim Ice Fortress and bound there; Q24020, Q2945,
+      Q2946, Q2947 and Q2042 complete, 181 quests in all. It wears the level-26 coin
+      spellbook 100600868 and four level-26 coin pieces.
+    - **Proof.** sim-snapshot.ps1 -Action Verify -Name ntc-ready-spirit-master-s1, run
+      nr117-verify-a1 (run/nr/NR-117/verify-a1.log; evidence under
+      run/snapshots/_verify/nr117-verify-a1): "Verified snapshot
+      ntc-ready-spirit-master-s1: character 133266 resumed at its endpoint." Seven
+      pre-commit checks pass (run/nr/NR-77/checks.log, on the tree of the three finish
+      captures of this chain).
 - [ ] **NR-118 - Spirit Master: the class scope.** Depends: NR-117
   - Work: One scope of the Spirit Master's play, chosen where its rules differ most from
     the Mage's, recorded by a bot alone, twice, and added to the gate's sets.
@@ -11288,3 +11305,9 @@ report what was done, what is parked or blocked, and what the operator must deci
   Q2945, Q2946, Q2947 and Q2042 complete, 181 quests. It is the fourth class at the
   plan's finish. Seven checks pass. Next: NR-117, the Spirit Master's finish capture,
   made in the same chain.
+- 2026-10-11 — Loop: NR-117 done. ntc-ready-spirit-master-s1 is captured at 319ff9c0e
+  (run nr117-ax-a1: the Abyss entry played once more alone, 17 min 13 s, no death) and
+  verified (run nr117-verify-a1): a Spirit Master of level 26, alive at Morheim Ice
+  Fortress, Q2945, Q2946, Q2947 and Q2042 complete, 181 quests. It is the fifth class at
+  the plan's finish. Seven checks pass. Next: NR-147, the Bard's finish capture, made in
+  the same chain.
