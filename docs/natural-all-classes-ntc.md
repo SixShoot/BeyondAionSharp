@@ -8226,12 +8226,50 @@ through these: each is ticked by the round that gave its capture.
       Bard, resumed at Q2213's tree, took the item and ended leg 2. The Chanter's use of
       the tree was cut short once; it fought the monster off before it used the tree
       again (object-use-again-after-cut-short, once in the round).
-- [ ] **NR-R6 - Round 6: Altgard leg 4 for five, leg 3 for four.** Depends: NR-R5
+- [x] **NR-R6 - Round 6: Altgard leg 4 for five, leg 3 for four.** Depends: NR-R5
   - Work: The eight worlds resumed from nr-r5 with -Capture nr-r6 (round file
     run/nr/NR-R6/round-6.json). The Sorcerer, Ranger, Spirit Master, Gunner and Rider
     play leg 4; the Chanter, Gladiator, Assassin and Bard play leg 3. Captures as
     altgard-rc-l4-<class> and altgard-rc-l3-<class>. One outcome line for each class; a
     stop gets a lettered item.
+  - Proof: round.json with nine outcome records; for each class that reached its
+    stage's end the completion receipt says verified and its capture is written.
+  - 2026-10-10: played. All nine reached their stage's end and all nine are captured:
+    leg 4 for the Sorcerer, Ranger, Spirit Master, Gunner and Rider, leg 3 for the
+    Chanter, Gladiator, Assassin and Bard. No bot stopped.
+    - **The round** (run r6-a1 at 52cc74274, -From nr-r5, -Capture nr-r6;
+      run/nr/NR-R6/r6-a1; round file run/nr/NR-R6/round-6.json). Eight worlds side by
+      side, 550 seconds of wall time: leg 4 is the long one, 154 to 269 game minutes.
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 1 | mage-sorcerer | Sorcerer | l4 | reached | 19 | 95 | 154.3 | 254, 157 kills | 2 | altgard-rc-l4-sorcerer |
+      | 2 | priest-chanter | Chanter | l3 | reached | 17 | 81 | 17.7 | 31, 30 kills | 0 | altgard-rc-l3-chanter |
+      | 3 | warrior-gladiator | Gladiator | l3 | reached | 17 | 81 | 16.6 | 20, 20 kills | 0 | altgard-rc-l3-gladiator |
+      | 4 | scout-assassin | Assassin | l3 | reached | 17 | 81 | 20.4 | 34, 30 kills | 0 | altgard-rc-l3-assassin |
+      | 5 | scout-ranger | Ranger | l4 | reached | 20 | 95 | 269.0 | 351, 239 kills | 5 | altgard-rc-l4-ranger |
+      | 6 | mage-spirit-master | Spirit Master | l4 | reached | 19 | 95 | 219.5 | 226, 156 kills | 1 | altgard-rc-l4-spirit-master |
+      | 7 | engineer-gunner | Gunner | l4 | reached | 19 | 95 | 236.6 | 298, 193 kills | 5 | altgard-rc-l4-gunner |
+      | 8 | artist-bard | Bard | l3 | reached | 17 | 81 | 13.9 | 19, 19 kills | 0 | altgard-rc-l3-bard |
+      | 8 | engineer-rider | Rider | l4 | reached | 20 | 95 | 254.0 | 301, 237 kills | 1 | altgard-rc-l4-rider |
+
+      Each receipt says verified. The captures are records that point into the round
+      snapshots nr-r6-w1 to nr-r6-w8.
+    - **Deaths, all in leg 4: fourteen, ten of them at one camp.** Each bot stood up at
+      its obelisk and went on (the death rule); none stopped. Ten deaths are at
+      Q24112's grave robbers (sentry 210504, fencer 210506, Comrade Sumarhon 210510,
+      level 14 and 15): the Ranger four times, the Sorcerer and the Gunner twice, the
+      Spirit Master and the Rider once. The other four are the Gunner's at a fierce
+      mosbear (Q2224), a Black Claw warrior and a tusked mosbear cub, and the Ranger's
+      at a tusked mosbear cub. A finding, not an item: deaths are outcomes, and every
+      class ended the leg.
+- [ ] **NR-R7 - Round 7: Altgard leg 5 for five, leg 4 for four.** Depends: NR-R6
+  - Work: The eight worlds resumed from nr-r6 with -Capture nr-r7 (round file
+    run/nr/NR-R7/round-7.json). The Sorcerer, Ranger, Spirit Master, Gunner and Rider
+    play leg 5; the Chanter, Gladiator, Assassin and Bard play leg 4. Captures as
+    altgard-rc-l5-<class> and altgard-rc-l4-<class>. One outcome line for each class; a
+    stop gets a lettered item. A class whose leg 5 is captured has its legs l1 to l5:
+    its item (NR-63, NR-103, NR-113, NR-123, NR-133) is ticked with the round.
   - Proof: round.json with nine outcome records; for each class that reached its
     stage's end the completion receipt says verified and its capture is written.
 
@@ -9315,3 +9353,10 @@ report what was done, what is parked or blocked, and what the operator must deci
   quests); the Chanter, Gladiator, Assassin and Bard ended leg 2 (level 16 or 17, 76
   quests). NR-R4b's rule ran once, for the Chanter at Q2213's tree. Written: NR-R6, round
   6. Seven checks pass. Next: NR-R6, round 6: leg 4 for five and leg 3 for four.
+- 2026-10-10 — Loop: NR-R6 played. Round 6 (r6-a1 at 52cc74274, -From nr-r5, 550 s): all
+  nine reached their stage's end and are captured in nr-r6-w1 to w8. The Sorcerer, Ranger,
+  Spirit Master, Gunner and Rider ended Altgard leg 4 (level 19 or 20, 95 quests, 154 to
+  269 game minutes) with fourteen deaths among them, ten at Q24112's grave robbers; the
+  Chanter, Gladiator, Assassin and Bard ended leg 3 (level 17, 81 quests) with none.
+  Written: NR-R7, round 7. Seven checks pass. Next: NR-R7, round 7: leg 5 for five and
+  leg 4 for four.
