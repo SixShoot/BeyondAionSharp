@@ -7628,9 +7628,15 @@ The template:
     receipt that says verified, and the Gunner stands at leg 5's end at level 20 with
     109 quests. Captured as altgard-rc-l1-gunner to altgard-rc-l5-gunner, records
     that point at character 133266 in the round snapshots nr-r3-w7 to nr-r7-w7.
-- [ ] **NR-124 - Gunner: Altgard legs l6 to l11.** Depends: NR-123; ticked by its round
+- [x] **NR-124 - Gunner: Altgard legs l6 to l11.** Depends: NR-123; ticked by its round
   - Work: As NR-123. Leg 11 is the destiny quest: its stone is 140000002 (NR-39).
   - Proof: Each capture verifies.
+  - 2026-10-11: done in rounds 9, 10, 12, 13, 20 and 21 (NR-R9, NR-R10, NR-R12, NR-R13,
+    NR-R20, NR-R21, world 7). Each leg ended with a receipt that says verified, leg 10
+    in round 20 after its hours in the Black Claw village, and the Gunner stands at leg
+    11's end at level 25 with 164 quests. Captured as altgard-rc-l6-gunner to
+    altgard-rc-l11-gunner,
+    records that point at character 133266 in the round snapshots of those rounds.
 - [ ] **NR-125 - Gunner: coin gear and Haramel.** Depends: NR-124; ticked by its round
   - Work: The coin-gear leg (leather, by its manifest, NR-38a) and Haramel with chest
     700830 (NR-40), captured as altgard-coingear-gunner and
@@ -10309,7 +10315,7 @@ through these: each is ticked by the round that gave its capture.
       | Gunner | none: ended | - | |
       | Assassin | Q2281 | 0 | five more counts of Q2281 by 0:41:19, then an hour with none; 33 flights at low health, 13 deaths, 34 fights that ended in a blocked approach. It is the one class still in leg 10 |
     - **Deaths: 13,** all the Assassin's.
-- [ ] **NR-R21 - Round 21: leg 11 for the Gunner, the coin gear for the Rider, leg 10 for the Assassin.** Depends: NR-R20
+- [x] **NR-R21 - Round 21: leg 11 for the Gunner, the coin gear for the Rider, leg 10 for the Assassin.** Depends: NR-R20
   - Work: Three worlds resumed from nr-r20 with -Capture nr-r21 (round file
     run/nr/NR-R21/round-21.json; worlds 1, 2, 3, 5 and 6 have no bot). The Gunner
     plays leg 11; the Rider plays the coin-gear stage; the Assassin goes on in leg 10
@@ -10317,6 +10323,41 @@ through these: each is ticked by the round that gave its capture.
     each class, and the table of leg 10's attempts carried on. A stop outside leg 10's
     hunts gets a lettered item, in round 21's own letters; so does a class with three
     attempts at one quest and nothing won.
+  - Proof: round.json with three outcome records; for each class that reached its
+    stage's end the completion receipt says verified and its capture is written.
+  - 2026-10-11: played. Two reached their stage's end and are captured: the Gunner ends
+    leg 11, the last of its legs l6 to l11 (NR-124 ticked), and the Rider ends the
+    coin-gear stage. The Assassin's hour at Q2281 won nothing. No stop of this round
+    is a defect.
+    - **The round** (run r21-a1 at 4a4be84c0, -From nr-r20, -Capture nr-r21;
+      run/nr/NR-R21/r21-a1; round file run/nr/NR-R21/round-21.json). Three worlds side by
+      side, worlds 4, 7 and 8, 104 seconds of wall time. Its file was played once
+      without a capture first (run preview-a1), with the same outcomes.
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 4 | scout-assassin | Assassin | l10 | stopped | 24 | 152 | 60.0 | 59, 43 kills | 4 | none |
+      | 7 | engineer-gunner | Gunner | l11 | reached | 25 | 164 | 11.6 | 11, 11 kills | 0 | altgard-rc-l11-gunner |
+      | 8 | engineer-rider | Rider | cg | reached | 25 | 165 | 14.4 | 24, 24 kills | 0 | altgard-coingear-rider |
+
+      Each receipt of a class that reached its stage's end says verified. The captures
+      are records that point into the round snapshots nr-r21-w4, nr-r21-w7 and
+      nr-r21-w8; the first holds the Assassin as it stood.
+    - **Leg 10, the attempts so far.**
+
+      | Class | Where its hour ran out | Attempts with nothing won | Note |
+      |---|---|---|---|
+      | Assassin | Q2281 | 1 | the quest stands at 3 of 3, 5 of 5 and 3 of 5: two scratchers of its third group are wanting. Three fights with one of them, no kill; 11 flights at low health, 4 deaths |
+    - **Deaths: 4,** all the Assassin's.
+- [ ] **NR-R22 - Round 22: the coin gear for the Gunner, Haramel for the Rider, leg 10 for the Assassin.** Depends: NR-R21
+  - Work: Three worlds resumed from nr-r21 with -Capture nr-r22 (round file
+    run/nr/NR-R22/round-22.json; worlds 1, 2, 3, 5 and 6 have no bot). The Gunner
+    plays the coin-gear stage; the Rider plays Haramel (stage l12); the Assassin goes
+    on in leg 10 from where it stopped. The file is played once without a capture
+    first; a stop that is a defect is mended before the captured round, in round 21's
+    letters. Captures as the class items name them. One outcome line for each class,
+    and the table of leg 10's attempts carried on. A class with three attempts at one
+    quest and nothing won gets an item.
   - Proof: round.json with three outcome records; for each class that reached its
     stage's end the completion receipt says verified and its capture is written.
 
@@ -11787,3 +11828,8 @@ report what was done, what is parked or blocked, and what the operator must deci
   Recorded at 836ce5c4e: two passes identical, 32,848 records, sha256 8c9662e82819155d,
   and guard-ranger passes. The full gate is now nineteen scopes. Seven checks and the
   script tests pass. Next: NR-R21, round 21, with its captures.
+- 2026-10-11 — Loop: NR-R21 played. Round 21 (r21-a1 at 4a4be84c0, -From nr-r20, 104 s,
+  three worlds): the Gunner ends leg 11 with 164 quests (NR-124) and the Rider the
+  coin-gear stage with 165; both are captured in nr-r21. The Assassin's hour at Q2281 won
+  nothing: two kills of the quest's third group are wanting. Written: NR-R22, round 22.
+  Seven checks pass. Next: NR-R22, round 22, with its captures.
