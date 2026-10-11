@@ -4789,11 +4789,16 @@ The template:
     Captured as altgard-rc-l6-sorcerer to altgard-rc-l11-sorcerer, records that point
     at character 133266 in the round snapshots nr-r8-w1 to nr-r11-w1, nr-r13-w1 and
     nr-r14-w1.
-- [ ] **NR-65 - Sorcerer: coin gear and Haramel.** Depends: NR-64; ticked by its round
+- [x] **NR-65 - Sorcerer: coin gear and Haramel.** Depends: NR-64; ticked by its round
   - Work: The coin-gear leg (cloth, by its manifest, NR-38a) and Haramel with chest
     700831 (NR-40), captured as altgard-coingear-sorcerer and
     altgard-rc-complete-s1-sorcerer.
   - Proof: Each capture verifies.
+  - 2026-10-11: done in rounds 15 and 16 (NR-R15, NR-R16, world 1). The coin-gear stage
+    ended at level 24 with 165 quests and Haramel at level 25 with 176 quests, in 98.6
+    game minutes without a death, each with a receipt that says verified. Captured as
+    altgard-coingear-sorcerer and altgard-rc-complete-s1-sorcerer, records that point at
+    character 133266 in the round snapshots nr-r15-w1 and nr-r16-w1.
 - [ ] **NR-66 - Sorcerer: the Abyss entry.** Depends: NR-65; ticked by its round
   - Work: Q24020, then Q2945, Q2946, Q2947 and Q2042 with the coin tiers it can wear
     (NR-38b, NR-Q14, NR-Q16), captured as morheim-abyss-entry-s1-sorcerer.
@@ -9374,7 +9379,7 @@ through these: each is ticked by the round that gave its capture.
       run guard-p8 (run/nr/NR-R15c/guard-p8/verdict.json): verdict pass, all thirteen
       scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests passes (4,632
       passed, 16 skipped) and Fast passes (run nrr15c-fast, 11 passed).
-- [ ] **NR-R16 - Round 16: Haramel for the Sorcerer, the coin gear for three, leg 10 for four, and the Assassin's leg 9.** Depends: NR-R15c
+- [x] **NR-R16 - Round 16: Haramel for the Sorcerer, the coin gear for three, leg 10 for four, and the Assassin's leg 9.** Depends: NR-R15c
   - Work: The eight worlds resumed from nr-r15 with -Capture nr-r16 (round file
     run/nr/NR-R16/round-16.json). The Sorcerer plays Haramel (stage l12); the Chanter,
     the Spirit Master and the Bard play the coin-gear stage; the Ranger, the Gladiator,
@@ -9383,6 +9388,82 @@ through these: each is ticked by the round that gave its capture.
     and the table of leg 10's attempts carried on. A stop outside leg 10's hunts gets a
     lettered item, in round 16's own letters; so does a class with three attempts at
     one quest and nothing won.
+  - Proof: round.json with nine outcome records; for each class that reached its
+    stage's end the completion receipt says verified and its capture is written.
+  - 2026-10-11: played. Seven reached their stage's end and are captured: the Sorcerer
+    Haramel, so NR-65 is ticked; the Chanter, the Spirit Master and the Bard the
+    coin-gear stage; the Gladiator and the Ranger leg 10; the Assassin leg 9. The Gunner
+    stopped at a cast the server refused nine times, a defect of the bot's: NR-R16a.
+    The Rider's hour ran out at Q2282, its first attempt there.
+    - **The round** (run r16-a1 at a1e35565a, -From nr-r15, -Capture nr-r16;
+      run/nr/NR-R16/r16-a1; round file run/nr/NR-R16/round-16.json). Eight worlds side by
+      side, 530 seconds of wall time. It plays as NR-R15c's round without a capture did.
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 1 | mage-sorcerer | Sorcerer | l12 | reached | 25 | 176 | 98.6 | 127, 122 kills | 0 | altgard-rc-complete-s1-sorcerer |
+      | 2 | priest-chanter | Chanter | cg | reached | 24 | 165 | 14.9 | 27, 27 kills | 0 | altgard-coingear-chanter |
+      | 3 | warrior-gladiator | Gladiator | l10 | reached | 24 | 162 | 105.9 | 70, 61 kills | 0 | altgard-rc-l10-gladiator |
+      | 4 | scout-assassin | Assassin | l9 | reached | 23 | 152 | 20.7 | 49, 22 kills | 2 | altgard-rc-l9-assassin |
+      | 5 | scout-ranger | Ranger | l10 | reached | 24 | 160 | 49.1 | 59, 44 kills | 3 | altgard-rc-l10-ranger |
+      | 6 | mage-spirit-master | Spirit Master | cg | reached | 25 | 165 | 20.2 | 27, 27 kills | 0 | altgard-coingear-spirit-master |
+      | 7 | engineer-gunner | Gunner | l10 | stopped | 24 | 152 | 172.2 | 197, 111 kills | 5 | none |
+      | 8 | artist-bard | Bard | cg | reached | 24 | 165 | 11.8 | 24, 24 kills | 0 | altgard-coingear-bard |
+      | 8 | engineer-rider | Rider | l10 | stopped | 23 | 152 | 147.4 | 171, 113 kills | 11 | none |
+
+      Each receipt of a class that reached its stage's end says verified. The captures
+      are records that point into the round snapshots nr-r16-w1 to nr-r16-w8, which hold
+      the two that stopped as they stood.
+    - **What the three items before it gave.** The Assassin took a landing six times
+      (NR-R15a), got Q2916's clothing at 0:15:07 and ended leg 9 in 20.7 game minutes.
+      The Ranger ended leg 10 without Q2282 and Q2283 (NR-R15c) in 49.1 game minutes,
+      with its own trip to Pandaemonium for the robe at 0:46:22. The Gladiator killed
+      its three warlocks, Q2282 at its second attempt, and did the campaign.
+    - **The Gunner: a cooldown the bot ended twice.** It did Q2281 at its second
+      attempt, killed one warlock of Q2282, and then the run ended on "Cast 2171
+      remains not ready after 9 consecutive refusals".
+      - Gunshot, Trunk Shot and Crosstrigger (2171) share cooldown 1802.
+      - At 2:52:03.741 Reload's reset came: SM_SKILL_COOLDOWN with nothing left for
+        each of them. The fight ended its cooldown 1802, rightly.
+      - At 2:52:04.469 Gunshot was cast again and took the cooldown for 16 seconds.
+      - At 2:52:09.829 the next fight began, a defence. A defence begins on the
+        packets from before it, to see who struck, and so read Reload's notice a second
+        time and ended cooldown 1802 again, five seconds into Gunshot's sixteen.
+      - Crosstrigger was then chosen and the server refused it, nine times in three
+        seconds, which the fight takes for a broken run.
+
+      Earlier in the hour, at 0:23:16, the server refused Gunshot seven times in the
+      same way and took the eighth. Item NR-R16a.
+    - **The Rider.** Q2281 at its third attempt, done at 1:37, with 20 fights that
+      ended in a blocked approach. Then fifty minutes at Q2282 without one fight with a
+      warlock, and 11 deaths in the round.
+    - **Leg 10, the attempts so far.**
+
+      | Class | Where its hour ran out | Attempts there | Note |
+      |---|---|---|---|
+      | Sorcerer, Chanter, Spirit Master, Bard | none: ended before | - | |
+      | Gladiator | none: ended | - | Q2282 at its second attempt |
+      | Ranger | none: ended | - | without Q2282 and Q2283 (NR-R15c) |
+      | Gunner | not an hour: a refused cast, in Q2282 | - | Q2281 at its second attempt; one warlock of three. NR-R16a |
+      | Rider | Q2282 | 1 | Q2281 at its third attempt |
+    - **Deaths: 21.**
+- [ ] **NR-R16a - A notice that a cooldown is over, read again by the next fight.** Depends: NR-R16
+  - Work: Java first: how skills share a cooldown, what Reload's reset sends, and what
+    the server answers a cast inside a cooldown. Mend the fight's reading in the shared
+    code: a notice ends a cooldown only when it came after the cast that took it. Look
+    at the seven refusals of Gunshot at 0:23:16 as well, and say whether they are the
+    same defect.
+  - Proof: The full gate identical, with the bundle. The Gunner, resumed from nr-r16-w7
+    without a capture, is not stopped by a refused cast.
+- [ ] **NR-R17 - Round 17: the Abyss entry for the Sorcerer, Haramel for three, leg 11 for two, leg 10 for three.** Depends: NR-R16a
+  - Work: The eight worlds resumed from nr-r16 with -Capture nr-r17 (round file
+    run/nr/NR-R17/round-17.json). The Sorcerer plays the Abyss entry (stage ax); the
+    Chanter, the Spirit Master and the Bard play Haramel (stage l12); the Gladiator and
+    the Ranger play leg 11; the Assassin plays leg 10; the Gunner and the Rider go on
+    in leg 10, each from where it stopped. Captures as the class items name them. One
+    outcome line for each class, and the table of leg 10's attempts carried on. A stop
+    outside leg 10's hunts gets a lettered item, in round 17's own letters; so does a
+    class with three attempts at one quest and nothing won.
   - Proof: round.json with nine outcome records; for each class that reached its
     stage's end the completion receipt says verified and its capture is written.
 
@@ -10674,3 +10755,11 @@ report what was done, what is parked or blocked, and what the operator must deci
   in 49.1 game minutes. Full gate guard-p8 (thirteen scopes identical), seven checks,
   unit suite (4,632 passed, 16 skipped) and Fast (nrr15c-fast) pass. Next: NR-R16, round
   16, with its captures.
+- 2026-10-11 — Loop: NR-R16 played. Round 16 (r16-a1 at a1e35565a, -From nr-r15, 530 s):
+  seven reached their stage's end and are captured in nr-r16-w1 to w8: the Sorcerer
+  Haramel (level 25, 176 quests), so NR-65 is ticked; the Chanter, the Spirit Master and
+  the Bard the coin-gear stage (165); the Gladiator (162) and the Ranger (160, without
+  Q2282 and Q2283) leg 10; the Assassin leg 9 (152). The Gunner stopped at a cast refused
+  nine times: a defence read Reload's notice again and ended a cooldown taken since:
+  NR-R16a. The Rider's hour ran out at Q2282, its first attempt there. Written: NR-R16a
+  and NR-R17, round 17. Seven checks pass. Next: NR-R16a.
