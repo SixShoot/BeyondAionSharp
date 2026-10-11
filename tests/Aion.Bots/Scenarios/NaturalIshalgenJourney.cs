@@ -5676,6 +5676,25 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 					await RestSafelyAsync(token);
 					return await ApproachShippedSpawnAsync(templateId, skipBlockedTarget, withinRange, returnedFromStrand: true, completedSource: completedSource, acceptObservedKill: acceptObservedKill);
 				}
+				// NR-R14b: the kill step leaves a monster that failed twice for another of its kind (AK-08). When it is the only
+				// one, Q2277's one Black Claw hunter or Q2292's one Mumu Ang, the hunt then finds none while that monster walks
+				// past in view. Before the hunt ends for want of one, a monster so left that still lives is taken back.
+				int[] leftAlive = session.Api.World.Objects.Values
+					.Where(known => known.TemplateId == templateId && !known.IsCorpse && navigator.LeftForAnother.Contains(known.ObjectId))
+					.Select(known => known.ObjectId).Order().ToArray();
+				if (leftAlive.Length > 0)
+				{
+					foreach (int left in leftAlive)
+					{
+						navigator.LeftForAnother.Remove(left);
+						navigator.UnavailableObjects.Remove(left);
+					}
+					session.TraceDiagnostic("left-target-taken-back", new Dictionary<string, object?>
+					{
+						["templateId"] = templateId, ["objects"] = leftAlive, ["position"] = session.CurrentPosition,
+					});
+					return await ApproachShippedSpawnAsync(templateId, skipBlockedTarget, withinRange, completedSource: completedSource, acceptObservedKill: acceptObservedKill);
+				}
 				throw new InvalidDataException($"No client-observed NPC {templateId} at {Math.Min(12, anchors.Length)} shipped spawn hints " +
 					$"from {session.CurrentPosition}: {string.Join(" | ", reasons)}");
 
@@ -8766,6 +8785,7 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 						failedTargets.TryGetValue(target, out int failures) && failures >= 1)
 					{
 						navigator.UnavailableObjects.Add(target);
+						navigator.LeftForAnother.Add(target);
 						session.TraceDiagnostic("kill-target-abandoned", new Dictionary<string, object?>
 						{
 							["template"] = templateId, ["target"] = target, ["position"] = session.CurrentPosition,

@@ -9129,13 +9129,44 @@ through these: each is ticked by the round that gave its capture.
       way and did not come to use the clothing. Its first attempt; the Rider's second
       took the clothing at once.
     - **Deaths: 40.**
-- [ ] **NR-R14b - The only monster of a hunted kind is left for another.** Depends: NR-R14
+- [x] **NR-R14b - The only monster of a hunted kind is left for another.** Depends: NR-R14
   - Work: The kill step leaves a monster that failed twice with no death and no
     retreat for another of its kind (AK-08). When no other of its kind is in view the
     hunt then finds none and the leg stops. Mend it in the shared code: a monster so
     left is taken back when the hunt would otherwise end for want of one.
   - Proof: The full gate identical, with the bundle. The Gunner, resumed from nr-r14-w7
     without a capture, hunts Q2277's hunter again.
+  - 2026-10-11: done. A hunt that would end for want of a monster takes back one it had
+    left. The proof round did not call on it.
+    - **Java.** Nothing of the server's is relied on.
+    - **The change, generic** (Sc/NaturalIshalgenJourney.cs and its Navigator). The
+      kill step notes which monsters it left alive for another of their kind
+      (LeftForAnother, beside the navigator's unavailable objects). Where the walk to a
+      hunted kind is about to end with "No client-observed NPC", after its waits
+      through the respawn, the ones so left that are in view and alive are made
+      available again and the walk is tried once more; the trace says
+      left-target-taken-back. Nothing else is taken back: not a corpse, not an object
+      set aside for another reason.
+    - **Proof round** (run change-a1, the change in the working tree, round 15's file
+      from nr-r14 without a capture; run/nr/NR-R14b/change-a1; 477 s). The Gunner, on a
+      fresh login with nothing set aside, left a hunter for another again at 0:09:39,
+      and this time others came: it had its ten of Q2277's item by 1:09:21, did Q2280,
+      and its hour ran out at Q2281, two quests on. The new step was not called on, by
+      the Gunner or by any other bot of the round. What the round shows is the hunt
+      unharmed; the step itself stands on the gate and on the reading of round 14's
+      stop.
+    - **Also seen in that round, of round 15.** The Sorcerer ends the coin-gear stage
+      and the Chanter, the Spirit Master and the Bard leg 11. The Gladiator does Q2280
+      at its third attempt and Q2281 and stops at Q2282. The Ranger's third hour at
+      Q2282 wins nothing. The Assassin's hour goes to one mau shaman: 76 fights
+      without a kill and 299 skills refused for distance, each at a distance the bot
+      reckons as 2 m, NR-110g's defect as the Gladiator met it in round 14. The Rider's
+      hour at Q2281 holds 110 fights that end in a blocked approach. Round 15 will
+      record them.
+    - **Proof.** Gate, set all+mage+warrior+artist+engineer+scout+templar, -Parallel 8,
+      run guard-p8 (run/nr/NR-R14b/guard-p8/verdict.json): verdict pass, all thirteen
+      scopes identical. Seven pre-commit checks pass, Aion.GameServer.Tests passes (4,632
+      passed, 16 skipped) and Fast passes (run nrr14b-fast, 11 passed).
 - [ ] **NR-R15 - Round 15: the coin gear for the Sorcerer, leg 11 for three, leg 10 for four, and the Assassin's leg 9.** Depends: NR-R14b
   - Work: The eight worlds resumed from nr-r14 with -Capture nr-r15 (round file
     run/nr/NR-R15/round-15.json). The Sorcerer plays the coin-gear stage; the Chanter,
@@ -10394,3 +10425,12 @@ report what was done, what is parked or blocked, and what the operator must deci
   without progress. A finding: NR-110g's defect cost the Gladiator four minutes at a
   caster it believed at its feet. Written: NR-R14b and NR-R15, round 15. Seven checks
   pass. Next: NR-R14b.
+- 2026-10-11 — Loop: NR-R14b done. The kill step leaves a monster that failed twice for
+  another of its kind; when it is the only one the hunt found none and the leg stopped. A
+  hunt that would end for want of a monster now takes back the ones so left that are
+  alive and in view. The proof round (change-a1, 477 s) did not call on it: the Gunner
+  left a hunter again, others came, and it went two quests on. Full gate guard-p8
+  (thirteen scopes identical), seven checks, unit suite (4,632 passed, 16 skipped) and
+  Fast (nrr14b-fast) pass. The same round showed the Assassin's hour going to a caster it
+  reckons at 2 m (NR-110g's defect) and the Rider's to blocked approaches. Next: NR-R15,
+  round 15, with its captures.

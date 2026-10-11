@@ -29,6 +29,9 @@ public sealed partial class NaturalIshalgenJourney
 		public BotTravelPlanner? Planner { get; init; }
 		public List<NaturalNavigationEvent> Events { get; } = [];
 		public HashSet<int> UnavailableObjects { get; } = [];
+		/// <summary>NR-R14b: the monsters among <see cref="UnavailableObjects"/> that a kill step left alive for another of
+		/// their kind (AK-08). A hunt that would end for want of one takes them back.</summary>
+		public HashSet<int> LeftForAnother { get; } = [];
 		/// <summary>CP-56a: the monsters a walk-in approach has accepted as its target's pack. While it is set their
 		/// circles are no hazard to a route or a segment; it is empty outside that approach.</summary>
 		public IReadOnlySet<int> AcceptedPack { get; set; } = new HashSet<int>();
