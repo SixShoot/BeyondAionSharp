@@ -9119,7 +9119,7 @@ through these: each is ticked by the round that gave its capture.
       so neither can be committed outside phase B (NR-Q2). The Cleric pulls an add that
       brings Sumarhon anyway at 2:28:12 and 2:48:51, and hunts him from 2:11:39, when
       the quest counted his death, until 2:49:45. Question NR-Q18.
-- [ ] **NR-R7b - The kill step at a pack that cannot be taken apart.** Depends: NR-98, NR-128 and NR-138, each ticked or its class parked
+- [x] **NR-R7b - The kill step at a pack that cannot be taken apart.** Depends: NR-98, NR-128 and NR-138, each ticked or its class parked
   - Work: NR-Q18, answered 2026-10-11: "Do what is needed." Taken when the classes are
     done, so that the rounds still to play keep the code they were tried on. Java first
     for what Q24112 counts and when. The two generic changes NR-Q18 names: a hunt ends
@@ -9161,6 +9161,14 @@ through these: each is ticked by the round that gave its capture.
       quest uncounted.
     - **The bundle** (run/nr/NR-R7b, chain): the unit suite (4,632 passed, 16 skipped),
       the seven checks and Fast (nrr7b-fast) pass.
+  - 2026-10-12: done. Scope c is recorded again.
+    - **Recorded again** at b7e82baef on a clean tree, with -Record -ReRecord (run
+      record-a1, run/nr/NR-R7b/record-a1/verdict.json): two passes identical, 96,269
+      records where it had 112,256, sha256 30ce68120b9babcb. 0 deaths where it had 3, 27
+      retreats where it had 37. The row keeps its line, replay, environment and ignore
+      list; the old trace stays in its folder.
+    - **The gate after** (run guard2-p8, run/nr/NR-R7b/guard2-p8/verdict.json):
+      twenty-two scopes identical. Seven checks pass on the recorded tree.
 - [x] **NR-R8 - Round 8: Altgard leg 6 for five, leg 5 for three, and the Assassin's leg 4.** Depends: NR-R7a
   - Work: The eight worlds resumed from nr-r7 with -Capture nr-r8 (round file
     run/nr/NR-R8/round-8.json). The Sorcerer, Ranger, Spirit Master, Gunner and Rider
@@ -12870,3 +12878,8 @@ report what was done, what is parked or blocked, and what the operator must deci
   death, where it ended at 2:56:42 with three. NR-Q18's second change is not made: no run
   is left that would show it. Unit suite, seven checks and Fast nrr7b-fast pass.
   Next: NR-R7b still, scope c recorded again; then NR-150.
+- 2026-10-12 — Loop: NR-R7b done. Scope c is recorded again at b7e82baef (record-a1, two
+  passes identical): 96,269 records where it had 112,256, sha256 30ce68120b9babcb, no
+  death where it had three. Gate guard2-p8: twenty-two scopes identical. Seven checks
+  pass. Every item but the close-out is ticked. Next: NR-150, the final gate and the
+  close-out.
