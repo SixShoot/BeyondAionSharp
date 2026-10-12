@@ -3241,7 +3241,10 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 								}
 								int huntKind = hunt.NpcIds.First(SpawnsOnMap);
 								int target;
-								try { target = await KillShippedSpawnAsync(huntKind); }
+								// NR-R7b: the hunt ends when the quest has counted its kill. Comrade Sumarhon fell as an attacker in his own
+								// camp, Q24112 counted him, and the kill step hunted him on for forty minutes and two deaths: it asked only
+								// for a kill of its own. The kill step reads the count between its tries (RC-11) when it is given it.
+								try { target = await KillShippedSpawnAsync(huntKind, objectiveDone: Counted); }
 								catch (InvalidDataException noRoute) when (!Counted() && !session.Api.World.IsDead &&
 									noRoute.Message.Contains("No collision-checked route", StringComparison.Ordinal))
 								{
@@ -3255,9 +3258,10 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 									});
 									if (!await WalkRoadDefendingAsync(spawn, $"hunt-road-{huntKind}", within: 40) && !session.Api.World.IsDead)
 										await UseLearnedReturnToBindAsync();
-									target = await KillShippedSpawnAsync(huntKind);
+									target = await KillShippedSpawnAsync(huntKind, objectiveDone: Counted);
 								}
-								navigator.UnavailableObjects.Add(target);
+								// A hunt the count ended names no monster of its own.
+								if (target != 0) navigator.UnavailableObjects.Add(target);
 							}
 							catch (InvalidDataException exception) when (Counted())
 							{

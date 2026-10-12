@@ -9132,6 +9132,35 @@ through these: each is ticked by the round that gave its capture.
   - Proof: Scope c played again: the Cleric reports Q24112 without hunting Sumarhon on
     after the quest has counted him. The bundle, and the full gate with every scope
     identical or recorded again twice.
+  - 2026-10-12, the code: a hunt ends when the quest has counted its kill. That is the
+    first of NR-Q18's two changes. The second is not made; why is below. Scope c
+    changes, as the question said it would, and is recorded again; the item is ticked
+    with that.
+    - **Java.** Q24112 counts one kill of Comrade Sumarhon at var 0 and none after
+      (_24112NoLaissezFaireForLepharists.onKillEvent 85-102), in whichever of the
+      player's fights he fell.
+    - **The change** (Sc/NaturalIshalgenJourney.cs, the leg's hunt step). The hunt
+      gives the kill step the quest's own count, as the template hunts do (RC-11), and
+      the kill step ends between its tries when the count has moved. A hunt the count
+      ended names no monster of its own. No branch on a class.
+    - **The gate** (run guard-p8, run/nr/NR-R7b/guard-p8/verdict.json): twenty-one
+      scopes identical. Scope c differs first at record 23,295, at 0:39:41, in
+      Q24013's hunt: the step set out for a Black Claw Sharpeye, a Black Claw Warrior
+      fell in the fight on the way and the quest counted it, and the hunt ends there,
+      where the recorded one went on to a sharpeye as well.
+    - **At Sumarhon.** The quest counts him at 2:18:23, the hunt ends at 2:18:36 and
+      the report is made at 2:20:15. The recorded leg hunted him on from 2:11:39 to
+      2:53:30 and died twice in that time. Leg 4 now ends at 2:22:25 without a death,
+      where it ended at 2:56:42 with three; its fourteen quests are the same; 96,269
+      records where it had 112,256.
+    - **The second change is not made.** "A pull made as the last resort against a
+      pack that holds the step's target strikes the target": with the first change the
+      Cleric's leg 4 no longer comes to that pull, every class of this plan is past
+      Sumarhon, and no run is left that would show it. Nothing unproven is written
+      (rule (n)). It stays under Blocked for a plan whose class meets Sumarhon with the
+      quest uncounted.
+    - **The bundle** (run/nr/NR-R7b, chain): the unit suite (4,632 passed, 16 skipped),
+      the seven checks and Fast (nrr7b-fast) pass.
 - [x] **NR-R8 - Round 8: Altgard leg 6 for five, leg 5 for three, and the Assassin's leg 4.** Depends: NR-R7a
   - Work: The eight worlds resumed from nr-r7 with -Capture nr-r8 (round file
     run/nr/NR-R8/round-8.json). The Sorcerer, Ranger, Spirit Master, Gunner and Rider
@@ -11226,6 +11255,10 @@ Nothing is blocked at the start.
     classes of a later plan.
   - 2026-10-11: answered, NR-Q18: "Do what is needed." Item NR-R7b, taken when the
     classes are done.
+  - 2026-10-12, NR-R7b: the first change is made, and the Cleric's leg 4 reports
+    Q24112 without hunting Sumarhon on and without a death. The second, the pull at a
+    pack that holds the step's target, is not made: no run of this plan would show it
+    any more. It is for a plan whose class meets Sumarhon with the quest uncounted.
 - **Recorded by NR-R21a, blocking nothing: the ground rule takes the underside of what is
   overhead for ground.** The bot asks the server's geometry for the first surface under a
   point two metres above the height it expects (GeoMap.GetZ, Java GeoMap.getZ 122-135).
@@ -12830,3 +12863,10 @@ report what was done, what is parked or blocked, and what the operator must deci
   8522e1d73aff7d68. The full gate is now twenty-two scopes, and all are identical
   (guard-p8 of NR-98). Seven checks and the script tests pass. Next: NR-R7b, the kill
   step at a pack that cannot be taken apart.
+- 2026-10-12 — Loop: NR-R7b, the code. A hunt ends when the quest has counted its kill
+  (the leg's hunt gives the kill step the quest's count). Gate guard-p8: twenty-one
+  scopes identical; scope c differs first at record 23,295, in Q24013's hunt, and at
+  Sumarhon the hunt ends 13 s after the quest counts him. Leg 4 ends at 2:22:25 without a
+  death, where it ended at 2:56:42 with three. NR-Q18's second change is not made: no run
+  is left that would show it. Unit suite, seven checks and Fast nrr7b-fast pass.
+  Next: NR-R7b still, scope c recorded again; then NR-150.
