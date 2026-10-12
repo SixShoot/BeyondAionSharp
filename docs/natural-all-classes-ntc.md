@@ -6022,10 +6022,16 @@ The template:
     at leg 5's end at level 21 with 109 quests. Captured as altgard-rc-l1-assassin to
     altgard-rc-l5-assassin, records that point at character 133266 in the round
     snapshots nr-r3-w4, nr-r5-w4, nr-r6-w4, nr-r9-w4 and nr-r10-w4.
-- [ ] **NR-94 - Assassin: Altgard legs l6 to l11.** Depends: NR-93; ticked by its round
+- [x] **NR-94 - Assassin: Altgard legs l6 to l11.** Depends: NR-93; ticked by its round
   - Work: As NR-93. Leg 11 is the destiny quest: its stone is the Templar's, 140000003
     (NR-39).
   - Proof: Each capture verifies.
+  - 2026-10-11: done in rounds 11, 12, 13, 16, 25 and 26 (NR-R11, NR-R12, NR-R13,
+    NR-R16, NR-R25, NR-R26, world 4). Each leg ended with a receipt that says verified,
+    leg 10 in round 25 after its hours in the Black Claw village, the last of them in
+    the gear it owns (NR-R23a). The Assassin stands at leg 11's end at level 25 with
+    164 quests. Captured as altgard-rc-l6-assassin to altgard-rc-l11-assassin, records
+    that point at character 133266 in the round snapshots of those rounds.
 - [ ] **NR-95 - Assassin: coin gear and Haramel.** Depends: NR-94; ticked by its round
   - Work: The coin-gear leg (leather, by its manifest, NR-38a; one dagger a tier, the
     other hand as it is) and Haramel with chest 700830 (NR-40), captured as
@@ -10937,7 +10943,7 @@ through these: each is ticked by the round that gave its capture.
       won in the gear of levels 6 to 10 (rounds 21 to 23). In the gear it owns
       (NR-R23a) it won Q2281 in its next hour and the rest of the leg in the one after.
     - **Deaths: 1.**
-- [ ] **NR-R26 - Round 26: leg 11 for the Assassin.** Depends: NR-R25
+- [x] **NR-R26 - Round 26: leg 11 for the Assassin.** Depends: NR-R25
   - Work: One world resumed from nr-r25 with -Capture nr-r26 (round file
     run/nr/NR-R26/round-26.json). The Assassin plays leg 11, the destiny quest, with the
     Templar's stone 140000003 (NR-39). The file is played once without a capture first;
@@ -10946,6 +10952,31 @@ through these: each is ticked by the round that gave its capture.
     chain, each file first without a capture: round 27 the coin gear, round 28 Haramel,
     round 29 the Abyss entry with its two captures. Each round is recorded in its own
     item.
+  - Proof: round.json with one outcome record; if the Assassin reached its stage's
+    end the completion receipt says verified and its capture is written.
+  - 2026-10-11: played. The Assassin ends leg 11, the last of its legs l6 to l11
+    (NR-94 ticked), and is captured.
+    - **The round** (run r26-a1 at 1e7a7888a, -From nr-r25, -Capture nr-r26;
+      run/nr/NR-R26/r26-a1; round file run/nr/NR-R26/round-26.json). One world, world 4,
+      63 seconds of wall time. Its file was played once without a capture first (run
+      preview-a1), with the same outcome. Rounds 26 to 29 were played in one chain
+      (run/nr/NR-R26/chain.log).
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 4 | scout-assassin | Assassin | l11 | reached | 25 | 164 | 17.0 | 11, 11 kills | 0 | altgard-rc-l11-assassin |
+
+      The receipt says verified. The capture is a record that points into the round
+      snapshot nr-r26-w4.
+    - **Leg 11.** At its start the Assassin puts on five pieces (NR-R23a): the Altgard
+      Dark Legionary Dagger (21) for the Legionary Dagger (16), which goes to the off
+      hand, a necklace, a hat and earrings. It wins the fight with the Hellion at its
+      first try, in 14.2 s, and ends Q2900 at level 25 with 164 quests. 17.0 game
+      minutes, no death.
+- [ ] **NR-R27 - Round 27: the coin gear for the Assassin.** Depends: NR-R26
+  - Work: One world resumed from nr-r26 with -Capture nr-r27 (round file
+    run/nr/NR-R27/round-27.json), played in the chain of NR-R26. The Assassin plays the
+    coin-gear stage.
   - Proof: round.json with one outcome record; if the Assassin reached its stage's
     end the completion receipt says verified and its capture is written.
 
@@ -12573,3 +12604,7 @@ report what was done, what is parked or blocked, and what the operator must deci
   Ranger left the two quests out in the gear of its Ascension. Written: NR-R26, round 26,
   with the rounds after it in one chain while the Assassin reaches its stage's end.
   Seven checks pass. Next: NR-R26, round 26, first without a capture.
+- 2026-10-11 — Loop: NR-R26 played. Round 26 (r26-a1 at 1e7a7888a, -From nr-r25, 63 s, one
+  world): the Assassin ends leg 11 at level 25 with 164 quests, no death (NR-94), and is captured in
+  nr-r26. Written: NR-R27. Seven checks pass.
+  Next: NR-R27, round 27.
