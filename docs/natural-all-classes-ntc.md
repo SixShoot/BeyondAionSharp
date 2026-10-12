@@ -10973,10 +10973,32 @@ through these: each is ticked by the round that gave its capture.
       hand, a necklace, a hat and earrings. It wins the fight with the Hellion at its
       first try, in 14.2 s, and ends Q2900 at level 25 with 164 quests. 17.0 game
       minutes, no death.
-- [ ] **NR-R27 - Round 27: the coin gear for the Assassin.** Depends: NR-R26
+- [x] **NR-R27 - Round 27: the coin gear for the Assassin.** Depends: NR-R26
   - Work: One world resumed from nr-r26 with -Capture nr-r27 (round file
     run/nr/NR-R27/round-27.json), played in the chain of NR-R26. The Assassin plays the
     coin-gear stage.
+  - Proof: round.json with one outcome record; if the Assassin reached its stage's
+    end the completion receipt says verified and its capture is written.
+  - 2026-10-11: played. The Assassin ends the coin-gear stage and is captured.
+    - **The round** (run r27-a1 at 1e7a7888a, -From nr-r26, -Capture nr-r27;
+      run/nr/NR-R27/r27-a1; round file run/nr/NR-R27/round-27.json). One world, world 4,
+      48 seconds of wall time. Its file was played once without a capture first (run
+      preview-a1), with the same outcome. Rounds 26 to 29 were played in one chain
+      (run/nr/NR-R26/chain.log).
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 4 | scout-assassin | Assassin | cg | reached | 25 | 165 | 16.8 | 28, 28 kills | 0 | altgard-coingear-assassin |
+
+      The receipt says verified. The capture is a record that points into the round
+      snapshot nr-r27-w4.
+    - **The coin gear.** By its manifest it buys the level-16 coin shoulderguards and
+      breeches, the two slots they better, and wears them. Q2293 is done. Level 25, 165
+      quests, 16.8 game minutes, no death.
+- [ ] **NR-R28 - Round 28: Haramel for the Assassin.** Depends: NR-R27
+  - Work: One world resumed from nr-r27 with -Capture nr-r28 (round file
+    run/nr/NR-R28/round-28.json), played in the chain of NR-R26. The Assassin plays
+    Haramel (stage l12).
   - Proof: round.json with one outcome record; if the Assassin reached its stage's
     end the completion receipt says verified and its capture is written.
 
@@ -12608,3 +12630,7 @@ report what was done, what is parked or blocked, and what the operator must deci
   world): the Assassin ends leg 11 at level 25 with 164 quests, no death (NR-94), and is captured in
   nr-r26. Written: NR-R27. Seven checks pass.
   Next: NR-R27, round 27.
+- 2026-10-11 — Loop: NR-R27 played. Round 27 (r27-a1 at 1e7a7888a, -From nr-r26, 48 s, one
+  world): the Assassin ends the coin-gear stage with 165 quests, no death, and is captured in nr-r27.
+  Written: NR-R28. Seven checks pass.
+  Next: NR-R28, round 28.
