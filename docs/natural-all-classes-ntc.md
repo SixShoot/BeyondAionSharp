@@ -1,8 +1,237 @@
 # Natural all classes to NTC-ready: the Cleric on the generic rules, every class along the Cleric's legs
 
-Status: opened 2026-10-08. Nothing in this document is implemented. It follows the closed
+Status: closed, 2026-10-12. Every item of the NR checklist is ticked: 242, of them 85
+lettered ones and 29 rounds. The Priest and the Cleric play by the table rules of every
+class, and every Asmodian second class stands verified as `ntc-ready-<class>-s1`. The
+full gate at `0dde5c1bc` finds all twenty-two scopes identical to their baselines. What
+was done, what was found and not fixed, and what the operator is asked is under [Closing
+status](#closing-status-2026-10-12).
+
+Opened 2026-10-08, when nothing in this document was implemented. It follows the closed
 class-profile plan ([natural-class-profiles.md](natural-class-profiles.md), CP-00 to CP-69)
-and is worked by a loop, one NR item at a time, without the operator present. Decision D40.
+and was worked by a loop, one NR item at a time, mostly without the operator present.
+Decision D40.
+
+## Closing status (2026-10-12)
+
+Written by NR-150. The evidence of every statement here is under the item it names.
+
+**The finish is reached.** Every Asmodian second class has a character that was created
+by packets, played Ishalgen, fought the trial, chose its class, followed the Cleric's
+legs through Altgard, Haramel and Morheim, and is preserved and verified as
+`ntc-ready-<class>-s1`: alive at Morheim Ice Fortress and bound there, with Q24020,
+Q2945, Q2946, Q2947 and Q2042 complete. The Priest and the Cleric play by the table
+rules every other class uses (phase B). No class is parked.
+
+| Class | Snapshot | The Abyss entry was played | At | Level | Quests | Weapon held | Coin pieces worn, a coin weapon among them |
+|---|---|---|---|---|---|---|---|
+| Cleric | ntc-ready-cleric-s1 | alone, NR-20 | 807ddd43b | 26 | 181 | Elite Rank 7 Asmodian Staff (26) | 5 |
+| Templar | ntc-ready-templar-s1 | alone, NR-57 | 37870a51e | 25 | 181 | Altruist's Sword (25) | 1 |
+| Sorcerer | ntc-ready-sorcerer-s1 | alone, NR-67 | ee27f233f | 26 | 181 | Elite Rank 7 Asmodian Spellbook (26) | 5 |
+| Chanter | ntc-ready-chanter-s1 | alone, NR-77 | 319ff9c0e | 26 | 181 | Elite Rank 7 Asmodian Staff (26) | 5 |
+| Spirit Master | ntc-ready-spirit-master-s1 | alone, NR-117 | 319ff9c0e | 26 | 181 | Elite Rank 7 Asmodian Spellbook (26) | 5 |
+| Bard | ntc-ready-bard-s1 | alone, NR-147 | 319ff9c0e | 26 | 181 | Elite Rank 7 Asmodian Harp (26) | 5 |
+| Gladiator | ntc-ready-gladiator-s1 | alone, NR-87 | a1c824f3f | 26 | 181 | Altruist's Greatsword (25) | 4 |
+| Ranger | ntc-ready-ranger-s1 | alone, NR-107 | a1c824f3f | 26 | 179 | Elite Rank 7 Asmodian Bow (26) | 5 |
+| Rider | ntc-ready-rider-s1 | in round 23, NR-137 | e69a9fd7d | 26 | 181 | Elite Rank 7 Asmodian Cipher-Blade (26) | 5 |
+| Gunner | ntc-ready-gunner-s1 | in round 24, NR-127 | 8a617eacc | 26 | 181 | Elite Rank 7 Asmodian Pistol (26) | 5 |
+| Assassin | ntc-ready-assassin-s1 | in round 29, NR-97 | 1e7a7888a | 26 | 181 | Elite Rank 7 Asmodian Dagger (26) | 5 |
+
+Eight of the eleven are the Abyss entry played once more alone from the class's Haramel
+capture. The last three come straight out of the round's world, by the operator's word
+of 2026-10-11 (NR-R21b): the snapshot is a record that points at the character in the
+round snapshot. Each is verified. The Templar ended the Abyss missions at level 25
+(NR-Q16). The Ranger has 179 quests: it leaves Q2282 and Q2283 out (NR-R15c).
+ntc-ready-spirit-master-s1 was played before its two staggers came back (NR-110g).
+
+**The rounds.** Nine classes played in 29 rounds (NR-R1 to NR-R29), each bot alone, one
+or two to a world and up to eight worlds side by side (rule (w); NR-Q11's default until
+the operator's answer of 2026-10-11, which asks for one world from now on). The Cleric
+is the accepted line; the Templar was the first class of phase D and played alone (NR-50
+to NR-58).
+
+| Class | Rounds | Rounds that ended short of a stage | Deaths | Game hours | Fights, kills | Life potions | Help scrolls |
+|---|---|---|---|---|---|---|---|
+| Sorcerer | 17 | 1 | 17 | 23.3 | 1,588, 1,258 | 159 | 222 |
+| Chanter | 18 | 2 | 12 | 23.2 | 1,880, 1,400 | 391 | 201 |
+| Gladiator | 20 | 4 | 34 | 28.1 | 2,145, 1,505 | 427 | 186 |
+| Assassin | 29 | 13 | 85 | 36.4 | 2,709, 1,868 | 704 | 386 |
+| Ranger | 20 | 4 | 49 | 28.5 | 2,096, 1,564 | 461 | 177 |
+| Spirit Master | 18 | 2 | 16 | 28.8 | 1,772, 1,328 | 120 | 222 |
+| Gunner | 24 | 8 | 40 | 34.6 | 2,238, 1,672 | 500 | 178 |
+| Bard | 18 | 2 | 12 | 24.4 | 1,578, 1,246 | 147 | 209 |
+| Rider | 23 | 8 | 43 | 30.0 | 2,140, 1,604 | 477 | 238 |
+
+Deaths, retreats and hours without progress are outcomes. Leg 10's Black Claw village
+cost the most hours without progress (the tables of leg 10's attempts under the rounds);
+the data marks its quests Q2281 and Q2282 [Group]. The Assassin's 85 deaths have a cause
+that was found late: until round 24 it wore what it had at Ascension (NR-R23).
+
+**The gate and the checks.** Full gate, run gate-a1 of NR-150, on the committed tree at
+`0dde5c1bc` (run/nr/NR-150/gate-a1/verdict.json): verdict pass, twenty-two scopes, each
+identical to its baseline. Records, with the commit each row was recorded at: p 35,463
+(3ac9e756f); m 109,039 (3ac9e756f); b 131,197 (382308064); l1 29,797 (60115ff14); c
+96,269 (b7e82baef); hm 37,510 (60115ff14); ax 15,715 (60115ff14); mage 23,555
+(382308064); warrior 24,199 (dd98e97e4); artist 23,104 (84bf4bcee); engineer 24,580
+(646134842); scout 27,592 (5917ca9b1); templar 36,504 (86ee86187); sorcerer 32,156
+(15dbfacad); chanter 67,343 (15dbfacad); spiritmaster 57,971 (15dbfacad); bard 41,410
+(15dbfacad); gladiator 34,229 (383b29b43); ranger 33,789 (15dbfacad); rider 36,460
+(15dbfacad); gunner 34,349 (15dbfacad); assassin 39,350 (46fb2a103). The whole check
+list of CLAUDE.md passes, 35 entries (run/nr/NR-150/checks.log, one log per check beside
+it): Aion.ChatServer.Tests 41 with 1 skipped, Aion.Commons.Tests 303,
+Aion.GameServer.Tests 4,632 with 16 skipped, Aion.LoginServer.Tests 135 with 7 skipped,
+Aion.Simulation.Tests 145 with 212 skipped; the four ratchets, the fidelity check, the
+Python and PowerShell tests, the NavBake check and Fast (nr150-fast).
+
+**The accepted line.** Phase B moved the Priest and the Cleric onto the table rules and
+recorded their scopes again where that changed them (rule (p), NR-21). From then on
+every item kept them identical, with two exceptions the operator allowed on 2026-10-11
+("Do what is needed"): scope b for the place a blow puts a monster (NR-110g), and scope
+c for the hunt that ends when the quest has counted its kill (NR-R7b). Scope c plays
+better for it: leg 4 ends without a death where it had three. No Priest or Cleric
+snapshot was touched.
+
+**Lettered items (rule (i)).** 85, all ticked. Each is under its own title in the
+checklist:
+
+- NR-19a: The gloves the coin purchase replaced are the character's own.
+- NR-46a: The grid search and its edge traces.
+- NR-46b: A wait that no packet can end.
+- NR-46c: The journey's own code.
+- NR-46d: Navmesh routes.
+- NR-44a: A server problem is laid to the bot whose turn raised it.
+- NR-38a: The coin-gear leg shops by the class's manifest.
+- NR-38b: The Abyss entry's two tiers shop by the class's manifest.
+- NR-50a: A rest with the powder for a class without a heal.
+- NR-50b: A skill's off-hand condition.
+- NR-50c: The shield of a line whose class holds one.
+- NR-50d: A toggle kept on.
+- NR-52a: The capital pass's end check names the line's ceremony weapon.
+- NR-53a: A swing in flight hovers inside the swing's reach.
+- NR-53b: The Templar pulls from range with Taunt.
+- NR-53c: A class that walks up walks to its own target.
+- NR-54b: A bind revive while Return cools down replaces the cast.
+- NR-54c: The Templar's fight-through takes a blocker as every line does.
+- NR-54d: A defence whose walk to an attacker is refused goes on.
+- NR-54e: A forced landing on a face too steep to leave stands beside it.
+- NR-54f: The rebirth before a quest instance is the class's own.
+- NR-54g: The destiny quest's stone step expects the class's stone.
+- NR-54a: The coin tiers buy the shield.
+- NR-55a: Haramel's start asks the class's own scope.
+- NR-55b: A class that walks up takes a decided pull into its pack.
+- NR-56a: A reward's hand-over step expects the class's pick.
+- NR-56b: The Abyss entry ends at the plan's finish for a class below level 26.
+- NR-57a: The Abyss entry's capture may take the plan's finish name.
+- NR-60a: A skill that restores mana.
+- NR-61a: A target that is about to die by a hit already made.
+- NR-67a: A leg captured alone from a round character.
+- NR-67b: The seat of a leg captured alone from a round character.
+- NR-70a: A toggle kept on.
+- NR-80a: A skill that needs its target in a state.
+- NR-80b: An attack that costs no mana is not held back by the reserve.
+- NR-90a: A skill that bursts the runes on its target.
+- NR-110a: A spirit summoned and kept.
+- NR-110b: The spirit follows its master.
+- NR-110c: The spirit fights.
+- NR-110d: The spirit's orders, its heal and its armor.
+- NR-110g: A stagger moves the monster for the bot too.
+- NR-110h: The Spirit Master without its staggers, until NR-110g.
+- NR-110i: A kill by the spirit is the bot's own.
+- NR-110e: A monster on the spirit is an attacker.
+- NR-110f: Where the spirit fights.
+- NR-120a: A follow-up that needs the step before it twice.
+- NR-120b: A skill that ends a cooldown.
+- NR-121a: A word of a monster's mana is not a word of its HP.
+- NR-121b: A shot at a walker that moved on is timed from where it was heading.
+- NR-120c: The Gunner's Trunk Shot and Volley.
+- NR-130a: The mech, and the Rider's table.
+- NR-131a: A Rider that a fight finds on foot boards its mech.
+- NR-R1a: A round's bot plays a stage.
+- NR-R1b: A Sprigg a step beyond the select distance is taken from the standoff.
+- NR-R3a: A round's bot plays an Altgard leg.
+- NR-R3b: The shot in flight is the listed skill that is ready again soonest.
+- NR-R4b: An object use that an attack cut short is followed by the defence.
+- NR-R7a: The Assassin at Comrade Sumarhon.
+- NR-R7b: The kill step at a pack that cannot be taken apart.
+- NR-R8a: The Chanter at Q2292's Mumu Ang.
+- NR-R8b: The Gunner on the road to Germir.
+- NR-R8c: The Rider at Q2246's insignia box.
+- NR-R8d: The Bard at Q2284's follower after another bot's escort.
+- NR-R11a: The port's getSuccessEffects().clear() throws.
+- NR-R11b: A talk to an NPC who is fighting.
+- NR-R11c: A leg played again from its end casts a Return it does not need.
+- NR-R12a: The Rider at Q2916's suspicious clothing.
+- NR-R12b: The Ranger at Q2281 in the Black Claw village.
+- NR-R12c: The Sorcerer at Q24014's item.
+- NR-R14b: The only monster of a hunted kind is left for another.
+- NR-R15a: A monster a blow has put away, and the server's refusal for distance.
+- NR-R15b: Fights that end in a blocked approach, over and over.
+- NR-R15c: The Ranger and Q2282.
+- NR-R16a: A notice that a cooldown is over, read again by the next fight.
+- NR-R16b: The walk to the end of a leg that has no hand-in there.
+- NR-R16c: A looted item that does not stack.
+- NR-R17a: A world with nothing left to play.
+- NR-R17b: A character that logs in above the ground.
+- NR-R18a: The Rider's own path through Q24016.
+- NR-R18b: A missed lift in Haramel, and no way back to its waiting place.
+- NR-R19a: A kill's teleport that comes before the fight has ended.
+- NR-R21a: The Rider's pull spot in Haramel that no route leaves.
+- NR-R21b: A round's Abyss entry gives the finish capture.
+- NR-R23a: A second class wears what it owns when a leg starts.
+- NR-R23b: The equipment check sees what is worn.
+
+**Found and not fixed.** Each is written under the item that met it; those that want the operator's word are under Blocked.
+
+- Gear in the legs. In the Altgard legs gear was put on at the town service alone, and
+  every second class fought legs 1 to 10 in what it wore at Ascension (NR-R23). Since
+  NR-R23a a class other than the accepted line runs its equipment check at each leg's
+  start. The check after every quest hand-in, the operator's rule of 2026-10-06, is
+  still not in the legs, and the accepted line keeps its own check points. Every leg
+  capture before round 24 was played the old way.
+- The Ranger's leave-out. It left Q2282 and Q2283 out at levels 22 to 24 in the gear of
+  its Ascension; the Assassin took both quests once it wore its own (NR-R25). The
+  Ranger's rule still leaves a fight at two attackers.
+- The ground rule takes the underside of what is overhead for ground (NR-R21a). It is
+  mended for pull spots alone. Two forms of a mend in the rule itself changed twelve and
+  thirteen scopes and left one replay unfinished each.
+- The kill step at a pack that cannot be taken apart. NR-Q18's second change, striking
+  the step's target in such a pack, is not made: no run of this plan would show it
+  (NR-R7b).
+- A counter skill of two statuses asks for none, in Java as in the port (NR-50); the
+  profiles leave such skills out.
+- Fights. A fight that ends in a blocked approach is taken up again at once (NR-R15b;
+  the Chanter's 268 fights without a kill at Q2224, an hour of the Rider's). A walker
+  thrown off a leg's road by retreats can spend its hour between hazards (NR-R8b). The
+  journey does not answer an attack while it holds for a patrol or sweeps loot, and it
+  pulls monsters that are walking home (NR-15, NR-17).
+- Smaller. TryLootCorpseItemAsync still expects a looted item to stack (NR-R16c).
+  Q2114's hunt counts its attempts to ten, which a crowded world could use up (NR-48).
+  The server lists a cooldown at login in whole seconds, as Java does, so a cast in its
+  last second is refused once (NR-R11c). The fight driver of the live scenarios NI-04
+  and NI-06 decides by the Priest's table and has not been run (NR-18). The Gunner's
+  Trunk Shot and Volley stay out of its table, by the data (NR-120c).
+- Captures as they stand. The Assassin's Haramel capture wears breeches of level 8 where
+  it had the coin breeches (NR-R28, mended after it by NR-R23b). Eight finish captures
+  are a leg played again alone, made before the operator's word on it.
+
+**For the operator to decide.** Each has its entry under Decisions and defaults or under Blocked.
+
+- Whether the legs run the equipment check after every quest hand-in for the second
+  classes, and whether the Cleric's own legs do (it changes every class scope, and the
+  Cleric's).
+- Whether the ground rule is mended, with every scope it changes recorded again.
+- The Ranger's Q2282 and Q2283, and with them whether a class that leaves a fight at two
+  attackers should.
+- NR-Q18's second change, when a class meets Comrade Sumarhon with the quest uncounted.
+- Whether the port reads both statuses of a counter skill, as a logged retail correction
+  (NR-50).
+- The defaults that were never answered and are in force: NR-Q1, NR-Q7, NR-Q8, NR-Q10
+  and NR-Q12 to NR-Q16; of these NR-Q14 (Bronze Coins for another class) and NR-Q16 (a
+  class that ends the Abyss missions at level 25, as the Templar did) change what a
+  character holds at the finish.
+
+**What follows.** The NTC plan asks this state of each party member.
+docs/natural-ntc-readiness.md has its update of the same date.
 
 ## The request
 
@@ -11208,13 +11437,37 @@ through these: each is ticked by the round that gave its capture.
 
 ### E. Close
 
-- [ ] **NR-150 - Final gate and close-out.** Depends: every item above, or its class parked
+- [x] **NR-150 - Final gate and close-out.** Depends: every item above, or its class parked
   under Blocked
   - Work: No code. The whole check list of CLAUDE.md, the full gate on every recorded
     scope, the closing status at the head of this document (each class's endpoint, deaths
     and consumables, every lettered item, every parked class with its reason, the findings
     not fixed), and the update of docs/natural-ntc-readiness.md.
   - Proof: Every scope identical to its baseline.
+  - 2026-10-12: done, at HEAD 0dde5c1bc with no code change.
+    - **The whole check list of CLAUDE.md, once** (run/nr/NR-150/checks.log, one log per
+      check beside it): all 35 entries exit 0. dotnet build and dotnet test of
+      AionServer.slnx pass: Aion.ChatServer.Tests 41 with 1 skipped, Aion.Commons.Tests
+      303, Aion.GameServer.Tests 4,632 with 16 skipped, Aion.LoginServer.Tests 135 with
+      7 skipped, Aion.Simulation.Tests 145 with 212 skipped. The four ratchets, the
+      fidelity check, the Python and PowerShell tests, the NavBake check of the baked
+      maps and Fast (run nr150-fast) pass.
+    - **Gate, twenty-two scopes, run gate-a1** (run/nr/NR-150/gate-a1/verdict.json):
+      verdict pass on a clean tree, -Parallel 8. All are identical to their baselines: p
+      35,463 (3ac9e756f); m 109,039 (3ac9e756f); b 131,197 (382308064); l1 29,797
+      (60115ff14); c 96,269 (b7e82baef); hm 37,510 (60115ff14); ax 15,715 (60115ff14);
+      mage 23,555 (382308064); warrior 24,199 (dd98e97e4); artist 23,104 (84bf4bcee);
+      engineer 24,580 (646134842); scout 27,592 (5917ca9b1); templar 36,504 (86ee86187);
+      sorcerer 32,156 (15dbfacad); chanter 67,343 (15dbfacad); spiritmaster 57,971
+      (15dbfacad); bard 41,410 (15dbfacad); gladiator 34,229 (383b29b43); ranger 33,789
+      (15dbfacad); rider 36,460 (15dbfacad); gunner 34,349 (15dbfacad); assassin 39,350
+      (46fb2a103).
+    - **Close-out.** The Status line and the section "Closing status (2026-10-12)" at
+      the head of this document are written: the eleven finish captures, the rounds with
+      each class's deaths and consumables, the accepted line, the 85 lettered items,
+      what was found and not fixed, and what the operator is asked. No class is parked.
+      docs/natural-ntc-readiness.md has its update of the same date. Seven checks pass
+      again after the documents were written (run/nr/NR-150/checks-after-docs.log).
 
 ## Blocked / questions for the operator
 
@@ -12883,3 +13136,7 @@ report what was done, what is parked or blocked, and what the operator must deci
   death where it had three. Gate guard2-p8: twenty-two scopes identical. Seven checks
   pass. Every item but the close-out is ticked. Next: NR-150, the final gate and the
   close-out.
+- 2026-10-12 — Loop: NR-150 done. The whole check list of CLAUDE.md passes, 35 entries.
+  Full gate gate-a1 at 0dde5c1bc: twenty-two scopes identical. The closing status is
+  written at the head of this document and docs/natural-ntc-readiness.md is updated.
+  Every item is ticked; no class is parked. The loop stops here.
