@@ -6043,14 +6043,35 @@ The template:
     altgard-coingear-assassin and altgard-rc-complete-s1-assassin, records that point
     at character 133266 in the round snapshots nr-r27-w4 and nr-r28-w4. In Haramel it
     wore breeches of level 8 where it had the coin breeches (NR-R28's finding).
-- [ ] **NR-96 - Assassin: the Abyss entry.** Depends: NR-95; ticked by its round
+- [x] **NR-96 - Assassin: the Abyss entry.** Depends: NR-95; ticked by its round
   - Work: Q24020, then Q2945, Q2946, Q2947 and Q2042 with the coin tiers it can wear
     (NR-38b, NR-Q14, NR-Q16), captured as morheim-abyss-entry-s1-assassin.
   - Proof: The capture verifies.
-- [ ] **NR-97 - Assassin: the endpoint.** Depends: NR-96; ticked by its round
+  - 2026-10-11: done in round 29 (NR-R29, world 4). The Abyss entry ended in 16.4 game
+    minutes without a death, with a receipt that says verified: an Assassin of level
+    26, alive at Morheim Ice Fortress, Q24020, Q2945, Q2946, Q2947 and Q2042 complete,
+    181 quests in all. Captured as morheim-abyss-entry-s1-assassin, a record that
+    points at character 133266 in the round snapshot nr-r29-w4.
+- [x] **NR-97 - Assassin: the endpoint.** Depends: NR-96; ticked by its round
   - Work: Captured and verified as ntc-ready-assassin-s1: alive at Morheim Ice Fortress,
     level 25 or higher, Q2945, Q2946, Q2947 and Q2042 complete.
   - Proof: The capture verifies.
+  - 2026-10-11: done in round 29. ntc-ready-assassin-s1 is captured and verified, and
+    it comes straight out of the round's world.
+    - **Captured** by the round, at 1e7a7888a: the round file names two captures for
+      the Assassin's Abyss entry (NR-R21b), and ntc-ready-assassin-s1 is a record that
+      points at character 133266 in the round snapshot nr-r29-w4, as
+      morheim-abyss-entry-s1-assassin is. No leg was played again alone for it.
+    - **The endpoint, from the receipt.** Character 133266, created by packets: an
+      Assassin of level 26, alive at Morheim Ice Fortress and bound there; Q24020,
+      Q2945, Q2946, Q2947 and Q2042 complete, 181 quests in all; the arena and the ring
+      course each at the first try. It holds the level-26 coin dagger 100200928 and
+      wears four level-26 coin pieces.
+    - **Proof.** sim-snapshot.ps1 -Action Verify -Name ntc-ready-assassin-s1, run
+      nr97-verify-a1 (run/nr/NR-R29/verify-assassin-a1.log; evidence under
+      run/snapshots/_verify/nr97-verify-a1): "Verified snapshot ntc-ready-assassin-s1:
+      character 133266 resumed at its endpoint." It is the eleventh class at the
+      plan's finish, and the last.
 - [ ] **NR-98 - Assassin: the class scope.** Depends: NR-97
   - Work: One scope of the Assassin's play, chosen where its rules differ most from the
     Scout's, recorded by a bot alone, twice, and added to the gate's sets.
@@ -11043,13 +11064,35 @@ through these: each is ticked by the round that gave its capture.
       - **The Assassin's play stands.** It ended Haramel in the level-8 breeches
         without a death, and the Abyss entry's own check dressed it again in round 29.
         Item NR-R23b mends the check and records the seven scopes again.
-- [ ] **NR-R29 - Round 29: the Abyss entry for the Assassin.** Depends: NR-R28
+- [x] **NR-R29 - Round 29: the Abyss entry for the Assassin.** Depends: NR-R28
   - Work: One world resumed from nr-r28 with -Capture nr-r29 (round file
     run/nr/NR-R29/round-29.json), played in the chain of NR-R26. The Assassin plays the
     Abyss entry and names two captures, morheim-abyss-entry-s1-assassin and
     ntc-ready-assassin-s1.
   - Proof: round.json with one outcome record; if the Assassin reached its stage's
     end the completion receipt says verified and its capture is written.
+  - 2026-10-11: played. The Assassin ends the Abyss entry and is at the plan's finish,
+    captured from the round's world and verified (NR-96, NR-97 ticked). Every class of
+    the plan is at its finish.
+    - **The round** (run r29-a1 at 1e7a7888a, -From nr-r28, -Capture nr-r29;
+      run/nr/NR-R29/r29-a1; round file run/nr/NR-R29/round-29.json). One world, world 4,
+      89 seconds of wall time. Its file was played once without a capture first (run
+      preview-a1), with the same outcome. Rounds 26 to 29 were played in one chain
+      (run/nr/NR-R26/chain.log).
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 4 | scout-assassin | Assassin | ax | reached | 26 | 181 | 16.4 | 10, 10 kills | 0 | morheim-abyss-entry-s1-assassin, ntc-ready-assassin-s1 |
+
+      The receipt says verified. The captures are records that point into the round
+      snapshot nr-r29-w4.
+    - **The Abyss entry.** Its own check at the leg's start dresses the Assassin again,
+      17 pieces, the breeches among them. Q24020, Q2945, Q2946, Q2947 and Q2042 are
+      done, the arena and the ring course each at the first try. Level 26, 181 quests,
+      16.4 game minutes, no death.
+    - **All eleven.** ntc-ready-<class>-s1 exists and is verified for the Cleric, the
+      Templar, the Sorcerer, the Chanter, the Spirit Master, the Bard, the Gladiator,
+      the Ranger, the Rider, the Gunner and the Assassin.
 - [ ] **NR-R23b - The equipment check sees what is worn.** Depends: NR-R28
   - Work: Found by round 28. The equipment check is given the inventory without what
     the leg protects from sale, the worn pieces among it, so a worn coin piece is not
@@ -12700,3 +12743,8 @@ report what was done, what is parked or blocked, and what the operator must deci
   level 8, since a protected piece that is worn is not shown to it; seven recorded class
   scopes carry such a swap. Written: NR-R29 and NR-R23b. Seven checks pass.
   Next: NR-R29, round 29.
+- 2026-10-11 — Loop: NR-R29 played. Round 29 (r29-a1 at 1e7a7888a, -From nr-r28, 89 s, one
+  world): the Assassin ends the Abyss entry with 181 quests, no death (NR-96), and
+  ntc-ready-assassin-s1 is captured from the round's world and verified (NR-97, run
+  nr97-verify-a1): the eleventh class at the plan's finish, and the last. Seven checks pass.
+  Next: NR-R23b, the equipment check sees what is worn; then NR-98, the Assassin's class scope.
