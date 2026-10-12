@@ -11093,7 +11093,7 @@ through these: each is ticked by the round that gave its capture.
     - **All eleven.** ntc-ready-<class>-s1 exists and is verified for the Cleric, the
       Templar, the Sorcerer, the Chanter, the Spirit Master, the Bard, the Gladiator,
       the Ranger, the Rider, the Gunner and the Assassin.
-- [ ] **NR-R23b - The equipment check sees what is worn.** Depends: NR-R28
+- [x] **NR-R23b - The equipment check sees what is worn.** Depends: NR-R28
   - Work: Found by round 28. The equipment check is given the inventory without what
     the leg protects from sale, the worn pieces among it, so a worn coin piece is not
     seen and a worse piece from the cube takes its slot. What is worn is always in the
@@ -11128,6 +11128,23 @@ through these: each is ticked by the round that gave its capture.
     - **The bundle** (run/nr/NR-R23b, chain; one tree with the Assassin's gate row of
       NR-98): the unit suite (4,632 passed, 16 skipped), the seven checks, the script
       tests and Fast (nrr23b-fast) pass.
+  - 2026-10-11: done. The seven class scopes are recorded again.
+    - **Recorded again** at 15dbfacad on a clean tree (run record-a1,
+      run/nr/NR-R23b/record-a1/verdict.json): each of the seven repeats in its two
+      passes, and each journey ends as before. The rows keep their line, replay,
+      environment and ignore list.
+
+      | Scope | Records before | Records now | sha256 | Retreats | Deaths |
+      |---|---|---|---|---|---|
+      | sorcerer | 35,435 | 32,156 | 5ee17283e8c31354 | 2 where it had 13 | 0 |
+      | chanter | 53,727 | 67,343 | caa0976216e751fb | 9 where it had 10 | 0 |
+      | spiritmaster | 50,141 | 57,971 | 169537d6ca39cb3b | 11 where it had 0 | 0 |
+      | bard | 37,953 | 41,410 | e88ae2e1a1b87f7c | 8 where it had 12 | 1 |
+      | ranger | 33,952 | 33,789 | b1b66ab514c4b584 | 6 where it had 7 | 0 |
+      | rider | 37,457 | 36,460 | 3de5eb497170d8c7 | 2 where it had 3 | 0 |
+      | gunner | 44,357 | 34,349 | 67ba4d3ac6104a71 | 4 where it had 8 | 0 |
+    - **The gate after** (run guard2-p8, run/nr/NR-R23b/guard2-p8/verdict.json):
+      twenty-one scopes identical. Seven checks pass on the recorded tree.
 
 ### E. Close
 
@@ -12779,3 +12796,8 @@ report what was done, what is parked or blocked, and what the operator must deci
   takes the coin leg piece off. Unit suite, seven checks, script tests and Fast
   nrr23b-fast pass. Next: NR-R23b still, the seven scopes recorded again; then NR-98, the
   Assassin's class scope.
+- 2026-10-11 — Loop: NR-R23b done. Scopes sorcerer, chanter, spiritmaster, bard, ranger,
+  rider and gunner are recorded again at 15dbfacad (record-a1, two passes identical each):
+  sorcerer 32,156, chanter 67,343, spiritmaster 57,971, bard 41,410, ranger 33,789, rider 36,460, gunner 34,349 records. Gate
+  guard2-p8: twenty-one scopes identical. Seven checks pass. Next: NR-98, the Assassin's
+  class scope.
