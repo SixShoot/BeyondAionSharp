@@ -11104,6 +11104,30 @@ through these: each is ticked by the round that gave its capture.
     piece that is no longer taken off.
   - Proof: The bundle with the full gate: the seven scopes named in NR-R28's finding
     no longer swap a worn piece at Haramel's start, and are recorded again.
+  - 2026-10-11, the code: what is worn is always in the equipment check's view. No
+    scope takes its coin leg piece off at Haramel's start. The seven class scopes are
+    recorded again; the item is ticked with that.
+    - **The change** (Sc/NaturalIshalgenJourney.cs, the one place the journey builds
+      the check's view of the inventory). A worn piece is always in it. What the leg
+      protects from sale, and Haramel's rule of what may be put on there, are applied
+      to the pieces in the cube alone. No branch on a class.
+    - **The gate** (run guard-p8, run/nr/NR-R23b/guard-p8/verdict.json): fourteen
+      scopes identical, the Priest's and the Cleric's seven among them. The seven
+      class scopes of NR-R28's finding differ, each first where the check at Haramel's
+      start no longer takes the coin leg piece off; each journey ends as before.
+
+      | Scope | First difference | Put on at the start of Haramel now | Records |
+      |---|---|---|---|
+      | sorcerer | record 67 | Altgard Medal of Honor (20) for a piece of level 6, Deyla's Earrings (17) for a piece of level 14 | 32,156 where it had 35,435 |
+      | chanter | record 58 | nothing | 67,343 where it had 53,727 |
+      | spiritmaster | record 67 | Altgard Medal of Honor (20) for a piece of level 6, Deyla's Earrings (17) for a piece of level 14 | 57,971 where it had 50,141 |
+      | bard | record 74 | Altgard Medal of Honor (20) for a piece of level 6, Deyla's Earrings (17) for a piece of level 14 | 41,410 where it had 37,953 |
+      | ranger | record 56 | nothing | 33,789 where it had 33,952 |
+      | rider | record 56 | nothing | 36,460 where it had 37,457 |
+      | gunner | record 57 | nothing | 34,349 where it had 44,357 |
+    - **The bundle** (run/nr/NR-R23b, chain; one tree with the Assassin's gate row of
+      NR-98): the unit suite (4,632 passed, 16 skipped), the seven checks, the script
+      tests and Fast (nrr23b-fast) pass.
 
 ### E. Close
 
@@ -12748,3 +12772,10 @@ report what was done, what is parked or blocked, and what the operator must deci
   ntc-ready-assassin-s1 is captured from the round's world and verified (NR-97, run
   nr97-verify-a1): the eleventh class at the plan's finish, and the last. Seven checks pass.
   Next: NR-R23b, the equipment check sees what is worn; then NR-98, the Assassin's class scope.
+- 2026-10-11 — Loop: NR-R23b, the code. What is worn is always in the equipment check's
+  view; the leg's protection and Haramel's rule apply to the pieces in the cube. Gate
+  guard-p8: fourteen scopes identical, the Cleric's among them; sorcerer, chanter,
+  spiritmaster, bard, ranger, rider and gunner differ first where the check no longer
+  takes the coin leg piece off. Unit suite, seven checks, script tests and Fast
+  nrr23b-fast pass. Next: NR-R23b still, the seven scopes recorded again; then NR-98, the
+  Assassin's class scope.

@@ -703,9 +703,13 @@ public sealed partial class NaturalIshalgenJourney(INaturalJourneySession sessio
 				NaturalGearInfo? Describe(int itemId) =>
 					NaturalInventoryCheck.Describe(runtime.Data.ItemDataDh.GetItemTemplate(itemId), playerClass, race);
 				IReadOnlySet<int> questNeeded = QuestNeededItems();
+				// NR-R23b: what is worn is always in view. A worn piece the leg protects from sale was left out with the rest of
+				// what it protects, its slot looked empty, and the first piece in the cube for that slot took its place: at
+				// Haramel's start the level-16 coin breeches came off for breeches of level 8. The leg's protection and
+				// Haramel's rule of what may be put on are for the pieces in the cube.
 				return await NaturalInventoryCheck.EquipAsync(session,
-					world.Inventory.Values.Where(item => !questNeeded.Contains(item.ItemId) && (altgardLeg?.Haramel == null ||
-						item.Details.EquippedSlot.GetValueOrDefault() != 0 || altgardLeg.Haramel.CanUpgrade(
+					world.Inventory.Values.Where(item => item.Details.EquippedSlot.GetValueOrDefault() != 0 ||
+						!questNeeded.Contains(item.ItemId) && (altgardLeg?.Haramel == null || altgardLeg.Haramel.CanUpgrade(
 							runtime.Data.ItemDataDh.GetItemTemplate(item.ItemId)?.GetItemGroup().ToString()))),
 					Describe, (long)Aion.GameServer.Model.Items.ItemSlot.MAIN_OFF_OR_SUB_OFF, refusedGear, gearToken, gear);
 			}
