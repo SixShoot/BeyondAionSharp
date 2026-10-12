@@ -6072,10 +6072,33 @@ The template:
       run/snapshots/_verify/nr97-verify-a1): "Verified snapshot ntc-ready-assassin-s1:
       character 133266 resumed at its endpoint." It is the eleventh class at the
       plan's finish, and the last.
-- [ ] **NR-98 - Assassin: the class scope.** Depends: NR-97
+- [x] **NR-98 - Assassin: the class scope.** Depends: NR-97
   - Work: One scope of the Assassin's play, chosen where its rules differ most from the
     Scout's, recorded by a bot alone, twice, and added to the gate's sets.
   - Proof: The two recordings are identical.
+  - 2026-10-11: done. Scope assassin is recorded and stands in the baseline file.
+    - **The scope.** Haramel, leg l12 from altgard-coingear-assassin with the later
+      capital, as every second class's is. It is where the Assassin plays least like the
+      Scout it was: it holds a dagger in each hand, keeps its poison on them, plays its
+      chains at melee and stays in a fight with two attackers. The capture it starts
+      from is a round character, replayed alone (NR-67a, NR-67b); the gate and its
+      scopes stay one bot in its own world (rule (w)).
+    - **The row** (scripts/sim/run-neutral-gate.ps1, committed first as 7f84b66f0). One
+      bundle on one tree with NR-R23b's change (run/nr/NR-R23b, chain): the script
+      tests, the seven checks, the unit suite (4,632 passed, 16 skipped), Fast
+      nrr23b-fast, and the full gate on twenty-one scopes, where fourteen were identical
+      and seven class scopes differed for NR-R23b.
+    - **The recording** at 46fb2a103 on a clean tree (run record-a1,
+      run/nr/NR-98/record-a1/verdict.json): two passes, identical after normalization:
+      39,350 records, sha256 8522e1d73aff7d68. No death, 8 retreats, 190 pull plans, 89
+      holds of the patrol rule, 0 help items supplied. The traces are kept under
+      run/cp/baseline/46fb2a103... and in the second copy beside the repository.
+    - **Proof.** The full gate with the new row passes (run guard-p8,
+      run/nr/NR-98/guard-p8/verdict.json): twenty-two scopes identical. Seven pre-commit
+      checks and the three script tests pass on the tree with the new row.
+    - **The full gate from here** is set
+      all+mage+warrior+artist+engineer+scout+templar+sorcerer+chanter+spiritmaster+bard+gladiator+ranger+rider+gunner+assassin:
+      twenty-two scopes.
 - [x] **NR-100 - Ranger: survey and profile data.** Depends: the close of phase C
   - 2026-10-10: done. The Ranger has a class line, a gear table and a profile the
     validator accepts. Nothing has been played. Its skills ask for no new form.
@@ -12801,3 +12824,9 @@ report what was done, what is parked or blocked, and what the operator must deci
   sorcerer 32,156, chanter 67,343, spiritmaster 57,971, bard 41,410, ranger 33,789, rider 36,460, gunner 34,349 records. Gate
   guard2-p8: twenty-one scopes identical. Seven checks pass. Next: NR-98, the Assassin's
   class scope.
+- 2026-10-11 — Loop: NR-98 done. Scope assassin is Haramel from
+  altgard-coingear-assassin, a round character replayed alone. Its row was committed as
+  7f84b66f0. Recorded at 46fb2a103: two passes identical, 39,350 records, sha256
+  8522e1d73aff7d68. The full gate is now twenty-two scopes, and all are identical
+  (guard-p8 of NR-98). Seven checks and the script tests pass. Next: NR-R7b, the kill
+  step at a pack that cannot be taken apart.

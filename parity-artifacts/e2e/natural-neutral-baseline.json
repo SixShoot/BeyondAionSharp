@@ -955,6 +955,53 @@
         "binds": 1,
         "soulHeals": 0
       }
+    },
+    {
+      "scope": "assassin",
+      "line": "scout-assassin",
+      "replay": {
+        "AltgardLeg1": true,
+        "Leg": "l12",
+        "From": "altgard-coingear-assassin",
+        "LaterCapital": true
+      },
+      "snapshot": "altgard-coingear-assassin",
+      "commit": "46fb2a1036a0653556cb6e14cf32b0914472b904",
+      "environment": {
+        "AION_SIM_SEED": "1",
+        "NA_HELP_ITEMS": null,
+        "AION_BOT_DASHBOARD_PORT": null,
+        "AION_SIM_PROCESS_KEY": null
+      },
+      "ignore": [],
+      "records": 39350,
+      "sha256": "8522e1d73aff7d68813359327f94155f80fa0acc99e9f56ec7f8d28213fc295e",
+      "counts": {
+        "records": 39351,
+        "deaths": 0,
+        "reviveSteps": 0,
+        "retreats": 8,
+        "retreatRoutes": 15,
+        "restSitsTraced": 1,
+        "restInterrupts": 0,
+        "betweenFightHeals": 0,
+        "powderRestCasts": 25,
+        "vendorBuys": 0,
+        "pullPlans": 190,
+        "patrolWaits": 89,
+        "emergencyDecisions": 0,
+        "atTargetPulls": 3,
+        "lifePotions": 11,
+        "restLifePotions": 1,
+        "restSitsForHealth": 2,
+        "manaPotions": 0,
+        "shieldScrolls": 0,
+        "speedScrolls": 0,
+        "runningScrolls": 0,
+        "helpItemsSupplied": 0,
+        "binds": 1,
+        "soulHeals": 0
+      }
     }
   ]
 }
