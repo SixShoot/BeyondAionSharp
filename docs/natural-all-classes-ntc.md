@@ -10905,13 +10905,47 @@ through these: each is ticked by the round that gave its capture.
       |---|---|---|---|
       | Assassin | Q2282 | 1 | Q2281 is won, at its fourth hour and the first in its own gear. At Q2282 it strikes no warlock in the hour: one walk up to one, refused; four deaths on the way to them |
     - **Deaths: 4,** all the Assassin's.
-- [ ] **NR-R25 - Round 25: leg 10 for the Assassin.** Depends: NR-R24
+- [x] **NR-R25 - Round 25: leg 10 for the Assassin.** Depends: NR-R24
   - Work: One world resumed from nr-r24 with -Capture nr-r25 (round file
     run/nr/NR-R25/round-25.json; world 4 alone has a bot: every other class is at the
     finish). The Assassin goes on in leg 10 from Q2282. The file is played once without
     a capture first; a stop that is a defect is mended before the captured round, in
     round 24's letters. One outcome line, and the table of leg 10's attempts carried
     on. Three attempts at one quest with nothing won get the Assassin an item (NR-Q4).
+  - Proof: round.json with one outcome record; if the Assassin reached its stage's
+    end the completion receipt says verified and its capture is written.
+  - 2026-10-11: played. The Assassin ends leg 10 and is captured. It leaves no quest
+    out.
+    - **The round** (run r25-a1 at ed4ca51e1, -From nr-r24, -Capture nr-r25;
+      run/nr/NR-R25/r25-a1; round file run/nr/NR-R25/round-25.json). One world, world
+      4, 213 seconds of wall time. Its file was played once without a capture first
+      (run preview-a1), with the same outcome.
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 4 | scout-assassin | Assassin | l10 | reached | 25 | 162 | 120.4 | 109, 87 kills | 1 | altgard-rc-l10-assassin |
+
+      The receipt says verified. The capture is a record that points into the round
+      snapshot nr-r25-w4.
+    - **Leg 10's end.** Q2282's three warlocks fall at 30:42, 35:57 and 41:19, each
+      in a fight with two attackers; two tries before them came to nothing. Then it
+      hands in Q2281, Q2282 and Q2283 and ends the leg at level 25 with 162 quests:
+      2273, 2277, 2280, 2281, 2282, 2283, 24014, 24015 and 24016 are this leg's. 120.4
+      game minutes, 109 fights and 87 kills, one death. With one attacker it wins 47
+      of 48 fights, with two 35 of 38, with three 2 of 7.
+    - **Leg 10, the attempts.** The Assassin had three hours at Q2281 with nothing
+      won in the gear of levels 6 to 10 (rounds 21 to 23). In the gear it owns
+      (NR-R23a) it won Q2281 in its next hour and the rest of the leg in the one after.
+    - **Deaths: 1.**
+- [ ] **NR-R26 - Round 26: leg 11 for the Assassin.** Depends: NR-R25
+  - Work: One world resumed from nr-r25 with -Capture nr-r26 (round file
+    run/nr/NR-R26/round-26.json). The Assassin plays leg 11, the destiny quest, with the
+    Templar's stone 140000003 (NR-39). The file is played once without a capture first;
+    a stop that is a defect is mended before the captured round, in round 25's letters.
+    While the Assassin reaches its stage's end the rounds after it are played in one
+    chain, each file first without a capture: round 27 the coin gear, round 28 Haramel,
+    round 29 the Abyss entry with its two captures. Each round is recorded in its own
+    item.
   - Proof: round.json with one outcome record; if the Assassin reached its stage's
     end the completion receipt says verified and its capture is written.
 
@@ -10997,6 +11031,13 @@ Nothing is blocked at the start.
 - **For a later look with the operator, blocking nothing (2026-10-11).**
   - **The Ranger's Q2282 and Q2283** stay left out (NR-R15c). The operator: "leave it
     for later evaluation where we can look into it. Not a blocker at this time."
+    - 2026-10-11, for that evaluation: the Ranger left them out while it wore what it
+      had at Ascension. At levels 22 to 24, in rounds 12 to 17, it held the Karmic
+      Longbow of level 10 and wore pieces of levels 6 to 10, with twelve and more
+      pieces of level 14 and higher in its cube; its first town service was in round
+      17 (NR-R23's finding). The Assassin, which stood at Q2281 for three hours in
+      such gear, took the three warlocks of Q2282 in round 25 in the gear it owns, each
+      in a fight with two attackers. The Ranger's rule still leaves a fight at two.
   - **The Assassin dies too often.** Four deaths and eleven flights at low health in its
     hour of round 21; seven deaths in the 100 game minutes of round 22's file played
     without a capture, five of them after Q2281's last kill. The operator: "I'm not sure
@@ -12525,3 +12566,10 @@ report what was done, what is parked or blocked, and what the operator must deci
   1759f3060: two passes identical, 44,357 records, sha256 a5073013ff2915f3. The full
   gate is now twenty-one scopes, and all are identical (guard-p8 of NR-128). Seven
   checks and the script tests pass. Next: NR-R25, round 25, the Assassin alone.
+- 2026-10-11 — Loop: NR-R25 played. Round 25 (r25-a1 at ed4ca51e1, -From nr-r24, 213 s,
+  one world): the Assassin ends leg 10 at level 25 with 162 quests and is captured in
+  nr-r25. It takes Q2282's three warlocks and hands in Q2281, Q2282 and Q2283: it leaves
+  no quest out. One death. Noted for the operator's look at the Ranger's leave-out: the
+  Ranger left the two quests out in the gear of its Ascension. Written: NR-R26, round 26,
+  with the rounds after it in one chain while the Assassin reaches its stage's end.
+  Seven checks pass. Next: NR-R26, round 26, first without a capture.
