@@ -6032,11 +6032,17 @@ The template:
     the gear it owns (NR-R23a). The Assassin stands at leg 11's end at level 25 with
     164 quests. Captured as altgard-rc-l6-assassin to altgard-rc-l11-assassin, records
     that point at character 133266 in the round snapshots of those rounds.
-- [ ] **NR-95 - Assassin: coin gear and Haramel.** Depends: NR-94; ticked by its round
+- [x] **NR-95 - Assassin: coin gear and Haramel.** Depends: NR-94; ticked by its round
   - Work: The coin-gear leg (leather, by its manifest, NR-38a; one dagger a tier, the
     other hand as it is) and Haramel with chest 700830 (NR-40), captured as
     altgard-coingear-assassin and altgard-rc-complete-s1-assassin.
   - Proof: Each capture verifies.
+  - 2026-10-11: done in rounds 27 and 28 (NR-R27, NR-R28, world 4). The coin-gear stage
+    ended at level 25 with 165 quests and Haramel at level 26 with 176 quests, in 92.2
+    game minutes without a death, each with a receipt that says verified. Captured as
+    altgard-coingear-assassin and altgard-rc-complete-s1-assassin, records that point
+    at character 133266 in the round snapshots nr-r27-w4 and nr-r28-w4. In Haramel it
+    wore breeches of level 8 where it had the coin breeches (NR-R28's finding).
 - [ ] **NR-96 - Assassin: the Abyss entry.** Depends: NR-95; ticked by its round
   - Work: Q24020, then Q2945, Q2946, Q2947 and Q2042 with the coin tiers it can wear
     (NR-38b, NR-Q14, NR-Q16), captured as morheim-abyss-entry-s1-assassin.
@@ -10995,12 +11001,66 @@ through these: each is ticked by the round that gave its capture.
     - **The coin gear.** By its manifest it buys the level-16 coin shoulderguards and
       breeches, the two slots they better, and wears them. Q2293 is done. Level 25, 165
       quests, 16.8 game minutes, no death.
-- [ ] **NR-R28 - Round 28: Haramel for the Assassin.** Depends: NR-R27
+- [x] **NR-R28 - Round 28: Haramel for the Assassin.** Depends: NR-R27
   - Work: One world resumed from nr-r27 with -Capture nr-r28 (round file
     run/nr/NR-R28/round-28.json), played in the chain of NR-R26. The Assassin plays
     Haramel (stage l12).
   - Proof: round.json with one outcome record; if the Assassin reached its stage's
     end the completion receipt says verified and its capture is written.
+  - 2026-10-11: played. The Assassin ends Haramel (NR-95 ticked) and is captured. A
+    defect of NR-R23a is found in it: item NR-R23b.
+    - **The round** (run r28-a1 at 1e7a7888a, -From nr-r27, -Capture nr-r28;
+      run/nr/NR-R28/r28-a1; round file run/nr/NR-R28/round-28.json). One world, world 4,
+      231 seconds of wall time. Its file was played once without a capture first (run
+      preview-a1), with the same outcome. Rounds 26 to 29 were played in one chain
+      (run/nr/NR-R26/chain.log).
+
+      | World | Line | Class | Stage | Outcome | Level | Quests | Game minutes | Fights | Deaths | Capture |
+      |---|---|---|---|---|---|---|---|---|---|---|
+      | 4 | scout-assassin | Assassin | l12 | reached | 26 | 176 | 92.2 | 147, 126 kills | 0 | altgard-rc-complete-s1-assassin |
+
+      The receipt says verified. The capture is a record that points into the round
+      snapshot nr-r28-w4.
+    - **Haramel.** Level 26, 176 quests, eleven of them Haramel's; 92.2 game minutes,
+      147 fights and 126 kills, no death.
+    - **Finding, a defect of NR-R23a: at Haramel's start the check takes the coin
+      breeches off.** The Assassin comes to Haramel in the level-16 coin breeches it
+      bought in round 27 (113301098, slot 4096). The check at the leg's start puts the
+      Anturoon Breeches of level 8 on in their place and reports the slot as empty.
+      The equipment check is not shown what the leg protects from sale, and the coin
+      pieces are protected in Haramel; so a protected piece that is worn is not seen,
+      its slot looks empty, and the first piece in the cube for that slot is put on.
+      The town service in Haramel has the same blind spot; before NR-R23a no leg ran
+      the check there with such a piece in the cube.
+      - **The recorded scopes carry it.** Seven class scopes run the check at
+        Haramel's start, and each takes its level-16 coin leg piece off for an Anturoon
+        piece of level 8: sorcerer, chanter, spiritmaster, bard, ranger, rider and
+        gunner. The chanter also takes the Altgard Medal of Honor (20) off for a
+        necklace of level 19. Sorcerer, spiritmaster and bard put a necklace of level
+        20 and earrings of level 17 on for pieces of levels 6 and 14, which is right,
+        and report those slots as empty too. Five of the seven were recorded again
+        under NR-R23a with it, and rider and gunner were first recorded with it.
+      - **The Assassin's play stands.** It ended Haramel in the level-8 breeches
+        without a death, and the Abyss entry's own check dressed it again in round 29.
+        Item NR-R23b mends the check and records the seven scopes again.
+- [ ] **NR-R29 - Round 29: the Abyss entry for the Assassin.** Depends: NR-R28
+  - Work: One world resumed from nr-r28 with -Capture nr-r29 (round file
+    run/nr/NR-R29/round-29.json), played in the chain of NR-R26. The Assassin plays the
+    Abyss entry and names two captures, morheim-abyss-entry-s1-assassin and
+    ntc-ready-assassin-s1.
+  - Proof: round.json with one outcome record; if the Assassin reached its stage's
+    end the completion receipt says verified and its capture is written.
+- [ ] **NR-R23b - The equipment check sees what is worn.** Depends: NR-R28
+  - Work: Found by round 28. The equipment check is given the inventory without what
+    the leg protects from sale, the worn pieces among it, so a worn coin piece is not
+    seen and a worse piece from the cube takes its slot. What is worn is always in the
+    check's view; the leg's protection and Haramel's rule of what may be put on apply
+    to the pieces in the cube. Generic, in the one place the journey builds that view.
+    The Priest's and the Cleric's seven scopes must stay identical (NR-Q2); a class
+    scope that changes is recorded again twice, its first difference explained by a
+    piece that is no longer taken off.
+  - Proof: The bundle with the full gate: the seven scopes named in NR-R28's finding
+    no longer swap a worn piece at Haramel's start, and are recorded again.
 
 ### E. Close
 
@@ -12634,3 +12694,9 @@ report what was done, what is parked or blocked, and what the operator must deci
   world): the Assassin ends the coin-gear stage with 165 quests, no death, and is captured in nr-r27.
   Written: NR-R28. Seven checks pass.
   Next: NR-R28, round 28.
+- 2026-10-11 — Loop: NR-R28 played. Round 28 (r28-a1 at 1e7a7888a, -From nr-r27, 231 s, one
+  world): the Assassin ends Haramel with 176 quests, no death (NR-95), and is captured in nr-r28. Found:
+  at Haramel's start the check of NR-R23a takes the coin breeches off for breeches of
+  level 8, since a protected piece that is worn is not shown to it; seven recorded class
+  scopes carry such a swap. Written: NR-R29 and NR-R23b. Seven checks pass.
+  Next: NR-R29, round 29.
